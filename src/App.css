@@ -1,12 +1,14 @@
+:root {
+	background-color: #6318af;
+}
+
 .App {
 	background-image: url('./assets/Clouds.png');
 	background-repeat: no-repeat;
-	background-color: #6318af;
+	height: 100vh;
+	width: 100vw;
 	position: absolute;
-	left: -7.6%;
-	right: -24.74%;
-	top: 22.5%;
-	bottom: -91.48%;
+	top: 22%;
 }
 
 .intro-container {
@@ -20,5 +22,35 @@
 	width: 235px;
 	height: 90px;
 	left: 843px;
-	top: 425px;
+	top: 225px;
+}
+
+.bottom-text {
+	/* Find out more about us! Visit our website */
+
+	position: absolute;
+	width: 329px;
+	height: 22px;
+	left: -450px;
+	top: 500px;
+
+	/* Titles and important things */
+
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 22px;
+	/* identical to box height */
+
+	text-align: center;
+
+	color: #ffffff;
+
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.site-link {
+	text-decoration: none;
+	color: #ffba00;
 }

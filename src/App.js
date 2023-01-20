@@ -9,7 +9,10 @@ function App() {
 				<button className="login">Login</button>
 				<button className="createPassword">Create account</button>
 				<div className="bottom-text">
-					Find out more about us! Visit our website
+					Find out more about us!
+					<a href="www.google.ca" className="site-link">
+						Visit our website
+					</a>
 				</div>
 			</div>
 		</div>
