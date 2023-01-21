@@ -1,4 +1,5 @@
 import logo from '../../assets/MKTFYlogo.png';
+import greyX from '../../assets/GreyX.png';
 import './login-portal.styles.css';
 import React, { useState } from 'react';
 import Modal from 'react-modal';
@@ -13,19 +14,11 @@ function LoginPortal() {
 		setLoginModalIsOpen(true);
 	};
 
-	const setLoginModalIsOpenToFalse = () => {
-		setLoginModalIsOpen(false);
-	};
-
 	const [accountModalIsOpen, setAccountModalIsOpen] = useState(false);
 	console.log(accountModalIsOpen);
 
 	const setAccountModalIsOpenToTrue = () => {
 		setAccountModalIsOpen(true);
-	};
-
-	const setAccountModalIsOpenToFalse = () => {
-		setAccountModalIsOpen(false);
 	};
 
 	return (
@@ -48,16 +41,24 @@ function LoginPortal() {
 					</a>
 				</div>
 
-				<Modal isOpen={loginModalIsOpen}>
-					<button onClick={setLoginModalIsOpenToFalse}>x</button>
+				<Modal
+					isOpen={loginModalIsOpen}
+					onRequestClose={() => setLoginModalIsOpen(false)}
+				>
+					<button onClick={() => setAccountModalIsOpen(false)}>
+						<img src={greyX} alt="x" />
+					</button>
 					<LoginModal />
-					<h1>login here</h1>
 				</Modal>
 
-				<Modal isOpen={accountModalIsOpen}>
-					<button onClick={setAccountModalIsOpenToFalse}>x</button>
+				<Modal
+					isOpen={accountModalIsOpen}
+					onRequestClose={() => setAccountModalIsOpen(false)}
+				>
+					<button onClick={() => setAccountModalIsOpen(false)}>
+						<img src={greyX} alt="x" />
+					</button>
 					<CreateModal />
-					<h1>Create here</h1>
 				</Modal>
 			</div>
 		</div>
