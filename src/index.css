@@ -1,7 +1,42 @@
 * {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 22px;
+
 	box-sizing: border-box;
 }
 
 body {
 	margin: 0;
+}
+
+h2 {
+	color: #9349de;
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 36px;
+	line-height: 49px;
+}
+
+h3 {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 27px;
+
+	color: #000000;
+}
+
+p {
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 22px;
+
+	color: #000000;
 }

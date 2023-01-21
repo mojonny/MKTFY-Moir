@@ -72,3 +72,14 @@
 	border: none;
 	font-weight: bold;
 }
+
+.modal {
+	position: absolute;
+	top: 10%;
+	left: 10%;
+	background-color: #ffffff;
+	border-radius: 10px;
+
+	width: 1400px;
+	height: 700px;
+}

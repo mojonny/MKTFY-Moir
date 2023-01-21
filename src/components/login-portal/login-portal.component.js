@@ -42,6 +42,7 @@ function LoginPortal() {
 				</div>
 
 				<Modal
+					className="login-modal"
 					isOpen={loginModalIsOpen}
 					onRequestClose={() => setLoginModalIsOpen(false)}
 				>
@@ -54,8 +55,18 @@ function LoginPortal() {
 				<Modal
 					isOpen={accountModalIsOpen}
 					onRequestClose={() => setAccountModalIsOpen(false)}
+					className="modal"
 				>
-					<button onClick={() => setAccountModalIsOpen(false)}>
+					<button
+						style={{
+							position: 'absolute',
+							top: '25px',
+							right: '15px',
+							backgroundColor: '#ffffff',
+							border: 'none',
+						}}
+						onClick={() => setAccountModalIsOpen(false)}
+					>
 						<img src={greyX} alt="x" />
 					</button>
 					<CreateModal />

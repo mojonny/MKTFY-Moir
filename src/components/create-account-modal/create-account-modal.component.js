@@ -4,14 +4,14 @@ import './create-account-modal.styles.css';
 function CreateModal() {
 	return (
 		<>
-			<div className="create-modal">
+			<div className="modal-container">
 				<h2>Welcome to MKTFY!</h2>
 
-				<p>
+				<h3>
 					It’s nice to meet you. At MKTFY you are able to buy, sell and donate
 					awesome stuff to a community of awesome people. Please fill out the
 					form below to get started.
-				</p>
+				</h3>
 				<div className="form-container">
 					<form className="form-input">
 						<label>
