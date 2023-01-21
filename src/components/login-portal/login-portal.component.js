@@ -3,7 +3,7 @@ import greyX from '../../assets/GreyX.png';
 import './login-portal.styles.css';
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import LoginModal from '../login-modal/login-modal-form.component';
+import LoginModal from '../login-modal/login-modal-overlay.component';
 import CreateModal from '../create-account-modal/create-account-modal.component';
 
 function LoginPortal() {
@@ -42,11 +42,20 @@ function LoginPortal() {
 				</div>
 
 				<Modal
-					className="login-modal"
 					isOpen={loginModalIsOpen}
 					onRequestClose={() => setLoginModalIsOpen(false)}
+					className="modal-login"
 				>
-					<button onClick={() => setAccountModalIsOpen(false)}>
+					<button
+						style={{
+							position: 'absolute',
+							top: '25px',
+							right: '15px',
+							backgroundColor: '#ffffff',
+							border: 'none',
+						}}
+						onClick={() => setLoginModalIsOpen(false)}
+					>
 						<img src={greyX} alt="x" />
 					</button>
 					<LoginModal />
@@ -55,7 +64,7 @@ function LoginPortal() {
 				<Modal
 					isOpen={accountModalIsOpen}
 					onRequestClose={() => setAccountModalIsOpen(false)}
-					className="modal"
+					className="modal-create-account"
 				>
 					<button
 						style={{

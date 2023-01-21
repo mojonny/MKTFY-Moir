@@ -25,11 +25,11 @@
 .bottom-text {
 	/* Find out more about us! Visit our website */
 
-	position: absolute;
-	width: 300px;
+	position: relative;
+	width: 500px;
 	height: 20px;
 	left: -700px;
-	top: 700px;
+	top: 400px;
 
 	/* Titles and important things */
 
@@ -73,13 +73,26 @@
 	font-weight: bold;
 }
 
-.modal {
+.modal-create-account {
 	position: absolute;
-	top: 10%;
+	top: 25%;
 	left: 10%;
 	background-color: #ffffff;
 	border-radius: 10px;
 
 	width: 1400px;
 	height: 700px;
+}
+
+.modal-login {
+	position: absolute;
+	top: 25%;
+	left: 25%;
+	width: 808px;
+	height: 614.2px;
+
+	/* Void white */
+
+	background: #ffffff;
+	border-radius: 10px;
 }

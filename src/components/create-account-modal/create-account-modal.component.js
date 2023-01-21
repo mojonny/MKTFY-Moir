@@ -1,7 +1,17 @@
 import React from 'react';
 import './create-account-modal.styles.css';
+import Modal from 'react-modal';
+import { useState } from 'react';
+import PasswordModal from '../password-modal/password-modal.component';
 
 function CreateModal() {
+	const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false);
+	console.log(passwordModalIsOpen);
+
+	const setPasswordModalIsOpenToTrue = () => {
+		setPasswordModalIsOpen(true);
+	};
+
 	return (
 		<>
 			<div className="modal-container">
@@ -103,7 +113,12 @@ function CreateModal() {
 							/>
 						</label>
 
-						<button className="next-button" type="submit" value="Next">
+						<button
+							className="next-button"
+							type="submit"
+							value="Next"
+							onClick={setPasswordModalIsOpenToTrue}
+						>
 							Next
 						</button>
 					</div>
@@ -114,6 +129,14 @@ function CreateModal() {
 					</p>
 				</form>
 			</div>
+
+			<Modal
+				className="pw-modal"
+				isOpen={passwordModalIsOpen}
+				onRequestClose={() => setPasswordModalIsOpen(false)}
+			>
+				<PasswordModal />
+			</Modal>
 		</>
 	);
 }
