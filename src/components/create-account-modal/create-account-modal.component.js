@@ -22,7 +22,7 @@ function CreateModal() {
 								className="input-style"
 								type="text"
 								name="name"
-								placeholder="Your first name"
+								placeholder=" Your first name"
 							/>
 						</label>
 
@@ -32,7 +32,7 @@ function CreateModal() {
 							<input
 								type="text"
 								name="Street address"
-								placeholder="Insert your address"
+								placeholder=" Insert your address"
 								className="input-style"
 							/>
 						</label>
@@ -44,7 +44,7 @@ function CreateModal() {
 								className="input-style"
 								type="text"
 								name="name"
-								placeholder="Your last name"
+								placeholder=" Your last name"
 							/>
 						</label>
 
@@ -54,7 +54,7 @@ function CreateModal() {
 							<input
 								type="text"
 								name="city"
-								placeholder="City name"
+								placeholder=" City name"
 								className="input-style"
 							/>
 						</label>
@@ -65,7 +65,7 @@ function CreateModal() {
 							<input
 								type="text"
 								name="province"
-								placeholder="Your province"
+								placeholder=" Your province"
 								className="input-style"
 							/>
 						</label>
@@ -76,7 +76,7 @@ function CreateModal() {
 							<input
 								type="email"
 								name="email"
-								placeholder="Insert your email"
+								placeholder=" Insert your email"
 								className="input-style"
 							/>
 						</label>
@@ -87,7 +87,7 @@ function CreateModal() {
 							<input
 								type="text"
 								name="country"
-								placeholder="Country name"
+								placeholder=" Country name"
 								className="input-style"
 							/>
 						</label>
@@ -98,7 +98,7 @@ function CreateModal() {
 							<input
 								type="phone"
 								name="phone"
-								placeholder="+1 (000)000-0000"
+								placeholder=" +1 (000)000-0000"
 								className="input-style"
 							/>
 						</label>
