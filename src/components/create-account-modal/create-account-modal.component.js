@@ -1,16 +1,11 @@
 import React from 'react';
 import './create-account-modal.styles.css';
-import Modal from 'react-modal';
+import greyX from '../../assets/GreyX.png';
 import { useState } from 'react';
-import PasswordModal from '../password-modal/password-modal.component';
 
 function CreateModal() {
-	const [passwordModalIsOpen, setPasswordModalIsOpen] = useState(false);
-	console.log(passwordModalIsOpen);
-
-	const setPasswordModalIsOpenToTrue = () => {
-		setPasswordModalIsOpen(true);
-	};
+	const [accountModalIsOpen, setAccountModalIsOpen] = useState(true);
+	console.log(accountModalIsOpen);
 
 	return (
 		<>
@@ -24,6 +19,18 @@ function CreateModal() {
 				</h3>
 
 				<form className="form-container">
+					<button
+						style={{
+							position: 'absolute',
+							top: '25px',
+							right: '15px',
+							backgroundColor: '#ffffff',
+							border: 'none',
+						}}
+						onClick={() => setAccountModalIsOpen(false)}
+					>
+						<img src={greyX} alt="x" />
+					</button>
 					<div className="form-input-layout">
 						<label className="first">
 							First name
@@ -113,12 +120,7 @@ function CreateModal() {
 							/>
 						</label>
 
-						<button
-							className="next-button"
-							type="submit"
-							value="Next"
-							onClick={setPasswordModalIsOpenToTrue}
-						>
+						<button className="next-button" type="submit" value="Next">
 							Next
 						</button>
 					</div>
@@ -129,14 +131,6 @@ function CreateModal() {
 					</p>
 				</form>
 			</div>
-
-			<Modal
-				className="pw-modal"
-				isOpen={passwordModalIsOpen}
-				onRequestClose={() => setPasswordModalIsOpen(false)}
-			>
-				<PasswordModal />
-			</Modal>
 		</>
 	);
 }

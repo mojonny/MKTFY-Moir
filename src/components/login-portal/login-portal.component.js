@@ -1,5 +1,4 @@
 import logo from '../../assets/MKTFYlogo.png';
-import greyX from '../../assets/GreyX.png';
 import './login-portal.styles.css';
 import React, { useState } from 'react';
 import Modal from 'react-modal';
@@ -46,18 +45,6 @@ function LoginPortal() {
 					onRequestClose={() => setLoginModalIsOpen(false)}
 					className="modal-login"
 				>
-					<button
-						style={{
-							position: 'absolute',
-							top: '25px',
-							right: '15px',
-							backgroundColor: '#ffffff',
-							border: 'none',
-						}}
-						onClick={() => setLoginModalIsOpen(false)}
-					>
-						<img src={greyX} alt="x" />
-					</button>
 					<LoginModal />
 				</Modal>
 
@@ -66,18 +53,6 @@ function LoginPortal() {
 					onRequestClose={() => setAccountModalIsOpen(false)}
 					className="modal-create-account"
 				>
-					<button
-						style={{
-							position: 'absolute',
-							top: '25px',
-							right: '15px',
-							backgroundColor: '#ffffff',
-							border: 'none',
-						}}
-						onClick={() => setAccountModalIsOpen(false)}
-					>
-						<img src={greyX} alt="x" />
-					</button>
 					<CreateModal />
 				</Modal>
 			</div>

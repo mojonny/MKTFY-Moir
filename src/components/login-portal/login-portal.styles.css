@@ -3,8 +3,8 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-color: #6318af;
-	height: 1200px;
-	width: 2100px;
+	height: 100%;
+	width: 100%;
 	position: fixed;
 }
 
@@ -15,21 +15,19 @@
 	padding: 0px;
 	gap: 15px;
 
-	position: absolute;
 	width: 250px;
 	height: 100px;
-	left: 850px;
-	top: 350px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .bottom-text {
-	/* Find out more about us! Visit our website */
-
-	position: relative;
-	width: 500px;
-	height: 20px;
-	left: -700px;
-	top: 400px;
+	position: fixed;
+	left: -150%;
+	top: 450%;
+	transform: translate(-50%, -50%);
 
 	/* Titles and important things */
 
@@ -51,18 +49,18 @@
 }
 
 .login-button {
-	padding: 5% 0 5% 0;
-	background: #ffba00;
-	border-radius: 100px;
+	padding: 10px 0 10px 0;
 	border: none;
 	color: #ffffff;
 	width: 300px;
-	height: 65px;
-	font-weight: bold;
+	height: 50px;
+	background: #d9d9d9;
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
+	border-radius: 100px;
 }
 
 .create-button {
-	padding: 5% 0 5% 0;
+	padding: 10px 0 10px 0;
 	text-align: center;
 	color: #ffffff;
 	background: #6318af;
@@ -88,10 +86,8 @@
 	position: absolute;
 	top: 25%;
 	left: 25%;
-	width: 808px;
-	height: 614.2px;
-
-	/* Void white */
+	width: 800px;
+	height: 600px;
 
 	background: #ffffff;
 	border-radius: 10px;
