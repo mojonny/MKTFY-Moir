@@ -1,4 +1,4 @@
-import logo from '../../assets/Clouds.png';
+import logo from '../../assets/MKTFYlogo.png';
 import { useNavigate } from 'react-router-dom';
 import './login-portal.styles.css';
 
