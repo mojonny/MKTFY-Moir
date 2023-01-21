@@ -12,59 +12,107 @@ function CreateModal() {
 					awesome stuff to a community of awesome people. Please fill out the
 					form below to get started.
 				</h3>
-				<div className="form-container">
-					<form className="form-input">
-						<label>
+
+				<form className="form-container">
+					<div className="form-input-layout">
+						<label className="first">
 							First name
-							<input type="text" name="name" placeholder="Your first name" />
+							<br />
+							<input
+								className="input-style"
+								type="text"
+								name="name"
+								placeholder="Your first name"
+							/>
 						</label>
-						<label>
+
+						<label className="address">
 							Street address
+							<br />
 							<input
 								type="text"
 								name="Street address"
 								placeholder="Insert your address"
+								className="input-style"
 							/>
 						</label>
-						<label>
+
+						<label className="last">
 							Last name
-							<input type="text" name="name" placeholder="Your last name" />
+							<br />
+							<input
+								className="input-style"
+								type="text"
+								name="name"
+								placeholder="Your last name"
+							/>
 						</label>
-						<label>
+
+						<label className="city">
 							City
 							<br />
-							<input type="text" name="city" placeholder="City name" />
+							<input
+								type="text"
+								name="city"
+								placeholder="City name"
+								className="input-style"
+							/>
 						</label>
-						<label>
+
+						<label className="province">
 							Province
-							<input type="text" name="province" placeholder="Your province" />
+							<br />
+							<input
+								type="text"
+								name="province"
+								placeholder="Your province"
+								className="input-style"
+							/>
 						</label>
-						<label>
+
+						<label className="email">
 							Email
+							<br />
 							<input
 								type="email"
 								name="email"
 								placeholder="Insert your email"
+								className="input-style"
 							/>
 						</label>
-						<label>
+
+						<label className="country">
 							Country
-							<input type="text" name="country" placeholder="Country name" />
+							<br />
+							<input
+								type="text"
+								name="country"
+								placeholder="Country name"
+								className="input-style"
+							/>
 						</label>
-						<label>
+
+						<label className="phone">
 							Phone
-							<input type="phone" name="phone" placeholder="+1 (000)000-0000" />
+							<br />
+							<input
+								type="phone"
+								name="phone"
+								placeholder="+1 (000)000-0000"
+								className="input-style"
+							/>
 						</label>
+
 						<button className="next-button" type="submit" value="Next">
 							Next
 						</button>
-						<p>
-							At MKTFY we respect your privacy and do not tolerate spam, and
-							will never sell, rent, lease or give away your information. We
-							only buy, sell or donate your stuff here at MKTFY.{' '}
-						</p>
-					</form>
-				</div>
+					</div>
+					<p>
+						At MKTFY we respect your privacy and do not tolerate spam, and will
+						never sell, rent, lease or give away your information. We only buy,
+						sell or donate your stuff here at MKTFY.{' '}
+					</p>
+				</form>
 			</div>
 		</>
 	);
