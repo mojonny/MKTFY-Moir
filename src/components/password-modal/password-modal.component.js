@@ -1,20 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import checkmark from '../../assets/Checkmark.png';
+import './password-modal.styles.css';
 
 export default function PasswordModal() {
-	const [passwordOpened, setPasswordOpened] = useState(false);
-	console.log(passwordOpened);
+	const navigate = useNavigate();
+
+	const navigateToTOC = () => {
+		navigate('/toc');
+	};
+
+	const navigateToPrivacy = () => {
+		navigate('/privacy');
+	};
+
 	return (
-		<>
-			<h1>Sign Up</h1>
-			<button onClick={() => setPasswordOpened(false)}>
-				go back to Create
-			</button>
-			<h1>Create Password</h1>
-			<p>
+		<div className="password-container">
+			<h2>Create Password</h2>
+			<h3>
 				The password must have at least 6 characters and must contain 1
 				uppercase and 1 number.
-			</p>
+			</h3>
+
 			<form>
 				<label className="password">
 					Password
@@ -25,7 +32,7 @@ export default function PasswordModal() {
 						className="input-style"
 					/>
 				</label>
-
+				<br />
 				<label className="password">
 					Password
 					<br />
@@ -37,29 +44,32 @@ export default function PasswordModal() {
 				</label>
 				<div className="requirement-container">
 					<div className="requirement">
-						<img src={checkmark} alt="checkmark" />
-						<p>At least 6 characters</p>
+						<p>
+							<img src={checkmark} alt="checkmark" />
+							At least 6 characters
+						</p>
 					</div>
 					<div className="requirement">
-						<img src={checkmark} alt="checkmark" />
-						<p>1 Uppercase</p>
+						<p>
+							<img src={checkmark} alt="checkmark" /> 1 Uppercase
+						</p>
 					</div>
 					<div className="requirement">
-						<img src={checkmark} alt="checkmark" />
-						<p>1 Number</p>
+						<p>
+							<img src={checkmark} alt="checkmark" /> 1 Number
+						</p>
 					</div>
 					<div className="agreement">
 						<input className="checkbox" type="checkbox" />
 					</div>
 					<p className="TOC">
-						{' '}
-						By checking this box, you agree to our{' '}
-						{/* <a href={toc}> Terms of Service </a> and our{' '} */}
-						{/* <a href={privacy}>Privacy Policy</a> */}
+						By checking this box, you agree to our {''}
+						<a href={navigateToTOC}> Terms of Service </a> and our
+						<a href={navigateToPrivacy}> Privacy Policy</a>
 					</p>
 				</div>
-				<button className="create-button">Create account</button>
+				<button className="create-button"> Create account</button>
 			</form>
-		</>
+		</div>
 	);
 }

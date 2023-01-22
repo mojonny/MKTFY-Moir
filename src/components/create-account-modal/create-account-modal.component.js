@@ -1,16 +1,15 @@
 import React from 'react';
-import './create-account-modal.styles.css';
-import greyX from '../../assets/GreyX.png';
 import { useState } from 'react';
+
 import Modal from 'react-modal';
 import PasswordModal from '../password-modal/password-modal.component';
 
-function CreateModal() {
-	const [createOpened, setCreateOpened] = useState(false);
-	console.log(createOpened);
+import greyX from '../../assets/GreyX.png';
+import arrow from '../../assets/Arrow.png';
+import './create-account-modal.styles.css';
 
+function CreateModal(setCreateOpened) {
 	const [passwordOpened, setPasswordOpened] = useState(false);
-	console.log(passwordOpened);
 
 	return (
 		<>
@@ -34,7 +33,7 @@ function CreateModal() {
 						}}
 						onClick={() => setCreateOpened(false)}
 					>
-						<img src={greyX} alt="x" />
+						<img src={greyX} alt="close" />
 					</button>
 					<div className="form-input-layout">
 						<label className="first">
@@ -125,20 +124,21 @@ function CreateModal() {
 							/>
 						</label>
 					</div>
+					<p>
+						At MKTFY we respect your privacy and do not tolerate spam, and will
+						never sell, rent, lease or give away your information. We only buy,
+						sell or donate your stuff here at MKTFY.{' '}
+					</p>
 				</form>
 				<button
 					onClick={setPasswordOpened}
 					className="next-button"
 					type="submit"
 					value="Next"
+					style={{ position: 'absolute', bottom: '18%', right: '20%' }}
 				>
 					Next
 				</button>
-				<p>
-					At MKTFY we respect your privacy and do not tolerate spam, and will
-					never sell, rent, lease or give away your information. We only buy,
-					sell or donate your stuff here at MKTFY.{' '}
-				</p>
 			</div>
 
 			<Modal
@@ -146,7 +146,32 @@ function CreateModal() {
 				onRequestClose={() => setPasswordOpened(false)}
 				ariaHideApp={false}
 			>
-				<PasswordModal />
+				<button
+					style={{
+						position: 'absolute',
+						top: '25px',
+						left: '15px',
+						backgroundColor: '#ffffff',
+						border: 'none',
+					}}
+					onClick={() => setPasswordOpened(false)}
+				>
+					<img src={arrow} alt="back" />
+				</button>
+
+				<button
+					style={{
+						position: 'absolute',
+						top: '25px',
+						right: '15px',
+						backgroundColor: '#ffffff',
+						border: 'none',
+					}}
+					onClick={() => setPasswordOpened(false)}
+				>
+					<img src={greyX} alt="close" />
+				</button>
+				<PasswordModal classname="password-modal" />
 			</Modal>
 		</>
 	);

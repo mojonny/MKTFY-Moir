@@ -79,3 +79,25 @@ body {
 	width: 350px;
 	height: 50px;
 }
+
+.password-modal {
+	position: relative;
+	width: 800px;
+	height: 900px;
+	/* Create password */
+
+	/* Auto layout */
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 100px 117px;
+	gap: 31px;
+	isolation: isolate;
+
+	/* Void white */
+
+	background: #ffffff;
+	border-radius: 10px;
+}
