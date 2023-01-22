@@ -1,11 +1,13 @@
-import logo from '../../assets/MKTFYlogo.png';
-import './login-portal.styles.css';
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+
 import LoginModal from '../login-modal/login-modal-overlay.component';
 import CreateModal from '../create-account-modal/create-account-modal.component';
 
-function LoginPortal() {
+import logo from '../../assets/MKTFYlogo.png';
+import './login-portal.styles.css';
+
+export default function LoginPortal() {
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
 	console.log(loginModalIsOpen);
 
@@ -13,11 +15,13 @@ function LoginPortal() {
 		setLoginModalIsOpen(true);
 	};
 
-	const [accountModalIsOpen, setAccountModalIsOpen] = useState(false);
-	console.log(accountModalIsOpen);
+	const [createOpened, setCreateOpened] = useState(false);
 
-	const setAccountModalIsOpenToTrue = () => {
-		setAccountModalIsOpen(true);
+	const setCreateOpenedToTrue = () => {
+		setCreateOpened({
+			createOpened: 'true',
+			passwordOpened: 'false',
+		});
 	};
 
 	return (
@@ -29,7 +33,7 @@ function LoginPortal() {
 					Login
 				</button>
 
-				<button className="create-button" onClick={setAccountModalIsOpenToTrue}>
+				<button className="create-button" onClick={setCreateOpenedToTrue}>
 					Create account
 				</button>
 
@@ -49,9 +53,10 @@ function LoginPortal() {
 				</Modal>
 
 				<Modal
-					isOpen={accountModalIsOpen}
-					onRequestClose={() => setAccountModalIsOpen(false)}
+					isOpen={createOpened}
 					className="modal-create-account"
+					ariaHideApp={false}
+					onRequestClose={() => setCreateOpened(false)}
 				>
 					<CreateModal />
 				</Modal>
@@ -59,5 +64,3 @@ function LoginPortal() {
 		</div>
 	);
 }
-
-export default LoginPortal;

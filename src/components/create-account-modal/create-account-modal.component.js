@@ -2,10 +2,15 @@ import React from 'react';
 import './create-account-modal.styles.css';
 import greyX from '../../assets/GreyX.png';
 import { useState } from 'react';
+import Modal from 'react-modal';
+import PasswordModal from '../password-modal/password-modal.component';
 
 function CreateModal() {
-	const [accountModalIsOpen, setAccountModalIsOpen] = useState(true);
-	console.log(accountModalIsOpen);
+	const [createOpened, setCreateOpened] = useState(false);
+	console.log(createOpened);
+
+	const [passwordOpened, setPasswordOpened] = useState(false);
+	console.log(passwordOpened);
 
 	return (
 		<>
@@ -27,7 +32,7 @@ function CreateModal() {
 							backgroundColor: '#ffffff',
 							border: 'none',
 						}}
-						onClick={() => setAccountModalIsOpen(false)}
+						onClick={() => setCreateOpened(false)}
 					>
 						<img src={greyX} alt="x" />
 					</button>
@@ -119,18 +124,30 @@ function CreateModal() {
 								className="input-style"
 							/>
 						</label>
-
-						<button className="next-button" type="submit" value="Next">
-							Next
-						</button>
 					</div>
-					<p>
-						At MKTFY we respect your privacy and do not tolerate spam, and will
-						never sell, rent, lease or give away your information. We only buy,
-						sell or donate your stuff here at MKTFY.{' '}
-					</p>
 				</form>
+				<button
+					onClick={setPasswordOpened}
+					className="next-button"
+					type="submit"
+					value="Next"
+				>
+					Next
+				</button>
+				<p>
+					At MKTFY we respect your privacy and do not tolerate spam, and will
+					never sell, rent, lease or give away your information. We only buy,
+					sell or donate your stuff here at MKTFY.{' '}
+				</p>
 			</div>
+
+			<Modal
+				isOpen={passwordOpened}
+				onRequestClose={() => setPasswordOpened(false)}
+				ariaHideApp={false}
+			>
+				<PasswordModal />
+			</Modal>
 		</>
 	);
 }
