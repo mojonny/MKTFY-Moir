@@ -17,6 +17,7 @@ export default function LoginPortal() {
 
 	const [createOpened, setCreateOpened] = useState(false);
 
+	//Opens the first of two modals and ensures the second does not overlay until it is called.
 	const setCreateOpenedToTrue = () => {
 		setCreateOpened({
 			createOpened: 'true',

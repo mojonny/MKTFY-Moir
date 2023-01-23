@@ -36,6 +36,7 @@ function CreateModal(setCreateOpened) {
 						<img src={greyX} alt="close" />
 					</button>
 					<div className="form-input-layout">
+						{/* I am sure this form can be simplified in the future */}
 						<label className="first">
 							First name
 							<br />
@@ -146,6 +147,7 @@ function CreateModal(setCreateOpened) {
 				onRequestClose={() => setPasswordOpened(false)}
 				ariaHideApp={false}
 			>
+				{/* I left the modal buttons outside of PasswordModal since they were not functioning inside the modal component itself. This is likely due to inexperience and not fully understanding binding props. */}
 				<button
 					style={{
 						position: 'absolute',
@@ -167,6 +169,9 @@ function CreateModal(setCreateOpened) {
 						backgroundColor: '#ffffff',
 						border: 'none',
 					}}
+					// I couldn't figure out how to close both modals in one click.
+					// So this is a beginner solution that reloads the page and closes both modals.
+
 					onClick={() => window.location.reload(false)}
 				>
 					<img src={greyX} alt="close" />

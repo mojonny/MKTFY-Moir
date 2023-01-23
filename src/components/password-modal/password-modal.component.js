@@ -5,6 +5,7 @@ import './password-modal.styles.css';
 
 export default function PasswordModal() {
 	const navigate = useNavigate();
+	//navigate to Terms/Privacy policies pages
 
 	const navigateToTOC = () => {
 		navigate('/toc');
