@@ -167,11 +167,11 @@ function CreateModal(setCreateOpened) {
 						backgroundColor: '#ffffff',
 						border: 'none',
 					}}
-					onClick={() => setPasswordOpened(false)}
+					onClick={() => window.location.reload(false)}
 				>
 					<img src={greyX} alt="close" />
 				</button>
-				<PasswordModal classname="password-modal" />
+				<PasswordModal className="password-modal" />
 			</Modal>
 		</>
 	);
