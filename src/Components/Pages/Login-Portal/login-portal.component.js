@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 
-import LoginModal from '../login-modal/login-modal-overlay.component';
-import CreateModal from '../create-account-modal/create-account-modal.component';
+import LoginModal from '../../Modals/login-modal/login-modal-overlay.component';
+import CreateModal from '../../Modals/create-account-modal/create-account-modal.component';
 
-import logo from '../../assets/MKTFYlogo.png';
+import logo from '../../../assets/MKTFYlogo.png';
 import './login-portal.styles.css';
 
 export default function LoginPortal() {

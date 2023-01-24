@@ -1,6 +1,6 @@
 import React from 'react';
 import './login-modal-overlay.styles.css';
-import greyX from '../../assets/GreyX.png';
+import greyX from '../../../assets/GreyX.png';
 import { useState } from 'react';
 
 function LoginModal() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import checkmark from '../../assets/Checkmark.png';
+import checkmark from '../../../assets/Checkmark.png';
 import './password-modal.styles.css';
 
 export default function PasswordModal() {
@@ -13,6 +13,9 @@ export default function PasswordModal() {
 
 	const navigateToPrivacy = () => {
 		navigate('/privacy');
+	};
+	const navigateHome = () => {
+		navigate('/home');
 	};
 
 	return (
@@ -69,7 +72,10 @@ export default function PasswordModal() {
 						<a href={navigateToPrivacy}> Privacy Policy</a>
 					</p>
 				</div>
-				<button className="create-button"> Create account</button>
+				<button className="create-button" onClick={navigateHome}>
+					{' '}
+					Create account
+				</button>
 			</form>
 		</div>
 	);

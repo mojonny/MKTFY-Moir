@@ -4,8 +4,8 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 import PasswordModal from '../password-modal/password-modal.component';
 
-import greyX from '../../assets/GreyX.png';
-import arrow from '../../assets/Arrow.png';
+import greyX from '../../../assets/GreyX.png';
+import arrow from '../../../assets/Arrow.png';
 import './create-account-modal.styles.css';
 
 function CreateModal(setCreateOpened) {

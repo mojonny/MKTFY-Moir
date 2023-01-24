@@ -1,0 +1,14 @@
+.slider {
+	position: relative;
+	top: 250px;
+	left: 50px;
+	padding: 25px 10px;
+	margin: 25px;
+	width: 1650px;
+	height: 450px;
+
+	/* Void white */
+
+	background: #ffffff;
+	border-radius: 5px;
+}
