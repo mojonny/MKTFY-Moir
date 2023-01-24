@@ -5,10 +5,30 @@
 	padding: 25px 10px;
 	margin: 25px;
 	width: 1650px;
-	height: 450px;
-
-	/* Void white */
+	height: 475px;
 
 	background: #ffffff;
-	border-radius: 5px;
+}
+
+.slider-title {
+	width: 128px;
+	height: 27px;
+	margin-left: 16px;
+	/* Web text */
+
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 27px;
+
+	/* Title Gray */
+
+	color: #313131;
+}
+
+.cards {
+	display: flex;
+	flex-direction: row;
+	gap: 35px;
 }
