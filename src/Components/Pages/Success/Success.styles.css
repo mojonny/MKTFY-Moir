@@ -1,0 +1,18 @@
+.layout {
+	background-image: url('../../../assets/Clouds.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-color: #6318af;
+	height: 100%;
+	width: 100%;
+	position: fixed;
+}
+
+.animation {
+	max-height: 300px;
+	max-width: 300px;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	color: #ffffff;
+}

@@ -1,6 +1,7 @@
 import './App.css';
 import LoginPortal from './Components/Pages/Login-Portal/login-portal.component';
 import Home from './Components/Pages/Home/Home';
+import Success from './Components/Pages/Success/Success.component';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<LoginPortal />} />
 				<Route path="/home" element={<Home />} />
+				<Route path="/success" element={<Success />} />
 			</Routes>
 		</div>
 	);

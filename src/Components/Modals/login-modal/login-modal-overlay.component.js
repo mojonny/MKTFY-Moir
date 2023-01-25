@@ -2,10 +2,17 @@ import React from 'react';
 import './login-modal-overlay.styles.css';
 import greyX from '../../../assets/GreyX.png';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function LoginModal() {
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
 	console.log(loginModalIsOpen);
+
+	const navigate = useNavigate();
+
+	const navigateToSuccess = () => {
+		navigate('/success');
+	};
 
 	return (
 		<>
@@ -57,7 +64,11 @@ function LoginModal() {
 						Forgot password
 					</a>
 					<br />
-					<button className="login-button" style={{ alignSelf: 'center' }}>
+					<button
+						className="login-button"
+						style={{ alignSelf: 'center' }}
+						onClick={navigateToSuccess}
+					>
 						Login
 					</button>
 				</form>
