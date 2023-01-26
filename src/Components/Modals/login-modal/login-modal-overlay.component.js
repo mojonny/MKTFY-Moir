@@ -1,17 +1,23 @@
-import React from 'react';
 import './login-modal-overlay.styles.css';
 import greyX from '../../../assets/GreyX.png';
 import { useState } from 'react';
+import Success from '../../Pages/Success/Success.component';
 import { useNavigate } from 'react-router-dom';
 
 function LoginModal() {
+	const [isLoading, setIsLoading] = useState(false);
+
 	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
 	console.log(loginModalIsOpen);
 
 	const navigate = useNavigate();
 
-	const navigateToSuccess = () => {
-		navigate('/success');
+	const navigateHome = () => {
+		setIsLoading(true);
+		setTimeout(() => {
+			navigate('/home');
+			setIsLoading(false);
+		}, 3000);
 	};
 
 	return (
@@ -65,10 +71,12 @@ function LoginModal() {
 					</a>
 					<br />
 					<button
+						onClick={navigateHome}
+						disabled={isLoading}
 						className="login-button"
 						style={{ alignSelf: 'center' }}
-						onClick={navigateToSuccess}
 					>
+						{isLoading ? <Success /> : navigateHome}
 						Login
 					</button>
 				</form>
