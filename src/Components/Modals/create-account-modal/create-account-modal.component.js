@@ -141,13 +141,14 @@ function CreateModal(setCreateOpened) {
 					Next
 				</button>
 			</div>
-
 			<Modal
 				isOpen={passwordOpened}
 				onRequestClose={() => setPasswordOpened(false)}
 				ariaHideApp={false}
+				className="password-modal-container"
 			>
 				{/* I left the modal buttons outside of PasswordModal since they were not functioning inside the modal component itself. This is likely due to inexperience and not fully understanding binding props. */}
+
 				<button
 					style={{
 						position: 'absolute',

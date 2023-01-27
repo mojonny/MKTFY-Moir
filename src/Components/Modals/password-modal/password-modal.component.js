@@ -1,26 +1,27 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import Success from '../../Pages/Success/Success.component';
+
 import checkmark from '../../../assets/Checkmark.png';
 import './password-modal.styles.css';
 
 export default function PasswordModal() {
 	const navigate = useNavigate();
-	//navigate to Terms/Privacy policies pages
 
-	const navigateToTOC = () => {
-		navigate('/toc');
-	};
+	const [isLoading, setIsLoading] = useState(false);
 
-	const navigateToPrivacy = () => {
-		navigate('/privacy');
-	};
 	const navigateHome = () => {
-		navigate('/home');
+		setIsLoading(true);
+		setTimeout(() => {
+			navigate('/home');
+			setIsLoading(false);
+		}, 2000);
 	};
 
 	return (
-		<div className="password-container">
-			<h2>Create Password</h2>
+		<div>
+			<h2 style={{ textAlign: 'center' }}>Create Password</h2>
 			<h3>
 				The password must have at least 6 characters and must contain 1
 				uppercase and 1 number.
@@ -36,6 +37,7 @@ export default function PasswordModal() {
 						className="input-style"
 					/>
 				</label>
+				<br />
 				<br />
 				<label className="password">
 					Password
@@ -63,17 +65,34 @@ export default function PasswordModal() {
 							<img src={checkmark} alt="checkmark" /> 1 Number
 						</p>
 					</div>
-					<div className="agreement">
+					<div className="requirement">
 						<input className="checkbox" type="checkbox" />
+						<h4 className="TOC">
+							By checking this box, you agree to our
+							<Link to="/privacyandterms" style={{ textDecoration: 'none' }}>
+								{' '}
+								Terms of Service{' '}
+							</Link>
+							and our
+							<br />
+							<Link to="/privacyandterms" style={{ textDecoration: 'none' }}>
+								Privacy Policy{' '}
+							</Link>
+						</h4>
 					</div>
-					<p className="TOC">
-						By checking this box, you agree to our {''}
-						<a href={navigateToTOC}> Terms of Service </a> and our
-						<a href={navigateToPrivacy}> Privacy Policy</a>
-					</p>
 				</div>
-				<button className="create-button" onClick={navigateHome}>
-					{' '}
+
+				<button
+					onClick={navigateHome}
+					disabled={isLoading}
+					className="create-button"
+					style={{
+						position: 'relative',
+						top: '30px',
+						left: '25%',
+					}}
+				>
+					{isLoading ? <Success /> : navigateHome}
 					Create account
 				</button>
 			</form>

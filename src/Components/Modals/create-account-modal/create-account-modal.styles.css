@@ -80,23 +80,20 @@ body {
 	height: 50px;
 }
 
-.password-modal {
-	position: relative;
+.password-modal-container {
 	width: 800px;
 	height: 900px;
-	/* Create password */
 
-	/* Auto layout */
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	padding: 100px 117px;
 	gap: 31px;
-	isolation: isolate;
-
-	/* Void white */
+	align-items: center;
+	padding: 100px 110px;
 
 	background: #ffffff;
 	border-radius: 10px;
