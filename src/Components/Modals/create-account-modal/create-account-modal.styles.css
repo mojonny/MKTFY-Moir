@@ -82,7 +82,6 @@ body {
 
 .password-modal-container {
 	width: 800px;
-	height: 900px;
 
 	position: absolute;
 	left: 50%;
@@ -93,7 +92,7 @@ body {
 	flex-direction: column;
 	gap: 31px;
 	align-items: center;
-	padding: 100px 110px;
+	padding: 5% 110px;
 
 	background: #ffffff;
 	border-radius: 10px;
