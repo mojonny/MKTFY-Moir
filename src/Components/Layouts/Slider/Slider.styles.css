@@ -1,3 +1,26 @@
+.carousel {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.slider-title {
+	margin-left: 15px;
+}
+
+.slider-container {
+	height: 800px;
+	width: 80%;
+	top: 250px;
+	overflow: scroll;
+	display: flex;
+	flex-direction: row;
+}
+
+.slider-container::-webkit-scrollbar {
+	display: none;
+}
+
 .slider {
 	position: relative;
 	top: 250px;
@@ -8,23 +31,6 @@
 	height: 475px;
 
 	background: #ffffff;
-}
-
-.slider-title {
-	width: 128px;
-	height: 27px;
-	margin-left: 16px;
-	/* Web text */
-
-	font-family: 'Open Sans';
-	font-style: normal;
-	font-weight: 600;
-	font-size: 20px;
-	line-height: 27px;
-
-	/* Title Gray */
-
-	color: #313131;
 }
 
 .cards {

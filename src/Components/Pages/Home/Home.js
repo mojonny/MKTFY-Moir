@@ -10,11 +10,11 @@ export default function Home() {
 	return (
 		<div className="home">
 			<Header />
-
-			<Slider />
-			<Slider />
-			<Slider />
-			<Slider />
+			<div className="carousel">
+				<div className="slider-container">
+					<Slider />
+				</div>
+			</div>
 
 			<img
 				alt="download app banner"

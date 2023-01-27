@@ -15,6 +15,8 @@ export default function Slider() {
 				<Card />
 				<Card />
 				<Card />
+				<Card />
+				<Card />
 			</div>
 		</div>
 	);
