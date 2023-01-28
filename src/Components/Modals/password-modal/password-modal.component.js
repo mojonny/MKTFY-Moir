@@ -69,12 +69,12 @@ export default function PasswordModal() {
 						<p className="TOC">
 							<input className="checkbox" type="checkbox" /> By checking this
 							box, you agree to our
-							<Link to="/privacyandterms" style={{ textDecoration: 'none' }}>
+							<Link to="/termsandservices" style={{ textDecoration: 'none' }}>
 								{' '}
 								Terms of Service{' '}
 							</Link>
 							and our
-							<Link to="/privacyandterms" style={{ textDecoration: 'none' }}>
+							<Link to="/privacy" style={{ textDecoration: 'none' }}>
 								{' '}
 								Privacy Policy{' '}
 							</Link>

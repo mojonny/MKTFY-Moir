@@ -13,7 +13,8 @@ function App() {
 				<Route path="/" element={<LoginPortal />} />
 				<Route path="/home" element={<Home />} />
 				<Route path="/success" element={<Success />} />
-				<Route path="/privacyandterms" element={<PrivacyAndTerms />} />
+				<Route path="/privacy" element={<PrivacyAndTerms />} />
+				<Route path="/termsandservices" element={<PrivacyAndTerms />} />
 			</Routes>
 		</div>
 	);
