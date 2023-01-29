@@ -16,6 +16,12 @@ export default function Home() {
 				</div>
 			</div>
 
+			<div className="carousel">
+				<div className="slider-container">
+					<Slider />
+				</div>
+			</div>
+
 			<img
 				alt="download app banner"
 				className="download-app-add"

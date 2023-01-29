@@ -17,9 +17,9 @@
 	flex-direction: row;
 }
 
-.slider-container::-webkit-scrollbar {
+/* .slider-container::-webkit-scrollbar {
 	display: none;
-}
+} */
 
 .slider {
 	position: relative;

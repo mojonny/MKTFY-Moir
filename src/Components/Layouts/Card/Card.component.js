@@ -9,7 +9,10 @@ export default function Cards() {
 	return (
 		<div className="card">
 			{/* get cards call */}
-			<img src={catDonut} alt="catDonut" />
+			<a href="/product">
+				<img src={catDonut} alt="catDonut" />
+			</a>
+
 			<div className="info-label">
 				<p>{title}</p>
 				<p>{price}</p>
