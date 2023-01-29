@@ -1,29 +1,12 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Chat from '../../../assets/Chat.png';
 import Arrow from '../../../assets/Arrow.png';
-import './PrivacyAndTerms.styles.css';
+import './Privacy.styles.css';
 
-export default function PrivacyAndTerms() {
-	const location = useLocation();
-	console.log(location.pathname);
-
-	//let Title = location.pathname;
-
-	let setTitle = (location) => {
-		if ((location.pathname = '/privacy')) {
-			return (
-				<div>
-					<h1>'MKTFY Privacy policy'</h1>
-				</div>
-			);
-		} else {
-			return 'MKTFY Terms and services';
-		}
-	};
-	console.log(setTitle);
-
+export default function Privacy() {
+	let Title = 'Privacy policies';
 	const navigate = useNavigate();
 
 	return (
@@ -54,7 +37,7 @@ export default function PrivacyAndTerms() {
 					<img src={Arrow} alt="back" onClick={() => navigate(-1)} />
 				</button>
 				<div className="text-container">
-					<h2>{location}</h2>
+					<h2>{Title}</h2>
 					<h3 style={{ textAlign: 'left' }}>
 						These Terms of Service constitute a legally binding agreement made
 						between you, whether personally or on behalf of an entity (“you”)
