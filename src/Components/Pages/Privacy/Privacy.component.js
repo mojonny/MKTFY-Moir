@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Chat from '../../../assets/Chat.png';
+//import Chat from '../../../assets/Chat.png';
 import Arrow from '../../../assets/Arrow.png';
 import './Privacy.styles.css';
 
@@ -11,7 +11,7 @@ export default function Privacy() {
 
 	return (
 		<div className="page-container">
-			<img
+			{/* <img
 				alt="people chatting"
 				className="chat-image"
 				src={Chat}
@@ -20,7 +20,7 @@ export default function Privacy() {
 					width: '100vw',
 					height: '400px',
 				}}
-			/>
+			/> */}
 
 			<div
 				className="info-container"
