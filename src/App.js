@@ -2,8 +2,8 @@ import './App.css';
 import LoginPortal from './Components/Pages/Login-Portal/login-portal.component';
 import Home from './Components/Pages/Home/Home';
 import Success from './Components/Pages/Success/Success.component';
-import Privacy from './Components/Pages/TOC and Privacy Policies/Privacy.component';
-import TOC from './Components/Pages/TOC/';
+import Privacy from './Components/Pages/Privacy/Privacy.component';
+import TOC from './Components/Pages/TOC/TOC.component';
 
 import { Route, Routes } from 'react-router-dom';
 
