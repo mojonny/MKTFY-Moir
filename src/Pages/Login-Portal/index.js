@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-////////////////////////////////////////////////////////////////////////////////////
 import LoginModal from './login-modal';
 import CreateModal from './create-account-modal';
 

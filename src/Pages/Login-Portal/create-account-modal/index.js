@@ -1,15 +1,22 @@
 import React from 'react';
 import { useState } from 'react';
 
-import Modal from 'react-modal';
+import Modal from '../../../Components/Modal';
 import PasswordModal from './password-modal';
-////////////////////////////////////////////////////////////////////////////////////
+
 import greyX from '../../../assets/GreyX.png';
 import arrow from '../../../assets/Arrow.png';
 import './index.css';
 
-function CreateModal(setCreateOpened) {
+function CreateModal({ setCreateOpened }) {
 	const [passwordOpened, setPasswordOpened] = useState(false);
+
+	const setPasswordOpenedToTrue = ({ setCreateOpened }) => {
+		setCreateOpened({
+			createOpened: 'false',
+			passwordOpened: 'true',
+		});
+	};
 
 	return (
 		<>
@@ -132,7 +139,7 @@ function CreateModal(setCreateOpened) {
 					</p>
 				</form>
 				<button
-					onClick={setPasswordOpened}
+					onClick={setPasswordOpenedToTrue}
 					className="next-button"
 					type="submit"
 					value="Next"
