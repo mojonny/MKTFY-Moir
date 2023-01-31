@@ -1,0 +1,33 @@
+.footer {
+	box-sizing: border-box;
+	position: absolute;
+	width: 100vw;
+	height: 609px;
+	left: 0px;
+	top: 2935px;
+	background-image: url('../../assets/FooterBG.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border: 1px solid #000000;
+	background-color: #e5e5e5;
+}
+
+.side-msg {
+	position: absolute;
+	width: 290px;
+	height: 200px;
+	left: 250px;
+	top: 220px;
+
+	/* Web text */
+
+	font-family: 'Open Sans';
+	font-style: normal;
+	font-weight: 600;
+	font-size: 20px;
+	line-height: 27px;
+
+	/* Void white */
+
+	color: #ffffff;
+}

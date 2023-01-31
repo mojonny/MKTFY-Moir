@@ -1,10 +1,10 @@
 import './App.css';
-import LoginPortal from './Components/Pages/Login-Portal/login-portal.component';
-import Home from './Components/Pages/Home/Home';
-import Success from './Components/Pages/Success/Success.component';
-import Privacy from './Components/Pages/Privacy/Privacy.component';
-import TOC from './Components/Pages/TOC/TOC.component';
-import Product from './Components/Pages/Product/Product.component';
+import LoginPortal from './Pages/Login-Portal';
+import Home from './Pages/Home';
+import Success from './Components/Success';
+import Privacy from './Pages/Login-Portal/Privacy';
+import TOC from './Pages/Login-Portal/TOC';
+import Product from './Pages/Home/Product';
 
 import { Route, Routes } from 'react-router-dom';
 
