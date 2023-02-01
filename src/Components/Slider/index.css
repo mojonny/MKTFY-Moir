@@ -1,0 +1,40 @@
+.carousel {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.slider-title {
+	margin-left: 15px;
+}
+
+.slider-container {
+	height: 800px;
+	width: 80%;
+	top: 250px;
+	overflow: scroll;
+	display: flex;
+	flex-direction: row;
+}
+
+/* .slider-container::-webkit-scrollbar {
+	display: none;
+} */
+
+.slider {
+	position: relative;
+	top: 250px;
+	left: 50px;
+	padding: 25px 10px;
+
+	width: 95%;
+	height: 475px;
+
+	background: #ffffff;
+}
+
+.cards {
+	display: flex;
+	flex-direction: row;
+	gap: 35px;
+}
