@@ -15,7 +15,7 @@ export default function PasswordModal() {
 		setTimeout(() => {
 			navigate('/home');
 			setIsLoading(false);
-		}, 200000);
+		}, 2000);
 	};
 
 	return (
