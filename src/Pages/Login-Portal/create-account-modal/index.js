@@ -1,7 +1,5 @@
 import React from 'react';
 
-//import greyX from '../../../assets/GreyX.png';
-import arrow from '../../../assets/Arrow.png';
 import './index.css';
 
 function CreateModal() {
@@ -113,19 +111,6 @@ function CreateModal() {
 					</p>
 				</form>
 			</div>
-			{/* I left the modal buttons outside of PasswordModal since they were not functioning inside the modal component itself. This is likely due to inexperience and not fully understanding binding props. */}
-
-			<button
-				style={{
-					position: 'absolute',
-					top: '25px',
-					left: '15px',
-					backgroundColor: '#ffffff',
-					border: 'none',
-				}}
-			>
-				<img src={arrow} alt="back" />
-			</button>
 		</>
 	);
 }

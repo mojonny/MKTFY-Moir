@@ -70,7 +70,16 @@ export default function LoginPortal() {
 					>
 						Next
 					</button>
-					<button onClick={() => setCreateOpened(false)}>Close Create</button>
+					<button
+						style={{
+							backgroundColor: '#ffffff',
+							border: 'none',
+							translate: '990px -680px',
+						}}
+						onClick={() => setCreateOpened(false)}
+					>
+						<img src={greyX} alt="close" />
+					</button>
 				</Modal>
 
 				<Modal
