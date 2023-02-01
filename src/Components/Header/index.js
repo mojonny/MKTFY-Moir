@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import altLogo from '../../assets/altLogo.png';
 import bell from '../../assets/Bell.png';
 import plus from '../../assets/Plus.png';
@@ -14,7 +16,9 @@ export default function Header() {
 			style={{ backgroundColor: '#6318AF', height: '220px' }}
 		>
 			<div className="search-bar">
-				<img alt="altLogo" src={altLogo} />
+				<Link to="/home">
+					<img alt="altLogo" src={altLogo} />
+				</Link>
 				<input type="text" placeholder="Search on MKTFY" />
 				<p>Welcome back, {username}</p>
 				<button>
