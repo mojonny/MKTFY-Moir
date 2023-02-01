@@ -1,23 +1,10 @@
 import React from 'react';
-import { useState } from 'react';
 
-import Modal from '../../../Components/Modal';
-import PasswordModal from './password-modal';
-
-import greyX from '../../../assets/GreyX.png';
+//import greyX from '../../../assets/GreyX.png';
 import arrow from '../../../assets/Arrow.png';
 import './index.css';
 
-function CreateModal({ setCreateOpened }) {
-	const [passwordOpened, setPasswordOpened] = useState(false);
-
-	const setPasswordOpenedToTrue = ({ setCreateOpened }) => {
-		setCreateOpened({
-			createOpened: 'false',
-			passwordOpened: 'true',
-		});
-	};
-
+function CreateModal() {
 	return (
 		<>
 			<div className="modal-container">
@@ -30,20 +17,7 @@ function CreateModal({ setCreateOpened }) {
 				</h3>
 
 				<form className="form-container">
-					<button
-						style={{
-							position: 'absolute',
-							top: '25px',
-							right: '15px',
-							backgroundColor: '#ffffff',
-							border: 'none',
-						}}
-						onClick={() => setCreateOpened(false)}
-					>
-						<img src={greyX} alt="close" />
-					</button>
 					<div className="form-input-layout">
-						{/* I am sure this form can be simplified in the future */}
 						<label className="first">
 							First name
 							<br />
@@ -138,54 +112,20 @@ function CreateModal({ setCreateOpened }) {
 						sell or donate your stuff here at MKTFY.{' '}
 					</p>
 				</form>
-				<button
-					onClick={setPasswordOpenedToTrue}
-					className="next-button"
-					type="submit"
-					value="Next"
-					style={{ position: 'absolute', bottom: '18%', right: '20%' }}
-				>
-					Next
-				</button>
 			</div>
-			<Modal
-				isOpen={passwordOpened}
-				onRequestClose={() => setPasswordOpened(false)}
-				ariaHideApp={false}
-				className="password-modal-container"
+			{/* I left the modal buttons outside of PasswordModal since they were not functioning inside the modal component itself. This is likely due to inexperience and not fully understanding binding props. */}
+
+			<button
+				style={{
+					position: 'absolute',
+					top: '25px',
+					left: '15px',
+					backgroundColor: '#ffffff',
+					border: 'none',
+				}}
 			>
-				{/* I left the modal buttons outside of PasswordModal since they were not functioning inside the modal component itself. This is likely due to inexperience and not fully understanding binding props. */}
-
-				<button
-					style={{
-						position: 'absolute',
-						top: '25px',
-						left: '15px',
-						backgroundColor: '#ffffff',
-						border: 'none',
-					}}
-					onClick={() => setPasswordOpened(false)}
-				>
-					<img src={arrow} alt="back" />
-				</button>
-
-				<button
-					style={{
-						position: 'absolute',
-						top: '25px',
-						right: '15px',
-						backgroundColor: '#ffffff',
-						border: 'none',
-					}}
-					// I couldn't figure out how to close both modals in one click.
-					// So this is a beginner solution that reloads the page and closes both modals.
-
-					onClick={() => window.location.reload(false)}
-				>
-					<img src={greyX} alt="close" />
-				</button>
-				<PasswordModal className="password-modal" />
-			</Modal>
+				<img src={arrow} alt="back" />
+			</button>
 		</>
 	);
 }

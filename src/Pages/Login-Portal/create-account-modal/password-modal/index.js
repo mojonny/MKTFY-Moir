@@ -4,6 +4,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import Success from '../../../../Components/Success';
 
 import checkmark from '../../../../assets/Checkmark.png';
+import greyX from '../../../../assets/GreyX.png';
 
 export default function PasswordModal() {
 	const navigate = useNavigate();
@@ -93,6 +94,22 @@ export default function PasswordModal() {
 				>
 					{isLoading ? <Success /> : navigateHome}
 					Create account
+				</button>
+
+				<button
+					style={{
+						position: 'absolute',
+						top: '25px',
+						right: '15px',
+						backgroundColor: '#ffffff',
+						border: 'none',
+					}}
+					// I couldn't figure out how to close both modals in one click.
+					// So this is a beginner solution that reloads the page and closes both modals.
+
+					onClick={() => window.location.reload(false)}
+				>
+					<img src={greyX} alt="close" />
 				</button>
 			</form>
 		</div>
