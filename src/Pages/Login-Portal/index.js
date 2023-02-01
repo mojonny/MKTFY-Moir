@@ -108,7 +108,7 @@ export default function LoginPortal() {
 						style={{
 							backgroundColor: '#ffffff',
 							border: 'none',
-							translate: '-360px -740px',
+							translate: '-360px -730px',
 						}}
 						onClick={() => setPasswordOpened(false)}
 					>
