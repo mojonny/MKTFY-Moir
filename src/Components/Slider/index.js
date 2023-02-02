@@ -7,8 +7,8 @@ export default function Slider() {
 
 	return (
 		<div className="slider">
-			<p className="slider-title">{title}</p>
 			<div className="card-container">
+				<h3 className="slider-title">{title}</h3>
 				<div className="cards">
 					<Card />
 					<Card />

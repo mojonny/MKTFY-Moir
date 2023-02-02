@@ -1,8 +1,8 @@
-.card-container::-webkit-scrollbar {
+.mini-card-container::-webkit-scrollbar {
 	display: none;
 }
 
-.card-container {
+.mini-card-container {
 	height: 775px;
 
 	width: 85%;
@@ -21,7 +21,7 @@
 	background: #ffffff;
 }
 
-.cards {
+.mini-cards {
 	display: flex;
 	flex-direction: row;
 	gap: 35px;
