@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import altLogo from '../../assets/altLogo.png';
 import bell from '../../assets/Bell.png';
 import plus from '../../assets/Plus.png';
 import hamburger from '../../assets/LinesMenu.png';
+import Dropdown from './Dropdown';
 
 import './index.css';
 
 export default function Header() {
 	const username = 'Pearl The Cat';
+
+	const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
+	console.log(dropdownIsOpen);
+
 	return (
 		<div
 			className="header"
@@ -20,8 +25,11 @@ export default function Header() {
 					<img alt="altLogo" src={altLogo} />
 				</Link>
 				<input type="text" placeholder="Search on MKTFY" />
-				<p>Welcome back, {username}</p>
+
 				<button>
+					<p>Welcome back, {username}</p>
+				</button>
+				<button onClick={() => setDropdownIsOpen(true)}>
 					<img alt="notifications" src={bell} />
 				</button>
 				<button
@@ -46,6 +54,11 @@ export default function Header() {
 				<p>Electronics</p>
 				<p>Real estate</p>
 			</div>
+
+			<Dropdown
+				isOpen={dropdownIsOpen}
+				onRequestClose={() => setDropdownIsOpen(false)}
+			/>
 		</div>
 	);
 }

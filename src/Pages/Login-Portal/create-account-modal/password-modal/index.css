@@ -1,0 +1,62 @@
+body {
+	background: #ffffff;
+	border-radius: 10px;
+}
+
+.modal-password {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 800px;
+	height: 600px;
+
+	background: #ffffff;
+	border-radius: 10px;
+}
+
+.modal-container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 0px 0px 0px 100px;
+
+	position: relative;
+	width: 80%;
+	height: 100%;
+}
+
+.password-modal-container {
+	width: 800px;
+
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+
+	display: flex;
+	flex-direction: column;
+	gap: 31px;
+	align-items: center;
+	padding: 5% 110px;
+
+	background: #ffffff;
+	border-radius: 10px;
+}
+
+.darkBG {
+	background-color: rgba(0, 0, 0, 0.2);
+	width: 100vw;
+	height: 100vh;
+	z-index: 0;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+
+.password-form {
+	display: flex;
+	flex-direction: column;
+	padding: 10% 10%;
+}

@@ -7,15 +7,7 @@ export default function Modal(props) {
 	}
 
 	return (
-		<div
-			className="BG"
-			style={{
-				height: '2000px',
-				width: '2000px',
-				backgroundColor: 'black',
-			}}
-			onClick={props.onClose}
-		>
+		<div className="BG" onClick={props.onClose}>
 			<div className="modal" style={{ height: '50px', width: '250px' }}>
 				<div className="modal-content">
 					<div className="modal-header">
