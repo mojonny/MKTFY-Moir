@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import Dropdown from './Dropdown';
+
+import LogoutButton from '../Auth0/LogoutButton';
+
 import altLogo from '../../assets/altLogo.png';
 import bell from '../../assets/Bell.png';
 import plus from '../../assets/Plus.png';
 import hamburger from '../../assets/LinesMenu.png';
-import Dropdown from './Dropdown';
-
 import './index.css';
 
 export default function Header() {
-	const username = 'Pearl The Cat';
-
 	const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
 	console.log(dropdownIsOpen);
 
@@ -24,10 +24,12 @@ export default function Header() {
 				<Link to="/home">
 					<img alt="altLogo" src={altLogo} />
 				</Link>
+
+				<LogoutButton />
 				<input type="text" placeholder="Search on MKTFY" />
 
 				<button>
-					<p>Welcome back, {username}</p>
+					<p>Welcome back, Pearl</p>
 				</button>
 				<button onClick={() => setDropdownIsOpen(true)}>
 					<img alt="notifications" src={bell} />

@@ -3,36 +3,56 @@ import React, { useState } from 'react';
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
 
-function CreateModal(props) {
+export default function CreateModal(props) {
 	const [createOpened, setCreateOpened] = useState(false);
 	console.log(createOpened);
+
+	const [passwordOpened, setPasswordOpened] = useState(false);
+	console.log(passwordOpened);
 
 	if (!props.createOpened) {
 		return null;
 	}
+
+	const showPassword = () => {
+		setCreateOpened(false);
+		setPasswordOpened(true);
+	};
+
 	return (
 		<div className="darkBG" onClick={props.onClose}>
 			<div className="modal-create" onClick={(e) => e.stopPropagation()}>
 				<div className="create-modal-container">
-					<form className="form-container">
+					<div className="form-container">
 						<button
 							style={{
 								backgroundColor: '#ffffff',
 								border: 'none',
 							}}
-							onClick={() => setCreateOpened(false)}
+							onClick={props.onClose}
 						>
-							<img src={greyX} alt="close" />
+							<img
+								style={{
+									backgroundColor: '#ffffff',
+									border: 'none',
+								}}
+								src={greyX}
+								alt="close"
+							/>
 						</button>
-
+						<button
+							className="next-button"
+							props={props}
+							onClick={showPassword}
+						>
+							Next
+						</button>
 						<h2>Welcome to MKTFY!</h2>
-
 						<h3>
 							It’s nice to meet you. At MKTFY you are able to buy, sell and
 							donate awesome stuff to a community of awesome people. Please fill
 							out the form below to get started.
 						</h3>
-
 						<div className="form-input-layout">
 							<label className="first">
 								First name
@@ -127,11 +147,9 @@ function CreateModal(props) {
 							will never sell, rent, lease or give away your information. We
 							only buy, sell or donate your stuff here at MKTFY.{' '}
 						</p>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
 	);
 }
-
-export default CreateModal;

@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { Auth0ProviderWithNavigate } from './Components/Auth0/ProviderWithNavigate';
+
 import App from './App';
+import './index.css';
+
 import { BrowserRouter } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 
@@ -9,7 +12,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
 		<BrowserRouter>
-			<App />
+			<Auth0ProviderWithNavigate>
+				<App />
+			</Auth0ProviderWithNavigate>
 		</BrowserRouter>
 	</React.StrictMode>
 );

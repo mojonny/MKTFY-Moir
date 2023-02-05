@@ -2,25 +2,25 @@ import React, { useState } from 'react';
 
 import LoginModal from './login-modal';
 import CreateModal from './create-account-modal';
-
-import logo from '../../assets/MKTFYlogo.png';
-
-import './index.css';
 import PasswordModal from './create-account-modal/password-modal';
 
+import LoginButton from '../../Components/Auth0/LoginButton';
+
+import logo from '../../assets/MKTFYlogo.png';
+import './index.css';
+
 export default function LoginPortal() {
-	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
+	const [loginOpened, setLoginOpened] = useState(false);
 
 	const [createOpened, setCreateOpened] = useState(false);
+	console.log(createOpened);
 
 	const [passwordOpened, setPasswordOpened] = useState(false);
 	console.log(passwordOpened);
 
-	const setCreateOpenedToTrue = () => {
-		setCreateOpened({
-			createOpened: 'true',
-			passwordOpened: 'false',
-		});
+	const showCreate = () => {
+		setCreateOpened(true);
+		setPasswordOpened(false);
 	};
 
 	return (
@@ -29,37 +29,32 @@ export default function LoginPortal() {
 				<img src={logo} className="logo" alt="logo" />
 
 				<div>
-					<button
+					<LoginButton
 						className="login-button"
-						onClick={() => setLoginModalIsOpen(true)}
+						onClick={() => setLoginOpened(true)}
 					>
 						Login
-					</button>
+					</LoginButton>
 					<LoginModal
-						className="modal-login"
-						loginModalIsOpen={loginModalIsOpen}
-						onClose={() => setLoginModalIsOpen(false)}
+						loginOpened={loginOpened}
+						onClose={() => setLoginOpened(false)}
 					/>
 				</div>
+
 				<div>
-					<button className="create-button" onClick={setCreateOpenedToTrue}>
+					<button className="create-button" onClick={showCreate}>
 						Create account
 					</button>
-					<div>
-						<CreateModal
-							className="modal-create"
-							createOpened={createOpened}
-							onClose={() => setCreateOpened(false)}
-						/>
-						<button className="next-button" onClick={setPasswordOpened}>
-							Next
-						</button>
-						<PasswordModal
-							className="modal-create"
-							createOpened={createOpened}
-							onClose={() => setCreateOpened(false)}
-						/>
-					</div>
+
+					<CreateModal
+						createOpened={createOpened}
+						onClose={() => setCreateOpened(false)}
+					/>
+
+					<PasswordModal
+						passwordOpened={passwordOpened}
+						onClose={() => setPasswordOpened(false)}
+					/>
 				</div>
 
 				<div className="bottom-text">
