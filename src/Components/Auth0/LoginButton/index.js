@@ -18,7 +18,6 @@ export const LoginButton = () => {
 				onClick={handleLogin}
 				style={{
 					padding: '10px 0 10px 0',
-
 					border: 'none',
 					color: '#ffffff',
 					width: '300px',

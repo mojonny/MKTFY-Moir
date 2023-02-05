@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-import LoginModal from './login-modal';
 import CreateModal from './create-account-modal';
 import PasswordModal from './create-account-modal/password-modal';
 
@@ -10,8 +9,6 @@ import logo from '../../assets/MKTFYlogo.png';
 import './index.css';
 
 export default function LoginPortal() {
-	const [loginOpened, setLoginOpened] = useState(false);
-
 	const [createOpened, setCreateOpened] = useState(false);
 	console.log(createOpened);
 
@@ -29,16 +26,7 @@ export default function LoginPortal() {
 				<img src={logo} className="logo" alt="logo" />
 
 				<div>
-					<LoginButton
-						className="login-button"
-						onClick={() => setLoginOpened(true)}
-					>
-						Login
-					</LoginButton>
-					<LoginModal
-						loginOpened={loginOpened}
-						onClose={() => setLoginOpened(false)}
-					/>
+					<LoginButton>Login</LoginButton>
 				</div>
 
 				<div>

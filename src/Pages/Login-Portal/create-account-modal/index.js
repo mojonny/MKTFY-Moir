@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
 
 export default function CreateModal(props) {
-	const [createOpened, setCreateOpened] = useState(false);
-	console.log(createOpened);
+	const [open, setOpen] = useState(props.showCreate);
+	console.log(open);
+
+	useEffect(() => {
+		setOpen(props.showCreate);
+	}, [props.showCreate]);
+
+	// const [createOpened, setCreateOpened] = useState(false);
+	// console.log(createOpened);
 
 	const [passwordOpened, setPasswordOpened] = useState(false);
 	console.log(passwordOpened);
@@ -14,10 +21,11 @@ export default function CreateModal(props) {
 		return null;
 	}
 
-	const showPassword = () => {
-		setCreateOpened(false);
-		setPasswordOpened(true);
-	};
+	// 	const showPassword = () => {
+	// 	setCreateOpened(false);
+	// 	setPasswordOpened(true);
+	// 	console.log(setPasswordOpened);
+	// };
 
 	return (
 		<div className="darkBG" onClick={props.onClose}>
@@ -42,8 +50,8 @@ export default function CreateModal(props) {
 						</button>
 						<button
 							className="next-button"
-							props={props}
-							onClick={showPassword}
+							props={props.passwordOpened}
+							onClick={() => setPasswordOpened(true)}
 						>
 							Next
 						</button>
