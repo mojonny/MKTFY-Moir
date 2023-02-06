@@ -4,6 +4,7 @@ import CreateModal from './create-account-modal';
 import PasswordModal from './create-account-modal/password-modal';
 
 import LoginButton from '../../Components/Auth0/LoginButton';
+import SignupButton from '../../Components/Auth0/SignUpButton';
 
 import logo from '../../assets/MKTFYlogo.png';
 import './index.css';
@@ -30,9 +31,9 @@ export default function LoginPortal() {
 				</div>
 
 				<div>
-					<button className="create-button" onClick={showCreate}>
+					<SignupButton className="create-button" onClick={showCreate}>
 						Create account
-					</button>
+					</SignupButton>
 
 					<CreateModal
 						createOpened={createOpened}
