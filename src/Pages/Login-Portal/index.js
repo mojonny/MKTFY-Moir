@@ -39,8 +39,18 @@ export default function LoginPortal() {
 						onClose={() => setIsModalOpen(false)}
 					/>
 				)}
-				{signupPage === 1 && <CreateModal setSignupPage={setSignupPage} />}
-				{signupPage === 2 && <PasswordModal setSignupPage={setSignupPage} />}
+				{signupPage === 1 && (
+					<CreateModal
+						signupPage={signupPage}
+						onClose={() => setSignupPage(0)}
+					/>
+				)}
+				{signupPage === 2 && (
+					<PasswordModal
+						signupPage={signupPage}
+						onClose={() => setSignupPage(0)}
+					/>
+				)}
 
 				<div className="bottom-text">
 					Find out more about us!

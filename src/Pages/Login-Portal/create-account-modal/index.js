@@ -1,60 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+
+import Modal from '../../../Components/Modal';
 
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
 
-export default function CreateModal(props) {
-	const [open, setOpen] = useState(props.showCreate);
-	console.log(open);
-
-	useEffect(() => {
-		setOpen(props.showCreate);
-	}, [props.showCreate]);
-
-	// const [createOpened, setCreateOpened] = useState(false);
-	// console.log(createOpened);
-
-	const [passwordOpened, setPasswordOpened] = useState(false);
-	console.log(passwordOpened);
-
-	if (!props.createOpened) {
-		return null;
-	}
-
-	// 	const showPassword = () => {
-	// 	setCreateOpened(false);
-	// 	setPasswordOpened(true);
-	// 	console.log(setPasswordOpened);
-	// };
-
+export default function CreateModal(props, { signupPage }) {
 	return (
 		<div className="darkBG" onClick={props.onClose}>
-			<div className="modal-create" onClick={(e) => e.stopPropagation()}>
+			<Modal
+				title="Create Modal"
+				open={true}
+				onClick={(e) => e.stopPropagation()}
+			>
+				<button
+					style={{
+						backgroundColor: '#ffffff',
+						border: 'none',
+					}}
+					onClick={props.onClose}
+				>
+					<img src={greyX} alt="close" />
+				</button>
+
 				<div className="create-modal-container">
 					<div className="form-container">
-						<button
-							style={{
-								backgroundColor: '#ffffff',
-								border: 'none',
-							}}
-							onClick={props.onClose}
-						>
-							<img
-								style={{
-									backgroundColor: '#ffffff',
-									border: 'none',
-								}}
-								src={greyX}
-								alt="close"
-							/>
-						</button>
-						<button
-							className="next-button"
-							props={props.passwordOpened}
-							onClick={() => setPasswordOpened(true)}
-						>
-							Next
-						</button>
 						<h2>Welcome to MKTFY!</h2>
 						<h3>
 							It’s nice to meet you. At MKTFY you are able to buy, sell and
@@ -149,6 +119,9 @@ export default function CreateModal(props) {
 									className="input-style"
 								/>
 							</label>
+							<button className="next-button" onClick={() => signupPage(2)}>
+								Next
+							</button>
 						</div>
 						<p>
 							At MKTFY we respect your privacy and do not tolerate spam, and
@@ -157,7 +130,7 @@ export default function CreateModal(props) {
 						</p>
 					</div>
 				</div>
-			</div>
+			</Modal>
 		</div>
 	);
 }

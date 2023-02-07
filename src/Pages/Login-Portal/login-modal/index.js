@@ -25,7 +25,6 @@ export default function LoginModal(props, { isModalOpen }) {
 			<Modal
 				title="Login Modal"
 				open={true}
-				isModalOpen={isModalOpen}
 				onClick={(e) => e.stopPropagation()}
 			>
 				<button
