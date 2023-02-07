@@ -1,24 +1,18 @@
 import React, { useState } from 'react';
 
+import LoginModal from './login-modal';
 import CreateModal from './create-account-modal';
 import PasswordModal from './create-account-modal/password-modal';
-
-import LoginButton from '../../Components/Auth0/LoginButton';
-import SignupButton from '../../Components/Auth0/SignUpButton';
 
 import logo from '../../assets/MKTFYlogo.png';
 import './index.css';
 
 export default function LoginPortal() {
-	const [createOpened, setCreateOpened] = useState(false);
-	console.log(createOpened);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [signupPage, setSignupPage] = useState(0);
 
-	const [passwordOpened, setPasswordOpened] = useState(false);
-	console.log(passwordOpened);
-
-	const showCreate = () => {
-		setCreateOpened(true);
-		setPasswordOpened(false);
+	const showModal = () => {
+		setIsModalOpen(true);
 	};
 
 	return (
@@ -26,25 +20,27 @@ export default function LoginPortal() {
 			<div className="intro-container">
 				<img src={logo} className="logo" alt="logo" />
 
-				<div>
-					<LoginButton>Login</LoginButton>
-				</div>
+				<button className="login-button" onClick={showModal}>
+					Login
+				</button>
 
-				<div>
-					<SignupButton className="create-button" onClick={showCreate}>
-						Create account
-					</SignupButton>
+				<button
+					className="create-button"
+					onClick={() => {
+						setSignupPage(1);
+					}}
+				>
+					Create account
+				</button>
 
-					<CreateModal
-						createOpened={createOpened}
-						onClose={() => setCreateOpened(false)}
+				{isModalOpen && (
+					<LoginModal
+						isModalOpen={isModalOpen}
+						onClose={() => setIsModalOpen(false)}
 					/>
-
-					<PasswordModal
-						passwordOpened={passwordOpened}
-						onClose={() => setPasswordOpened(false)}
-					/>
-				</div>
+				)}
+				{signupPage === 1 && <CreateModal setSignupPage={setSignupPage} />}
+				{signupPage === 2 && <PasswordModal setSignupPage={setSignupPage} />}
 
 				<div className="bottom-text">
 					Find out more about us!

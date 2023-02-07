@@ -1,14 +1,14 @@
-import './index.css';
-import greyX from '../../../assets/GreyX.png';
 import { useState } from 'react';
-import Success from '../../../Components/Success';
 import { useNavigate } from 'react-router-dom';
 
-export default function LoginModal(props) {
-	const [isLoading, setIsLoading] = useState(false);
+import Success from '../../../Components/Success';
+import Modal from '../../../Components/Modal';
 
-	const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
-	console.log(loginModalIsOpen);
+import greyX from '../../../assets/GreyX.png';
+import './index.css';
+
+export default function LoginModal(props, { isModalOpen }) {
+	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -17,76 +17,71 @@ export default function LoginModal(props) {
 		setTimeout(() => {
 			navigate('/home');
 			setIsLoading(false);
-		}, 2000);
+		}, 3000);
 	};
-
-	if (!props.loginModalIsOpen) {
-		return null;
-	}
 
 	return (
 		<div className="darkBG" onClick={props.onClose}>
-			<div className="modal-login" onClick={(e) => e.stopPropagation()}>
-				<div className="login-modal-container">
-					<form className="login-form">
-						<button
-							style={{
-								position: 'absolute',
-								top: '25px',
-								right: '15px',
-								backgroundColor: '#ffffff',
-								border: 'none',
-							}}
-							onClick={() => setLoginModalIsOpen(false)}
-						>
-							<img src={greyX} alt="x" />
-						</button>
+			<Modal
+				title="Login Modal"
+				open={true}
+				isModalOpen={isModalOpen}
+				onClick={(e) => e.stopPropagation()}
+			>
+				<button
+					style={{
+						backgroundColor: '#ffffff',
+						border: 'none',
+					}}
+					onClick={props.onClose}
+				>
+					<img src={greyX} alt="close" />
+				</button>
+				<form className="login-form">
+					<h2 style={{ textAlign: 'center' }}>Welcome back!</h2>
 
-						<h2 style={{ textAlign: 'center' }}>Welcome back!</h2>
-
-						<label>
-							Email
-							<br />
-							<input
-								type="email"
-								placeholder=" Insert your email"
-								className="input-style"
-							/>
-						</label>
+					<label>
+						Email
 						<br />
-						<label>
-							Password
-							<br />
-							<input
-								type="password"
-								placeholder=" Insert your password"
-								className="input-style"
-							/>
-						</label>
+						<input
+							type="email"
+							placeholder=" Insert your email"
+							className="input-style"
+						/>
+					</label>
+					<br />
+					<label>
+						Password
 						<br />
-						<a
-							style={{
-								textAlign: 'right',
-								color: '#FFBA00',
-								textDecoration: 'none',
-							}}
-							href="https://mktfy-marketing-site.vercel.app/"
-						>
-							Forgot password
-						</a>
-						<br />
-						<button
-							onClick={navigateHome}
-							disabled={isLoading}
-							className="login-button"
-							style={{ alignSelf: 'center' }}
-						>
-							{isLoading ? <Success /> : navigateHome}
-							Login
-						</button>
-					</form>
-				</div>
-			</div>
+						<input
+							type="password"
+							placeholder=" Insert your password"
+							className="input-style"
+						/>
+					</label>
+					<br />
+					<a
+						style={{
+							textAlign: 'right',
+							color: '#FFBA00',
+							textDecoration: 'none',
+						}}
+						href="https://mktfy-marketing-site.vercel.app/"
+					>
+						Forgot password
+					</a>
+					<br />
+					<button
+						onClick={navigateHome}
+						disabled={isLoading}
+						className="login-button"
+						style={{ alignSelf: 'center' }}
+					>
+						{isLoading ? <Success /> : navigateHome}
+						Login
+					</button>
+				</form>
+			</Modal>
 		</div>
 	);
 }

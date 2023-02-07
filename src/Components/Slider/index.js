@@ -11,13 +11,6 @@ export default function Slider() {
 				<h3 className="slider-title">{title}</h3>
 				<div className="cards">
 					<Card />
-					<Card />
-					<Card />
-					<Card />
-					<Card />
-					<Card />
-					<Card />
-					<Card />
 				</div>
 			</div>
 		</div>

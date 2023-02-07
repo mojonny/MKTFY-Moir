@@ -7,7 +7,7 @@ export default function SignupButton() {
 	const handleSignUp = async () => {
 		await loginWithRedirect({
 			appState: {
-				returnTo: '/profile',
+				returnTo: '/',
 			},
 			authorizationParams: {
 				screen_hint: 'signup',
@@ -16,7 +16,20 @@ export default function SignupButton() {
 	};
 
 	return (
-		<button className="button__sign-up" onClick={handleSignUp}>
+		<button
+			className="button__sign-up"
+			onClick={handleSignUp}
+			style={{
+				padding: '10px 0 10px 0',
+				border: 'none',
+				color: '#ffffff',
+				width: '300px',
+				height: '50px',
+				background: '#6318af',
+				boxShadow: '4px 4px 8px rgba(0, 0, 0, 0.15)',
+				borderRadius: '100px',
+			}}
+		>
 			Sign Up
 		</button>
 	);

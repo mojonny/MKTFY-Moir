@@ -16,6 +16,7 @@ export const LoginButton = () => {
 		!isAuthenticated && (
 			<button
 				onClick={handleLogin}
+				className="button__login"
 				style={{
 					padding: '10px 0 10px 0',
 					border: 'none',
