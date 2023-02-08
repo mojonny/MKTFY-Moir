@@ -1,15 +1,16 @@
 import React from 'react';
 
-import Modal from '../../../Components/Modal';
+//import Modal from '../../../Components/Modal';
 
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
 
-export default function CreateModal(props, { signupPage }) {
+export default function CreateModal({ setSignupPage }) {
 	return (
-		<div className="darkBG" onClick={props.onClose}>
-			<Modal
+		<div className="darkBG" onClick={() => setSignupPage(0)}>
+			<div
 				title="Create Modal"
+				className="create-modal"
 				open={true}
 				onClick={(e) => e.stopPropagation()}
 			>
@@ -18,7 +19,7 @@ export default function CreateModal(props, { signupPage }) {
 						backgroundColor: '#ffffff',
 						border: 'none',
 					}}
-					onClick={props.onClose}
+					onClick={() => setSignupPage(0)}
 				>
 					<img src={greyX} alt="close" />
 				</button>
@@ -119,7 +120,7 @@ export default function CreateModal(props, { signupPage }) {
 									className="input-style"
 								/>
 							</label>
-							<button className="next-button" onClick={() => signupPage(2)}>
+							<button className="next-button" onClick={() => setSignupPage(2)}>
 								Next
 							</button>
 						</div>
@@ -130,7 +131,7 @@ export default function CreateModal(props, { signupPage }) {
 						</p>
 					</div>
 				</div>
-			</Modal>
+			</div>
 		</div>
 	);
 }

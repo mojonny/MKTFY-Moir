@@ -25,18 +25,14 @@
 
 .bottom-text {
 	position: fixed;
-	left: -150%;
-	top: 450%;
-	transform: translate(-50%, -50%);
-
-	/* Titles and important things */
+	left: -200%;
+	top: 500%;
 
 	font-family: 'Open Sans';
 	font-style: normal;
 	font-weight: 700;
 	font-size: 16px;
 	line-height: 22px;
-	/* identical to box height */
 
 	text-align: center;
 	color: #ffffff;

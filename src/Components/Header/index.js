@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import Dropdown from './Dropdown';
 
-import LogoutButton from '../Auth0/LogoutButton';
 import altLogo from '../../assets/altLogo.png';
 import bell from '../../assets/Bell.png';
 import plus from '../../assets/Plus.png';
@@ -24,7 +23,6 @@ export default function Header() {
 					<img alt="altLogo" src={altLogo} />
 				</Link>
 
-				<LogoutButton />
 				<input type="text" placeholder="Search on MKTFY" />
 
 				<button>

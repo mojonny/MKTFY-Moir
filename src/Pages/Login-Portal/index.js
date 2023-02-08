@@ -41,13 +41,13 @@ export default function LoginPortal() {
 				)}
 				{signupPage === 1 && (
 					<CreateModal
-						signupPage={signupPage}
+						setSignupPage={setSignupPage}
 						onClose={() => setSignupPage(0)}
 					/>
 				)}
 				{signupPage === 2 && (
 					<PasswordModal
-						signupPage={signupPage}
+						setSignupPage={setSignupPage}
 						onClose={() => setSignupPage(0)}
 					/>
 				)}

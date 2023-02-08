@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
-import Modal from '../../../../Components/Modal';
+//import Modal from '../../../../Components/Modal';
 import Success from '../../../../Components/Success';
 
 import checkmark from '../../../../assets/Checkmark.png';
 import greyX from '../../../../assets/GreyX.png';
 import back from '../../../../assets/Arrow.png';
 
-export default function PasswordModal(props) {
+export default function PasswordModal({ setSignupPage }) {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -18,12 +18,13 @@ export default function PasswordModal(props) {
 		setTimeout(() => {
 			navigate('/');
 			setIsLoading(false);
+			setSignupPage(0);
 		}, 2000);
 	};
 
 	return (
-		<div className="darkBG" onClick={props.onClose}>
-			<Modal
+		<div className="darkBG" onClick={() => setSignupPage(0)}>
+			<div
 				title="Create Password Modal"
 				open={true}
 				onClick={(e) => e.stopPropagation()}
@@ -33,7 +34,7 @@ export default function PasswordModal(props) {
 						backgroundColor: '#ffffff',
 						border: 'none',
 					}}
-					onClick={props.onClose}
+					onClick={() => setSignupPage(0)}
 				>
 					<img src={greyX} alt="close" />
 				</button>
@@ -44,7 +45,7 @@ export default function PasswordModal(props) {
 							border: 'none',
 							translate: '-360px -730px',
 						}}
-						onClick={props.onClose}
+						onClick={() => setSignupPage(1)}
 					>
 						<img src={back} alt="back" />
 					</button>
@@ -122,7 +123,7 @@ export default function PasswordModal(props) {
 					{isLoading ? <Success /> : navigateToPortal}
 					Create account
 				</button>
-			</Modal>
+			</div>
 		</div>
 	);
 }

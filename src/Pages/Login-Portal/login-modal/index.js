@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Success from '../../../Components/Success';
-import Modal from '../../../Components/Modal';
 
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
 
-export default function LoginModal(props, { isModalOpen }) {
+export default function LoginModal(props) {
+	//loading lottie for success message
 	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -22,8 +22,9 @@ export default function LoginModal(props, { isModalOpen }) {
 
 	return (
 		<div className="darkBG" onClick={props.onClose}>
-			<Modal
+			<div
 				title="Login Modal"
+				className="login-modal"
 				open={true}
 				onClick={(e) => e.stopPropagation()}
 			>
@@ -80,7 +81,7 @@ export default function LoginModal(props, { isModalOpen }) {
 						Login
 					</button>
 				</form>
-			</Modal>
+			</div>
 		</div>
 	);
 }
