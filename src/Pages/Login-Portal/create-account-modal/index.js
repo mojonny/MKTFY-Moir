@@ -14,20 +14,25 @@ export default function CreateModal({ setSignupPage }) {
 				open={true}
 				onClick={(e) => e.stopPropagation()}
 			>
-				<button
-					style={{
-						backgroundColor: '#ffffff',
-						border: 'none',
-					}}
-					onClick={() => setSignupPage(0)}
-				>
-					<img src={greyX} alt="close" />
-				</button>
-
 				<div className="create-modal-container">
 					<div className="form-container">
+						<button
+							className="cancel-button"
+							style={{
+								backgroundColor: '#ffffff',
+								border: 'none',
+							}}
+							onClick={() => setSignupPage(0)}
+						>
+							<img src={greyX} alt="close" />
+						</button>
 						<h2>Welcome to MKTFY!</h2>
-						<h3>
+						<h3
+							style={{
+								paddingRight: '140px',
+								size: '20px',
+							}}
+						>
 							It’s nice to meet you. At MKTFY you are able to buy, sell and
 							donate awesome stuff to a community of awesome people. Please fill
 							out the form below to get started.
@@ -123,12 +128,13 @@ export default function CreateModal({ setSignupPage }) {
 							<button className="next-button" onClick={() => setSignupPage(2)}>
 								Next
 							</button>
+
+							<p className="bottom-note">
+								At MKTFY we respect your privacy and do not tolerate spam, and
+								will never sell, rent, lease or give away your information. We
+								only buy, sell or donate your stuff here at MKTFY.{' '}
+							</p>
 						</div>
-						<p>
-							At MKTFY we respect your privacy and do not tolerate spam, and
-							will never sell, rent, lease or give away your information. We
-							only buy, sell or donate your stuff here at MKTFY.{' '}
-						</p>
 					</div>
 				</div>
 			</div>

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 
 import { Link, useNavigate } from 'react-router-dom';
-//import Modal from '../../../../Components/Modal';
 import Success from '../../../../Components/Success';
 
 import checkmark from '../../../../assets/Checkmark.png';
 import greyX from '../../../../assets/GreyX.png';
 import back from '../../../../assets/Arrow.png';
 
+import './index.css';
+
 export default function PasswordModal({ setSignupPage }) {
+	const [passwordType, setPasswordType] = useState('password');
 	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -22,28 +24,38 @@ export default function PasswordModal({ setSignupPage }) {
 		}, 2000);
 	};
 
+	const togglePassword = () => {
+		if (passwordType === 'password') {
+			setPasswordType('text');
+			return;
+		}
+		setPasswordType('password');
+	};
+
 	return (
 		<div className="darkBG" onClick={() => setSignupPage(0)}>
 			<div
+				className="password-modal-container"
 				title="Create Password Modal"
 				open={true}
 				onClick={(e) => e.stopPropagation()}
 			>
-				<button
-					style={{
-						backgroundColor: '#ffffff',
-						border: 'none',
-					}}
-					onClick={() => setSignupPage(0)}
-				>
-					<img src={greyX} alt="close" />
-				</button>
 				<div>
 					<button
 						style={{
 							backgroundColor: '#ffffff',
 							border: 'none',
-							translate: '-360px -730px',
+							transform: 'translate(605px, 25px)',
+						}}
+						onClick={() => setSignupPage(0)}
+					>
+						<img src={greyX} alt="close" />
+					</button>
+					<button
+						style={{
+							backgroundColor: '#ffffff',
+							border: 'none',
+							transform: 'translate(-165px, 23px)',
 						}}
 						onClick={() => setSignupPage(1)}
 					>
@@ -60,10 +72,32 @@ export default function PasswordModal({ setSignupPage }) {
 					Password
 					<br />
 					<input
-						type="password"
-						placeholder=" Insert your password"
-						className="input-style"
+						type={passwordType}
+						name="password"
+						className="input-style1"
+						placeholder="Insert your password"
 					/>
+					<button
+						style={{
+							border: 'none',
+							backgroundColor: '#ffffff',
+						}}
+						onClick={togglePassword}
+					>
+						{passwordType === 'password' ? (
+							<i
+								className="fa-solid fa-eye-slash"
+								id="eye"
+								onClick={togglePassword}
+							/>
+						) : (
+							<i
+								className="fa-solid fa-eye"
+								id="eye"
+								onClick={togglePassword}
+							/>
+						)}
+					</button>
 				</label>
 				<br />
 				<br />
@@ -71,10 +105,32 @@ export default function PasswordModal({ setSignupPage }) {
 					Password
 					<br />
 					<input
-						type="password"
-						placeholder=" Insert your password"
-						className="input-style"
+						type={passwordType}
+						name="password"
+						className="input-style1"
+						placeholder="Insert your password"
 					/>
+					<button
+						style={{
+							border: 'none',
+							backgroundColor: '#ffffff',
+						}}
+						onClick={togglePassword}
+					>
+						{passwordType === 'password' ? (
+							<i
+								className="fa-solid fa-eye-slash"
+								id="eye"
+								onClick={togglePassword}
+							/>
+						) : (
+							<i
+								className="fa-solid fa-eye"
+								id="eye"
+								onClick={togglePassword}
+							/>
+						)}
+					</button>
 				</label>
 				<div className="requirement-container">
 					<div className="requirement">
@@ -84,7 +140,11 @@ export default function PasswordModal({ setSignupPage }) {
 						</p>
 					</div>
 					<div className="requirement">
-						<p>
+						<p
+							style={{
+								verticalAlign: 'center',
+							}}
+						>
 							<img src={checkmark} alt="checkmark" /> 1 Uppercase
 						</p>
 					</div>

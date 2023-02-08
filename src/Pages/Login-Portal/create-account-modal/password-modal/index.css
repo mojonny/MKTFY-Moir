@@ -1,3 +1,7 @@
+.requirement {
+	vertical-align: middle;
+}
+
 body {
 	background: #ffffff;
 	border-radius: 10px;
@@ -27,19 +31,15 @@ body {
 }
 
 .password-modal-container {
-	width: 800px;
-
+	width: 810px;
+	height: 875px;
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-
 	display: flex;
 	flex-direction: column;
-	gap: 31px;
-	align-items: center;
-	padding: 5% 110px;
-
+	padding: 0px 10% 0% 10%;
 	background: #ffffff;
 	border-radius: 10px;
 }
@@ -59,4 +59,28 @@ body {
 	display: flex;
 	flex-direction: column;
 	padding: 10% 10%;
+}
+
+.input-style1 {
+	background: #ffffff;
+	border: 1px solid #e2e2e2;
+	border-radius: 5px;
+	width: 100%;
+	height: 50px;
+}
+
+.fa-eye {
+	position: absolute;
+	cursor: pointer;
+	color: lightgray;
+	transform: translate(385px, -40px);
+	scale: 1.25;
+}
+
+.fa-eye-slash {
+	position: absolute;
+	cursor: pointer;
+	color: lightgray;
+	transform: translate(385px, -40px);
+	scale: 1.25;
 }
