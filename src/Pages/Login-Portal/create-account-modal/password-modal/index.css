@@ -31,17 +31,22 @@ body {
 }
 
 .password-modal-container {
-	width: 810px;
-	height: 875px;
+	min-width: 810px;
+	min-height: 875px;
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	display: flex;
-	flex-direction: column;
 	padding: 0px 10% 0% 10%;
+
 	background: #ffffff;
 	border-radius: 10px;
+}
+
+.password-form-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
 }
 
 .darkBG {
@@ -73,7 +78,7 @@ body {
 	position: absolute;
 	cursor: pointer;
 	color: lightgray;
-	transform: translate(385px, -40px);
+	transform: translate(-2rem, 0rem);
 	scale: 1.25;
 }
 
@@ -81,6 +86,45 @@ body {
 	position: absolute;
 	cursor: pointer;
 	color: lightgray;
-	transform: translate(385px, -40px);
+	transform: translate(-2rem, 0rem);
 	scale: 1.25;
+}
+
+.password-box {
+	display: flex;
+	flex-direction: row;
+}
+
+.nav-icons {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-top: 20px;
+}
+
+.create-button2 {
+	position: relative;
+	left: 25%;
+	padding: 10px 0 10px 0;
+	text-align: center;
+	color: #ffffff;
+	background: #6318af;
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
+	border-radius: 100px;
+	width: 300px;
+	height: 65px;
+	border: none;
+	font-weight: bold;
+}
+
+.back-button {
+	background-color: #ffffff;
+	border: none;
+	margin-left: -110px;
+}
+
+.close-button {
+	background-color: #ffffff;
+	border: none;
+	margin-right: -110px;
 }

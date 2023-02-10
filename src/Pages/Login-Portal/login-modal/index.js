@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import Success from '../../../Components/Success';
+import PasswordShowHide from '../../../Components/PasswordShowHide';
 
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
 
 export default function LoginModal(props) {
-	//loading lottie for success message
 	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -46,18 +46,13 @@ export default function LoginModal(props) {
 						<input
 							type="email"
 							placeholder=" Insert your email"
-							className="input-style"
+							className="input-style1"
 						/>
 					</label>
 					<br />
-					<label>
+					<label className="password">
 						Password
-						<br />
-						<input
-							type="password"
-							placeholder=" Insert your password"
-							className="input-style"
-						/>
+						<PasswordShowHide />
 					</label>
 					<br />
 					<a
