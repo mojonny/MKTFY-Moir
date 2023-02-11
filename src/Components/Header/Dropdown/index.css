@@ -1,0 +1,42 @@
+.dropBG {
+	background-color: rgba(0, 0, 0, 0.2);
+	width: 100vw;
+	height: 100vh;
+	z-index: 0;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+}
+
+.drop-container {
+	background-color: #ffffff;
+	padding: 0px 20px 20px 20px;
+	width: 330px;
+	height: 600px;
+	top: 665px;
+	left: 1430px;
+
+	position: fixed;
+	border-radius: 4px;
+}
+
+.title-container {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	align-items: center;
+}
+
+.drop-nav-links {
+	text-decoration: none;
+	font-weight: 400;
+	color: #313131;
+}
+
+.bottom-drop-links {
+	display: flex;
+	justify-content: space-between;
+	font-weight: 400;
+	color: #313131;
+}

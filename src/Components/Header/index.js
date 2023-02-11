@@ -7,57 +7,73 @@ import altLogo from '../../assets/altLogo.png';
 import bell from '../../assets/Bell.png';
 import plus from '../../assets/Plus.png';
 import hamburger from '../../assets/LinesMenu.png';
+import dropArrow from '../../assets/DownArrow.png';
 import './index.css';
 
 export default function Header() {
-	const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
-	console.log(dropdownIsOpen);
+	const [isDropOpen, setIsDropOpen] = useState(false);
+	console.log('dropdown: ', isDropOpen);
+
+	const showDrop = () => {
+		setIsDropOpen(true);
+	};
 
 	return (
-		<div
-			className="header"
-			style={{ backgroundColor: '#6318AF', height: '220px' }}
-		>
-			<div className="search-bar">
+		<div className="header">
+			<div className="search-bar-container">
 				<Link to="/home">
 					<img alt="altLogo" src={altLogo} />
 				</Link>
 
-				<input type="text" placeholder="Search on MKTFY" />
+				<input
+					className="search-bar"
+					type="text"
+					placeholder="All |  Search on MKTFY | Calgary"
+				/>
+				<div className="account-links">
+					<div className="profile-dropdown">
+						<p style={{ margin: '0', textAlign: 'right', color: '#ffffff' }}>
+							Welcome back,
+						</p>
+						<button className="profile-button" onClick={showDrop}>
+							<img src={dropArrow} alt="dropArrow" />
+							<h4 style={{ margin: '0' }}>Pearl The Cat</h4>
+						</button>
+					</div>
+					<button style={{ background: 'none', border: 'none' }}>
+						<img alt="notifications" src={bell} />
+					</button>
 
-				<button>
-					<p>Welcome back, Pearl</p>
-				</button>
-				<button onClick={() => setDropdownIsOpen(true)}>
-					<img alt="notifications" src={bell} />
-				</button>
-				<button
-					style={{
-						display: 'flex',
-						flexDirection: 'row',
-						JustifyContent: 'flex-start',
-						alignItems: 'center',
-					}}
-				>
-					<img alt="+" src={plus} />
-					<p> Create Offer</p>
-				</button>
+					<button className="create-listing-button">
+						<img src={plus} alt="plus" />
+						<h4 style={{ color: '#ffffff' }}> Create Listing</h4>
+					</button>
+				</div>
 			</div>
 
-			<div className="Categories">
-				<img alt="drop-down" src={hamburger} />
-				<p>Categories</p>
-				<p>Deals</p>
-				<p>Cars & Vehicles</p>
-				<p>Furniture</p>
-				<p>Electronics</p>
-				<p>Real estate</p>
+			<div>
+				<ul className="categories">
+					<li>
+						<img
+							alt="drop-down"
+							src={hamburger}
+							style={{ paddingRight: '15px' }}
+						/>
+						Categories
+					</li>
+					<li>Deals</li>
+					<li>Cars & Vehicles</li>
+					<li>Furniture</li>
+					<li>Electronics</li>
+					<li>Real Estate</li>
+				</ul>
 			</div>
-
-			<Dropdown
-				isOpen={dropdownIsOpen}
-				onRequestClose={() => setDropdownIsOpen(false)}
-			/>
+			{isDropOpen && (
+				<Dropdown
+					isDropOpen={isDropOpen}
+					onClose={() => setIsDropOpen(false)}
+				/>
+			)}
 		</div>
 	);
 }

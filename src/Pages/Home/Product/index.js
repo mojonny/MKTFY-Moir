@@ -5,7 +5,6 @@ export default function Product() {
 	return (
 		<div>
 			<Header />
-			Product.component
 		</div>
 	);
 }
