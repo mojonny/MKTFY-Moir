@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import eye from '../../assets/eye.png';
 import eyeslash from '../../assets/eye-slash.png';
+import './index.css';
 
 export default function PasswordShowHide() {
 	const [passwordType, setPasswordType] = useState('password');
@@ -15,13 +16,13 @@ export default function PasswordShowHide() {
 	};
 
 	return (
-		<div>
+		<div className="password-eye-box">
 			<input
 				type={passwordType}
 				placeholder="Insert your password"
-				className="input-style1"
+				className="input-style2"
 			/>
-			<button onClick={togglePassword}>
+			<button className="eye-slash" onClick={togglePassword}>
 				{passwordType === 'password' ? (
 					<i>
 						<img src={eyeslash} alt="close" />

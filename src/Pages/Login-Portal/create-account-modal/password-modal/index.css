@@ -1,33 +1,12 @@
-.requirement {
-	vertical-align: middle;
-}
-
-body {
-	background: #ffffff;
-	border-radius: 10px;
-}
-
-.modal-password {
-	position: absolute;
-	left: 50%;
+.darkBG {
+	background-color: rgba(0, 0, 0, 0.2);
+	width: 100vw;
+	height: 100vh;
+	z-index: 0;
 	top: 50%;
+	left: 50%;
 	transform: translate(-50%, -50%);
-	width: 800px;
-	height: 600px;
-
-	background: #ffffff;
-	border-radius: 10px;
-}
-
-.modal-container {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding: 0px 0px 0px 100px;
-
-	position: relative;
-	width: 80%;
-	height: 100%;
+	position: absolute;
 }
 
 .password-modal-container {
@@ -43,63 +22,53 @@ body {
 	border-radius: 10px;
 }
 
-.password-form-container {
+.pw-back-button {
+	background-color: #ffffff;
+	border: none;
+	margin-left: -20%;
+	margin-top: 30px;
+}
+
+.pw-close-button {
+	background-color: #ffffff;
+	border: none;
+	position: inherit;
+	transform: translate(45rem, 15px);
+}
+
+.text-area {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
+	gap: 30px;
+	margin-bottom: 100px;
 }
 
-.darkBG {
-	background-color: rgba(0, 0, 0, 0.2);
-	width: 100vw;
-	height: 100vh;
-	z-index: 0;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	position: absolute;
+.requirement {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+	font-weight: 400;
 }
 
-.password-form {
+.requirement-box {
 	display: flex;
 	flex-direction: column;
-	padding: 10% 10%;
+	gap: 20px;
 }
 
-.input-style1 {
-	background: #ffffff;
-	border: 1px solid #e2e2e2;
-	border-radius: 5px;
-	width: 100%;
-	height: 50px;
-}
-
-.fa-eye {
-	position: absolute;
+.checkbox {
+	height: 25px;
+	width: 25px;
+	border-color: #9349de;
+	transition: all 0.5s ease;
 	cursor: pointer;
-	color: lightgray;
-	transform: translate(-2rem, 0rem);
-	scale: 1.25;
 }
 
-.fa-eye-slash {
-	position: absolute;
-	cursor: pointer;
-	color: lightgray;
-	transform: translate(-2rem, 0rem);
-	scale: 1.25;
-}
-
-.password-box {
+.checkbox-info {
 	display: flex;
 	flex-direction: row;
-}
-
-.nav-icons {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	padding-top: 20px;
+	align-items: center;
+	gap: 10px;
 }
 
 .create-button2 {
@@ -115,16 +84,4 @@ body {
 	height: 65px;
 	border: none;
 	font-weight: bold;
-}
-
-.back-button {
-	background-color: #ffffff;
-	border: none;
-	margin-left: -110px;
-}
-
-.close-button {
-	background-color: #ffffff;
-	border: none;
-	margin-right: -110px;
 }

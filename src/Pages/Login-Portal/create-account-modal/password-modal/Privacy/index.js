@@ -1,61 +1,33 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import Chat from '../../../assets/Chat.png';
 import Arrow from '../../../assets/Arrow.png';
-import './TOC.styles.css';
+import './index.css';
 
 export default function TOC() {
-	const location = useLocation();
-	console.log(location.pathname);
-
-	//let Title = location.pathname;
-
-	let setTitle = (location) => {
-		if ((location.pathname = '/privacy')) {
-			return (
-				<div>
-					<h1>'MKTFY Privacy policy'</h1>
-				</div>
-			);
-		} else {
-			return 'MKTFY Terms and services';
-		}
-	};
-	console.log(setTitle);
+	let Title = 'MKTFY Privacy policy';
 
 	const navigate = useNavigate();
 
 	return (
 		<div className="page-container">
-			<img
-				alt="people chatting"
-				className="chat-image"
-				src={Chat}
-				style={{
-					position: 'fixed',
-					width: '100vw',
-					height: '400px',
-				}}
-			/>
-
+			<div>
+				<img alt="people chatting" className="chat-image" src={Chat} />
+			</div>
 			<div
-				className="info-container"
-				style={{ paddingTop: '500px', paddingLeft: '230px' }}
+				style={{
+					display: 'flex',
+					flexDirection: 'row',
+					alignItems: 'flex-start',
+				}}
 			>
-				<button
-					style={{
-						position: 'relative',
-						right: '100px',
-						backgroundColor: '#ffffff',
-						border: 'none',
-					}}
-				>
+				<button className="back-button1">
 					<img src={Arrow} alt="back" onClick={() => navigate(-1)} />
 				</button>
-				<div className="text-container">
-					<h2>{location}</h2>
-					<h3 style={{ textAlign: 'left' }}>
+				<div className="text-content">
+					<h2 style={{ color: 'black' }}>{Title}</h2>
+					<h3>
 						These Terms of Service constitute a legally binding agreement made
 						between you, whether personally or on behalf of an entity (“you”)
 						and [business entity name] (“we,” “us” or “our”), concerning your

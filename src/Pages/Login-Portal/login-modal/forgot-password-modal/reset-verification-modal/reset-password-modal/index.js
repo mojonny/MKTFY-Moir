@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
-import Success from '../../../../Components/Success';
-import PasswordShowHide from '../../../../Components/PasswordShowHide';
+import { useNavigate } from 'react-router-dom';
+import Success from '../../../../../../Components/Success';
+import PasswordShowHide from '../../../../../../Components/PasswordShowHide';
 
-import checkmark from '../../../../assets/Checkmark.png';
-import greyX from '../../../../assets/GreyX.png';
-import back from '../../../../assets/Arrow.png';
+import checkmark from '../../../../../../assets/Checkmark.png';
+import greyX from '../../../../../../assets/GreyX.png';
+import back from '../../../../../../assets/Arrow.png';
 
 import './index.css';
 
-export default function PasswordModal({ setSignupPage }) {
+export default function ResetPasswordModal({ setLoginPage }) {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -20,28 +20,36 @@ export default function PasswordModal({ setSignupPage }) {
 		setTimeout(() => {
 			navigate('/');
 			setIsLoading(false);
-			setSignupPage(0);
+			setLoginPage(0);
 		}, 2000);
 	};
 
 	return (
-		<div className="darkBG" onClick={() => setSignupPage(0)}>
+		<div className="darkBG" onClick={() => setLoginPage(0)}>
 			<div
-				className="password-modal-container"
+				className="reset-password-modal-container"
 				title="Create Password Modal"
 				open={true}
 				onClick={(e) => e.stopPropagation()}
 			>
 				<div>
-					<button className="pw-back-button" onClick={() => setSignupPage(1)}>
+					<button
+						className="back-button"
+						style={{ marginLeft: '-20%' }}
+						onClick={() => setLoginPage(1)}
+					>
 						<img src={back} alt="back" />
 					</button>
-					<button className="pw-close-button" onClick={() => setSignupPage(0)}>
+					<button
+						className="close-button"
+						style={{ transform: 'translate(45rem,15px)' }}
+						onClick={() => setLoginPage(0)}
+					>
 						<img src={greyX} alt="close" />
 					</button>
 				</div>
 				<div className="text-area">
-					<h2 style={{ textAlign: 'center' }}>Create Password</h2>
+					<h2 style={{ textAlign: 'center' }}>Reset Password</h2>
 					<h3>
 						The password must have at least 6 characters and must contain 1
 						uppercase and 1 number.
@@ -70,33 +78,13 @@ export default function PasswordModal({ setSignupPage }) {
 						</div>
 					</div>
 
-					<div className="checkbox-info">
-						<input className="checkbox" type="checkbox" />
-						<div style={{ fontSize: '14px', fontWeight: '400' }}>
-							By checking this box, you agree to our{' '}
-							<Link
-								to="/termsandservices"
-								style={{ fontSize: '14px', fontWeight: '700' }}
-							>
-								Terms of Service
-							</Link>
-							{'  '}and our{'  '}
-							<Link
-								to="/privacy"
-								style={{ fontSize: '14px', fontWeight: '700' }}
-							>
-								Privacy Policy
-							</Link>
-						</div>
-					</div>
-
 					<button
 						onClick={navigateToPortal}
 						disabled={isLoading}
 						className="create-button2"
 					>
 						{isLoading ? <Success /> : navigateToPortal}
-						Create account
+						Set password
 					</button>
 				</div>
 			</div>

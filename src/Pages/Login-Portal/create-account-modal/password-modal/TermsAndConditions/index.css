@@ -1,0 +1,19 @@
+.chat-image {
+	max-width: 1920px;
+	height: 400px;
+}
+
+.text-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding-left: 100px;
+	width: 1360px;
+}
+
+.back-button1 {
+	background-color: #ffffff;
+	border: none;
+	padding-top: 35px;
+	padding-left: 130px;
+}

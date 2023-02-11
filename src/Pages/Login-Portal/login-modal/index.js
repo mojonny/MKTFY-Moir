@@ -7,7 +7,7 @@ import PasswordShowHide from '../../../Components/PasswordShowHide';
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
 
-export default function LoginModal(props) {
+export default function LoginModal({ setLoginPage }) {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -21,50 +21,56 @@ export default function LoginModal(props) {
 	};
 
 	return (
-		<div className="darkBG" onClick={props.onClose}>
+		<div className="darkBG" onClick={() => setLoginPage(0)}>
 			<div
 				title="Login Modal"
 				className="login-modal"
 				open={true}
 				onClick={(e) => e.stopPropagation()}
 			>
-				<button
-					style={{
-						backgroundColor: '#ffffff',
-						border: 'none',
-					}}
-					onClick={props.onClose}
-				>
+				<button className="close-button2" onClick={() => setLoginPage(0)}>
 					<img src={greyX} alt="close" />
 				</button>
-				<form className="login-form">
+				<div className="login-form">
 					<h2 style={{ textAlign: 'center' }}>Welcome back!</h2>
 
-					<label>
+					<label
+						style={{
+							paddingLeft: '50px',
+						}}
+					>
 						Email
 						<br />
 						<input
 							type="email"
 							placeholder=" Insert your email"
-							className="input-style1"
+							className="input-style2"
 						/>
 					</label>
 					<br />
-					<label className="password">
+					<label
+						className="password"
+						style={{
+							paddingLeft: '50px',
+						}}
+					>
 						Password
 						<PasswordShowHide />
 					</label>
 					<br />
-					<a
+					<button
+						onClick={() => setLoginPage(2)}
 						style={{
 							textAlign: 'right',
 							color: '#FFBA00',
 							textDecoration: 'none',
+							paddingRight: '50px',
+							backgroundColor: '#ffffff',
+							border: 'none',
 						}}
-						href="https://mktfy-marketing-site.vercel.app/"
 					>
 						Forgot password
-					</a>
+					</button>
 					<br />
 					<button
 						onClick={navigateHome}
@@ -75,7 +81,7 @@ export default function LoginModal(props) {
 						{isLoading ? <Success /> : navigateHome}
 						Login
 					</button>
-				</form>
+				</div>
 			</div>
 		</div>
 	);

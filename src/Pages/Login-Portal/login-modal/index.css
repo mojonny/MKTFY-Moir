@@ -18,16 +18,15 @@
 	position: absolute;
 	left: 50%;
 	top: 50%;
-	height: 615px;
 	width: 810px;
 	transform: translate(-50%, -50%);
 	background-color: #ffffff;
+	border-radius: 10px;
 }
 
-/* #eye-login {
-	position: absolute;
-	cursor: pointer;
-	color: lightgray;
-	transform: translate(485px, -40px);
-	scale: 1.25;
-} */
+.close-button2 {
+	background-color: #ffffff;
+	border: none;
+	position: inherit;
+	transform: translate(46rem, 30px);
+}

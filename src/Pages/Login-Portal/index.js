@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
 import LoginModal from './login-modal';
+import ForgotPasswordModal from './login-modal/forgot-password-modal';
+import ResetVerificationModal from './login-modal/forgot-password-modal/reset-verification-modal';
+import ResetPasswordModal from './login-modal/forgot-password-modal/reset-verification-modal/reset-password-modal';
+
 import CreateModal from './create-account-modal';
 import PasswordModal from './create-account-modal/password-modal';
 
@@ -8,19 +12,20 @@ import logo from '../../assets/MKTFYlogo.png';
 import './index.css';
 
 export default function LoginPortal() {
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [loginPage, setLoginPage] = useState(0);
 	const [signupPage, setSignupPage] = useState(0);
-
-	const showModal = () => {
-		setIsModalOpen(true);
-	};
 
 	return (
 		<div className="Login-Portal">
 			<div className="intro-container">
 				<img src={logo} className="logo" alt="logo" />
 
-				<button className="login-button" onClick={showModal}>
+				<button
+					className="login-button"
+					onClick={() => {
+						setLoginPage(1);
+					}}
+				>
 					Login
 				</button>
 
@@ -33,12 +38,33 @@ export default function LoginPortal() {
 					Create account
 				</button>
 
-				{isModalOpen && (
+				{/*  Login Modals*/}
+				{loginPage === 1 && (
 					<LoginModal
-						isModalOpen={isModalOpen}
-						onClose={() => setIsModalOpen(false)}
+						setLoginPage={setLoginPage}
+						onClose={() => setLoginPage(0)}
 					/>
 				)}
+				{loginPage === 2 && (
+					<ForgotPasswordModal
+						setLoginPage={setLoginPage}
+						onClose={() => setLoginPage(0)}
+					/>
+				)}
+				{loginPage === 3 && (
+					<ResetVerificationModal
+						setLoginPage={setLoginPage}
+						onClose={() => setLoginPage(0)}
+					/>
+				)}
+				{loginPage === 4 && (
+					<ResetPasswordModal
+						setLoginPage={setLoginPage}
+						onClose={() => setLoginPage(0)}
+					/>
+				)}
+
+				{/*  Signup Modals*/}
 				{signupPage === 1 && (
 					<CreateModal
 						setSignupPage={setSignupPage}

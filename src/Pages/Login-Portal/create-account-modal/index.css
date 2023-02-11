@@ -52,6 +52,8 @@ body {
 
 .bottom-note {
 	grid-column: 1/5;
+	font-size: 16px;
+	font-weight: 400;
 }
 
 .input-style {
