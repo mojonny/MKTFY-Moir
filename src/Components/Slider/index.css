@@ -3,10 +3,7 @@
 }
 
 .card-container {
-	height: 775px;
-
 	width: 85%;
-	top: 250px;
 	overflow: scroll;
 	display: flex;
 	flex-direction: row;

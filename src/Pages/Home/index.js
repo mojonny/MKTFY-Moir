@@ -3,7 +3,7 @@ import appBanner from '../../assets/AppBanner1.png';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import Slider from '../../Components/Slider';
-import MiniSlider from '../../Components/Slider/Mini-Slider';
+//import MiniSlider from '../../Components/Slider/Mini-Slider';
 
 import './index.css';
 
@@ -14,7 +14,7 @@ export default function Home() {
 
 			<Slider />
 			<br />
-			<div className="min-container">
+			{/* <div className="min-container">
 				<MiniSlider />
 				<MiniSlider />
 			</div>
@@ -22,7 +22,7 @@ export default function Home() {
 			<div className="min-container">
 				<MiniSlider />
 				<MiniSlider />
-			</div>
+			</div> */}
 			<img
 				alt="download app banner"
 				className="download-app-add"
