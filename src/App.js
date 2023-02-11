@@ -3,8 +3,8 @@ import { Route, Routes } from 'react-router-dom';
 
 import LoginPortal from './Pages/Login-Portal';
 import Home from './Pages/Home';
-import Privacy from './Pages/Login-Portal/Privacy';
-import TOC from './Pages/Login-Portal/TermsAndConditions';
+import Privacy from './Pages/Login-Portal/create-account-modal/password-modal/Privacy';
+import TOC from './Pages/Login-Portal/create-account-modal/password-modal/TermsAndConditions';
 
 import './App.css';
 

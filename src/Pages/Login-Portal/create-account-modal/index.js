@@ -1,7 +1,5 @@
 import React from 'react';
 
-//import Modal from '../../../Components/Modal';
-
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
 

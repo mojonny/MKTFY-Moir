@@ -35,14 +35,23 @@ export default function ResetPasswordModal({ setLoginPage }) {
 				<div>
 					<button
 						className="back-button"
-						style={{ marginLeft: '-20%' }}
+						style={{
+							marginTop: '20px',
+							marginLeft: '-20%',
+							background: 'none',
+							border: 'none',
+						}}
 						onClick={() => setLoginPage(1)}
 					>
 						<img src={back} alt="back" />
 					</button>
 					<button
 						className="close-button"
-						style={{ transform: 'translate(45rem,15px)' }}
+						style={{
+							transform: 'translate(45rem,15px)',
+							background: 'none',
+							border: 'none',
+						}}
 						onClick={() => setLoginPage(0)}
 					>
 						<img src={greyX} alt="close" />

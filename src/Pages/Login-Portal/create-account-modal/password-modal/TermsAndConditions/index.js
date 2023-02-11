@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Chat from '../../../assets/Chat.png';
-import Back from '../../../assets/Arrow.png';
+import Chat from '../../../../../assets/Chat.png';
+import Back from '../../../../../assets/Arrow.png';
 import './index.css';
 
 export default function TOC({ setSignupPage }) {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Chat from '../../../assets/Chat.png';
-import Arrow from '../../../assets/Arrow.png';
+import Chat from '../../../../../assets/Chat.png';
+import Arrow from '../../../../../assets/Arrow.png';
 import './index.css';
 
-export default function TOC() {
+export default function Privacy() {
 	let Title = 'MKTFY Privacy policy';
 
 	const navigate = useNavigate();
