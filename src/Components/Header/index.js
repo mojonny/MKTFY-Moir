@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import Dropdown from './Dropdown';
+import SearchBar from './Search-bar';
 
 import altLogo from '../../assets/altLogo.png';
 import bell from '../../assets/Bell.png';
@@ -25,11 +26,8 @@ export default function Header() {
 					<img alt="altLogo" src={altLogo} />
 				</Link>
 
-				<input
-					className="search-bar"
-					type="text"
-					placeholder="All |  Search on MKTFY | Calgary"
-				/>
+				<SearchBar />
+
 				<div className="account-links">
 					<div className="profile-dropdown">
 						<p style={{ margin: '0', textAlign: 'right', color: '#ffffff' }}>
