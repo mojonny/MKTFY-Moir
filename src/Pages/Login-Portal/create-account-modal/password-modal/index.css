@@ -10,37 +10,28 @@
 }
 
 .password-modal-container {
-	min-width: 810px;
-	min-height: 875px;
+	padding: 25px;
+	width: 810px;
+	height: 875px;
 	position: absolute;
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	padding: 0px 10% 0% 10%;
-
 	background: #ffffff;
 	border-radius: 10px;
 }
 
-.pw-back-button {
-	background-color: #ffffff;
-	border: none;
-	margin-left: -20%;
-	margin-top: 30px;
-}
-
+.pw-back-button,
 .pw-close-button {
-	background-color: #ffffff;
+	background: none;
 	border: none;
-	position: inherit;
-	transform: translate(45rem, 15px);
 }
 
 .text-area {
 	display: flex;
 	flex-direction: column;
 	gap: 30px;
-	margin-bottom: 100px;
+	padding: 0px 50px 100px 50px;
 }
 
 .requirement {

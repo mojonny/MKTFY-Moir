@@ -12,12 +12,14 @@ export default function ResetVerificationModal({ setLoginPage }) {
 				open={true}
 				onClick={(e) => e.stopPropagation()}
 			>
-				<button className="back-button2" onClick={() => setLoginPage(0)}>
-					<img src={back} alt="back" />
-				</button>
-				<button className="close-button1" onClick={() => setLoginPage(0)}>
-					<img src={greyX} alt="close" />
-				</button>
+				<div className="button-container">
+					<button className="back-button2" onClick={() => setLoginPage(0)}>
+						<img src={back} alt="back" />
+					</button>
+					<button className="close-button1" onClick={() => setLoginPage(0)}>
+						<img src={greyX} alt="close" />
+					</button>
+				</div>
 
 				<div className="text-area1">
 					<h2 style={{ textAlign: 'center', margin: '30px 0 0 0' }}>

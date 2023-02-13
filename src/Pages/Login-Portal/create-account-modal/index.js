@@ -17,7 +17,7 @@ export default function CreateModal({ setSignupPage }) {
 						<button
 							className="cancel-button"
 							style={{
-								backgroundColor: '#ffffff',
+								background: 'none',
 								border: 'none',
 							}}
 							onClick={() => setSignupPage(0)}

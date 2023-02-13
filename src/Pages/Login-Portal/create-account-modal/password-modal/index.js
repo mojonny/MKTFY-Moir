@@ -32,7 +32,7 @@ export default function PasswordModal({ setSignupPage }) {
 				open={true}
 				onClick={(e) => e.stopPropagation()}
 			>
-				<div>
+				<div className="button-container">
 					<button className="pw-back-button" onClick={() => setSignupPage(1)}>
 						<img src={back} alt="back" />
 					</button>
