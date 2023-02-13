@@ -17,7 +17,7 @@ export default function LoginModal({ setLoginPage }) {
 		setTimeout(() => {
 			navigate('/home');
 			setIsLoading(false);
-		}, 3000);
+		}, 2000);
 	};
 
 	return (

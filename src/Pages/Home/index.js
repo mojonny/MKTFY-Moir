@@ -11,10 +11,10 @@ export default function Home() {
 	return (
 		<div className="home">
 			<Header />
-
-			<Slider />
 			<br />
-			{/* <div className="min-container">
+			<Slider />
+			{/*
+			 <div className="min-container">
 				<MiniSlider />
 				<MiniSlider />
 			</div>

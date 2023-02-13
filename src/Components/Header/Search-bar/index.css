@@ -19,6 +19,7 @@
 }
 
 #select ul {
+	z-index: 2;
 	position: absolute;
 	margin-top: 5px;
 	padding: 10px 20px;
@@ -28,6 +29,17 @@
 	border-radius: 10px;
 	background-color: #ffffff;
 	filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+#select ul:after {
+	content: ' ';
+	position: absolute;
+	left: 30px;
+	top: -10px;
+	border-top: none;
+	border-right: 15px solid transparent;
+	border-left: 15px solid transparent;
+	border-bottom: 15px solid #ffffff;
 }
 
 li.options {

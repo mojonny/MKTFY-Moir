@@ -46,7 +46,11 @@ export default function Cards() {
 		<div key={card.id} className="card-area">
 			<div className="info-label">
 				<a href="/product">
-					<img src={catDonut} alt="catPicture" />
+					<img
+						style={{ objectFit: 'contain' }}
+						src={catDonut}
+						alt="catPicture"
+					/>
 				</a>
 				<p>{card.title}</p>
 				<h3>{card.price}</h3>

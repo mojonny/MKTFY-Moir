@@ -7,6 +7,13 @@ export default function SearchBar() {
 	const [isDropOpen, setIsDropOpen] = useState(false);
 	const [isDropOpen1, setIsDropOpen1] = useState(false);
 
+	const [category, setCategory] = useState('All');
+	console.log(setCategory);
+
+	function handleChange(event) {
+		console.log(event.target.value);
+	}
+
 	const handleToggle = () => {
 		setIsDropOpen((current) => !current);
 	};
@@ -21,11 +28,15 @@ export default function SearchBar() {
 					onClick={handleToggle}
 					style={{ border: 'none', background: 'none' }}
 				>
-					<h2 style={{ color: '#000000' }}>All</h2>
+					<h2 style={{ color: '#000000' }} onChange={handleChange}>
+						{category}
+					</h2>
 				</button>
 				{isDropOpen && (
 					<ul isDropOpen={isDropOpen}>
-						<li class="options">All Categories</li>
+						<li class="options" id="1">
+							All Categories
+						</li>
 						<li class="options">Deals</li>
 						<li class="options">Cars & Vehicles</li>
 						<li class="options">Furniture</li>
