@@ -8,11 +8,18 @@ export default function SearchBar() {
 	const [isDropOpen1, setIsDropOpen1] = useState(false);
 
 	const [category, setCategory] = useState('All');
-	console.log(setCategory);
 
-	function handleChange(event) {
-		console.log(event.target.value);
-	}
+	const [location, setLocation] = useState('Calgary');
+
+	const handleClick = (e) => {
+		setCategory(e.target.id);
+		setIsDropOpen(false);
+	};
+
+	const handleClick1 = (e) => {
+		setLocation(e.target.id);
+		setIsDropOpen1(false);
+	};
 
 	const handleToggle = () => {
 		setIsDropOpen((current) => !current);
@@ -28,20 +35,28 @@ export default function SearchBar() {
 					onClick={handleToggle}
 					style={{ border: 'none', background: 'none' }}
 				>
-					<h2 style={{ color: '#000000' }} onChange={handleChange}>
-						{category}
-					</h2>
+					<h2>{category}</h2>
 				</button>
 				{isDropOpen && (
 					<ul isDropOpen={isDropOpen}>
-						<li class="options" id="1">
+						<li className="options" id="All Categories" onClick={handleClick}>
 							All Categories
 						</li>
-						<li class="options">Deals</li>
-						<li class="options">Cars & Vehicles</li>
-						<li class="options">Furniture</li>
-						<li class="options">Electronics</li>
-						<li class="options">Real Estate</li>
+						<li className="options" id="Deals" onClick={handleClick}>
+							Deals
+						</li>
+						<li className="options" id="Cars & Vehicles" onClick={handleClick}>
+							Cars & Vehicles
+						</li>
+						<li className="options" id="Furniture" onClick={handleClick}>
+							Furniture
+						</li>
+						<li className="options" id="Electronics" onClick={handleClick}>
+							Electronics
+						</li>
+						<li className="options" id="Real Estate" onClick={handleClick}>
+							Real Estate
+						</li>
 					</ul>
 				)}
 			</div>
@@ -64,7 +79,7 @@ export default function SearchBar() {
 					}}
 				>
 					<img src={arrow} alt="arrow" />
-					<h2 style={{ color: '#000000' }}>Calgary</h2>
+					<h2>{location}</h2>
 				</button>
 				{isDropOpen1 && (
 					<ul>
@@ -81,9 +96,15 @@ export default function SearchBar() {
 								style={{ border: 'none', background: 'none' }}
 							/>
 						</li>
-						<li class="options">Calgary</li>
-						<li class="options">Brooks</li>
-						<li class="options">Camrose</li>
+						<li className="options" id="Calgary" onClick={handleClick1}>
+							Calgary
+						</li>
+						<li className="options" id="Brooks" onClick={handleClick1}>
+							Brooks
+						</li>
+						<li className="options" id="Camrose" onClick={handleClick1}>
+							Camrose
+						</li>
 					</ul>
 				)}
 			</div>
