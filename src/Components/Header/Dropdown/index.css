@@ -1,4 +1,4 @@
-.dropBG {
+/* .dropBG {
 	background-color: rgba(0, 0, 0, 0.2);
 	width: 100vw;
 	height: 100vh;
@@ -7,18 +7,29 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	position: absolute;
-}
+} */
 
 .drop-container {
 	background-color: #ffffff;
-	padding: 0px 20px 20px 20px;
+	margin-top: 15px;
+	padding: 20px 20px 20px 20px;
 	width: 330px;
 	height: 600px;
-	top: 665px;
-	left: 1430px;
-
-	position: fixed;
 	border-radius: 4px;
+	position: absolute;
+	z-index: 3;
+	filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.drop-container:after {
+	content: ' ';
+	position: absolute;
+	left: 30px;
+	top: -10px;
+	border-top: none;
+	border-right: 15px solid transparent;
+	border-left: 15px solid transparent;
+	border-bottom: 15px solid #ffffff;
 }
 
 .title-container {
@@ -30,13 +41,13 @@
 
 .drop-nav-links {
 	text-decoration: none;
-	font-weight: 400;
 	color: #313131;
+	font-weight: 400;
 }
 
 .bottom-drop-links {
 	display: flex;
 	justify-content: space-between;
-	font-weight: 400;
-	color: #313131;
+	text-decoration: none;
+	color: #ff3131;
 }

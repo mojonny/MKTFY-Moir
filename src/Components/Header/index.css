@@ -1,19 +1,12 @@
 .header {
-	height: 220px;
+	min-height: 220px;
 	width: 100vw;
 	background-color: #6318af;
 	padding: 25px 0px 0px 150px;
 	position: absolute;
 	display: flex;
 	flex-direction: column;
-}
-
-.download-app-add {
-	position: absolute;
-	width: 1636px;
-	height: 546px;
-	left: 142px;
-	top: 2280px;
+	/* align-items: center; */
 }
 
 .search-bar-container {
@@ -25,6 +18,12 @@
 	height: 129px;
 }
 
+.search-bar {
+	height: 75px;
+	width: 935px;
+	border-radius: 8px;
+}
+
 .categories {
 	padding-left: 325px;
 	color: #ffffff;
@@ -33,12 +32,6 @@
 	flex-direction: row;
 	gap: 80px;
 	list-style-type: none;
-}
-
-.search-bar {
-	height: 75px;
-	width: 935px;
-	border-radius: 8px;
 }
 
 .account-links {
