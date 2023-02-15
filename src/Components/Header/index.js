@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 
 import SearchBar from './Search-bar';
 import Dropdown from './Dropdown';
+import NotificationPopup from './Notification';
 
 import altLogo from '../../assets/altLogo.png';
-import bell from '../../assets/Bell.png';
+
 import plus from '../../assets/Plus.png';
 import hamburger from '../../assets/LinesMenu.png';
 
@@ -23,9 +24,7 @@ export default function Header() {
 				<div className="account-links">
 					<Dropdown />
 
-					<button style={{ background: 'none', border: 'none' }}>
-						<img alt="notifications" src={bell} />
-					</button>
+					<NotificationPopup />
 
 					<button className="create-listing-button">
 						<img src={plus} alt="plus" />

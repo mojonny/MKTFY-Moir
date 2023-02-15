@@ -1,16 +1,16 @@
-.drop-container {
+.notification-container {
 	background-color: #ffffff;
 	margin-top: 15px;
 	padding: 20px 20px 20px 20px;
-	width: 330px;
-	height: 600px;
+	width: 380px;
+	height: 485px;
 	border-radius: 4px;
 	position: absolute;
 	z-index: 3;
 	filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.drop-container:after {
+.notification-container:after {
 	content: ' ';
 	position: absolute;
 	left: 30px;
@@ -21,22 +21,17 @@
 	border-bottom: 15px solid #ffffff;
 }
 
-.title-container {
+.mini-logo {
+	height: 60px;
+	width: 60px;
+	object-fit: contain;
+	background-color: #6318af;
+	padding: 10px;
+	border-radius: 60px;
+}
+
+.note-box {
 	display: flex;
 	flex-direction: row;
-	gap: 10px;
 	align-items: center;
-}
-
-.drop-nav-links {
-	text-decoration: none;
-	color: #313131;
-	font-weight: 400;
-}
-
-.bottom-drop-links {
-	display: flex;
-	justify-content: space-between;
-	text-decoration: none;
-	color: #ff3131;
 }

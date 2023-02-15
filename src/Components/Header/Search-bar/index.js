@@ -1,7 +1,7 @@
 import './index.css';
 import arrow from '../../../assets/DropArrowBlk.png';
 import search from '../../../assets/LookinGlass.png';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 export default function SearchBar() {
 	const [isDropOpen, setIsDropOpen] = useState(false);
@@ -28,6 +28,39 @@ export default function SearchBar() {
 	const handleToggle1 = () => {
 		setIsDropOpen1((current) => !current);
 	};
+
+	const dropMenu = useRef(null);
+
+	//Closes dropdown when clicked outside
+	const closeOpenMenus = (e) => {
+		if (
+			dropMenu.current &&
+			isDropOpen &&
+			!dropMenu.current.contains(e.target)
+		) {
+			setIsDropOpen(false);
+		}
+	};
+
+	//Event listener to close dropdown on click outside
+	document.addEventListener('mousedown', closeOpenMenus);
+
+	const dropMenu1 = useRef(null);
+
+	//Closes dropdown when clicked outside
+	const closeOpenMenus1 = (e) => {
+		if (
+			dropMenu1.current &&
+			isDropOpen1 &&
+			!dropMenu1.current.contains(e.target)
+		) {
+			setIsDropOpen1(false);
+		}
+	};
+
+	//Event listener to close dropdown on click outside
+	document.addEventListener('mousedown', closeOpenMenus1);
+
 	return (
 		<div className="search-bar">
 			<div id="select">
@@ -38,7 +71,7 @@ export default function SearchBar() {
 					<h2>{category}</h2>
 				</button>
 				{isDropOpen && (
-					<ul isDropOpen={isDropOpen}>
+					<ul ref={dropMenu} onClick={(e) => e.stopPropagation()}>
 						<li className="options" id="All Categories" onClick={handleClick}>
 							All Categories
 						</li>
@@ -82,7 +115,7 @@ export default function SearchBar() {
 					<h2>{location}</h2>
 				</button>
 				{isDropOpen1 && (
-					<ul>
+					<ul ref={dropMenu1} onClick={(e) => e.stopPropagation()}>
 						<li class="mini-search">
 							<img
 								className="mini-looking-glass"

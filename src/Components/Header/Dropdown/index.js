@@ -8,20 +8,25 @@ import './index.css';
 export default function Dropdown() {
 	const [isDropOpen3, setIsDropOpen3] = useState(false);
 
-	const dropMenu = useRef(null);
+	const dropMenu3 = useRef(null);
 
-	const closeOpenMenus = (e) => {
+	//Closes dropdown when clicked outside
+	const closeOpenMenus3 = (e) => {
 		if (
-			dropMenu.current &&
+			dropMenu3.current &&
 			isDropOpen3 &&
-			!dropMenu.current.contains(e.target)
+			!dropMenu3.current.contains(e.target)
 		) {
 			setIsDropOpen3(false);
 		}
 	};
-	document.addEventListener('mousedown', closeOpenMenus);
+
+	//Event listener to close dropdown on click outside
+	document.addEventListener('mousedown', closeOpenMenus3);
+
+	//This function opens the dropdown when the button is clicked
 	const handleToggle3 = () => {
-		setIsDropOpen3((current) => !current);
+		setIsDropOpen3(true);
 	};
 	return (
 		<div>
@@ -36,8 +41,9 @@ export default function Dropdown() {
 						<h4 style={{ margin: '0' }}>Pearl The Cat</h4>
 					</button>
 				</div>
+				{/* This is what pops up on button click */}
 				{isDropOpen3 && (
-					<div ref={dropMenu} onClick={(e) => e.stopPropagation()}>
+					<div ref={dropMenu3} onClick={(e) => e.stopPropagation()}>
 						<div className="drop-container">
 							<div className="title-container">
 								<div
