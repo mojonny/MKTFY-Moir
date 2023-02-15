@@ -54,32 +54,38 @@ export default function NotificationPopup() {
 					className="notification-container"
 				>
 					<div className="new-notifications">
-						<h3>New for you</h3>
+						<h3 style={{ paddingLeft: '20px' }}>New for you</h3>
 						<div className="notification-box">
 							<div className="note-box">
 								<img src={mktfy} className="mini-logo" alt="mktfy" />
-								<div style={{ margin: '0px' }}>
-									<h4>Hey Pearl, welcome to MKTFY</h4>
+								<div className="note">
+									Hey Pearl, welcome to MKTFY
+									<br />
 									<p>September 07,2020</p>
 								</div>
 							</div>
 						</div>
 					</div>
-
+					<br />
 					<div className="old-notifications">
-						<h3>Previously seen</h3>
+						<h3 style={{ paddingLeft: '20px' }}>Previously seen</h3>
 						<div className="notification-box">
 							<div className="note-box">
 								<img src={mktfy} className="mini-logo" alt="mktfy" />
-								<div>
-									<h4>Let's create your first listing!</h4>
+
+								<div className="note">
+									Let's create your first listing!
+									<br />
 									<p>September 05,2020</p>
 								</div>
 							</div>
+							<br />
 							<div className="note-box">
 								<img src={mktfy} className="mini-logo" alt="mktfy" />
-								<div>
-									<h4>Our Terms of Service has been updated!</h4>
+
+								<div className="note">
+									Our Terms of Service has been updated!
+									<br />
 									<p>September 03,2020</p>
 								</div>
 							</div>

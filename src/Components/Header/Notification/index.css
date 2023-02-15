@@ -1,11 +1,12 @@
 .notification-container {
 	background-color: #ffffff;
 	margin-top: 15px;
-	padding: 20px 20px 20px 20px;
+	padding: 0px 0px 20px 0px;
 	width: 380px;
-	height: 485px;
+	min-height: 485px;
 	border-radius: 4px;
 	position: absolute;
+	transform: translate(-340px, 0px);
 	z-index: 3;
 	filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.25));
 }
@@ -13,7 +14,7 @@
 .notification-container:after {
 	content: ' ';
 	position: absolute;
-	left: 30px;
+	right: 10px;
 	top: -10px;
 	border-top: none;
 	border-right: 15px solid transparent;
@@ -34,4 +35,13 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	gap: 20px;
+	padding: 18px 15px 18px 15px;
+	background-color: #f7f7f7;
+	filter: drop-shadow(1px 2px rgba(0, 0, 0, 0.25));
+}
+
+.notification-box {
+	display: flex;
+	flex-direction: column;
 }

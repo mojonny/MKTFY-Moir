@@ -32,6 +32,14 @@
 	text-decoration: none;
 	color: #313131;
 	font-weight: 400;
+	box-shadow: inset 0 0 0 0 #6318af;
+	transition: color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+}
+
+.drop-nav-links:hover {
+	box-shadow: inset 300px 0 0 0 #f7f7f7;
+	overflow: hidden;
+	color: #6318af;
 }
 
 .bottom-drop-links {
@@ -39,4 +47,22 @@
 	justify-content: space-between;
 	text-decoration: none;
 	color: #ff3131;
+}
+
+.profile-icon {
+	color: #ffffff;
+	background-color: #560f9f;
+	height: 40px;
+	width: 40px;
+	border-radius: 200px;
+	padding: 10px 15px 10px 15px;
+}
+
+.settings-links,
+.help-links {
+	display: flex;
+	flex-direction: column;
+	text-decoration: none;
+	gap: 16px;
+	margin-bottom: 70px;
 }

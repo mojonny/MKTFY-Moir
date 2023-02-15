@@ -46,31 +46,12 @@ export default function Dropdown() {
 					<div ref={dropMenu3} onClick={(e) => e.stopPropagation()}>
 						<div className="drop-container">
 							<div className="title-container">
-								<div
-									style={{
-										color: '#ffffff',
-										backgroundColor: '#560f9f',
-										height: '40px',
-										width: '40px',
-										borderRadius: '200px',
-										padding: '10px 15px 10px 15px',
-									}}
-								>
-									P
-								</div>
+								<div className="profile-icon">P</div>
 								<h1>Pearl The Cat</h1>
 							</div>
 
 							<h2 style={{ color: 'black', margin: '0px' }}>Settings</h2>
-							<div
-								style={{
-									display: 'flex',
-									flexDirection: 'column',
-									textDecoration: 'none',
-									gap: '16px',
-									marginBottom: '70px',
-								}}
-							>
+							<div className="settings-links">
 								<Link className="drop-nav-links" to="/account">
 									Account information
 								</Link>
@@ -86,14 +67,7 @@ export default function Dropdown() {
 							</div>
 							<br />
 							<h2 style={{ color: '#313131', margin: '0px' }}>Help</h2>
-							<div
-								style={{
-									display: 'flex',
-									flexDirection: 'column',
-									gap: '16px',
-									marginBottom: '70px',
-								}}
-							>
+							<div className="help-links">
 								<Link className="drop-nav-links" to="/faq">
 									FAQ
 								</Link>
