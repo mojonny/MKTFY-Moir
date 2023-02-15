@@ -1,6 +1,5 @@
 import React from 'react';
 import appBanner from '../../assets/AppBanner1.png';
-import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
 import Slider from '../../Components/Slider';
 
@@ -15,7 +14,6 @@ const SubTitle = 'Explore now';
 export default function Home() {
 	return (
 		<div className="home-dashboard">
-			<Header />
 			<br />
 			<br />
 			<Slider />

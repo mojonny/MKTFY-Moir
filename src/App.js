@@ -15,6 +15,7 @@ import TOC from './Pages/Login-Portal/create-account-modal/password-modal/TermsA
 // Homepage/ Dashboard after login
 import Home from './Pages/Home';
 import Product from './Pages/Home/Product';
+import CreateListing from './Pages/Home/Create-Listing';
 import Checkout from './Pages/Home/Product/Checkout';
 
 //Pages accessed by settings dropdown
@@ -31,34 +32,40 @@ import ContactUs from './Pages/Help/FAQ';
 //In case of 404
 import NotFound from './Pages/NotFound';
 
+import MainLayout from './Components/Layout';
+
 export default function App() {
 	return (
 		<div className="App">
 			<Routes>
 				<Route path="/" element={<LoginPortal />} />
-				<Route path="/home" element={<Home />} />
+
 				{/* Pages from sign-up modals */}
 				<Route path="/privacy" element={<Privacy />} />
 				<Route path="/termsandservices" element={<TOC />} />
 
-				{/* Linked to home page/dashboard */}
-				<Route path="/product" element={<Product />} />
+				<Route element={<MainLayout />}>
+					<Route path="/home" element={<Home />} />
+					{/* Linked to home page/dashboard */}
+					<Route path="/product" element={<Product />} />
+					<Route path="/createlisting" element={<CreateListing />} />
 
-				{/* Linked to product listing */}
-				<Route path="/checkout" element={<Checkout />} />
+					{/* Linked to product listing */}
+					<Route path="/checkout" element={<Checkout />} />
 
-				{/* Links found in Settings dropdown */}
-				<Route path="/account" element={<AccountInfo />} />
-				<Route path="/changepassword" element={<ChangePassword />} />
-				<Route path="/mypurchases" element={<MyPurchases />} />
-				<Route path="/mylistings" element={<MyListings />} />
+					{/* Links found in Settings dropdown */}
+					<Route path="/account" element={<AccountInfo />} />
+					<Route path="/changepassword" element={<ChangePassword />} />
+					<Route path="/mypurchases" element={<MyPurchases />} />
+					<Route path="/mylistings" element={<MyListings />} />
 
-				{/* Linked to my listings */}
-				<Route path="/pending" element={<PendingItems />} />
+					{/* Linked to my listings */}
+					<Route path="/pending" element={<PendingItems />} />
 
-				{/* Links found under help in dropdown */}
-				<Route path="/faq" element={<FAQ />} />
-				<Route path="/contactus" element={<ContactUs />} />
+					{/* Links found under help in dropdown */}
+					<Route path="/faq" element={<FAQ />} />
+					<Route path="/contactus" element={<ContactUs />} />
+				</Route>
 
 				{/* In case of 404 */}
 				<Route path="*" element={<NotFound />} />

@@ -17,7 +17,9 @@ export default function SearchBar() {
 	};
 
 	const handleClick1 = (e) => {
+		//updates field
 		setLocation(e.target.id);
+		//closes modal after click
 		setIsDropOpen1(false);
 	};
 
