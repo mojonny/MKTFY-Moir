@@ -1,28 +1,11 @@
-.mini-card-container::-webkit-scrollbar {
-	display: none;
+.mini-slider1 {
+	display: flex;
+	flex-direction: column;
+	gap: 45px;
 }
 
-.mini-card-container {
-	height: 775px;
-
-	width: 85%;
-	top: 250px;
-	overflow: scroll;
+.cat-pics {
 	display: flex;
 	flex-direction: row;
-	position: relative;
-	top: 250px;
-	left: 50px;
-	padding: 25px 10px;
-	border-radius: 5px 5px 5px 5px;
-	margin: 0;
-	height: 475px;
-
-	background: #ffffff;
-}
-
-.mini-cards {
-	display: flex;
-	flex-direction: row;
-	gap: 35px;
+	gap: 20px;
 }

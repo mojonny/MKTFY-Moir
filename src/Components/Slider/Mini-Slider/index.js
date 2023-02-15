@@ -1,23 +1,41 @@
-import React from 'react';
-import Card from '../Card';
+// import React from 'react';
+// import { Link } from 'react-router-dom';
 
-import './index.css';
+// import './index.css';
 
-export default function MiniSlider() {
-	const Title = 'Shop Pearls & Pearls';
+// const Title = 'Shop Pearls & Pearls';
 
-	const SubTitle = 'Explore now';
+// const SubTitle = 'Explore now';
 
-	return (
-		<div className="mini-slider">
-			<div className="mini-card-container">
-				<h3 className="mini-slider-title">{Title}</h3>
-				<div className="mini-cards">
-					<Card />
-					<Card />
-				</div>
-				<h4 className="mini-slider-title">{SubTitle}</h4>
-			</div>
-		</div>
-	);
-}
+// export default function MiniSlider() {
+// 	return (
+// 		<div className="mini-slider1">
+// 			<h3>{Title}</h3>
+// 			<div className="cat-pics">
+// 				<Link to="/product">
+// 					<img
+// 						style={{ objectFit: 'contain' }}
+// 						src={catDonut}
+// 						alt="catPicture"
+// 					/>
+// 				</Link>
+// 				<Link to="/product">
+// 					<img
+// 						className="cat-mini"
+// 						style={{ objectFit: 'contain' }}
+// 						src={catDonut}
+// 						alt="catPicture"
+// 					/>
+// 				</Link>
+// 				<Link to="/product">
+// 					<img
+// 						style={{ objectFit: 'contain' }}
+// 						src={catDonut}
+// 						alt="catPicture"
+// 					/>
+// 				</Link>
+// 			</div>
+// 			<h4>{SubTitle}</h4>
+// 		</div>
+// 	);
+// }

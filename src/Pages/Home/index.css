@@ -1,7 +1,53 @@
+.home-dashboard {
+	background-color: #e5e5e5;
+	height: fit-content;
+	width: 100vw;
+	/* display: flex;
+	flex-direction: column;
+	gap: 50px; */
+}
+
+.mini-slider-container {
+	margin-left: 150px;
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+}
+
+.mini-slider1,
+.mini-slider2 {
+	height: 485px;
+	width: 810px;
+	background: #ffffff;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	gap: 40px;
+	padding: 40px 30px 40px 30px;
+}
+
+.cat-pics {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+}
+
+.cat-image {
+	height: 265px;
+	width: 235px;
+	border-radius: 10px;
+}
+
+.bottom-explore-link {
+	text-align: right;
+	color: #9349de;
+	padding: 0px 0px 40px 0px;
+}
+
+.top-shop-title {
+	margin-top: 40px;
+}
 .download-app-add {
-	position: absolute;
-	width: 1636px;
-	height: 546px;
-	left: 142px;
-	top: 2280px;
+	margin: 70px 0px 100px 150px;
 }

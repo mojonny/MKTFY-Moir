@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import SearchBar from './Search-bar';
-import Dropdown from './Dropdown';
-import NotificationPopup from './Notification';
+import Dropdown from './Profile-Dropdown';
+import NotificationPopup from './Notification-Dropdown';
 
 import altLogo from '../../assets/altLogo.png';
 
