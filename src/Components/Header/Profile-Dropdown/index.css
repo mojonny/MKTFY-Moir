@@ -55,7 +55,8 @@
 	height: 40px;
 	width: 40px;
 	border-radius: 200px;
-	padding: 10px 15px 10px 15px;
+	text-align: center;
+	padding-top: 8px;
 }
 
 .settings-links,

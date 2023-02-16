@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import SearchBar from './Search-bar';
 import Dropdown from './Profile-Dropdown';
@@ -13,6 +13,11 @@ import hamburger from '../../assets/LinesMenu.png';
 import './index.css';
 
 export default function Header() {
+	const navigate = useNavigate();
+
+	const navigateToCreateListing = () => {
+		navigate('/createlisting');
+	};
 	return (
 		<div className="header">
 			<div className="search-bar-container">
@@ -26,7 +31,10 @@ export default function Header() {
 
 					<NotificationPopup />
 
-					<button className="create-listing-button">
+					<button
+						className="create-listing-button"
+						onClick={navigateToCreateListing}
+					>
 						<img src={plus} alt="plus" />
 						<h4 style={{ color: '#ffffff' }}> Create Listing</h4>
 					</button>
