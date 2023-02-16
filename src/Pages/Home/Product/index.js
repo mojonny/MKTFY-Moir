@@ -33,7 +33,7 @@ export default function Product() {
 					<div className="side-info-container">
 						<h1> Pearl The Cat: Toy edition</h1>
 						<div className="price-info">
-							<h2>$340.00</h2>
+							<h1 style={{ color: '#6e20be' }}>$340.00</h1>
 							<div className="new-price-label"> NEW </div>
 						</div>
 						<button className="checkout-button">I want this!</button>
