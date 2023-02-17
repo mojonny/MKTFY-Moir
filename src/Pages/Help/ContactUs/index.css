@@ -51,7 +51,7 @@
 	display: none;
 }
 
-input {
+.contact-input {
 	height: 51px;
 	width: 500px;
 	border-radius: 4px;
@@ -60,7 +60,7 @@ input {
 	overflow: scroll;
 }
 
-input::placeholder {
+.contact-input::placeholder {
 	color: #4d4d4d;
 	opacity: 40%;
 }

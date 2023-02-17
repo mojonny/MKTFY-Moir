@@ -32,12 +32,16 @@ export default function ContactUS() {
 						<div>
 							<label>Name</label>
 							<br />
-							<input placeholder="Your name"></input>
+							<input className="contact-input" placeholder="Your name" />
 						</div>
 						<div>
 							<label>Email address</label>
 							<br />
-							<input type="email" placeholder="Your email" />
+							<input
+								type="email"
+								className="contact-input"
+								placeholder="Your email"
+							/>
 						</div>
 						<div>
 							<label>Message</label>
