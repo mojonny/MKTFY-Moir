@@ -28,6 +28,11 @@ export default function Dropdown() {
 	const handleToggle3 = () => {
 		setIsDropOpen3(true);
 	};
+
+	const handleClick = (e) => {
+		setIsDropOpen3(false);
+	};
+
 	return (
 		<div>
 			<div className="profile-dropdown">
@@ -52,26 +57,50 @@ export default function Dropdown() {
 
 							<h2 style={{ color: 'black', margin: '0px' }}>Settings</h2>
 							<div className="settings-links">
-								<Link className="drop-nav-links" to="/account">
+								<Link
+									className="drop-nav-links"
+									to="/account"
+									onClick={handleClick}
+								>
 									Account information
 								</Link>
-								<Link className="drop-nav-links" to="/changepassword">
+								<Link
+									className="drop-nav-links"
+									onClick={handleClick}
+									to="/changepassword"
+								>
 									Change password
 								</Link>
-								<Link className="drop-nav-links" to="/mypurchases">
+								<Link
+									className="drop-nav-links"
+									onClick={handleClick}
+									to="/mypurchases"
+								>
 									My purchases
 								</Link>
-								<Link className="drop-nav-links" to="/mylistings">
+								<Link
+									className="drop-nav-links"
+									onClick={handleClick}
+									to="/mylistings"
+								>
 									My listings
 								</Link>
 							</div>
 							<br />
 							<h2 style={{ color: '#313131', margin: '0px' }}>Help</h2>
 							<div className="help-links">
-								<Link className="drop-nav-links" to="/faq">
+								<Link
+									className="drop-nav-links"
+									onClick={handleClick}
+									to="/faq"
+								>
 									FAQ
 								</Link>
-								<Link className="drop-nav-links" to="/contactus">
+								<Link
+									className="drop-nav-links"
+									onClick={handleClick}
+									to="/contactus"
+								>
 									Contact us
 								</Link>
 							</div>

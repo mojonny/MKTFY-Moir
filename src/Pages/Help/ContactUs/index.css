@@ -19,38 +19,6 @@
 	margin-bottom: 190px;
 }
 
-.vert-image-slider {
-	display: flex;
-	flex-direction: column;
-	gap: 16px;
-}
-
-.vert-cat-pic {
-	height: 123px;
-	width: 118px;
-	border-radius: 10px;
-}
-
-.checkout-pic {
-	height: 125px;
-	width: 236px;
-	border-radius: 10px;
-}
-
-.price-info {
-	display: flex;
-	flex-direction: row;
-}
-
-.new-price-label {
-	color: #194905;
-	background-color: #c2eec1;
-	font-size: 12px;
-	height: 16px;
-	width: 40px;
-	text-align: center;
-}
-
 .send-button {
 	width: 495px;
 	height: 65px;
@@ -59,55 +27,6 @@
 	border-radius: 100px;
 	border: none;
 	filter: drop-shadow(4px 4px 8px (0, 0, 0, 0.15));
-}
-
-.product-seller-info {
-	display: flex;
-	flex-direction: row;
-	align-items: flex-start;
-	gap: 10px;
-}
-
-.seller-details {
-	display: flex;
-	flex-direction: column;
-}
-
-.seller-listings {
-	display: flex;
-	flex-direction: row;
-	gap: 5px;
-}
-
-.vert-down-arrow {
-	-webkit-transform: rotate(180deg);
-	-moz-transform: rotate(180deg);
-	-ms-transform: rotate(180deg);
-	-o-transform: rotate(180deg);
-	transform: rotate(180deg);
-}
-
-.vert-down-arrow,
-.vert-up-arrow {
-	background: none;
-	border: none;
-}
-
-.side-info-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-}
-
-.checkout-item-box {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-}
-
-.checkout-item-detail {
-	display: flex;
-	flex-direction: column;
 }
 
 .contact-form-container1 {
