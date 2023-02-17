@@ -7,13 +7,13 @@
 
 .password-eye-box {
 	display: flex;
-	width: 100%;
+	width: 105%;
 }
 
 .input-style2 {
 	background: #ffffff;
 	border: 1px solid #e2e2e2;
 	border-radius: 5px;
-	width: 545px;
+	width: 100%;
 	height: 50px;
 }
