@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import catSide from '../../../assets/catToyedition.png';
 import upDownArrow from '../../../assets/UpDownArrow.png';
 import listingIcon from '../../../assets/listingTag.png';
@@ -8,6 +9,11 @@ import breadArrow from '../../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function Product() {
+	const navigate = useNavigate();
+
+	const navigateToCheckout = () => {
+		navigate('/checkout');
+	};
 	return (
 		<>
 			<div className="product-container">
@@ -36,7 +42,9 @@ export default function Product() {
 							<h1 style={{ color: '#6e20be' }}>$340.00</h1>
 							<div className="new-price-label"> NEW </div>
 						</div>
-						<button className="checkout-button">I want this!</button>
+						<button className="checkout-button" onClick={navigateToCheckout}>
+							I want this!
+						</button>
 						<div className="product-details">
 							<h4>Details</h4>
 							<p>

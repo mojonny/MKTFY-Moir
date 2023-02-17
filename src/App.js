@@ -27,7 +27,7 @@ import PendingItems from './Pages/Settings/MyListings/Pending';
 
 //Pages accessed by help links in dropdown
 import FAQ from './Pages/Help/FAQ';
-import ContactUs from './Pages/Help/FAQ';
+import ContactUs from './Pages/Help/ContactUs';
 
 //In case of 404
 import NotFound from './Pages/NotFound';

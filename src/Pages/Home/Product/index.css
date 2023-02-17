@@ -15,7 +15,7 @@
 	flex-direction: row;
 	gap: 20px;
 	height: 575px;
-	width: 80vw;
+	max-width: 1631px;
 	background-color: #ffffff;
 	padding: 32px 138px 32px 16px;
 	border-radius: 10px;
