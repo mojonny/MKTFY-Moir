@@ -1,0 +1,40 @@
+.vert-slider-landing {
+	display: flex;
+	flex-direction: column;
+	width: 120px;
+	gap: 30px;
+}
+
+.vert-image-slider1 {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	width: 120px;
+	overflow-y: scroll;
+	border-radius: 10px;
+}
+
+.vert-image-slider1::-webkit-scrollbar {
+	display: none;
+}
+
+.vert-cat-pic {
+	height: 123px;
+	width: 118px;
+	border-radius: 10px;
+}
+
+.vert-down-arrow {
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+.vert-down-arrow,
+.vert-up-arrow {
+	background: none;
+	border: none;
+	cursor: pointer;
+}

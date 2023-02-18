@@ -1,0 +1,41 @@
+.lost-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	height: 100vh;
+	background-image: linear-gradient(
+		-225deg,
+		#fdca40 0,
+		#ffba00 29%,
+		#9349de 67%,
+		#560f9f 100%
+	);
+	background-size: 500% 500%;
+	animation: bg 8s linear infinite;
+}
+
+@keyframes bg {
+	50% {
+		background-position: 100% 100%;
+	}
+}
+
+.lost-page-text {
+	background-image: url(../../assets/Clouds.svg);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 5%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	height: 650px;
+	width: 900px;
+	border: 5px solid #e7e7e7;
+	border-radius: 10px;
+	color: #e7e7e7;
+	text-align: center;
+}

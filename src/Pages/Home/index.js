@@ -1,7 +1,7 @@
 import React from 'react';
 import appBanner from '../../assets/AppBanner1.png';
 import Footer from '../../Components/Footer';
-import Slider from '../../Components/Slider';
+import Slider from '../../Components/Sliders/Home-Slider';
 
 import { Link } from 'react-router-dom';
 import catDonut from '../../assets/catBreakfast.png';

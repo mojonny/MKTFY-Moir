@@ -1,0 +1,60 @@
+.change-pw-container {
+	padding-top: 130px;
+	margin-left: 150px;
+}
+
+.breadcrumbs {
+	padding: 10px;
+}
+
+.change-pw-landing {
+	height: 800px;
+	width: 635px;
+	background-color: #ffffff;
+	padding: 24px;
+	border-radius: 10px;
+	margin-bottom: 190px;
+}
+
+.set-pw-button {
+	width: 585px;
+	height: 65px;
+	color: #ffffff;
+	background-color: #6318af;
+	border-radius: 100px;
+	border: none;
+	filter: drop-shadow(4px 4px 8px (0, 0, 0, 0.15));
+	margin-bottom: 0px;
+}
+
+.account-form-container {
+	display: flex;
+	flex-direction: row;
+	gap: 160px;
+	padding: 60px 140px 60px 140px;
+}
+
+.left-side-form,
+.right-side-form {
+	width: 530px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	gap: 25px;
+	background-color: #f7f7f7;
+	border-radius: 0px 10px 10px 0px;
+}
+
+.pw-input {
+	border-radius: 4px;
+	border: solid #e2e2e2 1px;
+	color: #4d4d4d;
+	height: 51px;
+	width: 530px;
+	padding: 16px 10px 16px 10px;
+}
+
+.pw-input::placeholder {
+	color: #4d4d4d;
+	opacity: 40%;
+}

@@ -6,28 +6,28 @@ import './App.css';
 import LoginPortal from './Pages/Login-Portal';
 
 // Pages from sign-up modals
-import Privacy from './Pages/Login-Portal/create-account-modal/password-modal/Privacy';
-import TOC from './Pages/Login-Portal/create-account-modal/password-modal/TermsAndConditions';
+import Privacy from './Pages/Privacy';
+import TOC from './Pages/TermsAndConditions';
 
 //Layout used for main app pages
 //import MainLayout from './Components/Layout';
 
 // Homepage/ Dashboard after login
 import Home from './Pages/Home';
-import Product from './Pages/Home/Product';
-import CreateListing from './Pages/Home/Create-Listing';
-import Checkout from './Pages/Home/Product/Checkout';
+import Product from './Pages/Product';
+import CreateListing from './Pages/Create-Listing';
+import Checkout from './Pages/Checkout';
 
 //Pages accessed by settings dropdown
-import AccountInfo from './Pages/Settings/AccountInfo';
-import ChangePassword from './Pages/Settings/ChangePassword';
-import MyPurchases from './Pages/Settings/MyPurchases';
-import MyListings from './Pages/Settings/MyListings';
-import PendingItems from './Pages/Settings/MyListings/Pending';
+import AccountInfo from './Pages/AccountInfo';
+import ChangePassword from './Pages/ChangePassword';
+import MyPurchases from './Pages/MyPurchases';
+import MyListings from './Pages/MyListings';
+import PendingItems from './Pages/Pending';
 
 //Pages accessed by help links in dropdown
-import FAQ from './Pages/Help/FAQ';
-import ContactUs from './Pages/Help/ContactUs';
+import FAQ from './Pages/FAQ';
+import ContactUs from './Pages/ContactUs';
 
 //In case of 404
 import NotFound from './Pages/NotFound';
