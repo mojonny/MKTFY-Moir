@@ -111,11 +111,11 @@ export default function ChangePassword() {
 								<button className="eye-slash" onClick={togglePassword}>
 									{passwordType === 'password' ? (
 										<i>
-											<img src={eyeslash} alt="close" />
+											<img src={eyeslash} alt="close-eye" />
 										</i>
 									) : (
 										<i>
-											<img src={eye} alt="close" />
+											<img src={eye} alt="open-eye" />
 										</i>
 									)}
 								</button>
@@ -142,11 +142,11 @@ export default function ChangePassword() {
 								<button className="eye-slash" onClick={togglePassword}>
 									{passwordType === 'password' ? (
 										<i>
-											<img src={eyeslash} alt="close" />
+											<img src={eyeslash} alt="close-eye" />
 										</i>
 									) : (
 										<i>
-											<img src={eye} alt="close" />
+											<img src={eye} alt="open-eye" />
 										</i>
 									)}
 								</button>
@@ -169,11 +169,11 @@ export default function ChangePassword() {
 								<button className="eye-slash" onClick={togglePassword}>
 									{passwordType === 'password' ? (
 										<i>
-											<img src={eyeslash} alt="eye-close" />
+											<img src={eyeslash} alt="close-eye" />
 										</i>
 									) : (
 										<i>
-											<img src={eye} alt="close" />
+											<img src={eye} alt="open-eye" />
 										</i>
 									)}
 								</button>

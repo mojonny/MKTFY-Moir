@@ -1,0 +1,43 @@
+.purchase-container {
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	padding-top: 125px;
+	margin-left: 150px;
+	margin-bottom: 190px;
+}
+
+.purchases-landing {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	height: 200px;
+	width: 810px;
+	background-color: #ffffff;
+
+	border-radius: 10px;
+}
+
+.purchase-pic {
+	height: 200px;
+	width: 390px;
+	object-fit: fill;
+}
+
+.price-info {
+	display: flex;
+	flex-direction: row;
+}
+
+.purchase-item-box {
+	display: flex;
+	flex-direction: row;
+	gap: 24px;
+}
+
+.purchase-item-detail {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: center;
+}

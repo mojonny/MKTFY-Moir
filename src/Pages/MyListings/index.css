@@ -1,0 +1,64 @@
+.listing-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding-top: 125px;
+	margin-left: 150px;
+	margin-bottom: 190px;
+}
+
+.listing-landing {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	height: 200px;
+	width: 810px;
+	background-color: #ffffff;
+
+	border-radius: 10px;
+}
+
+.listing-pic {
+	height: 200px;
+	width: 390px;
+	border-radius: 10px 0px 0px 10px;
+	object-fit: inherit;
+}
+
+.listing-item-box {
+	display: flex;
+	flex-direction: row;
+	gap: 24px;
+}
+
+.listing-item-detail {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	justify-content: center;
+}
+
+.listing-item-detail::hover {
+	background-color: black;
+}
+
+.active-sold-labels {
+	display: flex;
+	flex-direction: row;
+	gap: 75px;
+}
+
+.active-button {
+	border: none;
+	background: none;
+	color: #6e20be;
+	size: 20px;
+	text-decoration: underline;
+}
+
+.inactive-button {
+	border: none;
+	background: none;
+	color: #4d4d4d;
+	size: 20px;
+}

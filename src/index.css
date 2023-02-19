@@ -36,6 +36,15 @@ h3 {
 	margin: 0px;
 }
 
+h4 {
+	font-family: 'Open Sans';
+	font-style: bold;
+	font-weight: 700;
+	size: 14px;
+	line-height: 20px;
+	margin: 0px;
+}
+
 p {
 	font-family: 'Open Sans';
 	font-style: normal;
@@ -51,6 +60,4 @@ li {
 	font-weight: 400;
 	size: 20px;
 	line-height: 22px;
-
-	color: #ffffff;
 }

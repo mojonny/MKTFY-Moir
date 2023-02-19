@@ -51,7 +51,7 @@ li.options {
 	transition: color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
 }
 
-li:hover {
+.options:hover {
 	box-shadow: inset 200px 0 0 0 #f7f7f7;
 	overflow: hidden;
 	color: #6318af;
