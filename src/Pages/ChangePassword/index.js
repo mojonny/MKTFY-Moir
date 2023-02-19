@@ -66,7 +66,7 @@ export default function ChangePassword() {
 		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
-			navigate('/changepassword');
+			navigate('/home');
 		}, 2000);
 	}
 
@@ -79,7 +79,7 @@ export default function ChangePassword() {
 		}
 		setPasswordType('password');
 	};
-
+	//to run pass check and disable the button by default
 	useEffect(() => {
 		isPassCheck();
 	}, []);
@@ -92,7 +92,7 @@ export default function ChangePassword() {
 					information{' '}
 				</div>
 				<div className="change-pw-landing">
-					<form className="contact-form-container1">
+					<form className="contact-form-container1" onSubmit={handleSubmit}>
 						<h1 style={{ color: '#9349de', margin: '0', fontSize: '36px' }}>
 							{' '}
 							Change password
@@ -105,7 +105,9 @@ export default function ChangePassword() {
 									type={passwordType}
 									placeholder="Current password"
 									className="input-style2"
+									onChange={(e) => setPassword(e.target.value)}
 								/>
+
 								<button className="eye-slash" onClick={togglePassword}>
 									{passwordType === 'password' ? (
 										<i>
