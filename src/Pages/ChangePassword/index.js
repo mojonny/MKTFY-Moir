@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-//import Success from '../../Components/Success';
+import Success from '../../Components/Success';
 
 import Checkmark from '../../assets/Checkmark.svg';
 import CheckmarkGrey from '../../assets/CheckmarkGrey.svg';
@@ -50,7 +50,7 @@ function isPassCheck() {
 
 export default function ChangePassword() {
 	//Show lottie when loading and moving to success
-	//const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
 
 	//To toggle visibility of password text
 	const [passwordType, setPasswordType] = useState('password');
@@ -59,15 +59,17 @@ export default function ChangePassword() {
 	const [password, setPassword] = useState('');
 
 	//Navigate back to home page once password is changed
-	//const navigate = useNavigate();
+	const navigate = useNavigate();
 
-	//function handleSubmit(event) {
-	//	event.preventDefault();
-	// setTimeout(() => {
-	// 	setIsLoading(true);
-	// 	navigate('/home');
-	// }, 2000);
-	//}
+	function handleSubmit(event) {
+		event.preventDefault();
+		setIsLoading(true);
+		setTimeout(() => {
+			setIsLoading(false);
+			navigate('/changepassword');
+		}, 2000);
+	}
+
 	//To change icon, change the input type
 	const togglePassword = (event) => {
 		event.preventDefault();
@@ -147,7 +149,6 @@ export default function ChangePassword() {
 									)}
 								</button>
 							</div>
-							{/* <p style={{ color: 'red' }}>{passwordError}</p> */}
 						</label>
 
 						<label className="password">
@@ -166,7 +167,7 @@ export default function ChangePassword() {
 								<button className="eye-slash" onClick={togglePassword}>
 									{passwordType === 'password' ? (
 										<i>
-											<img src={eyeslash} alt="close" />
+											<img src={eyeslash} alt="eye-close" />
 										</i>
 									) : (
 										<i>
@@ -204,9 +205,13 @@ export default function ChangePassword() {
 							</div>
 						</div>
 						{/* <p style={{ color: 'red' }}>{passwordMatchError}</p> */}
-						<button className="set-pw-button" id="set-pw-button">
-							{isPassCheck}
-							{/* {isLoading ? <Success /> : handleSubmit} */}
+						<button
+							className="set-pw-button"
+							id="set-pw-button"
+							disabled={isLoading}
+							onClick={handleSubmit}
+						>
+							{isLoading ? <Success /> : handleSubmit}
 							Set password
 						</button>
 					</form>
