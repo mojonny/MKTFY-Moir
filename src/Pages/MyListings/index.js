@@ -7,6 +7,7 @@ import { getListings, filterListings } from '../../Services/services';
 
 export default function MyListings() {
 	const [filteredListings, setFilteredListings] = useState(null);
+	const [activeItems, setActiveItems] = useState('AVAILABLE ITEMS');
 	const [buttonClass, setButtonClass] = useState('inactive-button');
 	const [buttonClass1, setButtonClass1] = useState('inactive-button');
 
@@ -21,13 +22,15 @@ export default function MyListings() {
 			setFilteredListings(filterListings(typeListing));
 			setButtonClass('active-button');
 			setButtonClass1('inactive-button');
+			setActiveItems('AVAILABLE ITEMS');
 		} else if (typeListing === 'sold') {
 			setFilteredListings(filterListings(typeListing));
 			setButtonClass1('active-button');
 			setButtonClass('inactive-button');
+			setActiveItems('');
 		} else {
 			setFilteredListings(getListings());
-			setButtonClass('inactive-button');
+			setActiveItems('');
 		}
 	}
 
@@ -57,7 +60,7 @@ export default function MyListings() {
 					</div>
 				</div>
 				<div>
-					<h2>AVAILABLE ITEMS</h2>
+					<h2>{activeItems}</h2>
 					<div>
 						<div>
 							{filteredListings &&
