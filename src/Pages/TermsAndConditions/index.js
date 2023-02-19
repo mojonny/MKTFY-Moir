@@ -1,11 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Chat from '../../assets/Chat.png';
+import Chat from '../../assets/Chat.svg';
 import Back from '../../assets/Arrow.png';
 import './index.css';
 
-//{ setSignupPage }
 export default function TOC() {
 	let Title = 'MKTFY Terms and conditions';
 
