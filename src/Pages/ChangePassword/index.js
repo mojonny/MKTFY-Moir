@@ -1,26 +1,86 @@
 import React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+//import { useNavigate } from 'react-router-dom';
 
-import Success from '../../Components/Success';
-import PasswordShowHide from '../../Components/PasswordShowHide';
+//import Success from '../../Components/Success';
 
-import checkmark from '../../assets/Checkmark.png';
+import Checkmark from '../../assets/Checkmark.svg';
+import CheckmarkGrey from '../../assets/CheckmarkGrey.svg';
+
 import breadArrow from '../../assets/breadCrumbArrow.png';
+import eye from '../../assets/eye.png';
+import eyeslash from '../../assets/eye-slash.png';
 import './index.css';
 
+//This checks that there is at least 1 Upper,1 Lower, and 1 Number
+// ^	The password string will start this way
+// (?=.*[a-z])	The string must contain at least 1 lowercase alphabetical character
+// (?=.*[A-Z])	The string must contain at least 1 uppercase alphabetical character
+// (?=.*[0-9])	The string must contain at least 1 numeric character
+// (?=.[!@#$%^&])	The string must contain at least one special character, but we are escaping reserved RegEx characters to avoid conflict
+// (?=.{8,})	The string must be eight characters or longer
+
+function isSixChar(password) {
+	return RegExp('^(?=.{6,})').test(password);
+}
+function isUpperCase(password) {
+	return RegExp('^(?=.*[A-Z])').test(password);
+}
+function isNumber(password) {
+	return RegExp('^(?=.*[0-9])').test(password);
+}
+
+function isPassCheck() {
+	let password1 = document.getElementById('password1');
+	let verifyPassword = document.getElementById('verifyPassword');
+
+	if (
+		password1.value !== verifyPassword.value ||
+		password1.value.length === 0 ||
+		verifyPassword.value.length === 0 ||
+		!isSixChar(password1.value) ||
+		!isUpperCase(password1.value) ||
+		!isNumber(password1.value)
+	) {
+		document.getElementById('set-pw-button').disabled = true;
+	} else {
+		document.getElementById('set-pw-button').disabled = false;
+	}
+}
+
 export default function ChangePassword() {
-	const [isLoading, setIsLoading] = useState(false);
+	//Show lottie when loading and moving to success
+	//const [isLoading, setIsLoading] = useState(false);
 
-	const navigate = useNavigate();
+	//To toggle visibility of password text
+	const [passwordType, setPasswordType] = useState('password');
 
-	const navigateHome = () => {
-		setIsLoading(true);
-		setTimeout(() => {
-			navigate('/home');
-			setIsLoading(false);
-		}, 2000);
+	//Split inputs so onchange only affects one input
+	const [password, setPassword] = useState('');
+
+	//Navigate back to home page once password is changed
+	//const navigate = useNavigate();
+
+	//function handleSubmit(event) {
+	//	event.preventDefault();
+	// setTimeout(() => {
+	// 	setIsLoading(true);
+	// 	navigate('/home');
+	// }, 2000);
+	//}
+	//To change icon, change the input type
+	const togglePassword = (event) => {
+		event.preventDefault();
+		if (passwordType === 'password') {
+			setPasswordType('text');
+			return;
+		}
+		setPasswordType('password');
 	};
+
+	useEffect(() => {
+		isPassCheck();
+	}, []);
 
 	return (
 		<>
@@ -35,9 +95,27 @@ export default function ChangePassword() {
 							{' '}
 							Change password
 						</h1>
+
 						<label className="pw">
 							Current password
-							<PasswordShowHide className="pw-input" />
+							<div className="password-eye-box">
+								<input
+									type={passwordType}
+									placeholder="Current password"
+									className="input-style2"
+								/>
+								<button className="eye-slash" onClick={togglePassword}>
+									{passwordType === 'password' ? (
+										<i>
+											<img src={eyeslash} alt="close" />
+										</i>
+									) : (
+										<i>
+											<img src={eye} alt="close" />
+										</i>
+									)}
+								</button>
+							</div>
 						</label>
 						<h3>
 							The password must have at least 6 characters and must contain 1
@@ -46,33 +124,89 @@ export default function ChangePassword() {
 
 						<label className="password">
 							Password
-							<PasswordShowHide />
+							<div className="password-eye-box">
+								<input
+									id="password1"
+									required
+									onKeyUp={(e) => isPassCheck(e.target.value)}
+									type={passwordType}
+									placeholder="Insert your password"
+									className="input-style2"
+									onChange={(e) => setPassword(e.target.value)}
+								/>
+
+								<button className="eye-slash" onClick={togglePassword}>
+									{passwordType === 'password' ? (
+										<i>
+											<img src={eyeslash} alt="close" />
+										</i>
+									) : (
+										<i>
+											<img src={eye} alt="close" />
+										</i>
+									)}
+								</button>
+							</div>
+							{/* <p style={{ color: 'red' }}>{passwordError}</p> */}
 						</label>
 
 						<label className="password">
 							Password
-							<PasswordShowHide />
+							<div className="password-eye-box">
+								<input
+									required
+									id="verifyPassword"
+									type={passwordType}
+									placeholder="Insert your password"
+									className="input-style2"
+									onKeyUp={(e) => isPassCheck(e.target.value)}
+									onChange={(e) => setPassword(e.target.value)}
+								/>
+
+								<button className="eye-slash" onClick={togglePassword}>
+									{passwordType === 'password' ? (
+										<i>
+											<img src={eyeslash} alt="close" />
+										</i>
+									) : (
+										<i>
+											<img src={eye} alt="close" />
+										</i>
+									)}
+								</button>
+							</div>
 						</label>
 
 						<div className="requirement-box">
 							<div className="requirement">
-								<img src={checkmark} alt="checkmark" />
+								{!isSixChar(password) ? (
+									<img src={CheckmarkGrey} alt="checkmark" />
+								) : (
+									<img src={Checkmark} alt="checkmark" />
+								)}
 								At least 6 characters
 							</div>
 							<div className="requirement">
-								<img src={checkmark} alt="checkmark" /> 1 Uppercase
+								{!isUpperCase(password) ? (
+									<img src={CheckmarkGrey} alt="checkmark" />
+								) : (
+									<img src={Checkmark} alt="checkmark" />
+								)}
+								1 Uppercase
 							</div>
 							<div className="requirement">
-								<img src={checkmark} alt="checkmark" /> 1 Number
+								{!isNumber(password) ? (
+									<img src={CheckmarkGrey} alt="checkmark" />
+								) : (
+									<img src={Checkmark} alt="checkmark" />
+								)}{' '}
+								1 Number
 							</div>
 						</div>
-
-						<button
-							onClick={navigateHome}
-							disabled={isLoading}
-							className="set-pw-button"
-						>
-							{isLoading ? <Success /> : navigateHome}
+						{/* <p style={{ color: 'red' }}>{passwordMatchError}</p> */}
+						<button className="set-pw-button" id="set-pw-button">
+							{isPassCheck}
+							{/* {isLoading ? <Success /> : handleSubmit} */}
 							Set password
 						</button>
 					</form>

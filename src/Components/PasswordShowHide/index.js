@@ -19,6 +19,7 @@ export default function PasswordShowHide() {
 	return (
 		<div className="password-eye-box">
 			<input
+				required
 				type={passwordType}
 				placeholder="Insert your password"
 				className="input-style2"

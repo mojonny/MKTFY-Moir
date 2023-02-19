@@ -16,7 +16,7 @@ export default function Home() {
 		<div className="home-dashboard">
 			<br />
 			<br />
-			<Slider />
+			<Slider key="0" />
 			<br />
 			<div className="mini-slider-container">
 				<div className="mini-slider1">
@@ -52,7 +52,7 @@ export default function Home() {
 				</div>
 			</div>
 			<br />
-			<Slider />
+			<Slider key="1" />
 			<br />
 			<div className="mini-slider-container">
 				<div className="mini-slider1">
