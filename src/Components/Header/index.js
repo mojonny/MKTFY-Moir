@@ -36,7 +36,10 @@ export default function Header() {
 						onClick={navigateToCreateListing}
 					>
 						<img src={plus} alt="plus" />
-						<h4 style={{ color: '#ffffff' }}> Create Listing</h4>
+						<h4 style={{ color: '#ffffff', padding: '15px,14px,15px,14px' }}>
+							{' '}
+							Create Listing
+						</h4>
 					</button>
 				</div>
 			</div>

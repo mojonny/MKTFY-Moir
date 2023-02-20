@@ -1,0 +1,82 @@
+.create-listing-container {
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+	padding-top: 125px;
+	margin-left: 150px;
+}
+
+.breadcrumbs {
+	padding: 10px;
+}
+
+.create-listing-landing {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	height: 860px;
+	max-width: 1220px;
+	background-color: #ffffff;
+
+	border-radius: 10px;
+	margin-bottom: 125px;
+}
+
+.listing-image-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 25px;
+}
+
+.main-listing-img {
+	height: 320px;
+	width: 480px;
+	border-radius: 6px;
+	margin-bottom: 12px;
+}
+
+.mini-image-box {
+	display: flex;
+	gap: 24px;
+}
+
+.listing-info-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 25px;
+	padding: 24px;
+	width: 100%;
+	border-radius: 0px 10px 10px 0px;
+	background-color: #f7f7f7;
+	overflow: visible;
+}
+
+.load-pic {
+	height: 100px;
+	width: 100px;
+	padding: 30px;
+	border: 1px dashed #6318af;
+	border-radius: 6px;
+}
+
+.post-button {
+	width: 645px;
+	height: 65px;
+	color: #ffffff;
+	background-color: #d9d9d9;
+	border-radius: 100px;
+	border: none;
+	filter: drop-shadow(0px 4px 12px (0, 0, 0, 0.25));
+}
+
+.cancel-listing-button {
+	width: 645px;
+	height: 65px;
+	background-color: #ffffff;
+	color: #969696;
+	border-radius: 100px;
+	border: 1px solid #969696;
+	filter: drop-shadow(0px 4px 12px (0, 0, 0, 0.25));
+}
