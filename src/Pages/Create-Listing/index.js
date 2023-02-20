@@ -1,25 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-import Success from '../../Components/Success';
 import loadImg from '../../assets/LoadImg.svg';
 import loadBigCam from '../../assets/bigCamera.svg';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function CreateListing() {
-	const [isLoading, setIsLoading] = useState(false);
-
-	const navigate = useNavigate();
-
-	const navigateHome = () => {
-		setIsLoading(true);
-		setTimeout(() => {
-			navigate('/home');
-			setIsLoading(false);
-		}, 2000);
-	};
 	return (
 		<>
 			<div className="create-listing-container">
