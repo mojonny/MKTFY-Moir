@@ -12,6 +12,7 @@ export default function MyListings() {
 	const [buttonClass1, setButtonClass1] = useState('inactive-button');
 
 	useEffect(() => {
+		//Gets all listings on initial render
 		setFilteredListings(getListings());
 	}, []);
 
@@ -19,9 +20,14 @@ export default function MyListings() {
 		//Sets filter onClick of active or sold buttons
 		let typeListing = e.target.value;
 		if (typeListing === 'active') {
+			//Only show active listings onClick
 			setFilteredListings(filterListings(typeListing));
+
+			//change button style onClick
 			setButtonClass('active-button');
 			setButtonClass1('inactive-button');
+
+			//Show available items heading
 			setActiveItems('AVAILABLE ITEMS');
 		} else if (typeListing === 'sold') {
 			setFilteredListings(filterListings(typeListing));
@@ -62,7 +68,7 @@ export default function MyListings() {
 				<div>
 					<h2>{activeItems}</h2>
 					<div>
-						<div>
+						<div className="all-listings">
 							{filteredListings &&
 								filteredListings.map((type) => (
 									<ul className="listing-item-box" key={type.id}>

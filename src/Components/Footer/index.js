@@ -37,13 +37,17 @@ export default function Footer() {
 				}}
 			>
 				Title
-				<n />
+				<br />
+				<br />
 				Tab
-				<n />
+				<br />
+				<br />
 				Tab
-				<n />
+				<br />
+				<br />
 				Tab
-				<n />
+				<br />
+				<br />
 				Tab
 			</div>
 			<div
@@ -60,13 +64,17 @@ export default function Footer() {
 				}}
 			>
 				Title
-				<n />
+				<br />
+				<br />
 				Contact us
-				<n />
+				<br />
+				<br />
 				Tab
-				<n />
+				<br />
+				<br />
 				Tab
-				<n />
+				<br />
+				<br />
 				Tab
 			</div>
 			<img
