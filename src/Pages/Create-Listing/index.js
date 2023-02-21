@@ -1,4 +1,8 @@
 import React from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import Success from '../../Components/Success';
 
 import loadImg from '../../assets/LoadImg.svg';
 import loadBigCam from '../../assets/bigCamera.svg';
@@ -6,6 +10,18 @@ import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function CreateListing() {
+	const [isLoading, setIsLoading] = useState(false);
+
+	const navigate = useNavigate();
+
+	const navigateHome = () => {
+		setIsLoading(true);
+		setTimeout(() => {
+			navigate('/home');
+			setIsLoading(false);
+		}, 2000);
+	};
+
 	return (
 		<>
 			<div className="create-listing-container">
@@ -45,14 +61,14 @@ export default function CreateListing() {
 										<label>Description</label>
 										<br />
 										<textarea
-											className="account-input"
+											className="description-text-area"
 											placeholder="Insert you description"
 										></textarea>
 									</div>
 									<div>
 										<label>Category</label>
 										<br />
-										<select>
+										<select className="create-listing-categories">
 											<option>All</option>
 											<option>Cars & Vehicles</option>
 											<option>Furniture</option>
@@ -60,24 +76,26 @@ export default function CreateListing() {
 											<option>Real estate</option>
 										</select>
 									</div>
-									<div>
-										<label>Condition</label>
-										<br />
-										<select>
-											<option>New - unused</option>
-											<option>Used - excellent</option>
-											<option>Used - good</option>
-											<option>Used - fair</option>
-											<option>Used - still functional</option>
-										</select>
-									</div>
-									<div>
-										<label>Price</label>
-										<br />
-										<input
-											className="account-input"
-											placeholder="type the price"
-										/>
+									<div className="condition-price-box">
+										<div>
+											<label>Condition</label>
+											<br />
+											<select className="condition-input">
+												<option>New - unused</option>
+												<option>Used - excellent</option>
+												<option>Used - good</option>
+												<option>Used - fair</option>
+												<option>Used - still functional</option>
+											</select>
+										</div>
+										<div>
+											<label>Price</label>
+											<br />
+											<input
+												className="price-input"
+												placeholder="type the price"
+											/>
+										</div>
 									</div>
 								</div>
 
@@ -89,11 +107,11 @@ export default function CreateListing() {
 										placeholder="123 1st Street SW"
 									/>
 								</div>
-								<div className="city-province">
+								<div>
 									<div>
 										<label>City</label>
 										<br />
-										<select>
+										<select className="create-listing-categories">
 											<option>Calgary</option>
 											<option>Brooks</option>
 											<option>Camrose</option>
@@ -101,9 +119,23 @@ export default function CreateListing() {
 									</div>
 								</div>
 
-								<button className="post-button">Post your offer</button>
+								<button
+									onClick={navigateHome}
+									disabled={isLoading}
+									className="post-button"
+								>
+									{isLoading ? <Success /> : navigateHome}
+									Post your offer
+								</button>
 
-								<button className="cancel-listing-button">Cancel</button>
+								<button
+									onClick={navigateHome}
+									disabled={isLoading}
+									className="cancel-listing-button"
+								>
+									{isLoading ? <Success /> : navigateHome}
+									Cancel
+								</button>
 							</div>
 						</div>
 					</form>

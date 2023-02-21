@@ -46,18 +46,6 @@
 	overflow: visible;
 }
 
-.listing-info-container1 {
-	display: flex;
-	flex-direction: column;
-
-	gap: 25px;
-
-	width: 100%;
-	border-radius: 0px 10px 10px 0px;
-	background-color: #f7f7f7;
-	overflow: visible;
-}
-
 .post-button {
 	width: 645px;
 	height: 65px;
@@ -116,36 +104,11 @@
 	gap: 10px;
 }
 
-.wrapper {
-	display: inline-block;
-	position: relative;
-}
-
-.btnimg {
-	background: #ffffff;
-	pointer-events: none;
-	width: 100px;
-	height: 100px;
-	opacity: 1;
-	line-height: 90px;
-	text-align: center;
-	z-index: 2;
-}
-
 .main-listing-img {
 	height: 320px;
 	width: 480px;
 	border-radius: 6px;
 	margin-bottom: 12px;
-}
-
-.mainbtnimg {
-	background: #ffffff;
-	pointer-events: none;
-	width: 320px;
-	height: 480px;
-	opacity: 1;
-	z-index: 2;
 }
 
 .load-pic {
@@ -154,13 +117,4 @@
 	padding: 30px;
 	border: 1px dashed #6318af;
 	border-radius: 6px;
-}
-
-input[type='file'] {
-	opacity: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
 }
