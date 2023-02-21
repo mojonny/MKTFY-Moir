@@ -88,31 +88,30 @@ export default function CreateListing() {
 									</div>
 								</div>
 							</div>
+						</div>
+						<div className="listing-info-container">
+							<div className="listing-info-container1">
+								<div>
+									<label>Product name</label>
+									<br />
 
-							<div className="listing-info-container">
-								<div className="listing-info-container1">
-									<div>
-										<label>Product name</label>
-										<br />
-
-										<input
-											className="create-listing-categories"
-											placeholder="Insert product name"
-										/>
-									</div>
-									<div>
-										<label>Description</label>
-										<br />
-										<textarea
-											className="description-text-area"
-											className="description-text-area"
-											placeholder="Insert you description"
-										></textarea>
-									</div>
-									<div>
-										<label>Category</label>
-										<br />
-										<select className="create-listing-categories">
+									<input
+										className="create-listing-categories"
+										placeholder="Insert product name"
+									/>
+								</div>
+								<div>
+									<label>Description</label>
+									<br />
+									<textarea
+										className="description-text-area"
+										placeholder="Insert you description"
+									></textarea>
+								</div>
+								<div>
+									<label>Category</label>
+									<br />
+									<div className="create-listing-categories">
 										<select className="create-listing-categories">
 											<option>All</option>
 											<option>Cars & Vehicles</option>
@@ -153,36 +152,38 @@ export default function CreateListing() {
 									/>
 								</div>
 								<div>
-								<div>
 									<div>
-										<label>City</label>
-										<br />
-										<select className="create-listing-categories">
-										<select className="create-listing-categories">
-											<option>Calgary</option>
-											<option>Brooks</option>
-											<option>Camrose</option>
-										</select>
+										<div>
+											<label>City</label>
+											<br />
+											<div className="create-listing-categories">
+												<select className="create-listing-categories">
+													<option>Calgary</option>
+													<option>Brooks</option>
+													<option>Camrose</option>
+												</select>
+											</div>
+										</div>
+
+										<button
+											onClick={navigateHome}
+											disabled={isLoading}
+											className="post-button"
+										>
+											{isLoading ? <Success /> : navigateHome}
+											Post your offer
+										</button>
+
+										<button
+											onClick={navigateHome}
+											disabled={isLoading}
+											className="cancel-listing-button"
+										>
+											{isLoading ? <Success /> : navigateHome}
+											Cancel
+										</button>
 									</div>
 								</div>
-
-								<button
-									onClick={navigateHome}
-									disabled={isLoading}
-									className="post-button"
-								>
-									{isLoading ? <Success /> : navigateHome}
-									Post your offer
-								</button>
-
-								<button
-									onClick={navigateHome}
-									disabled={isLoading}
-									className="cancel-listing-button"
-								>
-									{isLoading ? <Success /> : navigateHome}
-									Cancel
-								</button>
 							</div>
 						</div>
 					</form>

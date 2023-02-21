@@ -1,11 +1,30 @@
 .mini-slider1 {
+	height: 485px;
+	/* width: 810px; */
+	width: 90%;
+	background: #ffffff;
+	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
-	gap: 45px;
+	justify-content: space-evenly;
+	gap: 40px;
+	padding: 40px 30px 40px 30px;
 }
 
 .cat-pics {
 	display: flex;
 	flex-direction: row;
 	gap: 20px;
+}
+
+.cat-image {
+	height: 265px;
+	width: 235px;
+	border-radius: 10px;
+}
+
+.bottom-explore-link {
+	text-align: right;
+	color: #9349de;
+	padding: 0px 0px 40px 0px;
 }
