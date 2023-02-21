@@ -17,27 +17,70 @@ export default function CreateListing() {
 					<form>
 						<div className="create-listing-landing">
 							<div className="listing-image-box">
-								<img
-									src={loadImg}
-									alt="main-listing-pic"
-									className="main-listing-img"
-								/>
+								<div>
+									<div class="mainbtnimg">
+										<img
+											src={loadImg}
+											alt="main-listing-pic"
+											className="main-listing-img"
+										/>
+									</div>
+									<input type="file" />
+								</div>
 
 								<div className="mini-image-box">
-									<img src={loadBigCam} className="load-pic" alt="upload-pic" />
-									<img src={loadBigCam} className="load-pic" alt="upload-pic" />
-									<img src={loadBigCam} className="load-pic" alt="upload-pic" />
-									<img src={loadBigCam} className="load-pic" alt="upload-pic" />
+									<div class="wrapper">
+										<div class="btnimg">
+											<img
+												src={loadBigCam}
+												className="load-pic"
+												alt="upload-pic"
+											/>
+										</div>
+										<input type="file" />
+									</div>
+
+									<div class="wrapper">
+										<div class="btnimg">
+											<img
+												src={loadBigCam}
+												className="load-pic"
+												alt="upload-pic"
+											/>
+										</div>
+										<input type="file" />
+									</div>
+									<div class="wrapper">
+										<div class="btnimg">
+											<img
+												src={loadBigCam}
+												className="load-pic"
+												alt="upload-pic"
+											/>
+										</div>
+										<input type="file" />
+									</div>
+									<div class="wrapper">
+										<div class="btnimg">
+											<img
+												src={loadBigCam}
+												className="load-pic"
+												alt="upload-pic"
+											/>
+										</div>
+										<input type="file" />
+									</div>
 								</div>
 							</div>
 
 							<div className="listing-info-container">
-								<div>
+								<div className="listing-info-container1">
 									<div>
 										<label>Product name</label>
 										<br />
+
 										<input
-											className="account-input"
+											className="create-listing-categories"
 											placeholder="Insert product name"
 										/>
 									</div>
@@ -45,14 +88,14 @@ export default function CreateListing() {
 										<label>Description</label>
 										<br />
 										<textarea
-											className="account-input"
+											className="description-text-area"
 											placeholder="Insert you description"
 										></textarea>
 									</div>
 									<div>
 										<label>Category</label>
 										<br />
-										<select>
+										<select className="create-listing-categories">
 											<option>All</option>
 											<option>Cars & Vehicles</option>
 											<option>Furniture</option>
@@ -60,24 +103,26 @@ export default function CreateListing() {
 											<option>Real estate</option>
 										</select>
 									</div>
-									<div>
-										<label>Condition</label>
-										<br />
-										<select>
-											<option>New - unused</option>
-											<option>Used - excellent</option>
-											<option>Used - good</option>
-											<option>Used - fair</option>
-											<option>Used - still functional</option>
-										</select>
-									</div>
-									<div>
-										<label>Price</label>
-										<br />
-										<input
-											className="account-input"
-											placeholder="type the price"
-										/>
+									<div className="condition-price-box">
+										<div>
+											<label>Condition</label>
+											<br />
+											<select className="condition-input">
+												<option>New - unused</option>
+												<option>Used - excellent</option>
+												<option>Used - good</option>
+												<option>Used - fair</option>
+												<option>Used - still functional</option>
+											</select>
+										</div>
+										<div>
+											<label>Price</label>
+											<br />
+											<input
+												className="price-input"
+												placeholder="Type the price"
+											/>
+										</div>
 									</div>
 								</div>
 
@@ -85,15 +130,15 @@ export default function CreateListing() {
 									<label>Address</label>
 									<br />
 									<input
-										className="account-input"
+										className="create-listing-categories"
 										placeholder="123 1st Street SW"
 									/>
 								</div>
-								<div className="city-province">
+								<div>
 									<div>
 										<label>City</label>
 										<br />
-										<select>
+										<select className="create-listing-categories">
 											<option>Calgary</option>
 											<option>Brooks</option>
 											<option>Camrose</option>
