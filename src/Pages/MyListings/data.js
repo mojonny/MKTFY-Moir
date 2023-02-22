@@ -5,7 +5,7 @@ export const listings = [
 		id: 0,
 		date: 'September 07,2020',
 		title: 'Pearl The Cat: Toy Edition',
-		status: 'draft',
+		status: 'active',
 		price: '$340.00',
 
 		src: 'https://images.pexels.com/photos/1056251/pexels-photo-1056251.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',

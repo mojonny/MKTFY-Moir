@@ -7,7 +7,7 @@ import { getListings, filterListings } from '../../Services/services';
 
 export default function MyListings() {
 	const [filteredListings, setFilteredListings] = useState(null);
-	const [activeItems, setActiveItems] = useState('AVAILABLE ITEMS');
+
 	const [buttonClass, setButtonClass] = useState('inactive-button');
 	const [buttonClass1, setButtonClass1] = useState('inactive-button');
 
@@ -26,17 +26,12 @@ export default function MyListings() {
 			//change button style onClick
 			setButtonClass('active-button');
 			setButtonClass1('inactive-button');
-
-			//Show available items heading
-			setActiveItems('AVAILABLE ITEMS');
 		} else if (typeListing === 'sold') {
 			setFilteredListings(filterListings(typeListing));
 			setButtonClass1('active-button');
 			setButtonClass('inactive-button');
-			setActiveItems('');
 		} else {
 			setFilteredListings(getListings());
-			setActiveItems('');
 		}
 	}
 
@@ -47,7 +42,9 @@ export default function MyListings() {
 					<div>
 						Deals for you <img src={breadArrow} alt="path-arrow" /> My Listings
 					</div>
+					<br />
 					<h1> My listings</h1>
+					<br />
 					<div className="active-sold-labels">
 						<button
 							onClick={handleListings}
@@ -66,30 +63,27 @@ export default function MyListings() {
 					</div>
 				</div>
 				<div>
-					<h2>{activeItems}</h2>
-					<div>
-						<div className="all-listings">
-							{filteredListings &&
-								filteredListings.map((type) => (
-									<ul className="listing-item-box" key={type.id}>
-										<li className="listing-landing">
-											<div className="listing-item-box">
-												<img
-													className="listing-pic"
-													src={type.src}
-													alt="listing img"
-												/>
-												<div className="listing-item-detail">
-													<p>{type.date}</p>
+					<div className="all-listings">
+						{filteredListings &&
+							filteredListings.map((type) => (
+								<ul className="listing-item-box" key={type.id}>
+									<li className="listing-landing">
+										<div className="listing-item-box">
+											<img
+												className="listing-pic"
+												src={type.src}
+												alt="listing img"
+											/>
+											<div className="listing-item-detail">
+												<p>{type.date}</p>
 
-													<h4>{type.title}</h4>
-													<h4>{type.price}</h4>
-												</div>
+												<h4>{type.title}</h4>
+												<h4>{type.price}</h4>
 											</div>
-										</li>
-									</ul>
-								))}
-						</div>
+										</div>
+									</li>
+								</ul>
+							))}
 					</div>
 				</div>
 			</div>
