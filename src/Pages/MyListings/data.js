@@ -1,3 +1,5 @@
+//Might need to stringify or transpile to JSON?
+
 export const listings = [
 	{
 		id: 0,

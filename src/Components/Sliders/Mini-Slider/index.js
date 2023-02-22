@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import catDonut from '../../assets/catBreakfast.png';
+import catDonut from '../../../assets/catBreakfast.png';
 import './index.css';
 
 const Title = 'Shop Pearls & Pearls';
