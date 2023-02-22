@@ -37,6 +37,7 @@ export default function CreateListing() {
 								src={loadImg}
 								alt="main-listing-pic"
 								className="main-listing-img"
+								required
 							/>
 
 							<div className="mini-image-box">
@@ -58,6 +59,7 @@ export default function CreateListing() {
 								<input
 									className="create-listing-categories"
 									placeholder="Insert product name"
+									required
 								/>
 							</div>
 							<div>
@@ -66,13 +68,17 @@ export default function CreateListing() {
 								<textarea
 									className="description-text-area"
 									placeholder="Insert you description"
-								></textarea>
+									required
+								/>
 							</div>
 							<div>
 								<label>Category</label>
 								<br />
 								<div>
-									<select className="create-listing-categories">
+									<select required className="create-listing-categories">
+										<option value="" disabled selected hidden>
+											Choose your Category
+										</option>
 										<option>All</option>
 										<option>Cars & Vehicles</option>
 										<option>Furniture</option>
@@ -85,18 +91,25 @@ export default function CreateListing() {
 								<div>
 									<label>Condition</label>
 									<br />
-									<select className="condition-input">
+									<select className="condition-input" required>
+										<option value="" disabled selected hidden>
+											Select condition
+										</option>
 										<option>New - unused</option>
 										<option>Used - excellent</option>
 										<option>Used - good</option>
 										<option>Used - fair</option>
-										<option>Used - still functional</option>
+										<option>Used - my trash=your treasure?</option>
 									</select>
 								</div>
 								<div>
 									<label>Price</label>
 									<br />
-									<input className="price-input" placeholder="type the price" />
+									<input
+										className="price-input"
+										placeholder="Type the price"
+										required
+									/>
 								</div>
 							</div>
 							<div>
@@ -104,7 +117,8 @@ export default function CreateListing() {
 								<br />
 								<input
 									className="create-listing-categories"
-									placeholder="123 1st Street SW"
+									placeholder="Insert your address"
+									required
 								/>
 							</div>
 
@@ -112,7 +126,10 @@ export default function CreateListing() {
 								<label>City</label>
 								<br />
 								<div>
-									<select className="create-listing-categories">
+									<select className="create-listing-categories" required>
+										<option value="" disabled selected hidden>
+											Select your city
+										</option>
 										<option>Calgary</option>
 										<option>Brooks</option>
 										<option>Camrose</option>

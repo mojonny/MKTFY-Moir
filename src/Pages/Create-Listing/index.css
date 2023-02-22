@@ -74,6 +74,11 @@
 	border: solid #e2e2e2 1px;
 	resize: none;
 	overflow: scroll;
+	color: #4d4d4d;
+}
+
+.description-text-area::placeholder {
+	color: #4d4d4d;
 }
 
 .description-text-area::-webkit-scrollbar {
@@ -86,6 +91,15 @@
 	border-radius: 4px;
 	border: solid #e2e2e2 1px;
 	padding: 14px 10px 14px 10px;
+	color: #4d4d4d;
+}
+
+.create-listing-categories:invalid {
+	color: rgba(77, 77, 77, 0.4);
+}
+
+.create-listing-categories::placeholder {
+	color: rgba(77, 77, 77, 0.4);
 }
 
 .condition-input,
@@ -95,6 +109,15 @@
 	border-radius: 4px;
 	border: solid #e2e2e2 1px;
 	padding: 14px 10px 14px 10px;
+	color: #4d4d4d;
+}
+
+.condition-input:invalid {
+	color: rgba(77, 77, 77, 0.4);
+}
+
+.price-input::placeholder {
+	color: rgba(77, 77, 77, 0.4);
 }
 
 .condition-price-box {
