@@ -1,6 +1,7 @@
 .login-form {
 	display: flex;
 	flex-direction: column;
+	gap: 30px;
 }
 
 .darkBG {
@@ -19,16 +20,19 @@
 	left: 50%;
 	top: 50%;
 	width: 810px;
+	height: 615px;
 	transform: translate(-50%, -50%);
 	background-color: #ffffff;
 	border-radius: 10px;
 	display: flex;
 	flex-direction: column;
-	padding: 25px 25px 75px 25px;
+
+	padding: 100px 133px 100px 133px;
 }
 
-.close-button2 {
-	background: none;
+.close-button-login {
 	border: none;
-	margin-left: auto;
+	background: none;
+	position: fixed;
+	transform: translate(620px, -75px);
 }

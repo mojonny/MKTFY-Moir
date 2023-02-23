@@ -12,7 +12,7 @@
 .password-modal-container {
 	padding: 25px;
 	width: 810px;
-	height: 875px;
+
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -30,6 +30,7 @@
 .text-area {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	gap: 30px;
 	padding: 0px 50px 100px 50px;
 }

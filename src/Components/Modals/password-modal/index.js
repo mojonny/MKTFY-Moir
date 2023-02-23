@@ -41,7 +41,9 @@ export default function PasswordModal({ setSignupPage }) {
 					</button>
 				</div>
 				<div className="text-area">
-					<h2 style={{ textAlign: 'center' }}>Create Password</h2>
+					<h1 style={{ textAlign: 'center', color: 'rgba(147, 73, 222, 1)' }}>
+						Create Password
+					</h1>
 					<h3>
 						The password must have at least 6 characters and must contain 1
 						uppercase and 1 number.

@@ -3,12 +3,19 @@ body {
 	border-radius: 10px;
 }
 
-.cancel-button {
+.cancel-button-create {
 	position: fixed;
-	transform: translate(3150%, 0px);
+	transform: translate(2900%, 0px);
+	padding-top: 16px;
+	border: none;
+	background: none;
 }
 
-.form-container {
+.form-container-create {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: 24px;
 	padding: 0px 0px 0px 110px;
 	width: 100%;
 	height: 100%;
@@ -85,13 +92,13 @@ body {
 	transition: 0.7s;
 }
 
-.create-modal {
+.create-modal1 {
 	position: absolute;
 	left: 50%;
 	top: 40%;
 	transform: translate(-50%, -50%);
-	width: 1500px;
-	height: 600px;
+	width: 1400px;
+	height: 705px;
 
 	background: #ffffff;
 	border-radius: 10px;

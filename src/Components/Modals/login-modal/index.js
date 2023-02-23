@@ -28,17 +28,15 @@ export default function LoginModal({ setLoginPage }) {
 				open={true}
 				onClick={(e) => e.stopPropagation()}
 			>
-				<button className="close-button2" onClick={() => setLoginPage(0)}>
+				<button className="close-button-login" onClick={() => setLoginPage(0)}>
 					<img src={greyX} alt="close" />
 				</button>
 				<div className="login-form">
-					<h2 style={{ textAlign: 'center' }}>Welcome back!</h2>
+					<h1 style={{ textAlign: 'center', color: 'rgba(147, 73, 222, 1)' }}>
+						Welcome back!
+					</h1>
 
-					<label
-						style={{
-							paddingLeft: '50px',
-						}}
-					>
+					<label>
 						Email
 						<br />
 						<input
@@ -47,31 +45,26 @@ export default function LoginModal({ setLoginPage }) {
 							className="input-style2"
 						/>
 					</label>
-					<br />
-					<label
-						className="password"
-						style={{
-							paddingLeft: '50px',
-						}}
-					>
+
+					<label className="password">
 						Password
 						<PasswordShowHide />
 					</label>
-					<br />
+
 					<button
 						onClick={() => setLoginPage(2)}
 						style={{
 							textAlign: 'right',
 							color: '#FFBA00',
 							textDecoration: 'none',
-							paddingRight: '50px',
+
 							backgroundColor: '#ffffff',
 							border: 'none',
 						}}
 					>
 						Forgot password
 					</button>
-					<br />
+
 					<button
 						onClick={navigateHome}
 						disabled={isLoading}
