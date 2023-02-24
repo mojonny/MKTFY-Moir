@@ -1,14 +1,17 @@
 import React from 'react';
-
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import VerticalSlider from '../../Components/Sliders/Vertical-Slider';
 import listingIcon from '../../assets/listingTag.png';
-import mainImage from '../../assets/mainCat.png';
+
+import catSide from '../../assets/catToyedition.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function Product() {
+	const [mainImage, setMainImage] = useState(catSide);
+	console.log(mainImage);
 	const navigate = useNavigate();
 
 	const navigateToCheckout = () => {
@@ -25,9 +28,13 @@ export default function Product() {
 					listing
 				</div>
 				<div className="product-landing">
-					<VerticalSlider />
-
-					<img src={mainImage} alt="main-cat-pic" className="main-img" />
+					<VerticalSlider setMainImage={setMainImage} />
+					<img
+						src={mainImage}
+						alt="main-cat-pic"
+						className="main-img"
+						catSide={catSide}
+					/>
 
 					<div className="side-info-container">
 						<h1> {ProductTitle}</h1>

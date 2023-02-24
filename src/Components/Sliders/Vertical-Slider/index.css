@@ -24,6 +24,13 @@
 	border-radius: 10px;
 }
 
+.vert-cat-button {
+	border: none;
+	background: none;
+	margin: 0;
+	padding: 0;
+}
+
 .vert-down-arrow {
 	-webkit-transform: rotate(180deg);
 	-moz-transform: rotate(180deg);
