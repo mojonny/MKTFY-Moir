@@ -130,8 +130,14 @@
 .main-listing-img {
 	height: 320px;
 	width: 480px;
+	object-fit: inherit;
 	border-radius: 6px;
 	margin-bottom: 12px;
+	cursor: pointer;
+}
+
+input[type='file'] {
+	display: none;
 }
 
 .load-pic {
