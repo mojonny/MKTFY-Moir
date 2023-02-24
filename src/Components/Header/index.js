@@ -44,23 +44,17 @@ export default function Header() {
 				</div>
 			</div>
 
-			<div>
-				<ul className="categories">
-					<li>
-						<img
-							alt="drop-down"
-							src={hamburger}
-							style={{ paddingRight: '15px' }}
-						/>
-						Categories
-					</li>
-					<li>Deals</li>
-					<li>Cars & Vehicles</li>
-					<li>Furniture</li>
-					<li>Electronics</li>
-					<li>Real Estate</li>
-				</ul>
-			</div>
+			<ul className="search-bar-categories">
+				<li>
+					<img alt="drop-down" src={hamburger} />
+					{'\xa0'.repeat(2)}Categories
+				</li>
+				<li>Deals</li>
+				<li>Cars & Vehicles</li>
+				<li>Furniture</li>
+				<li>Electronics</li>
+				<li>Real Estate</li>
+			</ul>
 		</div>
 	);
 }

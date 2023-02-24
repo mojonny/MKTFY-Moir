@@ -1,7 +1,8 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import UploadImage from '../../Components/UploadImage';
 import Success from '../../Components/Success';
 
 import loadImg from '../../assets/LoadImg.svg';
@@ -22,24 +23,27 @@ export default function CreateListing() {
 		}, 2000);
 	};
 
-	//A way to upload the images
-	const [images, setImages] = useState([]);
-	console.log(images);
+	// const [showDefaultImg, setShowDefaultImg] = useState(true);
 
-	//A way to upload images
-	const [imageURLs, setImageURLs] = useState([]);
+	// //A way to upload the images
+	// const [images, setImages] = useState([]);
+	// console.log(images);
 
-	useEffect(() => {
-		if (images.length < 1) return;
-		const newImageUrls = [];
-		images.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
-		setImageURLs(newImageUrls);
-	}, [images]);
+	// //A way to upload images
+	// const [imageURLs, setImageURLs] = useState([]);
 
-	function onImageChange(e) {
-		setImages([...e.target.files]);
-		console.log(setImages);
-	}
+	// useEffect(() => {
+	// 	if (images.length < 1) return;
+	// 	const newImageUrls = [];
+	// 	images.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
+	// 	setImageURLs(newImageUrls);
+	// }, [images]);
+
+	// function onImageChange(e) {
+	// 	setImages([...e.target.files]);
+	// 	setShowDefaultImg(false);
+	// 	console.log(setImages);
+	// }
 
 	return (
 		<>
@@ -52,13 +56,15 @@ export default function CreateListing() {
 				<form>
 					<div className="create-listing-landing">
 						<div className="listing-image-box">
-							<label>
-								<img
-									src={loadImg}
-									alt="main-listing-pic"
-									className="main-listing-img"
-									images={images}
-								/>
+							{/* <label>
+								{showDefaultImg && (
+									<img
+										src={loadImg}
+										alt="main-listing-pic"
+										className="main-listing-img"
+										showDefaultImg={showDefaultImg}
+									/>
+								)}
 								<input
 									type="file"
 									multiple
@@ -66,31 +72,46 @@ export default function CreateListing() {
 									onChange={onImageChange}
 								/>
 
-								{images === [] ? (
+								{imageURLs.map((imageSrc) => (
 									<img
-										src={loadImg}
-										alt="main-listing-pic"
+										src={imageSrc}
+										alt="uploaded img"
 										className="main-listing-img"
 									/>
-								) : (
-									imageURLs.map((imageSrc) => (
-										<img
-											src={imageSrc}
-											alt="uploaded img"
-											className="main-listing-img"
-										/>
-									))
-								)}
-							</label>
+								))}
+							</label> */}
+							<UploadImage src={loadImg} />
 
 							<div className="mini-image-box">
-								<img src={loadBigCam} className="load-pic" alt="upload-pic" />
+								{/* <label>
+									{showDefaultImg && (
+										<img
+											src={loadBigCam}
+											className="load-pic"
+											alt="upload-pic"
+											showDefaultImg={showDefaultImg}
+										/>
+									)}
+									<input
+										type="file"
+										multiple
+										accept="image/*"
+										onChange={onImageChange}
+									/>
 
-								<img src={loadBigCam} className="load-pic" alt="upload-pic" />
-
-								<img src={loadBigCam} className="load-pic" alt="upload-pic" />
-
-								<img src={loadBigCam} className="load-pic" alt="upload-pic" />
+									{imageURLs.map((imageSrc1) => (
+										<img
+											src={imageSrc1}
+											alt="uploaded img"
+											className="load-pic"
+											style={{ padding: '0px', border: 'none' }}
+										/>
+									))}
+								</label> */}
+								<UploadImage src={loadBigCam} className="load-pic" />
+								<UploadImage src={loadBigCam} className="load-pic" />
+								<UploadImage src={loadBigCam} className="load-pic" />
+								<UploadImage src={loadBigCam} className="load-pic" />
 							</div>
 						</div>
 

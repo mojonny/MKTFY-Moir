@@ -23,12 +23,13 @@
 	border-radius: 8px;
 }
 
-.categories {
-	padding-left: 325px;
+.search-bar-categories {
+	padding-right: 350px;
 	color: #ffffff;
 	size: 20px;
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
 	gap: 80px;
 	list-style-type: none;
 }
