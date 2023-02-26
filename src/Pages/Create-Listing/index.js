@@ -6,7 +6,7 @@ import UploadImage from '../../Components/UploadImage';
 import Success from '../../Components/Success';
 
 import loadImg from '../../assets/LoadImg.svg';
-import loadBigCam from '../../assets/bigCamera.svg';
+import loadBigCam from '../../assets/Frame 123.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
@@ -23,27 +23,9 @@ export default function CreateListing() {
 		}, 2000);
 	};
 
-	// const [showDefaultImg, setShowDefaultImg] = useState(true);
-
-	// //A way to upload the images
-	// const [images, setImages] = useState([]);
-	// console.log(images);
-
-	// //A way to upload images
-	// const [imageURLs, setImageURLs] = useState([]);
-
-	// useEffect(() => {
-	// 	if (images.length < 1) return;
-	// 	const newImageUrls = [];
-	// 	images.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
-	// 	setImageURLs(newImageUrls);
-	// }, [images]);
-
-	// function onImageChange(e) {
-	// 	setImages([...e.target.files]);
-	// 	setShowDefaultImg(false);
-	// 	console.log(setImages);
-	// }
+	const handleSubmit = (event) => {
+		event.preventDefault();
+	};
 
 	return (
 		<>
@@ -53,65 +35,20 @@ export default function CreateListing() {
 					listing
 				</div>
 
-				<form>
+				<form onSubmit={handleSubmit}>
 					<div className="create-listing-landing">
 						<div className="listing-image-box">
-							{/* <label>
-								{showDefaultImg && (
-									<img
-										src={loadImg}
-										alt="main-listing-pic"
-										className="main-listing-img"
-										showDefaultImg={showDefaultImg}
-									/>
-								)}
-								<input
-									type="file"
-									multiple
-									accept="image/*"
-									onChange={onImageChange}
-								/>
-
-								{imageURLs.map((imageSrc) => (
-									<img
-										src={imageSrc}
-										alt="uploaded img"
-										className="main-listing-img"
-									/>
-								))}
-							</label> */}
-							<UploadImage src={loadImg} />
+							<UploadImage src={loadImg} className="main-listing-img" />
 
 							<div className="mini-image-box">
-								{/* <label>
-									{showDefaultImg && (
-										<img
-											src={loadBigCam}
-											className="load-pic"
-											alt="upload-pic"
-											showDefaultImg={showDefaultImg}
-										/>
-									)}
-									<input
-										type="file"
-										multiple
-										accept="image/*"
-										onChange={onImageChange}
-									/>
-
-									{imageURLs.map((imageSrc1) => (
-										<img
-											src={imageSrc1}
-											alt="uploaded img"
-											className="load-pic"
-											style={{ padding: '0px', border: 'none' }}
-										/>
-									))}
-								</label> */}
-								<UploadImage src={loadBigCam} className="load-pic" />
-								<UploadImage src={loadBigCam} className="load-pic" />
-								<UploadImage src={loadBigCam} className="load-pic" />
-								<UploadImage src={loadBigCam} className="load-pic" />
+								<UploadImage
+									className="load-pic"
+									style={{ border: '1px dashed #6318af' }}
+									src={loadBigCam}
+								/>
+								<UploadImage className="load-pic" src={loadBigCam} />
+								<UploadImage className="load-pic" src={loadBigCam} />
+								<UploadImage className="load-pic" src={loadBigCam} />
 							</div>
 						</div>
 

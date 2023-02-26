@@ -32,6 +32,7 @@ import ContactUs from './Pages/ContactUs';
 //In case of 404
 import NotFound from './Pages/NotFound';
 
+//Use the main layout by react-router v6
 import MainLayout from './Components/Layout';
 
 export default function App() {
