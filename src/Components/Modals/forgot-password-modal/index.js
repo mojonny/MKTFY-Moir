@@ -16,6 +16,7 @@ export default function ForgotPasswordModal({ setLoginPage }) {
 		});
 	};
 
+	//Sends the verification code to the user's email
 	const onSubmit = (event) => {
 		event.preventDefault();
 		auth.passwordlessStart(
@@ -29,7 +30,7 @@ export default function ForgotPasswordModal({ setLoginPage }) {
 					console.log(err);
 				} else {
 					console.log(resp);
-
+					sessionStorage.setItem('userEmail', user.email);
 					setLoginPage(3);
 				}
 			}

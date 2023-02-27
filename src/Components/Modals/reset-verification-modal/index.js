@@ -1,32 +1,43 @@
 import React, { useState } from 'react';
 
 import { auth } from '../../../Services/auth0.service';
-
+import { phoneNumberAutoFormat } from '../../../Utils';
 import back from '../../../assets/Arrow.png';
 import greyX from '../../../assets/GreyX.png';
 
 export default function ResetVerificationModal({ setLoginPage }) {
-	const [user, setUser] = useState({ verificationCode: '' });
+	const [valueCode, setValueCode] = useState('');
+	const [user, setUser] = useState({
+		email: sessionStorage.getItem('userEmail'),
+		verificationCode: '',
+	});
 
 	const onChangeHandler = (e) => {
+		const targetValue = phoneNumberAutoFormat(e.target.value);
+		setValueCode(targetValue);
+
 		setUser({
 			...user,
 			[e.target.name]: e.target.value,
 		});
 	};
 
+	//This checks the code then redirects the user to the homepage(skipping change pw***)
 	const onSubmit = (event) => {
 		event.preventDefault();
+
+		const userCode = user.verificationCode.replace(/-/g, '');
 
 		auth.passwordlessLogin(
 			{
 				connection: 'email',
-				email: 'moir89@hotmail.com',
-				verificationCode: user.verificationCode,
+				email: user.email,
+				verificationCode: userCode,
 			},
 			function (err, resp) {
 				if (err) {
 					console.log(err);
+					console.log(user.verificationCode);
 				} else {
 					console.log(resp);
 					setLoginPage(4);
@@ -66,12 +77,12 @@ export default function ResetVerificationModal({ setLoginPage }) {
 						Verification code
 						<br />
 						<input
-							type="number"
-							placeholder=" 00-00-00"
+							placeholder="00-00-00"
 							name="verificationCode"
-							value={user.verificationCode}
+							value={valueCode}
 							onChange={onChangeHandler}
 							className="input-style2"
+							maxLength={8}
 						/>
 					</label>
 					<button
