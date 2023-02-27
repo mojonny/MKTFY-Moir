@@ -1,25 +1,117 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { auth } from '../../../Services/auth0.service';
+import {
+	AUTH0_LOGIN_REDIRECT_URI,
+	AUTH0_LOGIN_RESPONSE_TYPE,
+	AUTH0_REALM,
+} from '../../../config';
 
-import Success from '../../Success';
-import PasswordShowHide from '../../PasswordShowHide';
-
+import eye from '../../../assets/eye.png';
+import eyeslash from '../../../assets/eye-slash.png';
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
 
+function isValidEmail(email) {
+	return RegExp(
+		'^(([^<>()[\\]\\\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\\"]+)*)|' +
+			'(\\".+\\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])' +
+			'|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'
+	).test(email);
+}
+
+function isValidPassword(password) {
+	return RegExp('^(?=.*[0-9])(?=.*[A-Z])(?!.*\\s).{6,}$').test(password);
+}
+
+// function isSixChar(password) {
+// 	return RegExp('^(?=.{6,})').test(password);
+// }
+// function isUpperCase(password) {
+// 	return RegExp('^(?=.*[A-Z])').test(password);
+// }
+// function isNumber(password) {
+// 	return RegExp('^(?=.*[0-9])').test(password);
+// }
+
 export default function LoginModal({ setLoginPage }) {
-	const [isLoading, setIsLoading] = useState(false);
+	const [user, setUser] = useState({ email: '', password: '' });
 
-	const navigate = useNavigate();
+	//validation error handling
+	const [pwError, setPwError] = useState('');
+	const [emailError, setEmailError] = useState('');
 
-	const navigateHome = () => {
-		setIsLoading(true);
-		setTimeout(() => {
-			navigate('/home');
-			setIsLoading(false);
-		}, 2000);
+	//To toggle visibility of password text
+	const [passwordType, setPasswordType] = useState('password');
+
+	useEffect(() => {
+		if (user.email) {
+			const timeoutId = setTimeout(() => {
+				if (!isValidEmail(user.email)) {
+					setEmailError('Email formatted incorrectly');
+				} else {
+					setEmailError('');
+				}
+			}, 1500);
+
+			return () => {
+				clearTimeout(timeoutId);
+			};
+		}
+	}, [user]);
+
+	useEffect(() => {
+		if (user.password) {
+			const timeoutId = setTimeout(() => {
+				if (!isValidPassword(user.password)) {
+					setPwError('Password formatted incorrectly');
+				} else {
+					setPwError('');
+				}
+			}, 1500);
+
+			return () => {
+				clearTimeout(timeoutId);
+			};
+		}
+	}, [user]);
+
+	const onChangeHandler = (e) => {
+		setUser({
+			...user,
+			[e.target.name]: e.target.value,
+		});
 	};
 
+	const onSubmit = (event) => {
+		console.log(user);
+		auth.login(
+			{
+				realm: AUTH0_REALM,
+				username: user.email,
+				password: user.password,
+				redirectUri: AUTH0_LOGIN_REDIRECT_URI,
+				responseType: AUTH0_LOGIN_RESPONSE_TYPE,
+			},
+			function (error, result) {
+				if (error) {
+					console.log('Oops! login failed.', error);
+					return;
+				} else {
+					console.log('Login success!', result);
+				}
+			}
+		);
+	};
+
+	//To change icon, change the input type
+	const togglePassword = (event) => {
+		event.preventDefault();
+		if (passwordType === 'password') {
+			setPasswordType('text');
+			return;
+		}
+		setPasswordType('password');
+	};
 	return (
 		<div className="darkBG" onClick={() => setLoginPage(0)}>
 			<div
@@ -31,7 +123,7 @@ export default function LoginModal({ setLoginPage }) {
 				<button className="close-button-login" onClick={() => setLoginPage(0)}>
 					<img src={greyX} alt="close" />
 				</button>
-				<div className="login-form">
+				<form className="login-form">
 					<h1 style={{ textAlign: 'center', color: 'rgba(147, 73, 222, 1)' }}>
 						Welcome back!
 					</h1>
@@ -40,18 +132,49 @@ export default function LoginModal({ setLoginPage }) {
 						Email
 						<br />
 						<input
+							required
 							type="email"
+							id="email"
 							placeholder=" Insert your email"
+							name="email"
+							value={user.email}
+							onChange={onChangeHandler}
 							className="input-style2"
 						/>
+						<p style={{ color: 'red' }}>{emailError}</p>
 					</label>
 
-					<label className="password">
+					<label>
 						Password
-						<PasswordShowHide />
+						<br />
+						<div className="password-eye-box">
+							<input
+								required
+								type={passwordType}
+								placeholder="Insert your password"
+								name="password"
+								id="password"
+								value={user.password}
+								onChange={onChangeHandler}
+								className="input-style2"
+							/>
+							<button className="eye-slash" onClick={togglePassword}>
+								{passwordType === 'password' ? (
+									<i>
+										<img src={eyeslash} alt="close-eye" />
+									</i>
+								) : (
+									<i>
+										<img src={eye} alt="open-eye" />
+									</i>
+								)}
+							</button>
+						</div>
+						<p style={{ color: 'red' }}>{pwError}</p>
 					</label>
 
 					<button
+						type="button"
 						onClick={() => setLoginPage(2)}
 						style={{
 							textAlign: 'right',
@@ -66,15 +189,17 @@ export default function LoginModal({ setLoginPage }) {
 					</button>
 
 					<button
-						onClick={navigateHome}
-						disabled={isLoading}
-						className="login-button"
-						style={{ alignSelf: 'center' }}
+						type="button"
+						id="login-button"
+						onClick={onSubmit}
+						className="login-modal-button"
+						disabled={
+							!isValidPassword(user.password) || !isValidEmail(user.email)
+						}
 					>
-						{isLoading ? <Success /> : navigateHome}
 						Login
 					</button>
-				</div>
+				</form>
 			</div>
 		</div>
 	);

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
-import Success from '../../Success';
-import PasswordShowHide from '../../PasswordShowHide';
+import { auth } from '../../../Services/auth0.service';
+import { AUTH0_REALM } from '../../../config';
+import { Link } from 'react-router-dom';
 
 import checkmark from '../../../assets/Checkmark.png';
 import greyX from '../../../assets/GreyX.png';
@@ -11,17 +11,32 @@ import back from '../../../assets/Arrow.png';
 import './index.css';
 
 export default function PasswordModal({ setSignupPage }) {
-	const [isLoading, setIsLoading] = useState(false);
+	const [user, setUser] = useState({ email: '', password: '' });
 
-	const navigate = useNavigate();
+	const onChangeHandler = (e) => {
+		setUser({
+			...user,
+			[e.target.name]: e.target.value,
+		});
+	};
 
-	const navigateToPortal = () => {
-		setIsLoading(true);
-		setTimeout(() => {
-			navigate('/');
-			setIsLoading(false);
-			setSignupPage(0);
-		}, 2000);
+	const onSubmit = (event) => {
+		event.preventDefault();
+		auth.signup(
+			{
+				email: user.email,
+				password: user.password,
+				connection: AUTH0_REALM,
+			},
+			function (error, result) {
+				if (error) {
+					console.log('Oops! Registration failed.', error);
+					return;
+				} else {
+					console.log('User registered!', result);
+				}
+			}
+		);
 	};
 
 	return (
@@ -40,10 +55,24 @@ export default function PasswordModal({ setSignupPage }) {
 						<img src={greyX} alt="close" />
 					</button>
 				</div>
-				<div className="text-area">
+				<form className="text-area">
 					<h1 style={{ textAlign: 'center', color: 'rgba(147, 73, 222, 1)' }}>
 						Create Password
 					</h1>
+
+					<label>
+						Email
+						<br />
+						<input
+							type="email"
+							placeholder=" Insert your email"
+							name="email"
+							value={user.email}
+							onChange={onChangeHandler}
+							className="input-style2"
+						/>
+					</label>
+
 					<h3>
 						The password must have at least 6 characters and must contain 1
 						uppercase and 1 number.
@@ -51,12 +80,14 @@ export default function PasswordModal({ setSignupPage }) {
 
 					<label className="password">
 						Password
-						<PasswordShowHide />
-					</label>
-
-					<label className="password">
-						Password
-						<PasswordShowHide />
+						<input
+							type="password"
+							placeholder="Insert your password"
+							name="password"
+							value={user.password}
+							onChange={onChangeHandler}
+							className="input-style2"
+						/>
 					</label>
 
 					<div className="requirement-box">
@@ -92,15 +123,10 @@ export default function PasswordModal({ setSignupPage }) {
 						</div>
 					</div>
 
-					<button
-						onClick={navigateToPortal}
-						disabled={isLoading}
-						className="create-button2"
-					>
-						{isLoading ? <Success /> : navigateToPortal}
+					<button type="button" onClick={onSubmit} className="create-button2">
 						Create account
 					</button>
-				</div>
+				</form>
 			</div>
 		</div>
 	);

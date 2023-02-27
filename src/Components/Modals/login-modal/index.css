@@ -36,3 +36,19 @@
 	position: fixed;
 	transform: translate(620px, -75px);
 }
+
+.login-modal-button {
+	color: #ffffff;
+	background: rgba(255, 186, 0, 1);
+	box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.15);
+	border: none;
+	border-radius: 100px;
+	height: 64px;
+	width: 345px;
+	align-self: center;
+	transition: background 0.9s ease-in-out;
+}
+
+.login-modal-button:disabled {
+	background: rgba(217, 217, 217, 1);
+}

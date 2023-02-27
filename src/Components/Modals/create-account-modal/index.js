@@ -12,7 +12,7 @@ export default function CreateModal({ setSignupPage }) {
 				open={true}
 				onClick={(e) => e.stopPropagation()}
 			>
-				<div className="form-container-create">
+				<form className="form-container-create">
 					<button
 						className="cancel-button-create"
 						onClick={() => setSignupPage(0)}
@@ -136,7 +136,7 @@ export default function CreateModal({ setSignupPage }) {
 							only buy, sell or donate your stuff here at MKTFY.{' '}
 						</p>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	);

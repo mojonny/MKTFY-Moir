@@ -1,10 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import { auth } from '../../../Services/auth0.service';
 
 import back from '../../../assets/Arrow.png';
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
 
 export default function ForgotPasswordModal({ setLoginPage }) {
+	const [user, setUser] = useState({ email: '' });
+
+	const onChangeHandler = (e) => {
+		setUser({
+			...user,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const onSubmit = (event) => {
+		event.preventDefault();
+
+		auth.passwordlessStart(
+			{
+				connection: 'email',
+				send: 'code',
+				email: user.email,
+			},
+			function (err, resp) {
+				if (err) {
+					console.log(err);
+				} else {
+					console.log(resp);
+					setLoginPage(3);
+				}
+			}
+		);
+	};
+
 	return (
 		<div className="darkBG" onClick={() => setLoginPage(0)}>
 			<div
@@ -35,11 +66,19 @@ export default function ForgotPasswordModal({ setLoginPage }) {
 						<input
 							type="email"
 							placeholder=" Insert your email"
+							name="email"
+							value={user.email}
+							onChange={onChangeHandler}
 							className="input-style2"
 						/>
 					</label>
 
-					<button className="create-button2" onClick={() => setLoginPage(3)}>
+					<button
+						className="create-button2"
+						button
+						type="button"
+						onClick={onSubmit}
+					>
 						Submit
 					</button>
 				</div>
