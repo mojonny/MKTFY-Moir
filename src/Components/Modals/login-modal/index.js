@@ -6,6 +6,8 @@ import {
 	AUTH0_REALM,
 } from '../../../config';
 
+import Success from '../../../Components/Success';
+
 import eye from '../../../assets/eye.png';
 import eyeslash from '../../../assets/eye-slash.png';
 import greyX from '../../../assets/GreyX.png';
@@ -34,6 +36,9 @@ function isValidPassword(password) {
 // }
 
 export default function LoginModal({ setLoginPage }) {
+	//Show lottie when loading and moving to success
+	const [isLoading, setIsLoading] = useState(false);
+
 	const [user, setUser] = useState({ email: '', password: '' });
 
 	//validation error handling
@@ -83,24 +88,28 @@ export default function LoginModal({ setLoginPage }) {
 	};
 
 	const onSubmit = (event) => {
-		console.log(user);
-		auth.login(
-			{
-				realm: AUTH0_REALM,
-				username: user.email,
-				password: user.password,
-				redirectUri: AUTH0_LOGIN_REDIRECT_URI,
-				responseType: AUTH0_LOGIN_RESPONSE_TYPE,
-			},
-			function (error, result) {
-				if (error) {
-					console.log('Oops! login failed.', error);
-					return;
-				} else {
-					console.log('Login success!', result);
+		event.preventDefault();
+		setIsLoading(true);
+		setTimeout(() => {
+			auth.login(
+				{
+					realm: AUTH0_REALM,
+					username: user.email,
+					password: user.password,
+					redirectUri: AUTH0_LOGIN_REDIRECT_URI,
+					responseType: AUTH0_LOGIN_RESPONSE_TYPE,
+				},
+				function (error, result) {
+					if (error) {
+						console.log('Oops! login failed.', error);
+						return;
+					} else {
+						setIsLoading(false);
+						console.log('Login success!', result);
+					}
 				}
-			}
-		);
+			);
+		}, 3000);
 	};
 
 	//To change icon, change the input type
@@ -194,9 +203,12 @@ export default function LoginModal({ setLoginPage }) {
 						onClick={onSubmit}
 						className="login-modal-button"
 						disabled={
-							!isValidPassword(user.password) || !isValidEmail(user.email)
+							isLoading ||
+							!isValidPassword(user.password) ||
+							!isValidEmail(user.email)
 						}
 					>
+						{isLoading ? <Success /> : onSubmit}
 						Login
 					</button>
 				</form>

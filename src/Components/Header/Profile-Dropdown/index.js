@@ -3,11 +3,17 @@ import { Link } from 'react-router-dom';
 
 import { auth } from '../../../Services/auth0.service';
 import { AUTH0_CLIENT_ID } from '../../../config';
+
+import Success from '../../../Components/Success';
+
 import logout from '../../../assets/LogOut.png';
 import dropArrow from '../../../assets/DownArrow.png';
 import './index.css';
 
 export default function Dropdown() {
+	//Show lottie when loading and moving to success
+	const [isLoading, setIsLoading] = useState(false);
+
 	const [isDropOpen3, setIsDropOpen3] = useState(false);
 
 	const dropMenu3 = useRef(null);
@@ -36,10 +42,14 @@ export default function Dropdown() {
 	};
 
 	const onSubmit = (e) => {
-		auth.logout({
-			returnTo: 'http://localhost:3000/',
-			clientID: AUTH0_CLIENT_ID,
-		});
+		setIsLoading(true);
+		setTimeout(() => {
+			setIsLoading(false);
+			auth.logout({
+				returnTo: 'http://localhost:3000/',
+				clientID: AUTH0_CLIENT_ID,
+			});
+		}, 3000);
 	};
 
 	return (
@@ -118,6 +128,7 @@ export default function Dropdown() {
 									type="button"
 									onClick={onSubmit}
 									className="bottom-drop-links"
+									disabled={isLoading}
 								>
 									<h2>Sign out</h2>
 									<img
@@ -125,6 +136,7 @@ export default function Dropdown() {
 										src={logout}
 										alt="logout"
 									/>
+									{isLoading ? <Success /> : onSubmit}
 								</button>
 							</div>
 						</div>
