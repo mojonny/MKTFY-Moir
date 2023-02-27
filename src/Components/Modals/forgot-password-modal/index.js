@@ -18,7 +18,6 @@ export default function ForgotPasswordModal({ setLoginPage }) {
 
 	const onSubmit = (event) => {
 		event.preventDefault();
-
 		auth.passwordlessStart(
 			{
 				connection: 'email',
@@ -30,6 +29,7 @@ export default function ForgotPasswordModal({ setLoginPage }) {
 					console.log(err);
 				} else {
 					console.log(resp);
+
 					setLoginPage(3);
 				}
 			}
