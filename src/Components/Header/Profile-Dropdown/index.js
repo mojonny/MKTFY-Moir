@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
+import { auth } from '../../../Services/auth0.service';
+import { AUTH0_CLIENT_ID } from '../../../config';
 import logout from '../../../assets/LogOut.png';
 import dropArrow from '../../../assets/DownArrow.png';
 import './index.css';
@@ -31,6 +33,13 @@ export default function Dropdown() {
 
 	const handleClick = (e) => {
 		setIsDropOpen3(false);
+	};
+
+	const onSubmit = (e) => {
+		auth.logout({
+			returnTo: 'http://localhost:3000/',
+			clientID: AUTH0_CLIENT_ID,
+		});
 	};
 
 	return (
@@ -105,14 +114,18 @@ export default function Dropdown() {
 								</Link>
 							</div>
 							<div>
-								<Link className="bottom-drop-links" to="/">
-									<h3>Sign out</h3>
+								<button
+									type="button"
+									onClick={onSubmit}
+									className="bottom-drop-links"
+								>
+									<h2>Sign out</h2>
 									<img
 										style={{ objectFit: 'contain' }}
 										src={logout}
 										alt="logout"
 									/>
-								</Link>
+								</button>
 							</div>
 						</div>
 					</div>

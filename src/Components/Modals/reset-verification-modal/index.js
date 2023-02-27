@@ -8,14 +8,16 @@ import greyX from '../../../assets/GreyX.png';
 export default function ResetVerificationModal({ setLoginPage }) {
 	const [valueCode, setValueCode] = useState('');
 	const [user, setUser] = useState({
+		//get the email stored from previous modal
 		email: sessionStorage.getItem('userEmail'),
 		verificationCode: '',
 	});
 
 	const onChangeHandler = (e) => {
+		//format the input to have dash between number pairs
 		const targetValue = phoneNumberAutoFormat(e.target.value);
 		setValueCode(targetValue);
-
+		//set user info for auth0
 		setUser({
 			...user,
 			[e.target.name]: e.target.value,
@@ -26,21 +28,21 @@ export default function ResetVerificationModal({ setLoginPage }) {
 	const onSubmit = (event) => {
 		event.preventDefault();
 
+		// format the code to remove dashes
 		const userCode = user.verificationCode.replace(/-/g, '');
 
 		auth.passwordlessLogin(
 			{
 				connection: 'email',
+				//use the email from session storage
 				email: user.email,
 				verificationCode: userCode,
 			},
 			function (err, resp) {
 				if (err) {
 					console.log(err);
-					console.log(user.verificationCode);
 				} else {
 					console.log(resp);
-					setLoginPage(4);
 				}
 			}
 		);

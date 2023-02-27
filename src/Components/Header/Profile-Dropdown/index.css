@@ -33,11 +33,14 @@
 	color: #313131;
 	font-weight: 400;
 	box-shadow: inset 0 0 0 0 #6318af;
+	border-radius: 10px;
+	padding-left: 2px;
 	transition: color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
 }
 
 .drop-nav-links:hover {
 	box-shadow: inset 300px 0 0 0 #f7f7f7;
+	border-radius: 10px;
 	overflow: hidden;
 	color: #6318af;
 }
@@ -45,8 +48,18 @@
 .bottom-drop-links {
 	display: flex;
 	justify-content: space-between;
+	width: 100%;
+	align-items: center;
 	text-decoration: none;
 	color: #ff3131;
+	border: none;
+	background: none;
+}
+
+.bottom-drop-links:hover {
+	transition: color 0.5s ease-in-out, box-shadow 0.5s ease-in-out;
+	overflow: hidden;
+	color: #6318af;
 }
 
 .profile-icon {
