@@ -1,17 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { auth } from '../../../Services/auth0.service';
 import { AUTH0_REALM } from '../../../config';
 import { Link } from 'react-router-dom';
 
-import checkmark from '../../../assets/Checkmark.png';
+import eye from '../../../assets/eye.png';
+import eyeslash from '../../../assets/eye-slash.png';
+import Checkmark from '../../../assets/Checkmark.svg';
+import CheckmarkGrey from '../../../assets/CheckmarkGrey.svg';
 import greyX from '../../../assets/GreyX.png';
 import back from '../../../assets/Arrow.png';
 
 import './index.css';
 
+function isSixChar(password) {
+	return RegExp('^(?=.{6,})').test(password);
+}
+function isUpperCase(password) {
+	return RegExp('^(?=.*[A-Z])').test(password);
+}
+function isNumber(password) {
+	return RegExp('^(?=.*[0-9])').test(password);
+}
+
 export default function PasswordModal({ setSignupPage }) {
-	const [user, setUser] = useState({ email: '', password: '' });
+	const [user, setUser] = useState({
+		email: sessionStorage.getItem('userEmail'),
+		password: '',
+	});
+
+	const [verifyPassword, setVerifyPassword] = useState('');
+
+	const [pwError, setPwError] = useState('');
+
+	//To toggle visibility of password text
+	const [passwordType, setPasswordType] = useState('password');
 
 	const onChangeHandler = (e) => {
 		setUser({
@@ -20,8 +43,29 @@ export default function PasswordModal({ setSignupPage }) {
 		});
 	};
 
+	useEffect(() => {
+		const password1 = document.getElementById('password');
+
+		if (verifyPassword) {
+			const timeoutId = setTimeout(() => {
+				if (verifyPassword !== password1.value) {
+					console.log('pw', password1.value);
+					console.log('verify', verifyPassword);
+					setPwError('Passwords do not match');
+				} else {
+					setPwError('');
+				}
+			}, 1500);
+
+			return () => {
+				clearTimeout(timeoutId);
+			};
+		}
+	}, [verifyPassword]);
+
 	const onSubmit = (event) => {
 		event.preventDefault();
+
 		auth.signup(
 			{
 				email: user.email,
@@ -31,12 +75,23 @@ export default function PasswordModal({ setSignupPage }) {
 			function (error, result) {
 				if (error) {
 					console.log('Oops! Registration failed.', error);
+					console.log(user.email);
 					return;
 				} else {
 					console.log('User registered!', result);
 				}
 			}
 		);
+	};
+
+	//To change icon, change the input type
+	const togglePassword = (event) => {
+		event.preventDefault();
+		if (passwordType === 'password') {
+			setPasswordType('text');
+			return;
+		}
+		setPasswordType('password');
 	};
 
 	return (
@@ -60,46 +115,90 @@ export default function PasswordModal({ setSignupPage }) {
 						Create Password
 					</h1>
 
-					<label>
-						Email
-						<br />
-						<input
-							type="email"
-							placeholder=" Insert your email"
-							name="email"
-							value={user.email}
-							onChange={onChangeHandler}
-							className="input-style2"
-						/>
-					</label>
-
 					<h3>
 						The password must have at least 6 characters and must contain 1
 						uppercase and 1 number.
 					</h3>
+					<label className="password">
+						Password
+						<div className="password-eye-box">
+							<input
+								required
+								type={passwordType}
+								placeholder="Insert your password"
+								name="password"
+								id="password"
+								value={user.password}
+								onChange={onChangeHandler}
+								className="input-style2"
+							/>
+
+							<button className="eye-slash" onClick={togglePassword}>
+								{passwordType === 'password' ? (
+									<i>
+										<img src={eyeslash} alt="close-eye" />
+									</i>
+								) : (
+									<i>
+										<img src={eye} alt="open-eye" />
+									</i>
+								)}
+							</button>
+						</div>
+					</label>
 
 					<label className="password">
 						Password
-						<input
-							type="password"
-							placeholder="Insert your password"
-							name="password"
-							value={user.password}
-							onChange={onChangeHandler}
-							className="input-style2"
-						/>
+						<div className="password-eye-box">
+							<input
+								required
+								type={passwordType}
+								placeholder="Insert your password"
+								id="verifyPassword"
+								verifyPassword={verifyPassword}
+								onChange={(e) => setVerifyPassword(e.target.value)}
+								className="input-style2"
+							/>
+
+							<button className="eye-slash" onClick={togglePassword}>
+								{passwordType === 'password' ? (
+									<i>
+										<img src={eyeslash} alt="close-eye" />
+									</i>
+								) : (
+									<i>
+										<img src={eye} alt="open-eye" />
+									</i>
+								)}
+							</button>
+						</div>
+						<p style={{ color: 'red' }}>{pwError}</p>
 					</label>
 
 					<div className="requirement-box">
 						<div className="requirement">
-							<img src={checkmark} alt="checkmark" />
+							{!isSixChar(user.password) ? (
+								<img src={CheckmarkGrey} alt="checkmark" />
+							) : (
+								<img src={Checkmark} alt="checkmark" />
+							)}
 							At least 6 characters
 						</div>
 						<div className="requirement">
-							<img src={checkmark} alt="checkmark" /> 1 Uppercase
+							{!isUpperCase(user.password) ? (
+								<img src={CheckmarkGrey} alt="checkmark" />
+							) : (
+								<img src={Checkmark} alt="checkmark" />
+							)}
+							1 Uppercase
 						</div>
 						<div className="requirement">
-							<img src={checkmark} alt="checkmark" /> 1 Number
+							{!isNumber(user.password) ? (
+								<img src={CheckmarkGrey} alt="checkmark" />
+							) : (
+								<img src={Checkmark} alt="checkmark" />
+							)}{' '}
+							1 Number
 						</div>
 					</div>
 
@@ -123,7 +222,12 @@ export default function PasswordModal({ setSignupPage }) {
 						</div>
 					</div>
 
-					<button type="button" onClick={onSubmit} className="create-button2">
+					<button
+						type="button"
+						id="set-pw-button"
+						onClick={onSubmit}
+						className="create-button2"
+					>
 						Create account
 					</button>
 				</form>

@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
 
 export default function CreateModal({ setSignupPage }) {
+	const [user, setUser] = useState({
+		email: '',
+		password: '',
+	});
+
+	const onChangeHandler = (e) => {
+		setUser({
+			...user,
+			[e.target.name]: e.target.value,
+		});
+	};
+
+	const onSubmit = (event) => {
+		event.preventDefault();
+		setSignupPage(2);
+		sessionStorage.setItem('userEmail', user.email);
+	};
+
 	return (
 		<div className="darkBG" onClick={() => setSignupPage(0)}>
 			<div
@@ -38,11 +56,12 @@ export default function CreateModal({ setSignupPage }) {
 						awesome stuff to a community of awesome people. Please fill out the
 						form below to get started.
 					</h3>
-					<div className="form-input-layout">
+					<form className="form-input-layout">
 						<label className="first">
 							First name
 							<br />
 							<input
+								required
 								className="input-style"
 								type="text"
 								name="name"
@@ -76,6 +95,7 @@ export default function CreateModal({ setSignupPage }) {
 							City
 							<br />
 							<input
+								required
 								type="text"
 								name="city"
 								placeholder=" City name"
@@ -98,9 +118,11 @@ export default function CreateModal({ setSignupPage }) {
 							Email
 							<br />
 							<input
+								required
 								type="email"
 								name="email"
 								placeholder=" Insert your email"
+								onChange={onChangeHandler}
 								className="input-style"
 							/>
 						</label>
@@ -120,13 +142,15 @@ export default function CreateModal({ setSignupPage }) {
 							Phone
 							<br />
 							<input
+								required
 								type="phone"
 								name="phone"
 								placeholder=" +1 (000)000-0000"
+								onChange={onChangeHandler}
 								className="input-style"
 							/>
 						</label>
-						<button className="next-button" onClick={() => setSignupPage(2)}>
+						<button className="next-button" onClick={onSubmit}>
 							Next
 						</button>
 
@@ -135,7 +159,7 @@ export default function CreateModal({ setSignupPage }) {
 							will never sell, rent, lease or give away your information. We
 							only buy, sell or donate your stuff here at MKTFY.{' '}
 						</p>
-					</div>
+					</form>
 				</form>
 			</div>
 		</div>
