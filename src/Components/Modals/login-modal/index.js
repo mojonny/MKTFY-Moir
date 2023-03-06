@@ -25,17 +25,7 @@ function isValidPassword(password) {
 	return RegExp('^(?=.*[0-9])(?=.*[A-Z])(?!.*\\s).{6,}$').test(password);
 }
 
-// function isSixChar(password) {
-// 	return RegExp('^(?=.{6,})').test(password);
-// }
-// function isUpperCase(password) {
-// 	return RegExp('^(?=.*[A-Z])').test(password);
-// }
-// function isNumber(password) {
-// 	return RegExp('^(?=.*[0-9])').test(password);
-// }
-
-export default function LoginModal({ setLoginPage }) {
+export default function LoginModal({ setLoginPage, setMessage }) {
 	//Show lottie when loading and moving to success
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -103,7 +93,9 @@ export default function LoginModal({ setLoginPage }) {
 				},
 				function (error, result) {
 					if (error) {
+						alert('Oops! Login failed, please try again.');
 						console.log('Oops! login failed.', error);
+						setIsLoading(false);
 						return;
 					} else {
 						setIsLoading(false);

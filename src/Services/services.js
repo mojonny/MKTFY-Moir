@@ -7,21 +7,17 @@ import { questions } from '../Pages/FAQ/data';
 //Response data = accessToken, refreshToken, expires, userDetails
 function login(email, password) {
 	console.log('Login to the app');
-	return axios.post(`https://********************.com/api/account/login`);
+	return axios.post(`http://localhost:5000/api/v1/account/login`);
 }
 
 function loginForgotPassword(email) {
 	console.log('Forgot pw');
-	return axios.post(
-		`https://********************.com/api/account/forgotpassword`
-	);
+	return axios.post(`http://localhost:5000/api/v1/account/forgotpassword`);
 }
 
 function loginResetPassword(currentPassword, password, passwordConfirmation) {
 	console.log('Reset pw');
-	return axios.post(
-		`https://********************.com/api/account/resetpassword`
-	);
+	return axios.post(`http://localhost:5000/api/v1/account/resetpassword`);
 }
 
 function signUp(
@@ -35,61 +31,53 @@ function signUp(
 	country
 ) {
 	console.log('Sign up for MKTFY');
-	return axios.post(`https://********************.com/api/account/login`);
+	return axios.post(`http://localhost:5000/api/v1/account/login`);
 }
 
 //This may not be needed for the search bar but still needed to get all listings
 function getAllListings(id) {
 	console.log('get all listings');
-	return axios.get(
-		`https://********************.com/api/listings/${id}/search`
-	);
+	return axios.get(`http://localhost:5000/api/v1/listings/${id}/search`);
 }
 
 //Might be able to just filter the data
 function getDeals(id) {
 	console.log('get all listings');
-	return axios.get(`https://********************.com/api/listings/${id}/deals`);
+	return axios.get(`http://localhost:5000/api/v1/listings/${id}/deals`);
 }
 
 function updateNotifications(id, data) {
 	return axios.put(
-		`https://********************.com/api/notifications/${id}/unread`,
+		`http://localhost:5000/api/v1/notifications/${id}/unread`,
 		data
 	);
 }
 
 function getNotifications(id) {
-	return axios.get(
-		`https://********************.com/api/notifications/${id}/all`
-	);
+	return axios.get(`http://localhost:5000/api/v1/notifications/${id}/all`);
 }
 
 //should get firstName,lastName,email,phone,address,city,province,country
 //for account info page
 function getAccountInfo() {
-	return axios.get(`https://********************.com/api/user/profile`);
+	return axios.get(`http://localhost:5000/api/v1/user/profile`);
 }
 
 function updateAccountInfo() {
-	return axios.put(`https://********************.com/api/user/profile`);
+	return axios.put(`http://localhost:5000/api/v1/user/profile`);
 }
 
 function changePassword() {
-	return axios.put(`https://********************.com/api/user/changepassword`);
+	return axios.put(`http://localhost:5000/api/v1/user/changepassword`);
 }
 
 //We want productName,date,title,price
 function getMyPurchases() {
-	return axios.get(
-		`https://********************.com/api/user/listings/history`
-	);
+	return axios.get(`http://localhost:5000/api/v1/user/listings/history`);
 }
 
 function contactUs(name, email, message) {
-	return axios.post(
-		'https://movie-reviews-service.onrender.com/api/user/contactus'
-	);
+	return axios.post('http://localhost:5000/api/v1/user/contactus');
 }
 ////////////////////////////////////////////////////////////////////////////////////////
 //get all the listings both active and sold
@@ -108,7 +96,7 @@ export function filterListings(listType) {
 
 //We want productName,date,title,price
 function getMyListings() {
-	return axios.get(`https://********************.com/api/user/listings/`);
+	return axios.get(`http://localhost:5000/api/v1/user/listings/`);
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 //FAQ page questions
@@ -134,38 +122,26 @@ function getProductDetails(
 	sellerProfile,
 	sellerListingCount
 ) {
-	return axios.get(
-		`https://movie-reviews-service.onrender.com/api/product/details`
-	);
+	return axios.get(`http://localhost:5000/api/v1/product/details`);
 }
 
 function checkout() {
-	return axios.post(
-		'https://movie-reviews-service.onrender.com/api/product/checkout'
-	);
+	return axios.post('http://localhost:5000/api/v1/product/checkout');
 }
 
 //Images, ProductName, Description,Category, Condition Price, Address, City
 function createListing(data) {
-	return axios.post(
-		'https://movie-reviews-service.onrender.com/api/add/listing',
-		data
-	);
+	return axios.post('http://localhost:5000/api/v1/add/listing', data);
 }
 
 //Id, FilePath
 function addImage(data) {
-	return axios.post(
-		'https://movie-reviews-service.onrender.com/api/uploads/image',
-		data
-	);
+	return axios.post('http://localhost:5000/api/v1/uploads/image', data);
 }
 
+//customer can add,update,remove their home address?
 function updateAddress(data) {
-	return axios.put(
-		'https://movie-reviews-service.onrender.com/api/v1/movies/review',
-		data
-	);
+	return axios.post('http://localhost:5000/api/v1/add/address', data);
 }
 
 // function find(query, by = 'title', page = 0) {

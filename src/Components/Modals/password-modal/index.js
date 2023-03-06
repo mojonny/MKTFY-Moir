@@ -4,6 +4,8 @@ import { auth } from '../../../Services/auth0.service';
 import { AUTH0_REALM } from '../../../config';
 import { Link } from 'react-router-dom';
 
+import Success from '../../../Components/Success';
+
 import eye from '../../../assets/eye.png';
 import eyeslash from '../../../assets/eye-slash.png';
 import Checkmark from '../../../assets/Checkmark.svg';
@@ -24,6 +26,16 @@ function isNumber(password) {
 }
 
 export default function PasswordModal({ setSignupPage }) {
+	//Show lottie when loading and moving to success
+	const [isLoading, setIsLoading] = useState(false);
+
+	//Make sure they agree to terms
+	const [agreement, setAgreement] = useState(false);
+
+	const handleChange = (event) => {
+		setAgreement(event.target.checked);
+	};
+
 	const [user, setUser] = useState({
 		email: sessionStorage.getItem('userEmail'),
 		password: '',
@@ -49,13 +61,11 @@ export default function PasswordModal({ setSignupPage }) {
 		if (verifyPassword) {
 			const timeoutId = setTimeout(() => {
 				if (verifyPassword !== password1.value) {
-					console.log('pw', password1.value);
-					console.log('verify', verifyPassword);
 					setPwError('Passwords do not match');
 				} else {
 					setPwError('');
 				}
-			}, 1500);
+			}, 36000);
 
 			return () => {
 				clearTimeout(timeoutId);
@@ -65,23 +75,30 @@ export default function PasswordModal({ setSignupPage }) {
 
 	const onSubmit = (event) => {
 		event.preventDefault();
-
-		auth.signup(
-			{
-				email: user.email,
-				password: user.password,
-				connection: AUTH0_REALM,
-			},
-			function (error, result) {
-				if (error) {
-					console.log('Oops! Registration failed.', error);
-					console.log(user.email);
-					return;
-				} else {
-					console.log('User registered!', result);
+		setIsLoading(true);
+		setTimeout(() => {
+			auth.signup(
+				{
+					email: user.email,
+					password: user.password,
+					connection: AUTH0_REALM,
+				},
+				function (error, result) {
+					if (error) {
+						alert('Oops! Signup failed, please try again.');
+						console.log('Oops! Registration failed.', error);
+						console.log(user.email);
+						setSignupPage(0);
+						setIsLoading(false);
+						return;
+					} else {
+						console.log('User registered!', result);
+						setSignupPage(0);
+						setIsLoading(false);
+					}
 				}
-			}
-		);
+			);
+		}, 3000);
 	};
 
 	//To change icon, change the input type
@@ -155,7 +172,7 @@ export default function PasswordModal({ setSignupPage }) {
 								type={passwordType}
 								placeholder="Insert your password"
 								id="verifyPassword"
-								verifyPassword={verifyPassword}
+								// verifyPassword={verifyPassword}
 								onChange={(e) => setVerifyPassword(e.target.value)}
 								className="input-style2"
 							/>
@@ -203,7 +220,13 @@ export default function PasswordModal({ setSignupPage }) {
 					</div>
 
 					<div className="checkbox-info">
-						<input className="checkbox" type="checkbox" />
+						<input
+							name="agreement"
+							onChange={handleChange}
+							className="checkbox"
+							type="checkbox"
+							required
+						/>
 						<div style={{ fontSize: '14px', fontWeight: '400' }}>
 							By checking this box, you agree to our{' '}
 							<Link
@@ -225,9 +248,11 @@ export default function PasswordModal({ setSignupPage }) {
 					<button
 						type="button"
 						id="set-pw-button"
+						disabled={!agreement || isLoading}
 						onClick={onSubmit}
 						className="create-button2"
 					>
+						{isLoading ? <Success title="account created" /> : onSubmit}
 						Create account
 					</button>
 				</form>

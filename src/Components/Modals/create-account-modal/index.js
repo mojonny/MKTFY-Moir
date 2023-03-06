@@ -4,49 +4,35 @@ import axios from 'axios';
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
 
+function isValidEmail(email) {
+	return RegExp(
+		'^(([^<>()[\\]\\\\.,;:\\s@\\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\\"]+)*)|' +
+			'(\\".+\\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])' +
+			'|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$'
+	).test(email);
+}
+
 export default function CreateModal({ setSignupPage }) {
-	const [user, setUser] = useState({
-		email: '',
-		password: '',
-	});
-
-	const [state, setState] = useState({
-		firstName: '',
-		lastName: '',
-		email: '',
-		phone: '',
-		address: '',
-		city: '',
-		province: '',
-		country: '',
-	});
-
-	const handleChange = (e) => {
-		const value = e.target.value;
-		setState({
-			...state,
-			[e.target.name]: value,
-		});
-	};
-
-	const onChangeHandler = (e) => {
-		setUser({
-			...user,
-			[e.target.name]: e.target.value,
-		});
-	};
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [email, setEmail] = useState('');
+	const [phone, setPhone] = useState('');
+	const [address, setAddress] = useState('');
+	const [city, setCity] = useState('');
+	const [province, setProvince] = useState('');
+	const [country, setCountry] = useState('');
 
 	const onSubmit = (event) => {
 		event.preventDefault();
 		const userData = {
-			firstName: state.firstName,
-			lastName: state.lastName,
-			email: state.email,
-			phone: state.phone,
-			address: state.address,
-			city: state.city,
-			province: state.province,
-			country: state.country,
+			firstName: firstName,
+			lastName: lastName,
+			email: email,
+			phone: phone,
+			address: address,
+			city: city,
+			province: province,
+			country: country,
 		};
 		axios
 			.post('https://localhost:3000/api/account/register', userData)
@@ -55,7 +41,7 @@ export default function CreateModal({ setSignupPage }) {
 			});
 
 		setSignupPage(2);
-		sessionStorage.setItem('userEmail', user.email);
+		sessionStorage.setItem('userEmail', userData.email);
 	};
 
 	return (
@@ -66,7 +52,7 @@ export default function CreateModal({ setSignupPage }) {
 				open={true}
 				onClick={(e) => e.stopPropagation()}
 			>
-				<div className="form-container-create">
+				<form className="form-container-create">
 					<button
 						className="cancel-button-create"
 						onClick={() => setSignupPage(0)}
@@ -97,13 +83,12 @@ export default function CreateModal({ setSignupPage }) {
 							First name
 							<br />
 							<input
-								required
 								className="input-style"
 								type="text"
 								name="name"
 								placeholder=" Your first name"
-								value={state.firstName}
-								onChange={handleChange}
+								value={firstName}
+								onChange={(e) => setFirstName(e.target.value)}
 							/>
 						</label>
 
@@ -115,8 +100,8 @@ export default function CreateModal({ setSignupPage }) {
 								name="Street address"
 								placeholder=" Insert your address"
 								className="input-style"
-								value={state.address}
-								onChange={handleChange}
+								value={address}
+								onChange={(e) => setAddress(e.target.value)}
 							/>
 						</label>
 
@@ -128,8 +113,8 @@ export default function CreateModal({ setSignupPage }) {
 								type="text"
 								name="name"
 								placeholder=" Your last name"
-								value={state.lastName}
-								onChange={handleChange}
+								value={lastName}
+								onChange={(e) => setLastName(e.target.value)}
 							/>
 						</label>
 
@@ -137,13 +122,12 @@ export default function CreateModal({ setSignupPage }) {
 							City
 							<br />
 							<input
-								required
 								type="text"
 								name="city"
 								placeholder=" City name"
 								className="input-style"
-								value={state.city}
-								onChange={handleChange}
+								value={city}
+								onChange={(e) => setCity(e.target.value)}
 							/>
 						</label>
 
@@ -155,8 +139,8 @@ export default function CreateModal({ setSignupPage }) {
 								name="province"
 								placeholder=" Your province"
 								className="input-style"
-								value={state.province}
-								onChange={handleChange}
+								value={province}
+								onChange={(e) => setProvince(e.target.value)}
 							/>
 						</label>
 
@@ -164,13 +148,12 @@ export default function CreateModal({ setSignupPage }) {
 							Email
 							<br />
 							<input
-								required
 								type="email"
 								name="email"
 								placeholder=" Insert your email"
-								onChange={onChangeHandler}
+								onChange={(e) => setEmail(e.target.value)}
 								className="input-style"
-								value={state.email}
+								value={email}
 							/>
 						</label>
 
@@ -182,8 +165,8 @@ export default function CreateModal({ setSignupPage }) {
 								name="country"
 								placeholder=" Country name"
 								className="input-style"
-								value={state.country}
-								onChange={handleChange}
+								value={country}
+								onChange={(e) => setCountry(e.target.value)}
 							/>
 						</label>
 
@@ -191,16 +174,20 @@ export default function CreateModal({ setSignupPage }) {
 							Phone
 							<br />
 							<input
-								required
 								type="phone"
 								name="phone"
 								placeholder=" +1 (000)000-0000"
 								className="input-style"
-								value={state.phone}
-								onChange={handleChange}
+								value={phone}
+								onChange={(e) => setPhone(e.target.value)}
 							/>
 						</label>
-						<button className="next-button" onClick={onSubmit}>
+						<button
+							type="submit"
+							disabled={!isValidEmail(email)}
+							className="next-page-button"
+							onClick={onSubmit}
+						>
 							Next
 						</button>
 
@@ -210,7 +197,7 @@ export default function CreateModal({ setSignupPage }) {
 							only buy, sell or donate your stuff here at MKTFY.{' '}
 						</p>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	);
