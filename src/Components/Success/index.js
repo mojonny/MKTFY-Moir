@@ -13,8 +13,14 @@ export default function Success({ title }) {
 
 	const { View } = useLottie(options);
 	return (
-		<div className="layout">
-			{title ? <h1>{title}</h1> : ''}
+		<div className="success-layout">
+			{title ? (
+				<h1 style={{ paddingBottom: '400px' }} className="animation">
+					{title}
+				</h1>
+			) : (
+				''
+			)}
 			<div className="animation">{View}</div>
 		</div>
 	);

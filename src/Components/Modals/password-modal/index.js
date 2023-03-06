@@ -252,7 +252,7 @@ export default function PasswordModal({ setSignupPage }) {
 						onClick={onSubmit}
 						className="create-button2"
 					>
-						{isLoading ? <Success title="account created" /> : onSubmit}
+						{isLoading ? <Success title="Account Created!" /> : onSubmit}
 						Create account
 					</button>
 				</form>
