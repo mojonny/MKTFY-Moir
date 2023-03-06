@@ -68,7 +68,9 @@ export default function LoginModal({ setLoginPage }) {
 		if (user.password) {
 			const timeoutId = setTimeout(() => {
 				if (!isValidPassword(user.password)) {
-					setPwError('Password formatted incorrectly');
+					setPwError(
+						'Incorrect password: Min 6 characters, 1 capital, and 1 number.'
+					);
 				} else {
 					setPwError('');
 				}

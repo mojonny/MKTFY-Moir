@@ -5,3 +5,6 @@ export const AUTH0_REALM = 'Username-Password-Authentication';
 export const AUTH0_USER_SCOPE = 'openid profile email';
 export const AUTH0_LOGIN_RESPONSE_TYPE = 'token id_token';
 export const AUTH0_LOGOUT_URI = 'http://localhost:3000/';
+
+//Domain from Backend: dev-imv7dvp8n7sd2xfz.us.auth0.com
+//ClientID from Backend: pRmCbrcVccEbKnPV1NfzvelsKlGz8R68

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
@@ -9,6 +10,25 @@ export default function CreateModal({ setSignupPage }) {
 		password: '',
 	});
 
+	const [state, setState] = useState({
+		firstName: '',
+		lastName: '',
+		email: '',
+		phone: '',
+		address: '',
+		city: '',
+		province: '',
+		country: '',
+	});
+
+	const handleChange = (e) => {
+		const value = e.target.value;
+		setState({
+			...state,
+			[e.target.name]: value,
+		});
+	};
+
 	const onChangeHandler = (e) => {
 		setUser({
 			...user,
@@ -18,6 +38,22 @@ export default function CreateModal({ setSignupPage }) {
 
 	const onSubmit = (event) => {
 		event.preventDefault();
+		const userData = {
+			firstName: state.firstName,
+			lastName: state.lastName,
+			email: state.email,
+			phone: state.phone,
+			address: state.address,
+			city: state.city,
+			province: state.province,
+			country: state.country,
+		};
+		axios
+			.post('https://localhost:3000/api/account/register', userData)
+			.then((response) => {
+				console.log(response.status, response.data);
+			});
+
 		setSignupPage(2);
 		sessionStorage.setItem('userEmail', user.email);
 	};
@@ -30,7 +66,7 @@ export default function CreateModal({ setSignupPage }) {
 				open={true}
 				onClick={(e) => e.stopPropagation()}
 			>
-				<form className="form-container-create">
+				<div className="form-container-create">
 					<button
 						className="cancel-button-create"
 						onClick={() => setSignupPage(0)}
@@ -56,7 +92,7 @@ export default function CreateModal({ setSignupPage }) {
 						awesome stuff to a community of awesome people. Please fill out the
 						form below to get started.
 					</h3>
-					<form className="form-input-layout">
+					<div className="form-input-layout">
 						<label className="first">
 							First name
 							<br />
@@ -66,6 +102,8 @@ export default function CreateModal({ setSignupPage }) {
 								type="text"
 								name="name"
 								placeholder=" Your first name"
+								value={state.firstName}
+								onChange={handleChange}
 							/>
 						</label>
 
@@ -77,6 +115,8 @@ export default function CreateModal({ setSignupPage }) {
 								name="Street address"
 								placeholder=" Insert your address"
 								className="input-style"
+								value={state.address}
+								onChange={handleChange}
 							/>
 						</label>
 
@@ -88,6 +128,8 @@ export default function CreateModal({ setSignupPage }) {
 								type="text"
 								name="name"
 								placeholder=" Your last name"
+								value={state.lastName}
+								onChange={handleChange}
 							/>
 						</label>
 
@@ -100,6 +142,8 @@ export default function CreateModal({ setSignupPage }) {
 								name="city"
 								placeholder=" City name"
 								className="input-style"
+								value={state.city}
+								onChange={handleChange}
 							/>
 						</label>
 
@@ -111,6 +155,8 @@ export default function CreateModal({ setSignupPage }) {
 								name="province"
 								placeholder=" Your province"
 								className="input-style"
+								value={state.province}
+								onChange={handleChange}
 							/>
 						</label>
 
@@ -124,6 +170,7 @@ export default function CreateModal({ setSignupPage }) {
 								placeholder=" Insert your email"
 								onChange={onChangeHandler}
 								className="input-style"
+								value={state.email}
 							/>
 						</label>
 
@@ -135,6 +182,8 @@ export default function CreateModal({ setSignupPage }) {
 								name="country"
 								placeholder=" Country name"
 								className="input-style"
+								value={state.country}
+								onChange={handleChange}
 							/>
 						</label>
 
@@ -146,8 +195,9 @@ export default function CreateModal({ setSignupPage }) {
 								type="phone"
 								name="phone"
 								placeholder=" +1 (000)000-0000"
-								onChange={onChangeHandler}
 								className="input-style"
+								value={state.phone}
+								onChange={handleChange}
 							/>
 						</label>
 						<button className="next-button" onClick={onSubmit}>
@@ -159,8 +209,8 @@ export default function CreateModal({ setSignupPage }) {
 							will never sell, rent, lease or give away your information. We
 							only buy, sell or donate your stuff here at MKTFY.{' '}
 						</p>
-					</form>
-				</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
