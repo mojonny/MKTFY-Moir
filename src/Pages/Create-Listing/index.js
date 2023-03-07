@@ -2,15 +2,38 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import UploadImage from '../../Components/UploadImage';
+import { Counter } from '../../Store/Counter';
+//import UploadImage from '../../Components/UploadImage/oldINDEX';
 import Success from '../../Components/Success';
 
 import loadImg from '../../assets/LoadImg.svg';
-import loadBigCam from '../../assets/Frame 123.png';
+//import loadBigCam from '../../assets/Frame 123.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function CreateListing() {
+	const [file, setFile] = useState([]);
+
+	function uploadSingleFile(e) {
+		let ImagesArray = Object.entries(e.target.files).map((e) =>
+			URL.createObjectURL(e[1])
+		);
+		console.log(ImagesArray);
+		setFile([...file, ...ImagesArray]);
+		console.log('file', file);
+	}
+
+	function upload(e) {
+		e.preventDefault();
+		console.log(file);
+	}
+
+	function deleteFile(e) {
+		const s = file.filter((item, index) => index !== e);
+		setFile(s);
+		console.log(s);
+	}
+
 	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -30,17 +53,51 @@ export default function CreateListing() {
 	return (
 		<>
 			<div className="create-listing-container">
+				<Counter />
 				<div className="breadcrumbs">
 					Deals for you <img src={breadArrow} alt="path-arrow" /> Product
 					listing
 				</div>
 
-				<form onSubmit={handleSubmit}>
+				<div onSubmit={handleSubmit}>
 					<div className="create-listing-landing">
 						<div className="listing-image-box">
-							<UploadImage src={loadImg} className="main-listing-img" />
+							<div className="form-group preview">
+								{file.length > 0 &&
+									file.map((item, index) => {
+										return (
+											<div key={item}>
+												<img src={item} alt="" />
+												<button type="button" onClick={() => deleteFile(index)}>
+													delete
+												</button>
+											</div>
+										);
+									})}
+							</div>
+							<div className="image-upload">
+								<label for="file-input">
+									<img src={loadImg} alt="main-pic" />
+								</label>
 
-							<div className="mini-image-box">
+								<input
+									type="file"
+									id="file-input"
+									disabled={file.length === 5}
+									className="form-control"
+									onChange={uploadSingleFile}
+									multiple
+								/>
+							</div>
+							<button
+								type="button"
+								className="btn btn-primary btn-block"
+								onClick={upload}
+							>
+								Upload
+							</button>
+
+							{/* <div className="mini-image-box">
 								<UploadImage
 									className="load-pic"
 									style={{ border: '1px dashed #6318af' }}
@@ -49,7 +106,7 @@ export default function CreateListing() {
 								<UploadImage className="load-pic" src={loadBigCam} />
 								<UploadImage className="load-pic" src={loadBigCam} />
 								<UploadImage className="load-pic" src={loadBigCam} />
-							</div>
+							</div> */}
 						</div>
 
 						<div className="listing-info-container">
@@ -134,6 +191,15 @@ export default function CreateListing() {
 										<option>Calgary</option>
 										<option>Brooks</option>
 										<option>Camrose</option>
+										<option>Cold Lake</option>
+										<option>Edmonton</option>
+										<option>Fort McMurray</option>
+										<option>Lacombe</option>
+										<option>Leduc</option>
+										<option>Lethbridge</option>
+										<option>Medicine Hat</option>
+										<option>Red Deer</option>
+										<option>St. Albert</option>
 									</select>
 								</div>
 							</div>
@@ -157,7 +223,7 @@ export default function CreateListing() {
 							</button>
 						</div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</>
 	);

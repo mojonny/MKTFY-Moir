@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+//import axios from 'axios';
 
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
@@ -34,11 +34,11 @@ export default function CreateModal({ setSignupPage }) {
 			province: province,
 			country: country,
 		};
-		axios
-			.post('https://localhost:3000/api/account/register', userData)
-			.then((response) => {
-				console.log(response.status, response.data);
-			});
+		// axios
+		// 	.post('https://localhost:3000/api/account/register', userData)
+		// 	.then((response) => {
+		// 		console.log(response.status, response.data);
+		// 	});
 
 		setSignupPage(2);
 		sessionStorage.setItem('userEmail', userData.email);

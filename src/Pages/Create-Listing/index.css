@@ -131,10 +131,6 @@
 	cursor: pointer;
 }
 
-input[type='file'] {
-	display: none;
-}
-
 .load-pic {
 	height: 100px;
 	width: 100px;
@@ -143,4 +139,10 @@ input[type='file'] {
 .mini-image-box {
 	display: flex;
 	gap: 24px;
+}
+
+.image-upload > input {
+	visibility: hidden;
+	width: 0;
+	height: 0;
 }

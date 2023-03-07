@@ -140,6 +140,33 @@ export default function SearchBar() {
 						<li className="options" id="Camrose" onClick={handleClick1}>
 							Camrose
 						</li>
+						<li className="options" id="ColdLake" onClick={handleClick1}>
+							Cold Lake
+						</li>
+						<li className="options" id="Edmonton" onClick={handleClick1}>
+							Edmonton
+						</li>
+						<li className="options" id="FortMcMurray" onClick={handleClick1}>
+							Fort McMurray
+						</li>
+						<li className="options" id="Lacombe" onClick={handleClick1}>
+							Lacombe
+						</li>
+						<li className="options" id="Leduc" onClick={handleClick1}>
+							Leduc
+						</li>
+						<li className="options" id="Lethbridge" onClick={handleClick1}>
+							Lethbridge
+						</li>
+						<li className="options" id="MedicineHat" onClick={handleClick1}>
+							Medicine Hat
+						</li>
+						<li className="options" id="RedDeer" onClick={handleClick1}>
+							Red Deer
+						</li>
+						<li className="options" id="St.Albert" onClick={handleClick1}>
+							St. Albert
+						</li>
 					</ul>
 				)}
 			</div>
