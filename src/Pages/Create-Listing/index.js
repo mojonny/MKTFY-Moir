@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import UploadImage from '../../Components/UploadImage';
 import Success from '../../Components/Success';
 
-//import loadBigCam from '../../assets/Frame 123.png';
+import loadImg from '../../assets/LoadImg.svg';
+import loadBigCam from '../../assets/Frame 123.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
@@ -39,16 +40,15 @@ export default function CreateListing() {
 				<div onSubmit={handleSubmit}>
 					<div className="create-listing-landing">
 						<div className="listing-image-box">
-							<UploadImage id="main-image" className="main-listing-img" />
+							<div>
+								<UploadImage className="main-listing-img" src={loadImg} />
+							</div>
 
 							<div className="mini-image-box">
-								<UploadImage
-									className="load-pic"
-									style={{ border: '1px dashed #6318af' }}
-								/>
-								<UploadImage className="load-pic" />
-								<UploadImage className="load-pic" />
-								<UploadImage className="load-pic" />
+								<UploadImage className="load-pic" src={loadBigCam} />
+								<UploadImage className="load-pic" src={loadBigCam} />
+								<UploadImage className="load-pic" src={loadBigCam} />
+								<UploadImage className="load-pic" src={loadBigCam} />
 							</div>
 						</div>
 
