@@ -2,38 +2,15 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Counter } from '../../Store/Counter';
-//import UploadImage from '../../Components/UploadImage/oldINDEX';
+//import { Counter } from '../../Store/Counter';
+import UploadImage from '../../Components/UploadImage';
 import Success from '../../Components/Success';
 
-import loadImg from '../../assets/LoadImg.svg';
 //import loadBigCam from '../../assets/Frame 123.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function CreateListing() {
-	const [file, setFile] = useState([]);
-
-	function uploadSingleFile(e) {
-		let ImagesArray = Object.entries(e.target.files).map((e) =>
-			URL.createObjectURL(e[1])
-		);
-		console.log(ImagesArray);
-		setFile([...file, ...ImagesArray]);
-		console.log('file', file);
-	}
-
-	function upload(e) {
-		e.preventDefault();
-		console.log(file);
-	}
-
-	function deleteFile(e) {
-		const s = file.filter((item, index) => index !== e);
-		setFile(s);
-		console.log(s);
-	}
-
 	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -53,7 +30,7 @@ export default function CreateListing() {
 	return (
 		<>
 			<div className="create-listing-container">
-				<Counter />
+				{/* <Counter /> */}
 				<div className="breadcrumbs">
 					Deals for you <img src={breadArrow} alt="path-arrow" /> Product
 					listing
@@ -62,51 +39,17 @@ export default function CreateListing() {
 				<div onSubmit={handleSubmit}>
 					<div className="create-listing-landing">
 						<div className="listing-image-box">
-							<div className="form-group preview">
-								{file.length > 0 &&
-									file.map((item, index) => {
-										return (
-											<div key={item}>
-												<img src={item} alt="" />
-												<button type="button" onClick={() => deleteFile(index)}>
-													delete
-												</button>
-											</div>
-										);
-									})}
-							</div>
-							<div className="image-upload">
-								<label for="file-input">
-									<img src={loadImg} alt="main-pic" />
-								</label>
+							<UploadImage id="main-image" className="main-listing-img" />
 
-								<input
-									type="file"
-									id="file-input"
-									disabled={file.length === 5}
-									className="form-control"
-									onChange={uploadSingleFile}
-									multiple
-								/>
-							</div>
-							<button
-								type="button"
-								className="btn btn-primary btn-block"
-								onClick={upload}
-							>
-								Upload
-							</button>
-
-							{/* <div className="mini-image-box">
+							<div className="mini-image-box">
 								<UploadImage
 									className="load-pic"
 									style={{ border: '1px dashed #6318af' }}
-									src={loadBigCam}
 								/>
-								<UploadImage className="load-pic" src={loadBigCam} />
-								<UploadImage className="load-pic" src={loadBigCam} />
-								<UploadImage className="load-pic" src={loadBigCam} />
-							</div> */}
+								<UploadImage className="load-pic" />
+								<UploadImage className="load-pic" />
+								<UploadImage className="load-pic" />
+							</div>
 						</div>
 
 						<div className="listing-info-container">
