@@ -93,9 +93,9 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 				},
 				function (error, result) {
 					if (error) {
+						setIsLoading(false);
 						alert('Oops! Login failed, please try again.');
 						console.log('Oops! login failed.', error);
-						setIsLoading(false);
 						return;
 					} else {
 						setIsLoading(false);
