@@ -10,16 +10,16 @@
 	padding: 40px 30px 40px 30px;
 }
 
-.cat-pics {
+/* .cat-pics {
 	display: flex;
 	flex-direction: row;
 	width: 100%;
 	overflow: hidden;
 	gap: 20px;
-}
+} */
 
-.cat-image {
+/* .cat-image {
 	height: 200px;
 	width: 200px;
 	border-radius: 10px;
-}
+} */

@@ -25,9 +25,9 @@ export default function NotFound() {
 				<button
 					onClick={navigateHome}
 					disabled={isLoading}
-					style={{ background: 'none', border: 'none' }}
+					style={{ background: 'none', border: 'none', cursor: 'pointer' }}
 				>
-					{isLoading ? <Success /> : navigateHome}
+					{isLoading ? <Success /> : null}
 
 					<img src={logo} alt="logo" style={{ height: '200px' }} />
 				</button>

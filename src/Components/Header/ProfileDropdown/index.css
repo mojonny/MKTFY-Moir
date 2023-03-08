@@ -40,7 +40,7 @@
 
 .drop-nav-links:hover {
 	box-shadow: inset 300px 0 0 0 #f7f7f7;
-	border-radius: 10px;
+	border-radius: 5px;
 	overflow: hidden;
 	color: #6318af;
 }
