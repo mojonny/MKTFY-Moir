@@ -58,12 +58,12 @@ export default function Checkout() {
 							className="checkout-button1"
 							style={{ alignSelf: 'center' }}
 						>
-							{isLoading ? <Success /> : navigateHome}
 							Contact seller to purchase
 						</button>
 					</div>
 				</div>
 			</div>
+			{isLoading ? <Success /> : null}
 		</>
 	);
 }

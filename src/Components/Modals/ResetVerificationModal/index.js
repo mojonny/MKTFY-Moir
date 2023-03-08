@@ -93,7 +93,7 @@ export default function ResetVerificationModal({ setLoginPage }) {
 							textAlign: 'right',
 							color: '#FFBA00',
 							textDecoration: 'none',
-							paddingRight: '50px',
+
 							backgroundColor: '#ffffff',
 							border: 'none',
 						}}

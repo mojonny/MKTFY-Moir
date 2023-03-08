@@ -10,7 +10,7 @@ import logout from '../../../assets/LogOut.png';
 import dropArrow from '../../../assets/DownArrow.png';
 import './index.css';
 
-export default function Dropdown() {
+export default function ProfileDropdown() {
 	//Show lottie when loading and moving to success
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -66,6 +66,8 @@ export default function Dropdown() {
 						width: '100%',
 						height: '100%',
 						padding: '5px',
+						color: '#ffffff',
+						fontWeight: 'lighter',
 					}}
 				>
 					Welcome back,
@@ -73,7 +75,7 @@ export default function Dropdown() {
 					<button
 						className="profile-button"
 						onClick={handleToggle3}
-						style={{ width: '100%' }}
+						style={{ width: '100%', cursor: 'pointer' }}
 					>
 						<img src={dropArrow} alt="dropArrow" />
 						<h4>Pearl The Cat</h4>

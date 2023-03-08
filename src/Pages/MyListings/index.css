@@ -52,6 +52,7 @@
 	background: none;
 	color: #6e20be;
 	font-size: larger;
+	cursor: pointer;
 	text-decoration: underline;
 }
 
@@ -60,6 +61,7 @@
 	background: none;
 	color: #4d4d4d;
 	font-size: larger;
+	cursor: pointer;
 }
 
 .all-listings {

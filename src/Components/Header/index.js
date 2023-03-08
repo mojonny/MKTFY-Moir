@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import SearchBar from './SearchBar';
-import Dropdown from './ProfileDropdown';
+import ProfileDropdown from './ProfileDropdown';
 import NotificationPopup from './NotificationDropdown';
 
 import altLogo from '../../assets/altLogo.png';
@@ -27,7 +27,7 @@ export default function Header() {
 
 				<SearchBar />
 				<div className="account-links">
-					<Dropdown />
+					<ProfileDropdown />
 
 					<NotificationPopup />
 
@@ -36,7 +36,13 @@ export default function Header() {
 						onClick={navigateToCreateListing}
 					>
 						<img src={plus} alt="plus" />
-						<h4 style={{ color: '#ffffff', padding: '15px,14px,15px,14px' }}>
+						<h4
+							style={{
+								color: '#ffffff',
+								padding: '15px,14px,15px,14px',
+								cursor: 'pointer',
+							}}
+						>
 							{' '}
 							Create Listing
 						</h4>

@@ -219,8 +219,9 @@ export default function PasswordModal({ setSignupPage }) {
 						</div>
 					</div>
 
-					<div className="checkbox-info">
+					<label for="checkbox" className="checkbox-info">
 						<input
+							id="checkbox"
 							name="agreement"
 							onChange={handleChange}
 							className="checkbox"
@@ -243,7 +244,7 @@ export default function PasswordModal({ setSignupPage }) {
 								Privacy Policy
 							</Link>
 						</div>
-					</div>
+					</label>
 
 					<button
 						type="button"

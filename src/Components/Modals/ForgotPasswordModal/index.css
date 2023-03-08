@@ -21,6 +21,7 @@
 .close-button1 {
 	background: none;
 	border: none;
+	cursor: pointer;
 }
 
 .text-area1 {
