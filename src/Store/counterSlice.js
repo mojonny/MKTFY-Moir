@@ -1,13 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+const initialState = {
+	images: [],
+};
+
 export const counterSlice = createSlice({
 	name: 'counter',
-	initialState: {
-		value: 0,
-	},
+	initialState,
 	reducers: {
-		increase: (state) => {
-			state.value += 1;
+		addImg: (state, action) => {
+			const newImageUrls = action.payload;
+			const addedImages = [...state.image, newImageUrls];
+			return { ...state, images: addedImages };
 		},
 		decrease: (state) => {
 			state.value -= 1;
@@ -16,6 +20,6 @@ export const counterSlice = createSlice({
 });
 
 // each case under reducers becomes an action
-export const { increase, decrease } = counterSlice.actions;
+export const { addImg, decrease } = counterSlice.actions;
 
 export default counterSlice.reducer;

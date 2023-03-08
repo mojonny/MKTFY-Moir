@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { decrease, increase } from './counterSlice';
+import { decrease, addImg } from './counterSlice';
 
 export function Counter() {
 	const count = useSelector((state) => state.counter.value);
@@ -12,7 +12,7 @@ export function Counter() {
 
 	return (
 		<div>
-			<button onClick={() => dispatch(increase())}>Increase</button>
+			<button onClick={() => dispatch(addImg())}>Add Image</button>
 			<p>{count}</p>
 			<button onClick={() => dispatch(decrease())}>Decrease</button>
 		</div>

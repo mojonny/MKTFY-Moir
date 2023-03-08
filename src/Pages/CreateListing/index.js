@@ -31,7 +31,10 @@ export default function CreateListing() {
 	return (
 		<>
 			<div className="create-listing-container">
-				{/* <Counter /> */}
+				{/* <form onSubmit={handleSubmit}>
+					<Counter />
+				</form> */}
+
 				<div className="breadcrumbs">
 					Deals for you <img src={breadArrow} alt="path-arrow" /> Product
 					listing
