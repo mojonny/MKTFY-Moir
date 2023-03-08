@@ -7,9 +7,7 @@ import './index.css';
 export default function MainLayout() {
 	return (
 		<div className="Main-layoutBG">
-			<nav>
-				<Header />
-			</nav>
+			<Header />
 
 			<Outlet />
 		</div>

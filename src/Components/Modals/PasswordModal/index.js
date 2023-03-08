@@ -4,7 +4,7 @@ import { auth } from '../../../Services/auth0.service';
 import { AUTH0_REALM } from '../../../config';
 import { Link } from 'react-router-dom';
 
-import Success from '../../../Components/Success';
+import Success from '../../Success';
 
 import eye from '../../../assets/eye.png';
 import eyeslash from '../../../assets/eye-slash.png';

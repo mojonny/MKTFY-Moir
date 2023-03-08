@@ -47,6 +47,7 @@
 	width: 345px;
 	align-self: center;
 	transition: background 0.9s ease-in-out;
+	cursor: pointer;
 }
 
 .login-modal-button:disabled {

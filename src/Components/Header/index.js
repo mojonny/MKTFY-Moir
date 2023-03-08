@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import SearchBar from './Search-bar';
-import Dropdown from './Profile-Dropdown';
-import NotificationPopup from './Notification-Dropdown';
+import SearchBar from './SearchBar';
+import Dropdown from './ProfileDropdown';
+import NotificationPopup from './NotificationDropdown';
 
 import altLogo from '../../assets/altLogo.png';
 

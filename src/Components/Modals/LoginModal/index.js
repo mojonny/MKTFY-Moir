@@ -6,7 +6,7 @@ import {
 	AUTH0_REALM,
 } from '../../../config';
 
-import Success from '../../../Components/Success';
+import Success from '../../Success';
 
 import eye from '../../../assets/eye.png';
 import eyeslash from '../../../assets/eye-slash.png';
@@ -183,7 +183,8 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 							textAlign: 'right',
 							color: '#FFBA00',
 							textDecoration: 'none',
-
+							width: 'auto',
+							marginLeft: 'auto',
 							backgroundColor: '#ffffff',
 							border: 'none',
 						}}
@@ -192,7 +193,7 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 					</button>
 
 					<button
-						type="button"
+						type="submit"
 						id="login-button"
 						onClick={onSubmit}
 						className="login-modal-button"
@@ -202,7 +203,7 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 							!isValidEmail(user.email)
 						}
 					>
-						{isLoading ? <Success /> : onSubmit}
+						{isLoading ? <Success /> : null}
 						Login
 					</button>
 				</form>

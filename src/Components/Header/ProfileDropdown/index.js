@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { auth } from '../../../Services/auth0.service';
 import { AUTH0_CLIENT_ID } from '../../../config';
 
-import Success from '../../../Components/Success';
+import Success from '../../Success';
 
 import logout from '../../../assets/LogOut.png';
 import dropArrow from '../../../assets/DownArrow.png';
@@ -42,27 +42,41 @@ export default function Dropdown() {
 	};
 
 	const onSubmit = (e) => {
+		setIsDropOpen3(false);
 		setIsLoading(true);
 		setTimeout(() => {
-			setIsLoading(false);
 			auth.logout({
 				returnTo: 'http://localhost:3000/',
 				clientID: AUTH0_CLIENT_ID,
 			});
+			setIsLoading(false);
 		}, 3000);
 	};
 
 	return (
 		<div>
+			{isLoading ? <Success /> : null}
 			<div className="profile-dropdown">
 				{/* This is what shows initially on header */}
-				<div className="profile">
-					<p style={{ margin: '0', textAlign: 'right', color: '#ffffff' }}>
-						Welcome back,
-					</p>
-					<button className="profile-button" onClick={handleToggle3}>
+				<div
+					className="profile"
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+						width: '100%',
+						height: '100%',
+						padding: '5px',
+					}}
+				>
+					Welcome back,
+					<br />
+					<button
+						className="profile-button"
+						onClick={handleToggle3}
+						style={{ width: '100%' }}
+					>
 						<img src={dropArrow} alt="dropArrow" />
-						<h4 style={{ margin: '0' }}>Pearl The Cat</h4>
+						<h4>Pearl The Cat</h4>
 					</button>
 				</div>
 				{/* This is what pops up on button click */}
@@ -136,7 +150,6 @@ export default function Dropdown() {
 										src={logout}
 										alt="logout"
 									/>
-									{isLoading ? <Success /> : onSubmit}
 								</button>
 							</div>
 						</div>

@@ -1,25 +1,27 @@
 .header {
 	min-height: 220px;
-	width: 100vw;
+	width: 99vw;
 	background-color: #6318af;
-	padding: 25px 0px 0px 150px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	box-sizing: border-box;
 }
 
 .search-bar-container {
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
 	align-items: center;
-	gap: 80px;
-	width: 1920px;
+	margin-left: 0 auto;
+	gap: 10px;
+	width: 80vw;
 	height: 129px;
 }
 
 .search-bar {
 	height: 75px;
-	width: 935px;
+	width: 100%;
 	border-radius: 8px;
 }
 
@@ -38,7 +40,6 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: 20px;
 }
 
 .profile-dropdown {

@@ -1,7 +1,7 @@
 .change-pw-container {
 	padding-top: 130px;
 	margin-left: 150px;
-	margin-bottom: 190px;
+	padding-bottom: 190px;
 }
 
 .breadcrumbs {
@@ -14,7 +14,6 @@
 	background-color: #ffffff;
 	padding: 24px;
 	border-radius: 10px;
-	margin-bottom: 190px;
 }
 
 .set-pw-button {

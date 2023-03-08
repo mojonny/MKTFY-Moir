@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-import LoginModal from '../../Components/Modals/login-modal';
-import ForgotPasswordModal from '../../Components/Modals/forgot-password-modal';
-import ResetVerificationModal from '../../Components/Modals/reset-verification-modal';
-import ResetPasswordModal from '../../Components/Modals/reset-password-modal';
+import LoginModal from '../../Components/Modals/LoginModal';
+import ForgotPasswordModal from '../../Components/Modals/ForgotPasswordModal';
+import ResetVerificationModal from '../../Components/Modals/ResetVerificationModal';
+import ResetPasswordModal from '../../Components/Modals/ResetPasswordModal';
 
-import CreateModal from '../../Components/Modals/create-account-modal';
-import PasswordModal from '../../Components/Modals/password-modal';
+import CreateModal from '../../Components/Modals/CreateAccountModal';
+import PasswordModal from '../../Components/Modals/PasswordModal';
 
 import logo from '../../assets/MKTFYlogo.png';
 import './index.css';
