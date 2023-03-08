@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-//import loadImg from '../../assets/LoadImg.svg';
 import removeImg from '../../assets/Closing X.svg';
-//import './index.css';
 
 export default function UploadImage({ src, className }) {
 	//show the default image when there isn't a file to be loaded, or when one is removed
@@ -53,27 +51,32 @@ export default function UploadImage({ src, className }) {
 					type="file"
 					multiple
 					accept="image/*"
-					hidden
 					onChange={onImageChange}
+					style={{ visibility: 'hidden', width: '0', height: '0' }}
 				/>
 			</label>
+			<button
+				type="button"
+				style={{
+					background: 'none',
+					border: 'none',
+					position: 'relative',
+					bottom: '80%',
+					left: '75%',
+					zIndex: '-5',
+				}}
+				onClick={() => setShowDefaultImg(true) || deleteFile(images.id)}
+			>
+				<img alt="close-button" src={removeImg} />
+			</button>
 			{imageURLs.map((imageSrc, index) => (
-				<>
-					<img src={imageSrc} className={className} alt="preview" key={index} />
-					<button
-						type="button"
-						style={{
-							background: 'none',
-							border: 'none',
-							position: 'relative',
-							bottom: '150px',
-							right: '150px',
-						}}
-						onClick={() => setShowDefaultImg(true) || deleteFile(images.id)}
-					>
-						<img alt="close-button" src={removeImg} />
-					</button>
-				</>
+				<img
+					src={imageSrc}
+					className={className}
+					alt="preview"
+					key={index}
+					style={{ marginLeft: '-24px', marginRight: '24px' }}
+				/>
 			))}
 		</>
 	);

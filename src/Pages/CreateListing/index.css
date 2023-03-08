@@ -137,10 +137,10 @@
 	height: 100px;
 	width: 100px;
 	border-radius: 6px;
+	margin: 0;
 }
 .mini-image-box {
 	display: flex;
-	gap: 24px;
 }
 
 .image-upload > input {
