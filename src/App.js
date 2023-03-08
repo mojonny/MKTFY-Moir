@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
 // Landing Page for login/sign-up
-import LoginPortal from './Pages/Login-Portal';
+import LoginPortal from './Pages/LoginPortal';
 
 // Pages from sign-up modals
 import Privacy from './Pages/Privacy';
@@ -15,7 +15,7 @@ import TOC from './Pages/TermsAndConditions';
 // Homepage/ Dashboard after login
 import Home from './Pages/Home';
 import Product from './Pages/Product';
-import CreateListing from './Pages/Create-Listing';
+import CreateListing from './Pages/CreateListing';
 import Checkout from './Pages/Checkout';
 
 //Pages accessed by settings dropdown
