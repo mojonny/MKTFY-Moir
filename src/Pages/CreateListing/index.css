@@ -141,6 +141,7 @@
 }
 .mini-image-box {
 	display: flex;
+	gap: 24px;
 }
 
 .image-upload > input {
