@@ -127,7 +127,7 @@
 .main-listing-img {
 	height: 320px;
 	width: 480px;
-	object-fit: inherit;
+	object-fit: cover;
 	border-radius: 6px;
 	margin-bottom: 12px;
 	cursor: pointer;

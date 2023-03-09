@@ -55,20 +55,26 @@ export default function UploadImage({ src, className }) {
 					multiple
 					accept="image/*"
 					onChange={onImageChange}
-					style={{ visibility: 'hidden', width: '0', height: '0' }}
+					style={{
+						visibility: 'hidden',
+						width: '0',
+						height: '0',
+					}}
 				/>
 			</label>
 			{showButton && (
 				<button
 					type="button"
 					style={{
+						display: 'flex',
 						background: 'none',
 						border: 'none',
 						position: 'relative',
 						width: '0',
 						height: '0',
 						top: '5%',
-						left: '10%',
+						left: '20%',
+						marginLeft: '-60px',
 					}}
 					showButton={showButton}
 					onClick={() =>
@@ -86,7 +92,7 @@ export default function UploadImage({ src, className }) {
 					className={className}
 					alt="preview"
 					key={index}
-					style={{ marginLeft: '-48px' }}
+					// style={{ marginLeft: '-60px' }}
 				/>
 			))}
 		</>
