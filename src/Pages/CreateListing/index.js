@@ -155,7 +155,6 @@ export default function CreateListing() {
 								disabled={isLoading}
 								className="post-button"
 							>
-								{isLoading ? <Success /> : navigateHome}
 								Post your offer
 							</button>
 
@@ -164,13 +163,13 @@ export default function CreateListing() {
 								disabled={isLoading}
 								className="cancel-listing-button"
 							>
-								{isLoading ? <Success /> : navigateHome}
 								Cancel
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
+			{isLoading ? <Success /> : null}
 		</>
 	);
 }
