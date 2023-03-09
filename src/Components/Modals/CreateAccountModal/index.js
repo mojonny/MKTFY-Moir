@@ -29,16 +29,16 @@ export default function CreateModal({ setSignupPage }) {
 			lastName: lastName,
 			email: email,
 			phone: phone,
-			address: address,
+			streetAddress: address,
 			city: city,
 			province: province,
-			country: country,
 		};
-		// axios
-		// 	.post('https://localhost:3000/api/account/register', userData)
-		// 	.then((response) => {
-		// 		console.log(response.status, response.data);
-		// 	});
+
+		// 	axios
+		// 		.post('https://localhost:3000/api/account/register', userData)
+		// 		.then((response) => {
+		// 			console.log(response.status, response.data);
+		// 		});
 
 		setSignupPage(2);
 		sessionStorage.setItem('userEmail', userData.email);

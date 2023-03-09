@@ -203,11 +203,11 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 							!isValidEmail(user.email)
 						}
 					>
-						{isLoading ? <Success /> : null}
 						Login
 					</button>
 				</form>
 			</div>
+			{isLoading ? <Success /> : null}
 		</div>
 	);
 }

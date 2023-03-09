@@ -92,11 +92,11 @@ export default function ResetPasswordModal({ setLoginPage }) {
 						disabled={isLoading}
 						className="create-button2"
 					>
-						{isLoading ? <Success /> : navigateToPortal}
 						Set password
 					</button>
 				</div>
 			</div>
+			{isLoading ? <Success /> : null}
 		</div>
 	);
 }

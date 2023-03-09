@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { auth } from '../../../Services/auth0.service';
+import { AUTH0_CLIENT_ID, AUTH0_REALM } from '../../../config';
 
 import back from '../../../assets/Arrow.png';
 import greyX from '../../../assets/GreyX.png';
@@ -19,10 +20,10 @@ export default function ForgotPasswordModal({ setLoginPage }) {
 	//Sends the verification code to the user's email
 	const onSubmit = (event) => {
 		event.preventDefault();
-		auth.passwordlessStart(
+		auth.changePassword(
 			{
-				connection: 'email',
-				send: 'code',
+				client_id: AUTH0_CLIENT_ID,
+				connection: AUTH0_REALM,
 				email: user.email,
 			},
 			function (err, resp) {
@@ -74,12 +75,7 @@ export default function ForgotPasswordModal({ setLoginPage }) {
 						/>
 					</label>
 
-					<button
-						className="create-button2"
-						button
-						type="button"
-						onClick={onSubmit}
-					>
+					<button className="create-button2" type="button" onClick={onSubmit}>
 						Submit
 					</button>
 				</div>
