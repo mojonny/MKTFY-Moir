@@ -1,6 +1,6 @@
 .chat-image {
-	max-width: 1920px;
-	height: 400px;
+	height: 100vh;
+	width: 99vw;
 }
 
 .text-content {
