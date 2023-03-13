@@ -48,8 +48,8 @@ export default function Home() {
 	//adding dependency for location
 	useEffect(() => {
 		// If we have the access token, then process the hash
-		if (location.hash) {
-			processHash(location.hash);
+		if (window.location.hash) {
+			processHash(window.location.hash);
 		}
 	}, [location]);
 

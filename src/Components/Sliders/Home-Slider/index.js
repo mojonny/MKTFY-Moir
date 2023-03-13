@@ -1,78 +1,62 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import catDonut from '../../../assets/catDonut.png';
+
 import './index.css';
 
 const cardData = [
 	{
 		id: 1,
-		title: 'Pearl The cat: Donut edition',
-		price: '$340.00',
+		name: 'Brown Brim',
+		imageUrl: 'https://i.ibb.co/ZYW3VTp/brown-brim.png',
+		price: 25,
 	},
 	{
 		id: 2,
-		//img: '../../assets/catMonster.png',
-		title: 'Pearl The cat: Monster edition',
-		price: '$340.00',
+		name: 'Blue Beanie',
+		imageUrl: 'https://i.ibb.co/ypkgK0X/blue-beanie.png',
+		price: 18,
 	},
 	{
 		id: 3,
-		//img: '../../assets/catXmas.png',
-		title: 'Pearl The cat: Christmas edition',
-		price: '$340.00',
+		name: 'Brown Cowboy',
+		imageUrl: 'https://i.ibb.co/QdJwgmp/brown-cowboy.png',
+		price: 35,
 	},
 	{
 		id: 4,
-		//img: '../../assets/catHallow.png',
-		title: 'Pearl The cat: Halloween edition',
-		price: '$340.00',
+		name: 'Grey Brim',
+		imageUrl: 'https://i.ibb.co/RjBLWxB/grey-brim.png',
+		price: 25,
 	},
 	{
 		id: 5,
-		//img: '../../assets/catBreakfast.png',
-		title: 'Pearl The cat: Breakfast edition',
-		price: '$340.00',
+		name: 'Green Beanie',
+		imageUrl: 'https://i.ibb.co/YTjW3vF/green-beanie.png',
+		price: 18,
 	},
 	{
 		id: 6,
-		//img: '../../assets/catToyedition.png',
-		title: 'Pearl The cat: Donut edition???',
-		price: '$340.00',
+		name: 'Palm Tree Cap',
+		imageUrl: 'https://i.ibb.co/rKBDvJX/palm-tree-cap.png',
+		price: 14,
 	},
 	{
 		id: 7,
-		title: 'Pearl The cat: Donut edition',
-		price: '$340.00',
+		name: 'Red Beanie',
+		imageUrl: 'https://i.ibb.co/bLB646Z/red-beanie.png',
+		price: 18.0,
 	},
 	{
 		id: 8,
-		//img: '../../assets/catMonster.png',
-		title: 'Pearl The cat: Monster edition',
-		price: '$340.00',
+		name: 'Wolf Cap',
+		imageUrl: 'https://i.ibb.co/1f2nWMM/wolf-cap.png',
+		price: 14.0,
 	},
 	{
 		id: 9,
-		//img: '../../assets/catXmas.png',
-		title: 'Pearl The cat: Christmas edition',
-		price: '$340.00',
-	},
-	{
-		id: 10,
-		//img: '../../assets/catHallow.png',
-		title: 'Pearl The cat: Halloween edition',
-		price: '$340.00',
-	},
-	{
-		id: 11,
-		//img: '../../assets/catBreakfast.png',
-		title: 'Pearl The cat: Breakfast edition',
-		price: '$340.00',
-	},
-	{
-		id: 12,
-		//img: '../../assets/catToyedition.png',
-		title: 'Pearl The cat: Donut edition???',
-		price: '$340.00',
+		name: 'Blue Snapback',
+		imageUrl: 'https://i.ibb.co/X2VJP2W/blue-snapback.png',
+		price: 16.0,
 	},
 ];
 
@@ -84,15 +68,20 @@ export default function Slider() {
 			<div className="info-label">
 				<Link to="/product">
 					<img
-						style={{ objectFit: 'contain' }}
-						src={catDonut}
+						style={{
+							objectFit: 'cover',
+							height: '235px',
+							width: '245px',
+							borderRadius: '10px 10px 0px 0px',
+						}}
+						src={card.imageUrl}
 						alt="catPicture"
 					/>
 				</Link>
 				<div className="bottom-card-info">
-					<p>{card.title}</p>
+					<p>{card.name}</p>
 					<br />
-					<h3 style={{ color: '#6318af' }}>{card.price}</h3>
+					<h3 style={{ color: '#6318af' }}>${card.price}</h3>
 				</div>
 			</div>
 		</div>

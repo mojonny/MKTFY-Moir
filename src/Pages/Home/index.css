@@ -12,28 +12,6 @@
 	gap: 20px;
 }
 
-.cat-pics {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
-	gap: 10px;
-}
-
-.cat-image {
-	max-height: 200px;
-	max-width: 200px;
-	border-radius: 10px;
-}
-
-.bottom-explore-link {
-	text-align: right;
-	color: #9349de;
-	padding: 0px 0px 40px 0px;
-}
-
-.top-shop-title {
-	margin-top: 40px;
-}
 .download-app-add {
 	margin: 0 auto;
 	width: 99vw;

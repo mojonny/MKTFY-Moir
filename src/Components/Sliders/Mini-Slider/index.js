@@ -11,8 +11,17 @@ const SubTitle = 'Explore now';
 export default function MiniSlider() {
 	return (
 		<div className="mini-slider1">
-			<h3 className="top-shop-title">{Title}</h3>
+			<h3>{Title}</h3>
 			<div className="cat-pics">
+				<Link to="/product">
+					<img className="cat-image" src={catDonut} alt="catPicture" />
+				</Link>
+				<Link to="/product">
+					<img className="cat-image" src={catDonut} alt="catPicture" />
+				</Link>
+				<Link to="/product">
+					<img className="cat-image" src={catDonut} alt="catPicture" />
+				</Link>
 				<Link to="/product">
 					<img className="cat-image" src={catDonut} alt="catPicture" />
 				</Link>
