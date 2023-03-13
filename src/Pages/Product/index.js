@@ -1,25 +1,32 @@
 import React from 'react';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import VerticalSlider from '../../Components/Sliders/Vertical-Slider';
 import listingIcon from '../../assets/listingTag.png';
 
-import catSide from '../../assets/catToyedition.png';
+//import catSide from '../../assets/catToyedition.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
+import { productData } from '../../Store/productData';
 
 export default function Product() {
-	const [mainImage, setMainImage] = useState(catSide);
-	console.log(mainImage);
-	const navigate = useNavigate();
+	//const [mainImage, setMainImage] = useState(singleProduct.id);
 
+	const navigate = useNavigate();
 	const navigateToCheckout = () => {
 		navigate('/checkout');
 	};
 
-	const ProductTitle = 'Pearl The Cat: Toy edition';
-	const ProductPrice = '$340.00';
+	const routeParams = useParams();
+
+	const id = routeParams.productId;
+
+	const filtered = productData.find(function (obj) {
+		return (obj.id = id);
+	});
+	console.log('filtered:', filtered);
+
 	return (
 		<>
 			<div className="product-container">
@@ -28,18 +35,17 @@ export default function Product() {
 					listing
 				</div>
 				<div className="product-landing">
-					<VerticalSlider setMainImage={setMainImage} />
+					<VerticalSlider id={id} />
 					<img
-						src={mainImage}
+						src={filtered.imageUrl}
 						alt="main-cat-pic"
 						className="main-img"
-						catSide={catSide}
 					/>
 
 					<div className="side-info-container">
-						<h1> {ProductTitle}</h1>
+						<h1> {filtered.name}</h1>
 						<div className="price-info">
-							<h1 style={{ color: '#6e20be' }}>{ProductPrice}</h1>
+							<h1 style={{ color: '#6e20be' }}>${filtered.price}</h1>
 							<div className="new-price-label"> NEW </div>
 						</div>
 						<button className="checkout-button" onClick={navigateToCheckout}>
@@ -47,13 +53,7 @@ export default function Product() {
 						</button>
 						<div className="product-details">
 							<h4>Details</h4>
-							<p>
-								The world’s most beautiful cat. Pearl The Cat is a pretty cat
-								who is grey with black stripes on top and spots on the belly.
-								She likes catching flies and eating beef jerky as well as
-								yogurt. This edition of Pearl The Cat includes toys for maximum
-								Pearl enjoyment. (Batteries not included)
-							</p>
+							<p>{filtered.description}</p>
 						</div>
 						<div className="product-seller-info">
 							<h4 className="profile-icon">P</h4>

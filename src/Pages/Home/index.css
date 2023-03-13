@@ -3,17 +3,35 @@
 	width: 99vw;
 }
 
+.download-app-add {
+	margin: 0 auto;
+	width: 99vw;
+	margin-bottom: 100px;
+}
+
+.slider {
+	height: 500px;
+	width: 87%;
+	padding: 20px 16px 20px 16px;
+	border-radius: 5px 5px 5px 5px;
+	margin: 0;
+	background: #ffffff;
+	margin-left: 150px;
+}
+
 .mini-slider-container {
 	margin-left: 150px;
-	width: 85vw;
+	width: 86vw;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	gap: 20px;
 }
-
-.download-app-add {
-	margin: 0 auto;
-	width: 99vw;
-	margin-bottom: 100px;
+.mini-slider {
+	height: 500px;
+	width: 49%;
+	padding: 20px 16px 20px 16px;
+	border-radius: 5px;
+	margin: 0;
+	background: #ffffff;
 }

@@ -47,8 +47,9 @@ export default function App() {
 
 				<Route element={<MainLayout />}>
 					<Route path="/home" element={<Home />} />
+					<Route path="/*" element={<Home />} />
 					{/* Linked to home page/dashboard */}
-					<Route path="/product" element={<Product />} />
+					<Route path="/product/:productId" element={<Product />} />
 					<Route path="/createlisting" element={<CreateListing />} />
 
 					{/* Linked to product listing */}
