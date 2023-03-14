@@ -49,7 +49,7 @@ export default function App() {
 					<Route path="/home" element={<Home />} />
 					<Route path="/*" element={<Home />} />
 					{/* Linked to home page/dashboard */}
-					<Route path="/product/:productId" element={<Product />} />
+					<Route path="/product/:id" element={<Product />} />
 					<Route path="/createlisting" element={<CreateListing />} />
 
 					{/* Linked to product listing */}

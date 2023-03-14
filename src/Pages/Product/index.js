@@ -1,5 +1,5 @@
 import React from 'react';
-//import { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import VerticalSlider from '../../Components/Sliders/Vertical-Slider';
@@ -11,21 +11,22 @@ import './index.css';
 import { productData } from '../../Store/productData';
 
 export default function Product() {
-	//const [mainImage, setMainImage] = useState(singleProduct.id);
-
 	const navigate = useNavigate();
 	const navigateToCheckout = () => {
 		navigate('/checkout');
 	};
 
-	const routeParams = useParams();
+	const { id } = useParams();
+	const productId = parseInt(id);
+	console.log(productId);
 
-	const id = routeParams.productId;
+	const filteredById = productData.filter(
+		(product) => product.id === productId
+	);
 
-	const filtered = productData.find(function (obj) {
-		return (obj.id = id);
-	});
-	console.log('filtered:', filtered);
+	const filtered = filteredById[0];
+	console.log(filteredById);
+	const [mainImage, setMainImage] = useState(filtered.imageUrl);
 
 	return (
 		<>
@@ -35,17 +36,31 @@ export default function Product() {
 					listing
 				</div>
 				<div className="product-landing">
-					<VerticalSlider id={id} />
-					<img
-						src={filtered.imageUrl}
-						alt="main-cat-pic"
-						className="main-img"
-					/>
+					<VerticalSlider filtered={filtered} setMainImage={setMainImage} />
+					<img src={mainImage} alt="main-cat-pic" className="main-img" />
 
 					<div className="side-info-container">
-						<h1> {filtered.name}</h1>
+						<h1
+							style={{
+								fontSize: '48px',
+								fontWeight: 'bold',
+								lineHeight: '54px',
+							}}
+						>
+							{' '}
+							{filtered.name}
+						</h1>
 						<div className="price-info">
-							<h1 style={{ color: '#6e20be' }}>${filtered.price}</h1>
+							<h1
+								style={{
+									color: '#6e20be',
+									fontSize: '40px',
+									fontWeight: 'bold',
+									lineHeight: '54px',
+								}}
+							>
+								${filtered.price}
+							</h1>
 							<div className="new-price-label"> NEW </div>
 						</div>
 						<button className="checkout-button" onClick={navigateToCheckout}>
