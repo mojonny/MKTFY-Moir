@@ -399,7 +399,7 @@ export const productData = [
 
 	{
 		id: 23,
-		name: 'Blue Tanktop',
+		name: 'Blue Tank top',
 		imageUrl: 'https://i.ibb.co/7CQVJNm/blue-tank.png',
 		price: 25,
 		imageUrls: [
@@ -525,7 +525,7 @@ export const productData = [
 	},
 	{
 		id: 30,
-		name: 'Camo Down Vest',
+		name: 'Camouflage Down Vest',
 		imageUrl: 'https://i.ibb.co/xJS0T3Y/camo-vest.png',
 		price: 325,
 		imageUrls: [
@@ -561,7 +561,7 @@ export const productData = [
 	},
 	{
 		id: 32,
-		name: 'Black & White Longsleeve',
+		name: 'Black & White Long sleeve',
 		imageUrl: 'https://i.ibb.co/55z32tw/long-sleeve.png',
 		price: 25,
 		imageUrls: [

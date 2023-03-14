@@ -12,14 +12,14 @@ export default function VerticalSlider({ filtered, setMainImage }) {
 	//Scrolls through vertical image carousel
 	const ScrollDown = () => {
 		document.getElementById('container').scrollBy({
-			top: -139,
+			top: -165,
 			behavior: 'smooth',
 		});
 	};
 
 	const ScrollUp = () => {
 		document.getElementById('container').scrollBy({
-			top: 139,
+			top: 165,
 			behavior: 'smooth',
 		});
 	};

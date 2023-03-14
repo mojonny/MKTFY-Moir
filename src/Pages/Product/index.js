@@ -63,7 +63,11 @@ export default function Product() {
 							</h1>
 							<div className="new-price-label"> NEW </div>
 						</div>
-						<button className="checkout-button" onClick={navigateToCheckout}>
+						<button
+							className="checkout-button"
+							onClick={navigateToCheckout}
+							filtered={filtered}
+						>
 							I want this!
 						</button>
 						<div className="product-details">
