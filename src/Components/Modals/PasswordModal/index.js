@@ -219,7 +219,7 @@ export default function PasswordModal({ setSignupPage }) {
 						</div>
 					</div>
 
-					<label for="checkbox" className="checkbox-info">
+					<label className="checkbox-info">
 						<input
 							id="checkbox"
 							name="agreement"

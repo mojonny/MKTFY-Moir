@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import { auth } from '../../Services/auth0.service';
 import { useLocation } from 'react-router-dom';
 
-import MiniSlider from '../../Components/Sliders/Mini-Slider';
-
 import appBanner from '../../assets/AppBanner1.png';
 import Footer from '../../Components/Footer';
 import Slider from '../../Components/Sliders/Home-Slider';
@@ -48,8 +46,8 @@ export default function Home() {
 	//adding dependency for location
 	useEffect(() => {
 		// If we have the access token, then process the hash
-		if (location.hash) {
-			processHash(location.hash);
+		if (window.location.hash) {
+			processHash(window.location.hash);
 		}
 	}, [location]);
 
@@ -57,18 +55,48 @@ export default function Home() {
 		<div className="home-dashboard">
 			<br />
 			<br />
-			<Slider key="0a" />
+			<Slider
+				className="slider"
+				key="001"
+				title="Deals"
+				sliderCategory="Deals"
+			/>
 			<br />
 			<div className="mini-slider-container">
-				<MiniSlider key="0b" />
-				<MiniSlider key="1c" />
+				<Slider
+					key="002"
+					title="Cars & Vehicles"
+					sliderCategory="Cars & Vehicles"
+					className="mini-slider"
+				/>
+				<Slider
+					className="mini-slider"
+					key="003"
+					title="Furniture"
+					sliderCategory="Furniture"
+				/>
 			</div>
 			<br />
-			<Slider key="1d" />
+			<Slider
+				className="slider"
+				key="004"
+				title="More deals for you"
+				sliderCategory="Deals"
+			/>
 			<br />
 			<div className="mini-slider-container" key="bottom">
-				<MiniSlider key="2e" />
-				<MiniSlider key="3f" />
+				<Slider
+					className="mini-slider"
+					key="005"
+					title="Electronics"
+					sliderCategory="Electronics"
+				/>
+				<Slider
+					className="mini-slider"
+					key="006"
+					title="Real Estate"
+					sliderCategory="Real Estate"
+				/>
 			</div>
 			<br />
 			<img

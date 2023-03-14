@@ -1,25 +1,25 @@
 import React from 'react';
 
-import cat1 from '../../../assets/catBreakfast.png';
-import cat2 from '../../../assets/catDonut.png';
-import cat3 from '../../../assets/catHallow.png';
+// import cat1 from '../../../assets/catBreakfast.png';
+// import cat2 from '../../../assets/catDonut.png';
+// import cat3 from '../../../assets/catHallow.png';
 
-import catSide from '../../../assets/catToyedition.png';
+// import catSide from '../../../assets/catToyedition.png';
 import upDownArrow from '../../../assets/UpDownArrow.png';
 import './index.css';
 
-export default function VerticalSlider({ setMainImage }) {
+export default function VerticalSlider({ filtered, setMainImage }) {
 	//Scrolls through vertical image carousel
 	const ScrollDown = () => {
 		document.getElementById('container').scrollBy({
-			top: -139,
+			top: -165,
 			behavior: 'smooth',
 		});
 	};
 
 	const ScrollUp = () => {
 		document.getElementById('container').scrollBy({
-			top: 139,
+			top: 165,
 			behavior: 'smooth',
 		});
 	};
@@ -32,30 +32,43 @@ export default function VerticalSlider({ setMainImage }) {
 			<div id="container" className="vert-image-slider1">
 				<button
 					className="vert-cat-button"
-					onClick={() => setMainImage(catSide)}
+					onClick={() => setMainImage(filtered.imageUrls[0])}
 				>
-					<img src={catSide} className="vert-cat-pic" alt="vert-cat-pic" />
-				</button>
-				<button className="vert-cat-button" onClick={() => setMainImage(cat1)}>
-					<img src={cat1} className="vert-cat-pic" alt="vert-cat-pic" />
-				</button>
-				<button className="vert-cat-button" onClick={() => setMainImage(cat2)}>
-					<img src={cat2} className="vert-cat-pic" alt="vert-cat-pic" />
-				</button>
-				<button className="vert-cat-button" onClick={() => setMainImage(cat3)}>
-					<img src={cat3} className="vert-cat-pic" alt="vert-cat-pic" />
+					<img
+						src={filtered.imageUrls[0]}
+						className="vert-cat-pic"
+						alt="vert-cat-pic"
+					/>
 				</button>
 				<button
 					className="vert-cat-button"
-					onClick={() => setMainImage(catSide)}
+					onClick={() => setMainImage(filtered.imageUrls[1])}
 				>
-					<img src={catSide} className="vert-cat-pic" alt="vert-cat-pic" />
+					<img
+						src={filtered.imageUrls[1]}
+						className="vert-cat-pic"
+						alt="vert-cat-pic"
+					/>
 				</button>
-				<button className="vert-cat-button" onClick={() => setMainImage(cat1)}>
-					<img src={cat1} className="vert-cat-pic" alt="vert-cat-pic" />
+				<button
+					className="vert-cat-button"
+					onClick={() => setMainImage(filtered.imageUrls[2])}
+				>
+					<img
+						src={filtered.imageUrls[2]}
+						className="vert-cat-pic"
+						alt="vert-cat-pic"
+					/>
 				</button>
-				<button className="vert-cat-button" onClick={() => setMainImage(cat2)}>
-					<img src={cat2} className="vert-cat-pic" alt="vert-cat-pic" />
+				<button
+					className="vert-cat-button"
+					onClick={() => setMainImage(filtered.imageUrls[3])}
+				>
+					<img
+						src={filtered.imageUrls[3]}
+						className="vert-cat-pic"
+						alt="vert-cat-pic"
+					/>
 				</button>
 			</div>
 			<button onClick={ScrollUp} className="vert-down-arrow">

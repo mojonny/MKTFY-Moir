@@ -87,13 +87,7 @@ export default function UploadImage({ src, className }) {
 				</button>
 			)}
 			{imageURLs.map((imageSrc, index) => (
-				<img
-					src={imageSrc}
-					className={className}
-					alt="preview"
-					key={index}
-					// style={{ marginLeft: '-60px' }}
-				/>
+				<img src={imageSrc} className={className} alt="preview" key={index} />
 			))}
 		</>
 	);

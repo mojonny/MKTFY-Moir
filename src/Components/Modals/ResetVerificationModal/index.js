@@ -30,13 +30,15 @@ export default function ResetVerificationModal({ setLoginPage }) {
 						Change Password
 					</h2>
 
-					<h3>
-						An email has been sent to <em>{user.email}</em> to change your
-						password. Follow the steps in the email and log in with your new
-						password.
+					<h3 style={{ textAlign: 'left' }}>
+						An email has been sent to <em>{user.email}</em>.
+						<br />
+						<br />
+						Please check your email for further instructions and click the
+						button below when the process is complete.
 					</h3>
 
-					<button
+					{/* <button
 						onClick={() => setLoginPage(2)}
 						style={{
 							textAlign: 'right',
@@ -47,7 +49,7 @@ export default function ResetVerificationModal({ setLoginPage }) {
 						}}
 					>
 						I didn't receive an email, please send it again
-					</button>
+					</button> */}
 				</div>
 			</div>
 		</div>

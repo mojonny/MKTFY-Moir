@@ -1,6 +1,6 @@
 .mini-slider1 {
-	height: 485px;
-	width: 50%;
+	height: 435px;
+	width: 49%;
 	background: #ffffff;
 	border-radius: 10px;
 	display: flex;
@@ -10,16 +10,25 @@
 	padding: 40px 30px 40px 30px;
 }
 
-/* .cat-pics {
+.cat-pics::-webkit-scrollbar {
+	display: none;
+}
+
+.cat-pics {
+	padding: 20px;
 	display: flex;
 	flex-direction: row;
-	width: 100%;
-	overflow: hidden;
-	gap: 20px;
-} */
+	gap: 10px;
+	overflow-x: scroll;
+}
 
-/* .cat-image {
-	height: 200px;
-	width: 200px;
+.cat-image {
+	max-height: 175px;
+	max-width: 175px;
 	border-radius: 10px;
-} */
+}
+
+.bottom-explore-link {
+	text-align: right;
+	color: #9349de;
+}
