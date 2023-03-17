@@ -8,8 +8,7 @@ import mainImage from '../../assets/mainCat.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
-export default function Checkout({ filtered }) {
-	console.log({ filtered });
+export default function Checkout() {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -43,7 +42,7 @@ export default function Checkout({ filtered }) {
 										margin: '0px',
 									}}
 								>
-									{filtered.price}
+									$250.00
 								</h4>
 							</div>
 						</div>
