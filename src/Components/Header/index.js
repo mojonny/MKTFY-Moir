@@ -9,7 +9,6 @@ import { ProductFilter } from '../../Features/ProductFilter/ProductFilter';
 
 import altLogo from '../../assets/altLogo.png';
 import plus from '../../assets/Plus.png';
-import hamburger from '../../assets/LinesMenu.png';
 
 import './index.css';
 
@@ -52,26 +51,7 @@ export default function Header() {
 				</div>
 			</div>
 
-			<ul className="search-bar-categories">
-				<li>
-					<img alt="drop-down" src={hamburger} />
-					{'\xa0'.repeat(2)}Categories
-				</li>
-				<li>
-					{/* <button
-						value="Deals"
-						type="Deals"
-						onClick={() => setFilteredProducts(getProducts())}
-					>
-						Deals
-					</button> */}
-					<ProductFilter />
-				</li>
-				<li>Cars & Vehicles</li>
-				<li>Furniture</li>
-				<li>Electronics</li>
-				<li>Real Estate</li>
-			</ul>
+			<ProductFilter />
 		</div>
 	);
 }
