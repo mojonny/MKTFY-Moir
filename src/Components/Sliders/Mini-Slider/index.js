@@ -1,38 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { productData } from '../../../Store/productData';
 
-import catDonut from '../../../assets/catBreakfast.png';
 import './index.css';
 
-const Title = 'Shop Pearls & Pearls';
+export default function MiniSlider({ title, sliderCategory, className }) {
+	const filteredListings = productData.filter(
+		({ category }) => category === sliderCategory
+	);
 
-const SubTitle = 'Explore now';
-
-export default function MiniSlider() {
-	return (
-		<div className="mini-slider1">
-			<h3>{Title}</h3>
-			<div className="cat-pics">
-				<Link to="/product">
-					<img className="cat-image" src={catDonut} alt="catPicture" />
-				</Link>
-				<Link to="/product">
-					<img className="cat-image" src={catDonut} alt="catPicture" />
-				</Link>
-				<Link to="/product">
-					<img className="cat-image" src={catDonut} alt="catPicture" />
-				</Link>
-				<Link to="/product">
-					<img className="cat-image" src={catDonut} alt="catPicture" />
-				</Link>
-				<Link to="/product">
-					<img className="cat-image" src={catDonut} alt="catPicture" />
-				</Link>
-				<Link to="/product">
-					<img className="cat-image" src={catDonut} alt="catPicture" />
+	const listingComponents = filteredListings.map((product) => (
+		<div key={product.id}>
+			<div className="info-label2">
+				<Link to={`/product/${product.id}`} key={product.id} id={product.id}>
+					<img
+						style={{
+							objectFit: 'cover',
+							height: '235px',
+							width: '245px',
+							borderRadius: '10px',
+						}}
+						src={product.imageUrl}
+						alt="catPicture"
+					/>
 				</Link>
 			</div>
-			<h4 className="bottom-explore-link">{SubTitle}</h4>
+		</div>
+	));
+	return (
+		<div className={className}>
+			<h3 className="slider-title">
+				<Link to={`/${title}`}>{title}</Link>
+			</h3>
+			<br />
+			<div className="card-container">{listingComponents}</div>
+			<Link to={`/${title}`}>Explore more</Link>
 		</div>
 	);
 }

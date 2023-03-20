@@ -8,9 +8,9 @@ import { useSelector } from 'react-redux';
 import appBanner from '../../assets/AppBanner1.png';
 import Footer from '../../Components/Footer';
 import Slider from '../../Components/Sliders/Home-Slider';
+import MiniSlider from '../../Components/Sliders/Mini-Slider';
 
 import './index.css';
-//import { productData } from '../../Store/productData';
 
 export default function Home() {
 	// const location = useLocation();
@@ -56,36 +56,34 @@ export default function Home() {
 	// 	}
 	// }, [location]);
 
+	const [showSliders, setShowSliders] = useState(true);
+	console.log('initial state:', showSliders);
+
 	const [filteredProducts, setFilteredProducts] = useState(null);
 
-	useEffect(() => {
-		setFilteredProducts(getProducts());
-	}, []);
-
 	const filterResult = useSelector((state) => state.product.value);
-	console.log('Filter state on-render home:', filterResult);
 
 	useEffect(() => {
 		let typeCategory = filterResult;
-		console.log(typeCategory);
 		typeCategory !== 'all'
 			? setFilteredProducts(filterProducts(typeCategory))
 			: setFilteredProducts(getProducts());
+	}, [filterResult]);
+
+	useEffect(() => {
+		let typeCategory = filterResult;
+		typeCategory !== '' ? setShowSliders(false) : setShowSliders(true);
 	}, [filterResult]);
 
 	return (
 		<div className="home-dashboard">
 			<br />
 			<br />
-			{/* <button value="Deals" onClick={handleProduct}>
-				Deals
-			</button> */}
-
 			<div className="results">
 				{filteredProducts &&
 					filteredProducts.map((product) => (
 						<div className="Search-Results-Container" key={product.id}>
-							<div className="search-result">
+							<div className="search-result-item">
 								<Link
 									to={`/product/${product.id}`}
 									key={product.id}
@@ -113,48 +111,62 @@ export default function Home() {
 			</div>
 			<br />
 			<br />
-			<Slider
-				className="slider"
-				key="001"
-				title="Deals"
-				sliderCategory="Deals"
-			/>
+			{showSliders && (
+				<Slider
+					className="slider"
+					key="001"
+					title="Deals"
+					sliderCategory="Deals"
+				/>
+			)}
 			<br />
 			<div className="mini-slider-container">
-				<Slider
-					key="002"
-					title="Cars & Vehicles"
-					sliderCategory="Cars & Vehicles"
-					className="mini-slider"
-				/>
-				<Slider
-					className="mini-slider"
-					key="003"
-					title="Furniture"
-					sliderCategory="Furniture"
-				/>
+				{showSliders && (
+					<MiniSlider
+						className="mini-slider"
+						key="002"
+						title="Cars & Vehicles"
+						sliderCategory="Cars & Vehicles"
+					/>
+				)}{' '}
+				{showSliders && (
+					<MiniSlider
+						className="mini-slider"
+						key="003"
+						title="Furniture"
+						sliderCategory="Furniture"
+					/>
+				)}
 			</div>
 			<br />
-			<Slider
-				className="slider"
-				key="004"
-				title="More deals for you"
-				sliderCategory="Deals"
-			/>
+			{showSliders && (
+				<Slider
+					className="slider"
+					key="004"
+					title="More deals for you"
+					sliderCategory="Deals"
+				/>
+			)}
 			<br />
 			<div className="mini-slider-container" key="bottom">
-				<Slider
-					className="mini-slider"
-					key="005"
-					title="Electronics"
-					sliderCategory="Electronics"
-				/>
-				<Slider
-					className="mini-slider"
-					key="006"
-					title="Real Estate"
-					sliderCategory="Real Estate"
-				/>
+				{showSliders && (
+					<MiniSlider
+						className="mini-slider"
+						key="005"
+						title="Electronics"
+						sliderCategory="Electronics"
+						showSliders={showSliders}
+					/>
+				)}
+				{showSliders && (
+					<MiniSlider
+						className="mini-slider"
+						key="006"
+						title="Real Estate"
+						sliderCategory="Real Estate"
+						showSliders={showSliders}
+					/>
+				)}
 			</div>
 			<br />
 			<img

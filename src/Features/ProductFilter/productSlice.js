@@ -3,10 +3,14 @@ import { createSlice } from '@reduxjs/toolkit';
 const productSlice = createSlice({
 	name: 'product',
 	initialState: {
-		value: 'all',
+		value: '',
 	},
 
 	reducers: {
+		filterhide: (state) => {
+			state.value = '';
+			console.log('Updated filter to:', state);
+		},
 		filternone: (state) => {
 			state.value = 'all';
 			console.log('Updated filter to:', state);
@@ -35,6 +39,7 @@ const productSlice = createSlice({
 });
 
 export const {
+	filterhide,
 	filternone,
 	filterdeals,
 	filtercars,
