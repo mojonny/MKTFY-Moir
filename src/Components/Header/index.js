@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+// import { getProducts } from '../../Services/services';
 import SearchBar from './SearchBar';
 import ProfileDropdown from './ProfileDropdown';
 import NotificationPopup from './NotificationDropdown';
+import { ProductFilter } from '../../Features/ProductFilter/ProductFilter';
 
 import altLogo from '../../assets/altLogo.png';
-
 import plus from '../../assets/Plus.png';
 import hamburger from '../../assets/LinesMenu.png';
 
@@ -18,6 +19,7 @@ export default function Header() {
 	const navigateToCreateListing = () => {
 		navigate('/createlisting');
 	};
+
 	return (
 		<div className="header">
 			<div className="search-bar-container">
@@ -55,7 +57,16 @@ export default function Header() {
 					<img alt="drop-down" src={hamburger} />
 					{'\xa0'.repeat(2)}Categories
 				</li>
-				<li>Deals</li>
+				<li>
+					{/* <button
+						value="Deals"
+						type="Deals"
+						onClick={() => setFilteredProducts(getProducts())}
+					>
+						Deals
+					</button> */}
+					<ProductFilter />
+				</li>
 				<li>Cars & Vehicles</li>
 				<li>Furniture</li>
 				<li>Electronics</li>

@@ -35,3 +35,14 @@
 	margin: 0;
 	background: #ffffff;
 }
+
+.results {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.search-result {
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+}

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { listings } from '../Pages/MyListings/data';
 import { questions } from '../Pages/FAQ/data';
+import { productData } from '../Store/productData';
 
 //Login Portal
 //Login POST = /api/account/login
@@ -99,6 +100,21 @@ function getMyListings() {
 	return axios.get(`http://localhost:5000/api/v1/user/listings/`);
 }
 ///////////////////////////////////////////////////////////////////////////////////////
+
+// //service
+export function getProducts() {
+	const productList = productData;
+	return productList;
+}
+
+export function filterProducts(buttonType) {
+	let filteredProduct = getProducts().filter(
+		(type) => type.category === buttonType
+	);
+	return filteredProduct;
+}
+
+//////////////////////////////////////////////
 //FAQ page questions
 export function getQuestions() {
 	const itemList = questions;
@@ -199,6 +215,8 @@ const MKTFYDataService = {
 	createListing,
 	addImage,
 	updateAddress,
+	filterProducts,
+	getProducts,
 };
 
 export default MKTFYDataService;

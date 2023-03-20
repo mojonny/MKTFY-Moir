@@ -8,7 +8,6 @@ export default function Slider({ title, sliderCategory, className }) {
 	const filteredListings = productData.filter(
 		({ category }) => category === sliderCategory
 	);
-	console.log(filteredListings);
 
 	const listingComponents = filteredListings.map((product) => (
 		<div key={product.id}>

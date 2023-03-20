@@ -1,58 +1,116 @@
-import React, { useEffect } from 'react';
-import { auth } from '../../Services/auth0.service';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+// import { auth } from '../../Services/auth0.service';
+// import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { getProducts, filterProducts } from '../../Services/services';
+import { useSelector } from 'react-redux';
 
 import appBanner from '../../assets/AppBanner1.png';
 import Footer from '../../Components/Footer';
 import Slider from '../../Components/Sliders/Home-Slider';
 
 import './index.css';
+//import { productData } from '../../Store/productData';
 
 export default function Home() {
-	const location = useLocation();
+	// const location = useLocation();
+	// console.log('window location for hash', window.location.hash);
 
-	const processHash = (hash) => {
-		auth.parseHash({ hash }, function (error, result) {
-			//if there is an error
-			if (error) {
-				return console.log('There is something wrong', error);
-			}
+	// const processHash = ({ location }) => {
+	// 	auth.parseHash({ hash: window.location.hash }, function (error, result) {
+	// 		//if there is an error
+	// 		if (error) {
+	// 			return console.log('There is something wrong', error);
+	// 		}
 
-			//Else we need to get hash and modify it
-			if (result) {
-				//get the access token
-				const { accessToken } = result;
-				console.log(accessToken);
-				// 1. Store this token in local storage
-				// 2. Authenticate application routes on the base of token
-				if (accessToken) {
-					auth.client.userInfo(accessToken, function (error, result) {
-						if (error) {
-							return console.log(
-								'Something went wrong in fetching user profile',
-								error
-							);
-						}
-						if (result) {
-							return console.log('User login success!', result);
-							//then redirect to home page
-						}
-					});
-				}
-			}
-		});
-	};
+	// 		//Else we need to get hash and modify it
+	// 		if (result) {
+	// 			//get the access token
+	// 			const { accessToken } = result;
+	// 			console.log(accessToken);
+	// 			// 1. Store this token in local storage
+	// 			// 2. Authenticate application routes on the base of token
+	// 			if (accessToken) {
+	// 				auth.client.userInfo(accessToken, function (error, result) {
+	// 					if (error) {
+	// 						return console.log(
+	// 							'Something went wrong in fetching user profile',
+	// 							error
+	// 						);
+	// 					}
+	// 					if (result) {
+	// 						return console.log('User login success!', result);
+	// 						//then redirect to home page
+	// 					}
+	// 				});
+	// 			}
+	// 		}
+	// 	});
+	// };
 
-	//adding dependency for location
+	// //adding dependency for location
+	// useEffect(() => {
+	// 	// If we have the access token, then process the hash
+	// 	if (window.location.hash) {
+	// 		processHash(window.location.hash);
+	// 	}
+	// }, [location]);
+
+	const [filteredProducts, setFilteredProducts] = useState(null);
+
 	useEffect(() => {
-		// If we have the access token, then process the hash
-		if (window.location.hash) {
-			processHash(window.location.hash);
-		}
-	}, [location]);
+		setFilteredProducts(getProducts());
+	}, []);
+
+	const filterResult = useSelector((state) => state.product.value);
+	console.log('Filter state on-render home:', filterResult);
+
+	useEffect(() => {
+		let typeCategory = filterResult;
+		console.log(typeCategory);
+		typeCategory !== 'all'
+			? setFilteredProducts(filterProducts(typeCategory))
+			: setFilteredProducts(getProducts());
+	}, [filterResult]);
 
 	return (
 		<div className="home-dashboard">
+			<br />
+			<br />
+			{/* <button value="Deals" onClick={handleProduct}>
+				Deals
+			</button> */}
+
+			<div className="results">
+				{filteredProducts &&
+					filteredProducts.map((product) => (
+						<div className="Search-Results-Container" key={product.id}>
+							<div className="search-result">
+								<Link
+									to={`/product/${product.id}`}
+									key={product.id}
+									id={product.id}
+								>
+									<img
+										style={{
+											objectFit: 'cover',
+											height: '235px',
+											width: '245px',
+											borderRadius: '10px 10px 0px 0px',
+										}}
+										src={product.imageUrl}
+										alt="product"
+									/>
+								</Link>
+								<div className="bottom-card-info">
+									<h3 style={{ color: '#6318af', textAlign: 'center' }}>
+										{product.name} - ${product.price}
+									</h3>
+								</div>
+							</div>
+						</div>
+					))}
+			</div>
 			<br />
 			<br />
 			<Slider

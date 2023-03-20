@@ -58,7 +58,7 @@ export default function ContactUS() {
 							className="send-button"
 							style={{ alignSelf: 'center' }}
 						>
-							{isLoading ? <Success /> : navigateHome}
+							{isLoading ? <Success /> : null}
 							Send
 						</button>
 					</form>

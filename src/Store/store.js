@@ -1,8 +1,8 @@
-// import { configureStore } from '@reduxjs/toolkit';
-// import productReducer from '../Features/Product/productSlice/';
+import { configureStore } from '@reduxjs/toolkit';
+import productReducer from '../Features/ProductFilter/productSlice';
 
-// export default configureStore({
-// 	reducer: {
-// 		product: productReducer,
-// 	},
-// });
+export default configureStore({
+	reducer: {
+		product: productReducer,
+	},
+});
