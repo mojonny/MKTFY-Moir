@@ -30,11 +30,26 @@ export default function MiniSlider({ title, sliderCategory, className }) {
 	return (
 		<div className={className}>
 			<h3 className="slider-title">
-				<Link to={`/${title}`}>{title}</Link>
+				<Link
+					to={`/${title}`}
+					style={{ textDecoration: 'none', color: '#000000' }}
+				>
+					{title}
+				</Link>
 			</h3>
 			<br />
 			<div className="card-container">{listingComponents}</div>
-			<Link to={`/${title}`}>Explore more</Link>
+			<Link
+				to={`/${title}`}
+				style={{
+					textDecoration: 'none',
+					marginLeft: '80%',
+					color: '#9349de',
+					size: '20px',
+				}}
+			>
+				Explore now
+			</Link>
 		</div>
 	);
 }

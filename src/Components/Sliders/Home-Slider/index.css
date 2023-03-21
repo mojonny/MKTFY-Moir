@@ -25,3 +25,10 @@
 .bottom-card-info {
 	padding: 0px 10px 25px 10px;
 }
+
+.slider-title {
+	text-decoration: none;
+	size: 20px;
+	margin: 10px;
+	color: #000000;
+}

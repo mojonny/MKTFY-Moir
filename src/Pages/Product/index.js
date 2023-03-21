@@ -11,11 +11,6 @@ import './index.css';
 import { productData } from '../../Store/productData';
 
 export default function Product() {
-	const navigate = useNavigate();
-	const navigateToCheckout = () => {
-		navigate('/checkout');
-	};
-
 	const { id } = useParams();
 	const productId = parseInt(id);
 	console.log(productId);
@@ -27,6 +22,14 @@ export default function Product() {
 	const filtered = filteredById[0];
 	console.log(filteredById);
 	const [mainImage, setMainImage] = useState(filtered.imageUrl);
+
+	const navigate = useNavigate();
+	const navigateToCheckout = () => {
+		navigate('/checkout');
+		sessionStorage.setItem('productName', filtered.name);
+		sessionStorage.setItem('productPrice', filtered.price);
+		sessionStorage.setItem('productImage', filtered.imageUrl);
+	};
 
 	return (
 		<>

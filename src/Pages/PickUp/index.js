@@ -1,67 +1,66 @@
 import React from 'react';
-
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import Success from '../../Components/Success';
 
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
-export default function Checkout() {
+export default function PickUp() {
+	const [isLoading, setIsLoading] = useState(false);
+
 	const navigate = useNavigate();
 
-	const navigatePickup = () => {
-		navigate('/pickup');
+	const navigateHome = () => {
+		setIsLoading(true);
+		setTimeout(() => {
+			navigate('/home');
+			setIsLoading(false);
+		}, 2000);
 	};
-
-	const productName = sessionStorage.getItem('productName');
-	const productPrice = sessionStorage.getItem('productPrice');
-	const productImage = sessionStorage.getItem('productImage');
 
 	return (
 		<>
-			<div className="product-container">
+			<div className="pickup-container">
 				<div className="breadcrumbs">
 					Deals for you <img src={breadArrow} alt="path-arrow" /> Product
 					listing <img src={breadArrow} alt="path-arrow" /> Checkout
+					<img src={breadArrow} alt="path-arrow" /> Pickup Information
 				</div>
-				<div className="product-landing1">
-					<h1 style={{ color: '#6318af' }}> Confirm</h1>
+				<div className="pickup-landing">
+					<h1 style={{ color: '#6318af' }}> Pick up</h1>
 					<div className="checkout-item-box">
-						<img
-							src={productImage}
-							alt="checkout-pic"
-							className="checkout-pic"
-						/>
+						<div className="profile-icon">P</div>
 						<div className="checkout-item-detail">
-							<h3>{productName}</h3>
+							<h2>Matt Smith</h2>
 							<div className="price-info1">
-								<h4
+								<h3
 									style={{
 										color: '#560f9f',
-										paddingTop: '10px',
 										margin: '0px',
 									}}
 								>
-									${productPrice}
-								</h4>
+									403-123-4567
+								</h3>
 							</div>
 						</div>
 					</div>
 					<div className="side-info-container">
-						<h3> Total</h3>
-						<div className="price-info">
-							<h1 style={{ color: '#6e20be' }}> ${productPrice}</h1>
-						</div>
+						<p>Please pick up your purchase at 12 12ave SW, Calgary, Alberta</p>
 						<br />
 						<button
-							onClick={navigatePickup}
+							onClick={navigateHome}
+							disabled={isLoading}
 							className="checkout-button1"
 							style={{ alignSelf: 'center' }}
 						>
-							Contact seller to purchase
+							Contact seller
 						</button>
 					</div>
 				</div>
 			</div>
+			{isLoading ? <Success /> : null}
 		</>
 	);
 }

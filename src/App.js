@@ -17,6 +17,7 @@ import Home from './Pages/Home';
 import Product from './Pages/Product';
 import CreateListing from './Pages/CreateListing';
 import Checkout from './Pages/Checkout';
+import PickUp from './Pages/PickUp';
 
 //Pages accessed by settings dropdown
 import AccountInfo from './Pages/AccountInfo';
@@ -54,6 +55,7 @@ export default function App() {
 
 					{/* Linked to product listing */}
 					<Route path="/checkout" element={<Checkout />} />
+					<Route path="/pickup" element={<PickUp />} />
 
 					{/* Links found in Settings dropdown */}
 					<Route path="/account" element={<AccountInfo />} />
