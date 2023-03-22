@@ -28,6 +28,9 @@ export default function Product() {
 	const filteredUser = filterByUser[0];
 	console.log(filteredUser);
 
+	const profileLetter = filteredUser.firstName[0];
+	console.log(profileLetter);
+
 	const navigate = useNavigate();
 	const navigateToCheckout = () => {
 		navigate('/checkout');
@@ -84,7 +87,7 @@ export default function Product() {
 							<p>{filtered.description}</p>
 						</div>
 						<div className="product-seller-info">
-							<h4 className="profile-icon">P</h4>
+							<h4 className="profile-icon">{profileLetter}</h4>
 							<div className="seller-details">
 								<h4 style={{ margin: '15px 0px 2px' }}>
 									{filteredUser.firstName} {filteredUser.lastName}

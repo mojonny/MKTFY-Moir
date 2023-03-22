@@ -26,6 +26,9 @@ export default function PickUp() {
 	const filteredUser = filterByUser[0];
 	console.log(filteredUser);
 
+	const profileLetter = filteredUser.firstName[0];
+	console.log(profileLetter);
+
 	return (
 		<>
 			<div className="pickup-container">
@@ -37,7 +40,7 @@ export default function PickUp() {
 				<div className="pickup-landing">
 					<h1 style={{ color: '#6318af' }}> Pick up</h1>
 					<div className="checkout-item-box">
-						<div className="profile-icon">P</div>
+						<div className="profile-icon">{profileLetter}</div>
 						<div className="checkout-item-detail">
 							<h2>
 								{filteredUser.firstName} {filteredUser.lastName}

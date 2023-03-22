@@ -40,14 +40,14 @@
 
 .left-side-form,
 .right-side-form {
-	width: 530px;
+	width: 550px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	gap: 25px;
 	background-color: #f7f7f7;
 	border-radius: 0px 10px 10px 0px;
-	padding: 5px;
+	padding: 15px;
 }
 
 .account-input {
@@ -64,7 +64,7 @@
 	border: solid #e2e2e2 1px;
 	color: #4d4d4d;
 	height: 51px;
-	width: 253px;
+	width: 237px;
 	padding: 16px 10px 16px 10px;
 }
 

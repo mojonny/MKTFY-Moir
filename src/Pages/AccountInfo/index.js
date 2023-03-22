@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { userData } from '../../Store/userData';
 
 import Success from '../../Components/Success';
 
@@ -20,6 +21,12 @@ export default function AccountInfo() {
 		}, 2000);
 	};
 
+	const storedEmail = sessionStorage.getItem('userEmail');
+
+	const filterByUser = userData.filter((user) => user.email === storedEmail);
+
+	const filteredUser = filterByUser[0];
+
 	return (
 		<>
 			<div className="account-info-container">
@@ -36,12 +43,18 @@ export default function AccountInfo() {
 							<div>
 								<label>First name</label>
 								<br />
-								<input placeholder="Pearl" className="account-input" />
+								<input
+									placeholder={filteredUser.firstName}
+									className="account-input"
+								/>
 							</div>
 							<div>
 								<label>Last name</label>
 								<br />
-								<input className="account-input" placeholder="The cat"></input>
+								<input
+									className="account-input"
+									placeholder={filteredUser.lastName}
+								></input>
 							</div>
 							<div>
 								<label>Email</label>
@@ -49,7 +62,7 @@ export default function AccountInfo() {
 								<input
 									className="account-input"
 									type="email"
-									placeholder="Insert your email"
+									placeholder={filteredUser.email}
 								/>
 							</div>
 							<div>
@@ -58,7 +71,7 @@ export default function AccountInfo() {
 								<input
 									className="account-input"
 									type="phone"
-									placeholder="+1 (585) 505-3333"
+									placeholder={filteredUser.phone}
 								/>
 							</div>
 						</div>
@@ -72,25 +85,34 @@ export default function AccountInfo() {
 								<br />
 								<input
 									className="account-input"
-									placeholder="123 1st Street SW"
+									placeholder={filteredUser.address}
 								/>
 							</div>
 							<div className="city-province">
 								<div>
 									<label>City</label>
 									<br />
-									<input className="account-input-city" placeholder="Calgary" />
+									<input
+										className="account-input-city"
+										placeholder={filteredUser.city}
+									/>
 								</div>
 								<div>
 									<label>Province</label>
 									<br />
-									<input className="account-input-city" placeholder="Alberta" />
+									<input
+										className="account-input-city"
+										placeholder={filteredUser.province}
+									/>
 								</div>
 							</div>
 							<div>
 								<label>Country</label>
 								<br />
-								<input className="account-input" placeholder="Canada" />
+								<input
+									className="account-input"
+									placeholder={filteredUser.country}
+								/>
 							</div>
 
 							<button
@@ -99,7 +121,7 @@ export default function AccountInfo() {
 								className="save-button"
 								style={{ alignSelf: 'center' }}
 							>
-								{isLoading ? <Success /> : navigateHome}
+								{isLoading ? <Success /> : null}
 								Save
 							</button>
 						</div>

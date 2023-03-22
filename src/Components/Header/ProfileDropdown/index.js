@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { auth } from '../../../Services/auth0.service';
 import { AUTH0_CLIENT_ID } from '../../../config';
 
+import { userData } from '../../../Store/userData';
 import Success from '../../Success';
 
 import logout from '../../../assets/LogOut.png';
@@ -53,6 +54,33 @@ export default function ProfileDropdown() {
 		}, 3000);
 	};
 
+	const storedEmail = sessionStorage.getItem('userEmail');
+	console.log(storedEmail);
+
+	let filterByUser = userData.filter((user) => user.email === storedEmail);
+
+	let filteredUser = filterByUser[0];
+
+	if (filteredUser === undefined) {
+		const tempUser = [
+			{
+				firstName: 'Pearl',
+				lastName: 'The Cat',
+				email: 'pearl@gmail.com',
+				phone: 4034563456,
+				province: 'Alberta',
+				country: 'Canada',
+				address: '123 Nowhere St. NW',
+				city: 'Calgary',
+				userId: '641a19eb739976b747123132131231230db9c6',
+			},
+		];
+
+		filteredUser = tempUser[0];
+	}
+	console.log(filteredUser);
+	const profileLetter = filteredUser.firstName[0];
+
 	return (
 		<div>
 			{isLoading ? <Success /> : null}
@@ -78,7 +106,9 @@ export default function ProfileDropdown() {
 						style={{ width: '100%', cursor: 'pointer' }}
 					>
 						<img src={dropArrow} alt="dropArrow" />
-						<h4>Pearl The Cat</h4>
+						<h4>
+							{filteredUser.firstName} {filteredUser.lastName}
+						</h4>
 					</button>
 				</div>
 				{/* This is what pops up on button click */}
@@ -86,8 +116,10 @@ export default function ProfileDropdown() {
 					<div ref={dropMenu3} onClick={(e) => e.stopPropagation()}>
 						<div className="drop-container">
 							<div className="title-container">
-								<div className="profile-icon">P</div>
-								<h1>Pearl The Cat</h1>
+								<div className="profile-icon">{profileLetter}</div>
+								<h1>
+									{filteredUser.firstName} {filteredUser.lastName}
+								</h1>
 							</div>
 
 							<h2 style={{ color: 'black', margin: '0px' }}>Settings</h2>

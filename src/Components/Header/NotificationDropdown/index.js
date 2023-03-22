@@ -27,6 +27,7 @@ export default function NotificationPopup() {
 	const handleNotification = () => {
 		setIsNotificationOpen(true);
 	};
+
 	return (
 		<div>
 			{/* This is what shows initially on header */}
@@ -59,7 +60,7 @@ export default function NotificationPopup() {
 							<div className="note-box">
 								<img src={mktfy} className="mini-logo" alt="mktfy" />
 								<div className="note">
-									Hey Pearl, welcome to MKTFY
+									Hey there, welcome to MKTFY
 									<br />
 									<p>September 07,2020</p>
 								</div>

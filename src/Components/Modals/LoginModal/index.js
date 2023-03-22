@@ -81,6 +81,8 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 
 	const onSubmit = (event) => {
 		event.preventDefault();
+		sessionStorage.setItem('userEmail', user.email);
+		console.log('User email stored:', user.email);
 		setIsLoading(true);
 		setTimeout(() => {
 			auth.login(

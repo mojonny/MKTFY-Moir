@@ -14,7 +14,6 @@ import './index.css';
 
 export default function Home() {
 	const location = useLocation();
-	console.log('window location for hash', window.location.hash);
 
 	const processHash = () => {
 		auth.parseHash({ hash: window.location.hash }, function (error, result) {
@@ -27,7 +26,7 @@ export default function Home() {
 			if (result) {
 				//get the access token
 				const { accessToken } = result;
-				console.log(accessToken);
+
 				// 1. Store this token in local storage
 				// 2. Authenticate application routes on the base of token
 				if (accessToken) {

@@ -1,5 +1,16 @@
 export const userData = [
 	{
+		firstName: 'Jonny',
+		lastName: 'Mo',
+		email: 'a1+moirjonathan@gmail.com',
+		phone: 4034563456,
+		province: 'Alberta',
+		country: 'Canada',
+		address: '123 Nowhere St. NW',
+		city: 'Calgary',
+		userId: '641a19eb739976b7470db9c6',
+	},
+	{
 		firstName: 'Jack',
 		lastName: 'Black',
 		email: 'jack.black@gmail.com',
