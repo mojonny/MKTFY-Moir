@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { productData } from '../../Store/productData';
+import { userData } from '../../Store/userData';
 
 import VerticalSlider from '../../Components/Sliders/Vertical-Slider';
 import listingIcon from '../../assets/listingTag.png';
@@ -20,6 +21,12 @@ export default function Product() {
 	const filtered = filteredById[0];
 	console.log('filter by id:', filteredById);
 	const [mainImage, setMainImage] = useState(filtered.imageUrl);
+
+	const userId = sessionStorage.getItem('userId');
+	console.log(userId);
+	const filterByUser = userData.filter((user) => user.userId === userId);
+	const filteredUser = filterByUser[0];
+	console.log(filteredUser);
 
 	const navigate = useNavigate();
 	const navigateToCheckout = () => {
@@ -79,12 +86,14 @@ export default function Product() {
 						<div className="product-seller-info">
 							<h4 className="profile-icon">P</h4>
 							<div className="seller-details">
-								<h4 style={{ margin: '15px 0px 2px' }}>Matt Smith</h4>
+								<h4 style={{ margin: '15px 0px 2px' }}>
+									{filteredUser.firstName} {filteredUser.lastName}
+								</h4>
 
 								<div className="seller-listings">
 									<img src={listingIcon} alt="listing icon" />
-									<div>2</div>
-									<p> listings</p>
+									<div>1</div>
+									<p> listing</p>
 								</div>
 							</div>
 						</div>

@@ -57,7 +57,7 @@ export default function PickUp() {
 					<div className="side-info-container">
 						<p>
 							Please pick up your purchase at {filteredUser.address},{' '}
-							{filteredUser.city},{filteredUser.province}
+							{filteredUser.city}, {filteredUser.province}
 						</p>
 						<br />
 						<button
