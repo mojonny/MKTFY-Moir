@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { userData } from '../../Store/userData';
 
 import Success from '../../Components/Success';
 
@@ -19,6 +20,11 @@ export default function PickUp() {
 			setIsLoading(false);
 		}, 2000);
 	};
+	const userId = sessionStorage.getItem('userId');
+	console.log(userId);
+	const filterByUser = userData.filter((user) => user.userId === userId);
+	const filteredUser = filterByUser[0];
+	console.log(filteredUser);
 
 	return (
 		<>
@@ -33,7 +39,9 @@ export default function PickUp() {
 					<div className="checkout-item-box">
 						<div className="profile-icon">P</div>
 						<div className="checkout-item-detail">
-							<h2>Matt Smith</h2>
+							<h2>
+								{filteredUser.firstName} {filteredUser.lastName}
+							</h2>
 							<div className="price-info1">
 								<h3
 									style={{
@@ -41,13 +49,16 @@ export default function PickUp() {
 										margin: '0px',
 									}}
 								>
-									403-123-4567
+									{filteredUser.phone}
 								</h3>
 							</div>
 						</div>
 					</div>
 					<div className="side-info-container">
-						<p>Please pick up your purchase at 12 12ave SW, Calgary, Alberta</p>
+						<p>
+							Please pick up your purchase at {filteredUser.address},{' '}
+							{filteredUser.city},{filteredUser.province}
+						</p>
 						<br />
 						<button
 							onClick={navigateHome}

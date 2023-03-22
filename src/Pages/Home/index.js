@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-// import { auth } from '../../Services/auth0.service';
-// import { useLocation } from 'react-router-dom';
+import { auth } from '../../Services/auth0.service';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { getProducts, filterProducts } from '../../Services/services';
 import { useSelector } from 'react-redux';
@@ -13,51 +13,50 @@ import MiniSlider from '../../Components/Sliders/Mini-Slider';
 import './index.css';
 
 export default function Home() {
-	// const location = useLocation();
-	// console.log('window location for hash', window.location.hash);
+	const location = useLocation();
+	console.log('window location for hash', window.location.hash);
 
-	// const processHash = ({ location }) => {
-	// 	auth.parseHash({ hash: window.location.hash }, function (error, result) {
-	// 		//if there is an error
-	// 		if (error) {
-	// 			return console.log('There is something wrong', error);
-	// 		}
+	const processHash = () => {
+		auth.parseHash({ hash: window.location.hash }, function (error, result) {
+			//if there is an error
+			if (error) {
+				return console.log('There is something wrong', error);
+			}
 
-	// 		//Else we need to get hash and modify it
-	// 		if (result) {
-	// 			//get the access token
-	// 			const { accessToken } = result;
-	// 			console.log(accessToken);
-	// 			// 1. Store this token in local storage
-	// 			// 2. Authenticate application routes on the base of token
-	// 			if (accessToken) {
-	// 				auth.client.userInfo(accessToken, function (error, result) {
-	// 					if (error) {
-	// 						return console.log(
-	// 							'Something went wrong in fetching user profile',
-	// 							error
-	// 						);
-	// 					}
-	// 					if (result) {
-	// 						return console.log('User login success!', result);
-	// 						//then redirect to home page
-	// 					}
-	// 				});
-	// 			}
-	// 		}
-	// 	});
-	// };
+			//Else we need to get hash and modify it
+			if (result) {
+				//get the access token
+				const { accessToken } = result;
+				console.log(accessToken);
+				// 1. Store this token in local storage
+				// 2. Authenticate application routes on the base of token
+				if (accessToken) {
+					auth.client.userInfo(accessToken, function (error, result) {
+						if (error) {
+							return console.log(
+								'Something went wrong in fetching user profile',
+								error
+							);
+						}
+						if (result) {
+							return console.log('User login success!', result);
+							//then redirect to home page
+						}
+					});
+				}
+			}
+		});
+	};
 
-	// //adding dependency for location
-	// useEffect(() => {
-	// 	// If we have the access token, then process the hash
-	// 	if (window.location.hash) {
-	// 		processHash(window.location.hash);
-	// 	}
-	// }, [location]);
+	//adding dependency for location
+	useEffect(() => {
+		// If we have the access token, then process the hash
+		if (window.location.hash) {
+			processHash(window.location.hash);
+		}
+	}, [location]);
 
 	const [showSliders, setShowSliders] = useState(true);
-	console.log('initial state:', showSliders);
 
 	const [filteredProducts, setFilteredProducts] = useState(null);
 

@@ -1,14 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { productData } from '../../Store/productData';
 
 import VerticalSlider from '../../Components/Sliders/Vertical-Slider';
 import listingIcon from '../../assets/listingTag.png';
-
-//import catSide from '../../assets/catToyedition.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
-import { productData } from '../../Store/productData';
 
 export default function Product() {
 	const { id } = useParams();
@@ -20,7 +18,7 @@ export default function Product() {
 	);
 
 	const filtered = filteredById[0];
-	console.log(filteredById);
+	console.log('filter by id:', filteredById);
 	const [mainImage, setMainImage] = useState(filtered.imageUrl);
 
 	const navigate = useNavigate();
@@ -29,6 +27,7 @@ export default function Product() {
 		sessionStorage.setItem('productName', filtered.name);
 		sessionStorage.setItem('productPrice', filtered.price);
 		sessionStorage.setItem('productImage', filtered.imageUrl);
+		sessionStorage.setItem('userId', filtered.userId);
 	};
 
 	return (
