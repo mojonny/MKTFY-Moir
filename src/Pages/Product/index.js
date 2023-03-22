@@ -22,9 +22,9 @@ export default function Product() {
 	console.log('filter by id:', filteredById);
 	const [mainImage, setMainImage] = useState(filtered.imageUrl);
 
-	const userId = sessionStorage.getItem('userId');
-	console.log(userId);
-	const filterByUser = userData.filter((user) => user.userId === userId);
+	const filterByUser = userData.filter(
+		(user) => user.userId === filtered.userId
+	);
 	const filteredUser = filterByUser[0];
 	console.log(filteredUser);
 
