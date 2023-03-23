@@ -4,6 +4,9 @@ import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { getProducts, filterProducts } from '../../Services/services';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
+
+import Success from '../../Components/Success';
 
 import appBanner from '../../assets/AppBanner1.png';
 import Footer from '../../Components/Footer';
@@ -13,6 +16,16 @@ import MiniSlider from '../../Components/Sliders/Mini-Slider';
 import './index.css';
 
 export default function Home() {
+	//Show lottie when loading and moving to success
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		setIsLoading(true);
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 3000);
+	}, []);
+
 	const location = useLocation();
 
 	const processHash = () => {
@@ -26,7 +39,7 @@ export default function Home() {
 			if (result) {
 				//get the access token
 				const { accessToken } = result;
-
+				console.log(accessToken);
 				// 1. Store this token in local storage
 				// 2. Authenticate application routes on the base of token
 				if (accessToken) {
@@ -58,6 +71,7 @@ export default function Home() {
 	const [showSliders, setShowSliders] = useState(true);
 
 	const [filteredProducts, setFilteredProducts] = useState(null);
+	const [listings, setListings] = useState(null);
 
 	const filterResult = useSelector((state) => state.product.value);
 
@@ -72,6 +86,21 @@ export default function Home() {
 		let typeCategory = filterResult;
 		typeCategory !== '' ? setShowSliders(false) : setShowSliders(true);
 	}, [filterResult]);
+
+	const retrieveListings = async () => {
+		const response = await axios.get('http://localhost:3000/listings');
+		console.log(response.data);
+		return response.data;
+	};
+
+	useEffect(() => {
+		const getAllListings = async () => {
+			const allListings = await retrieveListings();
+			if (allListings) setListings(allListings);
+		};
+
+		getAllListings();
+	}, []);
 
 	return (
 		<div className="home-dashboard">
@@ -174,6 +203,7 @@ export default function Home() {
 			/>
 			<br />
 			<Footer />
+			{isLoading ? <Success /> : null}
 		</div>
 	);
 }

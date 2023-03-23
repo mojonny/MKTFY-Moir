@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import LoginModal from '../../Components/Modals/LoginModal';
 import ForgotPasswordModal from '../../Components/Modals/ForgotPasswordModal';
 import ResetVerificationModal from '../../Components/Modals/ResetVerificationModal';
 import ResetPasswordModal from '../../Components/Modals/ResetPasswordModal';
-
+import Success from '../../Components/Success';
 import CreateModal from '../../Components/Modals/CreateAccountModal';
 import PasswordModal from '../../Components/Modals/PasswordModal';
 
@@ -14,6 +14,15 @@ import './index.css';
 export default function LoginPortal() {
 	const [loginPage, setLoginPage] = useState(0);
 	const [signupPage, setSignupPage] = useState(0);
+	//Show lottie when loading and moving to success
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		setIsLoading(true);
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 3000);
+	}, []);
 
 	return (
 		<div className="Login-Portal">
@@ -88,6 +97,7 @@ export default function LoginPortal() {
 					</a>
 				</div>
 			</div>
+			{isLoading ? <Success /> : null}
 		</div>
 	);
 }

@@ -5,16 +5,12 @@ import { auth } from '../../../Services/auth0.service';
 import { AUTH0_CLIENT_ID } from '../../../config';
 
 import { userData } from '../../../Store/userData';
-import Success from '../../Success';
 
 import logout from '../../../assets/LogOut.png';
 import dropArrow from '../../../assets/DownArrow.png';
 import './index.css';
 
 export default function ProfileDropdown() {
-	//Show lottie when loading and moving to success
-	const [isLoading, setIsLoading] = useState(false);
-
 	const [isDropOpen3, setIsDropOpen3] = useState(false);
 
 	const dropMenu3 = useRef(null);
@@ -44,14 +40,13 @@ export default function ProfileDropdown() {
 
 	const onSubmit = (e) => {
 		setIsDropOpen3(false);
-		setIsLoading(true);
+
 		setTimeout(() => {
 			auth.logout({
 				returnTo: 'http://localhost:3000/',
 				clientID: AUTH0_CLIENT_ID,
 			});
-			setIsLoading(false);
-		}, 3000);
+		}, 1500);
 	};
 
 	const storedEmail = sessionStorage.getItem('userEmail');
@@ -83,7 +78,6 @@ export default function ProfileDropdown() {
 
 	return (
 		<div>
-			{isLoading ? <Success /> : null}
 			<div className="profile-dropdown">
 				{/* This is what shows initially on header */}
 				<div
@@ -176,7 +170,6 @@ export default function ProfileDropdown() {
 									type="button"
 									onClick={onSubmit}
 									className="bottom-drop-links"
-									disabled={isLoading}
 								>
 									<h2>Sign out</h2>
 									<img
