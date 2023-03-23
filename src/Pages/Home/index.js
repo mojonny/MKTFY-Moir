@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { getProducts, filterProducts } from '../../Services/services';
 import { useSelector } from 'react-redux';
+import Success from '../../Components/Success';
 
 import appBanner from '../../assets/AppBanner1.png';
 import Footer from '../../Components/Footer';
@@ -13,6 +14,9 @@ import MiniSlider from '../../Components/Sliders/Mini-Slider';
 import './index.css';
 
 export default function Home() {
+	//Show lottie when loading and moving to success
+	const [isLoading, setIsLoading] = useState(false);
+
 	const location = useLocation();
 	console.log('window location for hash', window.location.hash);
 
@@ -74,8 +78,17 @@ export default function Home() {
 		typeCategory !== '' ? setShowSliders(false) : setShowSliders(true);
 	}, [filterResult]);
 
+	useEffect(() => {
+		setIsLoading(true);
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 3000);
+	}, []);
+
 	return (
 		<div className="home-dashboard">
+			{isLoading ? <Success /> : null}
+
 			<br />
 			<br />
 			<div className="results">

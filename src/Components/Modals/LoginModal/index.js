@@ -6,8 +6,6 @@ import {
 	AUTH0_REALM,
 } from '../../../config';
 
-import Success from '../../Success';
-
 import eye from '../../../assets/eye.png';
 import eyeslash from '../../../assets/eye-slash.png';
 import greyX from '../../../assets/GreyX.png';
@@ -26,9 +24,6 @@ function isValidPassword(password) {
 }
 
 export default function LoginModal({ setLoginPage, setMessage }) {
-	//Show lottie when loading and moving to success
-	const [isLoading, setIsLoading] = useState(false);
-
 	const [user, setUser] = useState({ email: '', password: '' });
 
 	//validation error handling
@@ -81,29 +76,23 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 
 	const onSubmit = (event) => {
 		event.preventDefault();
-		setIsLoading(true);
-		setTimeout(() => {
-			auth.login(
-				{
-					realm: AUTH0_REALM,
-					username: user.email,
-					password: user.password,
-					redirectUri: AUTH0_LOGIN_REDIRECT_URI,
-					responseType: AUTH0_LOGIN_RESPONSE_TYPE,
-				},
-				function (error, result) {
-					if (error) {
-						setIsLoading(false);
-						alert('Oops! Login failed, please try again.');
-						console.log('Oops! login failed.', error);
-						return;
-					} else {
-						setIsLoading(false);
-						console.log('Login success!', result);
-					}
+
+		auth.login(
+			{
+				realm: AUTH0_REALM,
+				username: user.email,
+				password: user.password,
+				redirectUri: AUTH0_LOGIN_REDIRECT_URI,
+				responseType: AUTH0_LOGIN_RESPONSE_TYPE,
+			},
+			function (error) {
+				if (error) {
+					alert('Oops! Login failed, please try again.');
+					console.log('Oops! login failed.', error);
+					return;
 				}
-			);
-		}, 3000);
+			}
+		);
 	};
 
 	//To change icon, change the input type
@@ -198,16 +187,13 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 						onClick={onSubmit}
 						className="login-modal-button"
 						disabled={
-							isLoading ||
-							!isValidPassword(user.password) ||
-							!isValidEmail(user.email)
+							!isValidPassword(user.password) || !isValidEmail(user.email)
 						}
 					>
 						Login
 					</button>
 				</form>
 			</div>
-			{isLoading ? <Success /> : null}
 		</div>
 	);
 }
