@@ -40,14 +40,14 @@ export default function App() {
 	return (
 		<div className="App">
 			<Routes>
-				<Route path="/" element={<LoginPortal />} />
+				<Route path="/auth" element={<LoginPortal />} />
 
 				{/* Pages from sign-up modals */}
 				<Route path="/privacy" element={<Privacy />} />
 				<Route path="/termsandservices" element={<TOC />} />
 
 				<Route element={<MainLayout />}>
-					<Route path="/home" element={<Home />} />
+					<Route path="/" element={<Home />} />
 					<Route path="/*" element={<Home />} />
 					{/* Linked to home page/dashboard */}
 					<Route path="/product/:id" element={<Product />} />

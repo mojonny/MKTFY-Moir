@@ -1,10 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { productData } from '../../../Store/productData';
 
 import './index.css';
 
 export default function Slider({ title, sliderCategory, className }) {
+	const [listings, setListings] = useState(null);
+	console.log('listings:', listings);
+	const retrieveListings = async () => {
+		const response = await axios.get(`http://localhost:5000/listings`);
+		console.log(response.data);
+		return response.data;
+	};
+
+	useEffect(() => {
+		const getAllListings = async () => {
+			const allListings = await retrieveListings();
+			if (allListings) setListings(allListings);
+		};
+
+		getAllListings();
+	}, []);
+
 	const filteredListings = productData.filter(
 		({ category }) => category === sliderCategory
 	);

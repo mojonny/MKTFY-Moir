@@ -4,13 +4,13 @@ import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { getProducts, filterProducts } from '../../Services/services';
 import { useSelector } from 'react-redux';
-import Success from '../../Components/Success';
 
-import appBanner from '../../assets/AppBanner1.png';
+import Success from '../../Components/Success';
 import Footer from '../../Components/Footer';
 import Slider from '../../Components/Sliders/Home-Slider';
 import MiniSlider from '../../Components/Sliders/Mini-Slider';
 
+import appBanner from '../../assets/AppBanner1.png';
 import './index.css';
 
 export default function Home() {
