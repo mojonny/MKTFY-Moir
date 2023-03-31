@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
 import { auth } from '../../../Services/auth0.service';
-import {
-	AUTH0_LOGIN_REDIRECT_URI,
-	AUTH0_LOGIN_RESPONSE_TYPE,
-	AUTH0_REALM,
-} from '../../../config';
+import { AUTH0_REALM } from '../../../config';
 
 import eye from '../../../assets/eye.png';
 import eyeslash from '../../../assets/eye-slash.png';
@@ -80,10 +76,8 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 		auth.login(
 			{
 				realm: AUTH0_REALM,
-				username: user.email,
+				email: user.email,
 				password: user.password,
-				redirectUri: AUTH0_LOGIN_REDIRECT_URI,
-				responseType: AUTH0_LOGIN_RESPONSE_TYPE,
 			},
 			function (error) {
 				if (error) {

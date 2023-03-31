@@ -5,7 +5,7 @@ import {
 	AUTH0_USER_SCOPE,
 	AUTH0_REALM,
 	AUTH0_LOGIN_REDIRECT_URI,
-	AUTH0_LOGIN_RESPONSE_TYPE,
+	AUTH0_AUDIENCE,
 } from '../config';
 
 const register = ({ user }) => {
@@ -36,7 +36,6 @@ const login = ({ user }) => {
 			username: user.email,
 			password: user.password,
 			redirectUri: AUTH0_LOGIN_REDIRECT_URI,
-			responseType: AUTH0_LOGIN_RESPONSE_TYPE,
 		},
 		function (error, result) {
 			if (error) {
@@ -75,6 +74,7 @@ export const auth = new auth0.WebAuth({
 	clientID: AUTH0_CLIENT_ID,
 	scope: AUTH0_USER_SCOPE,
 	redirectUri: AUTH0_LOGIN_REDIRECT_URI,
-	responseType: AUTH0_LOGIN_RESPONSE_TYPE,
+	responseType: 'token',
 	realm: AUTH0_REALM,
+	audience: AUTH0_AUDIENCE,
 });

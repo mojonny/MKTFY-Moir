@@ -12,7 +12,7 @@ import './index.css';
 export default function Product() {
 	const { id } = useParams();
 	const productId = parseInt(id);
-	console.log(productId);
+	console.log('prod id:', productId);
 
 	const filteredById = productData.filter(
 		(product) => product.id === productId

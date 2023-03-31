@@ -60,14 +60,6 @@ export function ProductFilter() {
 				<li>
 					<button
 						className="nav-category-button"
-						onClick={() => dispatch(filterfurniture())}
-					>
-						Furniture
-					</button>
-				</li>
-				<li>
-					<button
-						className="nav-category-button"
 						onClick={() => dispatch(filterelectronics())}
 					>
 						Electronics

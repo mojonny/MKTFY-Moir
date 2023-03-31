@@ -10,7 +10,8 @@ import Privacy from './Pages/Privacy';
 import TOC from './Pages/TermsAndConditions';
 
 //Layout used for main app pages
-//import MainLayout from './Components/Layout';
+//Use the main layout by react-router v6
+import MainLayout from './Components/Layout';
 
 // Homepage/ Dashboard after login
 import Home from './Pages/Home';
@@ -32,9 +33,6 @@ import ContactUs from './Pages/ContactUs';
 
 //In case of 404
 import NotFound from './Pages/NotFound';
-
-//Use the main layout by react-router v6
-import MainLayout from './Components/Layout';
 
 export default function App() {
 	return (
