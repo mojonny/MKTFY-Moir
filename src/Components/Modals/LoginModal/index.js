@@ -125,7 +125,7 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 							value={user.email}
 							onChange={onChangeHandler}
 							className="input-style2"
-							autoComplete="true"
+							autoComplete="false"
 						/>
 						<p style={{ color: 'red' }}>{emailError}</p>
 					</label>

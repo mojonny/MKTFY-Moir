@@ -1,6 +1,7 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import Success from '../../Components/Success';
 
@@ -19,6 +20,26 @@ export default function AccountInfo() {
 			setIsLoading(false);
 		}, 2000);
 	};
+
+	useEffect(() => {
+		//Check if user exists
+		function getUser() {
+			const token = sessionStorage.getItem('accessToken');
+			const id = sessionStorage.getItem('id');
+			const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`;
+
+			axios
+				.get(url, { headers: { Authorization: `Bearer ${token}` } })
+				.then((res) => {
+					return console.log('SUCCESS: User found!', res.data);
+				})
+				.catch((error) => {
+					console.log('ERROR: User does not exist in db', error);
+				});
+		}
+
+		getUser();
+	}, []);
 
 	return (
 		<>
@@ -63,7 +84,7 @@ export default function AccountInfo() {
 							</div>
 						</div>
 
-						<div className="right-side-form">
+						<div className="right-side-forms">
 							<h2 style={{ color: '#000000', margin: '0px' }}>
 								Address information
 							</h2>
@@ -75,31 +96,18 @@ export default function AccountInfo() {
 									placeholder="123 1st Street SW"
 								/>
 							</div>
-							<div className="city-province">
-								<div>
-									<label>City</label>
-									<br />
-									<input className="account-input-city" placeholder="Calgary" />
-								</div>
-								<div>
-									<label>Province</label>
-									<br />
-									<input className="account-input-city" placeholder="Alberta" />
-								</div>
-							</div>
 							<div>
-								<label>Country</label>
+								<label>City</label>
 								<br />
-								<input className="account-input" placeholder="Canada" />
+								<input className="account-input" placeholder="Calgary" />
 							</div>
-
 							<button
 								onClick={navigateHome}
 								disabled={isLoading}
 								className="save-button"
 								style={{ alignSelf: 'center' }}
 							>
-								{isLoading ? <Success /> : navigateHome}
+								{isLoading ? <Success /> : null}
 								Save
 							</button>
 						</div>

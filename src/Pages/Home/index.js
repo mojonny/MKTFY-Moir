@@ -24,17 +24,17 @@ export default function Home() {
 	const navigate = useNavigate();
 	const token = sessionStorage.getItem('accessToken');
 
-	//Send user to auth page if not logged in
-	function checkIfLoggedIn() {
-		if (window.location.hash === '') {
-			navigate('/auth');
-		}
-	}
-
-	checkIfLoggedIn();
-
 	//Get user accessToken and id
 	useEffect(() => {
+		//Send user to auth page if not logged in
+		function checkIfLoggedIn() {
+			if (window.location.hash === '') {
+				navigate('/auth');
+			}
+		}
+
+		checkIfLoggedIn();
+
 		function processHash() {
 			if (token !== null) {
 				return;
@@ -60,7 +60,7 @@ export default function Home() {
 		}
 
 		processHash();
-	}, [token]);
+	}, [navigate, token]);
 
 	//Check if user exists in backend.If not, register them
 	useEffect(() => {
@@ -79,7 +79,7 @@ export default function Home() {
 			//Only run check if first name is stored (only happens on signup)
 			//If it is, then register the user
 			//If not, then check they exist in backend db (for sanity)
-			if (firstName !== null) {
+			if (email !== null) {
 				axios
 					.post(
 						'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/register',
@@ -100,7 +100,7 @@ export default function Home() {
 					.catch((error) =>
 						console.log('ERROR: User may already be registered', error)
 					);
-			} else if (firstName === null) {
+			} else if (email === null) {
 				if (token === null) {
 					return;
 				} else if (token !== null) {
