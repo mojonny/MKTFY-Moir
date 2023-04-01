@@ -22,9 +22,9 @@ export default function Home() {
 	// const filterResult = useSelector((state) => state.product.value);
 	//const location = useLocation();
 	const navigate = useNavigate();
-
 	const token = sessionStorage.getItem('accessToken');
 
+	//Send user to auth page if not logged in
 	function checkIfLoggedIn() {
 		if (window.location.hash === '') {
 			navigate('/auth');
@@ -35,10 +35,10 @@ export default function Home() {
 
 	//Get user accessToken and id
 	useEffect(() => {
-		async function processHash() {
-			if (token) {
+		function processHash() {
+			if (token !== null) {
 				return;
-			} else if (!token) {
+			} else if (token === null) {
 				auth.parseHash(
 					{ hash: window.location.hash },
 					function (err, authResult) {
@@ -62,6 +62,7 @@ export default function Home() {
 		processHash();
 	}, [token]);
 
+	//Check if user exists in backend.If not, register them
 	useEffect(() => {
 		//Check if user exists
 		function validateUser() {
@@ -75,16 +76,10 @@ export default function Home() {
 			const city = sessionStorage.getItem('city');
 			const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`;
 
-			if (token) {
-				axios
-					.get(url, { headers: { Authorization: `Bearer ${token}` } })
-					.then((res) => {
-						return console.log('SUCCESS: User found!', res);
-					})
-					.catch((error) => {
-						console.log('ERROR: User does not exist in db', error);
-					});
-			} else {
+			//Only run check if first name is stored (only happens on signup)
+			//If it is, then register the user
+			//If not, then check they exist in backend db (for sanity)
+			if (firstName !== null) {
 				axios
 					.post(
 						'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/register',
@@ -105,6 +100,19 @@ export default function Home() {
 					.catch((error) =>
 						console.log('ERROR: User may already be registered', error)
 					);
+			} else if (firstName === null) {
+				if (token === null) {
+					return;
+				} else if (token !== null) {
+					axios
+						.get(url, { headers: { Authorization: `Bearer ${token}` } })
+						.then((res) => {
+							return console.log('SUCCESS: User found!', res);
+						})
+						.catch((error) => {
+							console.log('ERROR: User does not exist in db', error);
+						});
+				}
 			}
 		}
 
