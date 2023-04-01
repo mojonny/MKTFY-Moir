@@ -19,8 +19,6 @@ export default function CreateModal({ setSignupPage }) {
 	const [phone, setPhone] = useState('');
 	const [address, setAddress] = useState('');
 	const [city, setCity] = useState('');
-	const [province, setProvince] = useState('');
-	const [country, setCountry] = useState('');
 
 	const onSubmit = (event) => {
 		event.preventDefault();
@@ -31,7 +29,6 @@ export default function CreateModal({ setSignupPage }) {
 			phone: phone,
 			address: address,
 			city: city,
-			province: province,
 		};
 
 		// 	axios
@@ -67,8 +64,8 @@ export default function CreateModal({ setSignupPage }) {
 					<h1
 						style={{
 							color: 'rgba(147,73,222,1)',
-							size: '36px',
-							paddingTop: '16px',
+							paddingTop: '20px',
+							width: '50%',
 						}}
 					>
 						Welcome to MKTFY!
@@ -136,19 +133,6 @@ export default function CreateModal({ setSignupPage }) {
 							/>
 						</label>
 
-						<label className="province">
-							Province
-							<br />
-							<input
-								type="text"
-								name="province"
-								placeholder=" Your province"
-								className="input-style"
-								value={province}
-								onChange={(e) => setProvince(e.target.value)}
-							/>
-						</label>
-
 						<label className="email">
 							Email
 							<br />
@@ -159,19 +143,6 @@ export default function CreateModal({ setSignupPage }) {
 								onChange={(e) => setEmail(e.target.value)}
 								className="input-style"
 								value={email}
-							/>
-						</label>
-
-						<label className="country">
-							Country
-							<br />
-							<input
-								type="text"
-								name="country"
-								placeholder=" Country name"
-								className="input-style"
-								value={country}
-								onChange={(e) => setCountry(e.target.value)}
 							/>
 						</label>
 

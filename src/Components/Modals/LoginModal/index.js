@@ -125,6 +125,7 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 							value={user.email}
 							onChange={onChangeHandler}
 							className="input-style2"
+							autoComplete="true"
 						/>
 						<p style={{ color: 'red' }}>{emailError}</p>
 					</label>
@@ -142,6 +143,7 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 								value={user.password}
 								onChange={onChangeHandler}
 								className="input-style2"
+								autoComplete="false"
 							/>
 							<button className="eye-slash" onClick={togglePassword}>
 								{passwordType === 'password' ? (

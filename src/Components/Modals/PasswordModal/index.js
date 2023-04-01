@@ -141,7 +141,6 @@ export default function PasswordModal({ setSignupPage }) {
 						Password
 						<div className="password-eye-box">
 							<input
-								required
 								type={passwordType}
 								placeholder="Insert your password"
 								name="password"
@@ -149,6 +148,7 @@ export default function PasswordModal({ setSignupPage }) {
 								value={user.password}
 								onChange={onChangeHandler}
 								className="input-style2"
+								autoComplete="false"
 							/>
 
 							<button className="eye-slash" onClick={togglePassword}>
@@ -169,13 +169,12 @@ export default function PasswordModal({ setSignupPage }) {
 						Password
 						<div className="password-eye-box">
 							<input
-								required
 								type={passwordType}
 								placeholder="Insert your password"
 								id="verifyPassword"
-								// verifyPassword={verifyPassword}
 								onChange={(e) => setVerifyPassword(e.target.value)}
 								className="input-style2"
+								autoComplete="false"
 							/>
 
 							<button className="eye-slash" onClick={togglePassword}>
@@ -227,7 +226,6 @@ export default function PasswordModal({ setSignupPage }) {
 							onChange={handleChange}
 							className="checkbox"
 							type="checkbox"
-							required
 						/>
 						<div style={{ fontSize: '14px', fontWeight: '400' }}>
 							By checking this box, you agree to our{' '}
