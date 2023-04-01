@@ -65,7 +65,7 @@ export default function PasswordModal({ setSignupPage }) {
 				} else {
 					setPwError('');
 				}
-			}, 36000);
+			}, 2000);
 
 			return () => {
 				clearTimeout(timeoutId);
@@ -92,13 +92,14 @@ export default function PasswordModal({ setSignupPage }) {
 						setIsLoading(false);
 						return;
 					} else {
-						console.log('User registered!', result);
+						sessionStorage.setItem('id', result.Id);
+						console.log('User registered in auth0!', result);
 						setSignupPage(0);
 						setIsLoading(false);
 					}
 				}
 			);
-		}, 3000);
+		}, 4000);
 	};
 
 	//To change icon, change the input type

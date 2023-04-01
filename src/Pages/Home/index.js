@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { auth } from '../../Services/auth0.service';
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { getProducts, filterProducts } from '../../Services/services';
-import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+//import { getProducts, filterProducts } from '../../Services/services';
+//import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 import Success from '../../Components/Success';
 import Footer from '../../Components/Footer';
-import Slider from '../../Components/Sliders/Home-Slider';
-import MiniSlider from '../../Components/Sliders/Mini-Slider';
+//import Slider from '../../Components/Sliders/Home-Slider';
+//import MiniSlider from '../../Components/Sliders/Mini-Slider';
 
 import appBanner from '../../assets/AppBanner1.png';
 import './index.css';
@@ -16,67 +16,111 @@ import './index.css';
 export default function Home() {
 	//Show lottie when loading and moving to success
 	const [isLoading, setIsLoading] = useState(false);
+	// const [showSliders, setShowSliders] = useState(true);
+	// const [filteredProducts, setFilteredProducts] = useState(null);
 
-	const location = useLocation();
-	console.log('window location for hash', window.location.hash);
+	// const filterResult = useSelector((state) => state.product.value);
+	//const location = useLocation();
+	const navigate = useNavigate();
 
-	const processHash = () => {
-		auth.parseHash({ hash: window.location.hash }, function (error, result) {
-			//if there is an error
-			if (error) {
-				return console.log('There is something wrong', error);
-			}
+	//Get user info from session storage to check if registered with backend
+	const id = sessionStorage.getItem('id');
+	const firstName = sessionStorage.getItem('firstName');
+	const lastName = sessionStorage.getItem('lastName');
+	const email = sessionStorage.getItem('userEmail');
+	const phone = sessionStorage.getItem('phone');
+	const address = sessionStorage.getItem('address');
+	const city = sessionStorage.getItem('city');
 
-			//Else we need to get hash and modify it
-			if (result) {
-				//get the access token
-				const { accessToken } = result;
-				console.log(accessToken);
-				// 1. Store this token in local storage
-				// 2. Authenticate application routes on the base of token
-				if (accessToken) {
-					auth.client.userInfo(accessToken, function (error, result) {
-						if (error) {
-							return console.log(
-								'Something went wrong in fetching user profile',
-								error
-							);
-						}
-						if (result) {
-							return console.log('User login success!', result);
-							//then redirect to home page
-						}
-					});
-				}
-			}
-		});
-	};
-
-	//adding dependency for location
-	useEffect(() => {
-		// If we have the access token, then process the hash
-		if (window.location.hash) {
-			processHash(window.location.hash);
+	function checkIfLoggedIn() {
+		if (window.location.hash === '') {
+			navigate('/auth');
 		}
-	}, [location]);
+	}
 
-	const [showSliders, setShowSliders] = useState(true);
+	checkIfLoggedIn();
 
-	const [filteredProducts, setFilteredProducts] = useState(null);
+	//Check if user exists
+	function findUser() {
+		const token = sessionStorage.getItem('accessToken');
+		axios
+			.get(
+				`http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`,
+				{ id: id },
+				{ headers: { Authorization: `Bearer ${token}` } }
+			)
+			.then((res) => console.log('User already exists:', res))
+			.catch((error) => {
+				console.log('User does not exist...Registering user:', error);
+				return registerUser();
+			});
+	}
 
-	const filterResult = useSelector((state) => state.product.value);
+	//If user doesn't exist, then register them
+	function registerUser() {
+		const token = sessionStorage.getItem('accessToken');
+		axios
+			.post(
+				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/register',
+				{
+					id: id,
+					firstName: firstName,
+					lastName: lastName,
+					email: email,
+					phone: phone,
+					address: address,
+					city: city,
+				},
+				{ headers: { Authorization: `Bearer ${token}` } }
+			)
+			.then((res) => console.log('User registered!', res))
+			.catch((error) => console.log('User already exists:', error));
+	}
 
+	//Get the accessToken and user id after login
+	//I want this to only run once to get the token
 	useEffect(() => {
-		let typeCategory = filterResult;
-		typeCategory !== 'all'
-			? setFilteredProducts(filterProducts(typeCategory))
-			: setFilteredProducts(getProducts());
-	}, [filterResult]);
+		async function processHash() {
+			if (id) {
+				return;
+			} else if (!id) {
+				auth.parseHash(
+					{ hash: window.location.hash },
+					function (err, authResult) {
+						if (err) {
+							return console.log('Parse hash error:', err);
+						}
+						auth.client.userInfo(authResult.accessToken, function (err, user) {
+							//To remove 'auth0|' from the start of the id string
+							let str = user.sub;
+							let n = 6;
+							let ID = str.substring(n);
 
-	useEffect(() => {
-		let typeCategory = filterResult;
-		typeCategory !== '' ? setShowSliders(false) : setShowSliders(true);
-	}, [filterResult]);
+							sessionStorage.setItem('id', ID);
+							sessionStorage.setItem('accessToken', authResult.accessToken);
+
+							console.log('Id stored from auth0:', ID);
+							console.log('Token stored from auth0:', authResult.accessToken);
+						});
+					}
+				);
+			}
+		}
+
+		processHash();
+	}, [id]);
+
+	// useEffect(() => {
+	// 	let typeCategory = filterResult;
+	// 	typeCategory !== 'all'
+	// 		? setFilteredProducts(filterProducts(typeCategory))
+	// 		: setFilteredProducts(getProducts());
+	// }, [filterResult]);
+
+	// useEffect(() => {
+	// 	let typeCategory = filterResult;
+	// 	typeCategory !== '' ? setShowSliders(false) : setShowSliders(true);
+	// }, [filterResult]);
 
 	useEffect(() => {
 		setIsLoading(true);
@@ -88,8 +132,8 @@ export default function Home() {
 	return (
 		<div className="home-dashboard">
 			{isLoading ? <Success /> : null}
-
-			<br />
+			<button onClick={findUser}>CallAxios</button>
+			{/* <br />
 			<br />
 			<div className="results">
 				{filteredProducts &&
@@ -180,7 +224,7 @@ export default function Home() {
 					/>
 				)}
 			</div>
-			<br />
+			<br /> */}
 			<img
 				alt="download app banner"
 				className="download-app-add"

@@ -29,7 +29,7 @@ export default function CreateModal({ setSignupPage }) {
 			lastName: lastName,
 			email: email,
 			phone: phone,
-			streetAddress: address,
+			address: address,
 			city: city,
 			province: province,
 		};
@@ -41,7 +41,12 @@ export default function CreateModal({ setSignupPage }) {
 		// 		});
 
 		setSignupPage(2);
+		sessionStorage.setItem('firstName', userData.firstName);
+		sessionStorage.setItem('lastName', userData.lastName);
 		sessionStorage.setItem('userEmail', userData.email);
+		sessionStorage.setItem('phone', userData.phone);
+		sessionStorage.setItem('address', userData.address);
+		sessionStorage.setItem('city', userData.city);
 	};
 
 	return (

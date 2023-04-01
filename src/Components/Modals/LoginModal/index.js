@@ -70,9 +70,8 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 		});
 	};
 
-	const onSubmit = (event) => {
+	async function onSubmit(event) {
 		event.preventDefault();
-
 		auth.login(
 			{
 				realm: AUTH0_REALM,
@@ -87,7 +86,7 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 				}
 			}
 		);
-	};
+	}
 
 	//To change icon, change the input type
 	const togglePassword = (event) => {
