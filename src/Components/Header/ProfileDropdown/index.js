@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../../../Services/auth0.service';
-import { AUTH0_CLIENT_ID, AUTH0_LOGOUT_URI } from '../../../config';
+import { AUTH0_LOGOUT_URI } from '../../../config';
 
 import logout from '../../../assets/LogOut.png';
 import dropArrow from '../../../assets/DownArrow.png';
@@ -39,7 +39,7 @@ export default function ProfileDropdown() {
 		setIsDropOpen3(false);
 		auth.logout({
 			returnTo: AUTH0_LOGOUT_URI,
-			clientID: AUTH0_CLIENT_ID,
+			// clientID: AUTH0_CLIENT_ID,
 		});
 	};
 

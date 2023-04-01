@@ -23,14 +23,7 @@ export default function Home() {
 	//const location = useLocation();
 	const navigate = useNavigate();
 
-	//Get user info from session storage to check if registered with backend
-	const id = sessionStorage.getItem('id');
-	const firstName = sessionStorage.getItem('firstName');
-	const lastName = sessionStorage.getItem('lastName');
-	const email = sessionStorage.getItem('userEmail');
-	const phone = sessionStorage.getItem('phone');
-	const address = sessionStorage.getItem('address');
-	const city = sessionStorage.getItem('city');
+	const token = sessionStorage.getItem('accessToken');
 
 	function checkIfLoggedIn() {
 		if (window.location.hash === '') {
@@ -40,50 +33,12 @@ export default function Home() {
 
 	checkIfLoggedIn();
 
-	//Check if user exists
-	function findUser() {
-		const token = sessionStorage.getItem('accessToken');
-		axios
-			.get(
-				`http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`,
-				{ id: id },
-				{ headers: { Authorization: `Bearer ${token}` } }
-			)
-			.then((res) => console.log('User already exists:', res))
-			.catch((error) => {
-				console.log('User does not exist...Registering user:', error);
-				return registerUser();
-			});
-	}
-
-	//If user doesn't exist, then register them
-	function registerUser() {
-		const token = sessionStorage.getItem('accessToken');
-		axios
-			.post(
-				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/register',
-				{
-					id: id,
-					firstName: firstName,
-					lastName: lastName,
-					email: email,
-					phone: phone,
-					address: address,
-					city: city,
-				},
-				{ headers: { Authorization: `Bearer ${token}` } }
-			)
-			.then((res) => console.log('User registered!', res))
-			.catch((error) => console.log('User already exists:', error));
-	}
-
-	//Get the accessToken and user id after login
-	//I want this to only run once to get the token
+	//Get user accessToken and id
 	useEffect(() => {
 		async function processHash() {
-			if (id) {
+			if (token) {
 				return;
-			} else if (!id) {
+			} else if (!token) {
 				auth.parseHash(
 					{ hash: window.location.hash },
 					function (err, authResult) {
@@ -98,9 +53,6 @@ export default function Home() {
 
 							sessionStorage.setItem('id', ID);
 							sessionStorage.setItem('accessToken', authResult.accessToken);
-
-							console.log('Id stored from auth0:', ID);
-							console.log('Token stored from auth0:', authResult.accessToken);
 						});
 					}
 				);
@@ -108,7 +60,56 @@ export default function Home() {
 		}
 
 		processHash();
-	}, [id]);
+	}, [token]);
+
+	useEffect(() => {
+		//Check if user exists
+		function validateUser() {
+			const token = sessionStorage.getItem('accessToken');
+			const id = sessionStorage.getItem('id');
+			const firstName = sessionStorage.getItem('firstName');
+			const lastName = sessionStorage.getItem('lastName');
+			const email = sessionStorage.getItem('userEmail');
+			const phone = sessionStorage.getItem('phone');
+			const address = sessionStorage.getItem('address');
+			const city = sessionStorage.getItem('city');
+			const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`;
+
+			if (token) {
+				axios
+					.get(url, { headers: { Authorization: `Bearer ${token}` } })
+					.then((res) => {
+						return console.log('SUCCESS: User found!', res);
+					})
+					.catch((error) => {
+						console.log('ERROR: User does not exist in db', error);
+					});
+			} else {
+				axios
+					.post(
+						'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/register',
+						{
+							id: id,
+							firstName: firstName,
+							lastName: lastName,
+							email: email,
+							phone: phone,
+							address: address,
+							city: city,
+						},
+						{ headers: { Authorization: `Bearer ${token}` } }
+					)
+					.then((res) => {
+						console.log('SUCCESS: Registered to db!', res);
+					})
+					.catch((error) =>
+						console.log('ERROR: User may already be registered', error)
+					);
+			}
+		}
+
+		validateUser();
+	}, [token]);
 
 	// useEffect(() => {
 	// 	let typeCategory = filterResult;
@@ -132,7 +133,6 @@ export default function Home() {
 	return (
 		<div className="home-dashboard">
 			{isLoading ? <Success /> : null}
-			<button onClick={findUser}>CallAxios</button>
 			{/* <br />
 			<br />
 			<div className="results">
