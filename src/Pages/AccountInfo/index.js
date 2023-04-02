@@ -19,8 +19,6 @@ export default function AccountInfo() {
 	var [address, setAddress] = useState('');
 	var [city, setCity] = useState('');
 
-	console.log('first name:', firstName);
-
 	async function updateUser() {
 		setIsLoading(true);
 		setTimeout(() => {

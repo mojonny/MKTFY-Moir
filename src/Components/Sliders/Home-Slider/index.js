@@ -1,33 +1,38 @@
-//import React, { useState, useEffect } from 'react';
-//import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { productData } from '../../../Store/productData';
+//import { productData } from '../../../Store/productData';
 
 import './index.css';
 
 export default function Slider({ title, sliderCategory, className }) {
-	//const [listings, setListings] = useState(null);
+	const [listings, setListings] = useState([]);
 
-	//const retrieveListings = async () => {
-	// const response = await axios.get(`http://localhost:5000/listings`);
-	// console.log(response.data);
-	// return response.data;
-	//};
+	console.log('listings:', listings);
 
-	// useEffect(() => {
-	// 	const getAllListings = async () => {
-	// 		const allListings = await retrieveListings();
-	// 		if (allListings) setListings(allListings);
-	// 	};
+	useEffect(() => {
+		const token = sessionStorage.getItem('accessToken');
+		const url =
+			'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product';
+		const options = {
+			headers: { Authorization: `Bearer ${token}` },
+		};
+		axios
+			.get(url, options)
+			.then((res) => {
+				setListings(res.data);
+				console.log('SUCCESS: Retrieved all listings:', res.data);
+			})
+			.catch((error) =>
+				console.log('ERROR: Unable to retrieve listings:', error)
+			);
+	}, []);
 
-	// 	getAllListings();
-	// }, []);
+	// const filteredListings = listings.filter(
+	// 	({ category }) => category === sliderCategory
+	// );
 
-	const filteredListings = productData.filter(
-		({ category }) => category === sliderCategory
-	);
-
-	const listingComponents = filteredListings.map((product) => (
+	const listingComponents = listings.map((product) => (
 		<div key={product.id}>
 			<div className="info-label">
 				<Link to={`/product/${product.id}`} key={product.id} id={product.id}>
@@ -38,12 +43,12 @@ export default function Slider({ title, sliderCategory, className }) {
 							width: '245px',
 							borderRadius: '10px 10px 0px 0px',
 						}}
-						src={product.imageUrl}
+						src={product.images[0]}
 						alt="catPicture"
 					/>
 				</Link>
 				<div className="bottom-card-info">
-					<p>{product.name}</p>
+					<p>{product.productName}</p>
 					<br />
 					<h3 style={{ color: '#6318af' }}>${product.price}</h3>
 				</div>
