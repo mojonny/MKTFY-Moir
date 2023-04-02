@@ -19,7 +19,7 @@
 }
 
 .save-button {
-	width: 530px;
+	min-width: 400px;
 	height: 50px;
 	color: #ffffff;
 	background-color: #ffba00;
@@ -38,6 +38,7 @@
 }
 
 .left-side-form {
+	min-width: 400px;
 	width: 530px;
 	display: flex;
 	flex-direction: column;
@@ -48,6 +49,7 @@
 	padding: 5px;
 }
 .right-side-forms {
+	min-width: 400px;
 	width: 530px;
 	height: 100%;
 	display: flex;

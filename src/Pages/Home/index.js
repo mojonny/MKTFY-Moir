@@ -22,64 +22,55 @@ export default function Home() {
 	// const filterResult = useSelector((state) => state.product.value);
 	//const location = useLocation();
 	const navigate = useNavigate();
-	const token = sessionStorage.getItem('accessToken');
+
+	//Send user to auth page if not logged in
+	//IFFE to redirect user before processHash
+	(() => {
+		if (window.location.hash === '') {
+			navigate('/auth');
+		}
+	})();
+
+	var registered = sessionStorage.getItem('Registered');
+	var token = sessionStorage.getItem('accessToken');
 
 	//Get user accessToken and id
 	useEffect(() => {
-		//Send user to auth page if not logged in
-		function checkIfLoggedIn() {
-			if (window.location.hash === '') {
-				navigate('/auth');
-			}
-		}
+		auth.parseHash((err, authResult) => {
+			if (authResult && authResult.accessToken) {
+				auth.client.userInfo(
+					authResult.accessToken,
 
-		checkIfLoggedIn();
+					function (err, user) {
+						//To remove 'auth0|' from the start of the id string
+						let str = user.sub;
+						let n = 6;
+						let ID = str.substring(n);
 
-		function processHash() {
-			if (token !== null) {
-				return;
-			} else if (token === null) {
-				auth.parseHash(
-					{ hash: window.location.hash },
-					function (err, authResult) {
-						if (err) {
-							return console.log('Parse hash error:', err);
-						}
-						auth.client.userInfo(authResult.accessToken, function (err, user) {
-							//To remove 'auth0|' from the start of the id string
-							let str = user.sub;
-							let n = 6;
-							let ID = str.substring(n);
-
-							sessionStorage.setItem('id', ID);
-							sessionStorage.setItem('accessToken', authResult.accessToken);
-						});
+						sessionStorage.setItem('id', ID);
+						sessionStorage.setItem('accessToken', authResult.accessToken);
 					}
 				);
 			}
-		}
+		});
+	}, []);
 
-		processHash();
-	}, [navigate, token]);
-
-	//Check if user exists in backend.If not, register them
+	//Register user
 	useEffect(() => {
-		//Check if user exists
-		function validateUser() {
-			const token = sessionStorage.getItem('accessToken');
-			const id = sessionStorage.getItem('id');
-			const firstName = sessionStorage.getItem('firstName');
-			const lastName = sessionStorage.getItem('lastName');
-			const email = sessionStorage.getItem('userEmail');
-			const phone = sessionStorage.getItem('phone');
-			const address = sessionStorage.getItem('address');
-			const city = sessionStorage.getItem('city');
-			const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`;
+		async function checkIfRegistered() {
+			let id = sessionStorage.getItem('id');
+			let firstName = sessionStorage.getItem('firstName');
+			let lastName = sessionStorage.getItem('lastName');
+			let email = sessionStorage.getItem('userEmail');
+			let phone = sessionStorage.getItem('phone');
+			let address = sessionStorage.getItem('address');
+			let city = sessionStorage.getItem('city');
 
-			//Only run check if first name is stored (only happens on signup)
+			//Only run check if user's email is stored (only happens on signup)
 			//If it is, then register the user
-			//If not, then check they exist in backend db (for sanity)
-			if (email !== null) {
+			if (registered === true) {
+				return;
+			} else if (registered === null && firstName !== null && token !== null) {
 				axios
 					.post(
 						'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/register',
@@ -95,29 +86,16 @@ export default function Home() {
 						{ headers: { Authorization: `Bearer ${token}` } }
 					)
 					.then((res) => {
+						sessionStorage.setItem('Registered', true);
 						console.log('SUCCESS: Registered to db!', res);
 					})
 					.catch((error) =>
 						console.log('ERROR: User may already be registered', error)
 					);
-			} else if (email === null) {
-				if (token === null) {
-					return;
-				} else if (token !== null) {
-					axios
-						.get(url, { headers: { Authorization: `Bearer ${token}` } })
-						.then((res) => {
-							return console.log('SUCCESS: User found!', res);
-						})
-						.catch((error) => {
-							console.log('ERROR: User does not exist in db', error);
-						});
-				}
 			}
 		}
-
-		validateUser();
-	}, [token]);
+		checkIfRegistered();
+	}, [registered, token]);
 
 	// useEffect(() => {
 	// 	let typeCategory = filterResult;
