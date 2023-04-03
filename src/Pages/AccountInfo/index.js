@@ -21,34 +21,29 @@ export default function AccountInfo() {
 
 	async function updateUser() {
 		setIsLoading(true);
-		setTimeout(() => {
-			const token = sessionStorage.getItem('accessToken');
-			const id = sessionStorage.getItem('id');
-			const url =
-				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User';
-			const data = {
-				id: id,
-				firstName: firstName,
-				lastName: lastName,
-				email: email,
-				phone: phone,
-				address: address,
-				city: city,
-			};
-			const options = {
-				headers: { Authorization: `Bearer ${token}` },
-			};
-			axios
-				.put(url, data, options)
-				.then((res) => {
-					console.log('SUCCESS: Account info updated:', res.data);
-				})
-				.catch((error) =>
-					console.log('ERROR: Unable to update account', error)
-				);
-			window.location.reload('/account');
-			setIsLoading(false);
-		}, 3000);
+		const token = sessionStorage.getItem('accessToken');
+		const id = sessionStorage.getItem('id');
+		const url = 'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User';
+		const data = {
+			id: id,
+			firstName: firstName,
+			lastName: lastName,
+			email: email,
+			phone: phone,
+			address: address,
+			city: city,
+		};
+		const options = {
+			headers: { Authorization: `Bearer ${token}` },
+		};
+		axios
+			.put(url, data, options)
+			.then((res) => {
+				console.log('SUCCESS: Account info updated:', res.data);
+			})
+			.catch((error) => console.log('ERROR: Unable to update account', error));
+		window.location.reload('/account');
+		setIsLoading(false);
 	}
 
 	useEffect(() => {
@@ -108,7 +103,7 @@ export default function AccountInfo() {
 									placeholder={user.lastName}
 									name={lastName}
 									onChange={(e) => setLastName(e.target.value)}
-								></input>
+								/>
 							</div>
 							<div>
 								<label>Email</label>

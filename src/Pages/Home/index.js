@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { auth } from '../../Services/auth0.service';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 //import { getProducts, filterProducts } from '../../Services/services';
 //import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -21,17 +21,20 @@ export default function Home() {
 
 	// const filterResult = useSelector((state) => state.product.value);
 
-	const navigate = useNavigate();
+	//const navigate = useNavigate();
 	var registered = sessionStorage.getItem('Registered');
 	var token = sessionStorage.getItem('accessToken');
+	//var loggedIn = sessionStorage.getItem('loggedIn');
 
 	//Send user to auth page if not logged in
 	//IFFE to redirect user before processHash
-	(() => {
-		if (!token) {
-			navigate('/auth');
-		}
-	})();
+	// (() => {
+	// 	if (loggedIn === true) {
+	// 		return;
+	// 	} else {
+	// 		navigate('/auth');
+	// 	}
+	// })();
 
 	//Get user accessToken and id
 	useEffect(() => {

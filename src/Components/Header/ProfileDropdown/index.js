@@ -16,23 +16,25 @@ export default function ProfileDropdown() {
 	const lastName = user.lastName;
 
 	useEffect(() => {
-		//Check if user exists
-		function getUser() {
-			const token = sessionStorage.getItem('accessToken');
-			const id = sessionStorage.getItem('id');
-			const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`;
+		setTimeout(() => {
+			//Check if user exists
+			function getUser() {
+				const token = sessionStorage.getItem('accessToken');
+				const id = sessionStorage.getItem('id');
+				const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`;
 
-			axios
-				.get(url, { headers: { Authorization: `Bearer ${token}` } })
-				.then((res) => {
-					setUser(res.data);
-					return console.log('SUCCESS: User found!', res.data);
-				})
-				.catch((error) => {
-					console.log('ERROR: User does not exist in db', error);
-				});
-		}
-		getUser();
+				axios
+					.get(url, { headers: { Authorization: `Bearer ${token}` } })
+					.then((res) => {
+						setUser(res.data);
+						return console.log('SUCCESS: User found!', res.data);
+					})
+					.catch((error) => {
+						console.log('ERROR: User does not exist in db', error);
+					});
+			}
+			getUser();
+		}, 3000);
 	}, []);
 
 	//Closes dropdown when clicked outside

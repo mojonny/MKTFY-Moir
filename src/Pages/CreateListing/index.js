@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 //import { Counter } from '../../Store/Counter';
 import UploadImage from '../../Components/UploadImage';
@@ -16,6 +17,15 @@ import './index.css';
 export default function CreateListing() {
 	const [isLoading, setIsLoading] = useState(false);
 
+	const [productName, setProductName] = useState(false);
+	const [description, setDescription] = useState(false);
+	const [price, setPrice] = useState(false);
+	const [category, setCategory] = useState(false);
+	const [condition, setCondition] = useState(false);
+	const [address, setAddress] = useState(false);
+	const [city, setCity] = useState(false);
+	//const [images, setImages] = useState(false);
+
 	const navigate = useNavigate();
 
 	const navigateHome = () => {
@@ -28,6 +38,28 @@ export default function CreateListing() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+		const token = sessionStorage.getItem('accessToken');
+
+		axios
+			.post(
+				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product',
+				{
+					productName: productName,
+					description: description,
+					price: price,
+					category: category,
+					condition: condition,
+					address: address,
+					city: city,
+					images: ['84f7bfc9-c182-475c-8790-2210f58e4cef'],
+				},
+				{ headers: { Authorization: `Bearer ${token}` } }
+			)
+			.then((res) => {
+				console.log('SUCCESS: Listing created!', res);
+				navigateHome();
+			})
+			.catch((error) => console.log('ERROR: Unable to create listing:', error));
 	};
 
 	return (
@@ -63,9 +95,10 @@ export default function CreateListing() {
 								<br />
 
 								<input
-									className="create-listing-categories"
 									placeholder="Insert product name"
-									required
+									className="create-listing-categories"
+									name={productName}
+									onChange={(e) => setProductName(e.target.value)}
 								/>
 							</div>
 							<div>
@@ -74,15 +107,21 @@ export default function CreateListing() {
 								<textarea
 									className="description-text-area"
 									placeholder="Insert you description"
-									required
+									name={description}
+									onChange={(e) => setDescription(e.target.value)}
 								/>
 							</div>
 							<div>
 								<label>Category</label>
 								<br />
 								<div>
-									<select required className="create-listing-categories">
-										<option value="" disabled selected hidden>
+									<select
+										required
+										className="create-listing-categories"
+										name={category}
+										onChange={(e) => setCategory(e.target.value)}
+									>
+										<option value="" selected hidden>
 											Choose your Category
 										</option>
 										<option>All</option>
@@ -97,8 +136,12 @@ export default function CreateListing() {
 								<div>
 									<label>Condition</label>
 									<br />
-									<select className="condition-input" required>
-										<option value="" disabled selected hidden>
+									<select
+										className="condition-input"
+										name={condition}
+										onChange={(e) => setCondition(e.target.value)}
+									>
+										<option value="" selected hidden>
 											Select condition
 										</option>
 										<option>New - unused</option>
@@ -114,7 +157,8 @@ export default function CreateListing() {
 									<input
 										className="price-input"
 										placeholder="Type the price"
-										required
+										name={price}
+										onChange={(e) => setPrice(e.target.value)}
 									/>
 								</div>
 							</div>
@@ -124,7 +168,8 @@ export default function CreateListing() {
 								<input
 									className="create-listing-categories"
 									placeholder="Insert your address"
-									required
+									name={address}
+									onChange={(e) => setAddress(e.target.value)}
 								/>
 							</div>
 
@@ -132,8 +177,12 @@ export default function CreateListing() {
 								<label>City</label>
 								<br />
 								<div>
-									<select className="create-listing-categories" required>
-										<option value="" disabled selected hidden>
+									<select
+										className="create-listing-categories"
+										name={city}
+										onChange={(e) => setCity(e.target.value)}
+									>
+										<option value="" selected hidden>
 											Select your city
 										</option>
 										<option>Calgary</option>
@@ -153,7 +202,7 @@ export default function CreateListing() {
 							</div>
 
 							<button
-								onClick={navigateHome}
+								onClick={handleSubmit}
 								disabled={isLoading}
 								className="post-button"
 							>

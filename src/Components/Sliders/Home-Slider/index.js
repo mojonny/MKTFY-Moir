@@ -1,31 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-//import { productData } from '../../../Store/productData';
 
 import './index.css';
 
 export default function Slider({ title, sliderCategory, className }) {
 	const [listings, setListings] = useState([]);
 
-	console.log('listings:', listings);
-
 	useEffect(() => {
-		const token = sessionStorage.getItem('accessToken');
-		const url =
-			'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product';
-		const options = {
-			headers: { Authorization: `Bearer ${token}` },
-		};
-		axios
-			.get(url, options)
-			.then((res) => {
-				setListings(res.data);
-				console.log('SUCCESS: Retrieved all listings:', res.data);
-			})
-			.catch((error) =>
-				console.log('ERROR: Unable to retrieve listings:', error)
-			);
+		setTimeout(() => {
+			const token = sessionStorage.getItem('accessToken');
+			const url =
+				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product';
+			const options = {
+				headers: { Authorization: `Bearer ${token}` },
+			};
+			axios
+				.get(url, options)
+				.then((res) => {
+					setListings(res.data);
+					console.log('SUCCESS: Retrieved all listings:', res.data);
+				})
+				.catch((error) =>
+					console.log('ERROR: Unable to retrieve listings:', error)
+				);
+		}, 3000);
 	}, []);
 
 	// const filteredListings = listings.filter(
