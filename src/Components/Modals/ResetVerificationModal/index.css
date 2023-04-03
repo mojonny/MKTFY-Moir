@@ -1,0 +1,27 @@
+.create-button3 {
+	padding: 10px 0 10px 0;
+	text-align: center;
+	color: #ffffff;
+	background: #6318af;
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
+	border-radius: 100px;
+	width: 345px;
+	height: 65px;
+	border: none;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.verify-password-modal-container {
+	width: 810px;
+	height: 400px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	background: #ffffff;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	padding: 25px;
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import Success from '../../../Components/Success';
 
@@ -30,8 +31,8 @@ function isNumber(password) {
 }
 
 function isPassCheck() {
-	let password1 = document.getElementById('password1');
-	let verifyPassword = document.getElementById('verifyPassword');
+	let password1 = document.getElementById('newPassword');
+	let verifyPassword = document.getElementById('confirmPassword');
 
 	if (
 		password1.value !== verifyPassword.value ||
@@ -55,18 +56,44 @@ export default function ChangePasswordForm() {
 	const [passwordType, setPasswordType] = useState('password');
 
 	//Split inputs so onchange only affects one input
-	const [password, setPassword] = useState('');
+	const [newPassword, setNewPassword] = useState('');
+	const [confirmPassword, setConfirmPassword] = useState('');
+
+	const currentPassword = sessionStorage.getItem('password');
 
 	//Navigate back to home page once password is changed
-	const navigate = useNavigate();
+	//const navigate = useNavigate();
 
 	function handleSubmit(event) {
 		event.preventDefault();
 		setIsLoading(true);
 		setTimeout(() => {
+			function updatePassword() {
+				const token = sessionStorage.getItem('accessToken');
+				console.log('new pw:', newPassword);
+				console.log('confirm pw:', confirmPassword);
+				const url =
+					'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Auth/changepassword';
+				const data = {
+					newPassword: newPassword,
+					confirmPassword: confirmPassword,
+				};
+				const options = {
+					headers: { Authorization: `Bearer ${token}` },
+				};
+				axios
+					.post(url, data, options)
+					.then((res) => {
+						console.log('SUCCESS: Password updated!', res.data);
+					})
+					.catch((error) =>
+						console.log('ERROR: Unable to update password:', error)
+					);
+			}
+
+			updatePassword();
 			setIsLoading(false);
-			navigate('/home');
-		}, 2000);
+		}, 3000);
 	}
 
 	//To change icon, change the input type
@@ -83,15 +110,40 @@ export default function ChangePasswordForm() {
 		isPassCheck();
 	}, []);
 
-	const Title = 'Change password';
-
 	return (
 		<>
 			<div className="change-pw-landing">
 				<form className="contact-form-container1" onSubmit={handleSubmit}>
 					<h1 style={{ color: '#9349de', margin: '0', fontSize: '36px' }}>
-						{Title}
+						Change password
 					</h1>
+
+					<label className="password">
+						Current Password
+						<div className="password-eye-box">
+							<input
+								id="currentPassword"
+								required
+								value={currentPassword}
+								type={passwordType}
+								className="input-style2"
+								autoComplete="false"
+								readOnly={true}
+							/>
+
+							<button className="eye-slash" onClick={togglePassword}>
+								{passwordType === 'password' ? (
+									<i>
+										<img src={eyeslash} alt="close-eye" />
+									</i>
+								) : (
+									<i>
+										<img src={eye} alt="open-eye" />
+									</i>
+								)}
+							</button>
+						</div>
+					</label>
 
 					<h3>
 						The password must have at least 6 characters and must contain 1
@@ -102,13 +154,15 @@ export default function ChangePasswordForm() {
 						Password
 						<div className="password-eye-box">
 							<input
-								id="password1"
+								id="newPassword"
 								required
 								onKeyUp={(e) => isPassCheck(e.target.value)}
 								type={passwordType}
 								placeholder="Insert your password"
 								className="input-style2"
-								onChange={(e) => setPassword(e.target.value)}
+								value={newPassword}
+								onChange={(e) => setNewPassword(e.target.value)}
+								autoComplete="false"
 							/>
 
 							<button className="eye-slash" onClick={togglePassword}>
@@ -130,12 +184,14 @@ export default function ChangePasswordForm() {
 						<div className="password-eye-box">
 							<input
 								required
-								id="verifyPassword"
+								id="confirmPassword"
 								type={passwordType}
 								placeholder="Insert your password"
 								className="input-style2"
 								onKeyUp={(e) => isPassCheck(e.target.value)}
-								onChange={(e) => setPassword(e.target.value)}
+								value={confirmPassword}
+								onChange={(e) => setConfirmPassword(e.target.value)}
+								autoComplete="false"
 							/>
 
 							<button className="eye-slash" onClick={togglePassword}>
@@ -154,7 +210,7 @@ export default function ChangePasswordForm() {
 
 					<div className="requirement-box">
 						<div className="requirement">
-							{!isSixChar(password) ? (
+							{!isSixChar(newPassword) ? (
 								<img src={CheckmarkGrey} alt="checkmark" />
 							) : (
 								<img src={Checkmark} alt="checkmark" />
@@ -162,7 +218,7 @@ export default function ChangePasswordForm() {
 							At least 6 characters
 						</div>
 						<div className="requirement">
-							{!isUpperCase(password) ? (
+							{!isUpperCase(newPassword) ? (
 								<img src={CheckmarkGrey} alt="checkmark" />
 							) : (
 								<img src={Checkmark} alt="checkmark" />
@@ -170,7 +226,7 @@ export default function ChangePasswordForm() {
 							1 Uppercase
 						</div>
 						<div className="requirement">
-							{!isNumber(password) ? (
+							{!isNumber(newPassword) ? (
 								<img src={CheckmarkGrey} alt="checkmark" />
 							) : (
 								<img src={Checkmark} alt="checkmark" />
@@ -178,14 +234,14 @@ export default function ChangePasswordForm() {
 							1 Number
 						</div>
 					</div>
-					{/* <p style={{ color: 'red' }}>{passwordMatchError}</p> */}
+
 					<button
 						className="set-pw-button"
 						id="set-pw-button"
 						disabled={isLoading}
 						onClick={handleSubmit}
 					>
-						{isLoading ? <Success /> : handleSubmit}
+						{isLoading ? <Success /> : null}
 						Set password
 					</button>
 				</form>

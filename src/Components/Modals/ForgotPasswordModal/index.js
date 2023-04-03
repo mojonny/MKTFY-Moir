@@ -55,7 +55,9 @@ export default function ForgotPasswordModal({ setLoginPage }) {
 					</button>
 				</div>
 				<div className="text-area1">
-					<h2 style={{ textAlign: 'center' }}>Forgot password?</h2>
+					<h2 style={{ textAlign: 'center', color: '#9349de' }}>
+						Forgot password?
+					</h2>
 
 					<h3>
 						It’s okay, these things happen. Please enter your email in the field
@@ -75,8 +77,8 @@ export default function ForgotPasswordModal({ setLoginPage }) {
 						/>
 					</label>
 
-					<button className="create-button2" type="button" onClick={onSubmit}>
-						Submit
+					<button className="create-button4" type="button" onClick={onSubmit}>
+						Send
 					</button>
 				</div>
 			</div>

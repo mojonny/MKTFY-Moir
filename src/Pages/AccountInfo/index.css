@@ -11,13 +11,15 @@
 .account-info-landing {
 	height: 560px;
 	width: 80vw;
+	min-width: 1260px;
 	background-color: #ffffff;
 	padding: 16px;
 	border-radius: 10px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
 }
 
 .save-button {
-	width: 530px;
+	min-width: 400px;
 	height: 50px;
 	color: #ffffff;
 	background-color: #ffba00;
@@ -33,14 +35,17 @@
 	flex-direction: row;
 	gap: 160px;
 	padding: 60px 140px 60px 140px;
-	/* gap: 21px;
-	height: 100%;
-	width: 100%; */
 }
 
+<<<<<<< HEAD
 .left-side-form,
 .right-side-form {
 	width: 550px;
+=======
+.left-side-form {
+	min-width: 400px;
+	width: 530px;
+>>>>>>> main
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
@@ -48,6 +53,17 @@
 	background-color: #f7f7f7;
 	border-radius: 0px 10px 10px 0px;
 	padding: 15px;
+}
+.right-side-forms {
+	min-width: 400px;
+	width: 530px;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+	background-color: #f7f7f7;
+	border-radius: 0px 10px 10px 0px;
+	padding: 5px;
 }
 
 .account-input {
@@ -59,6 +75,7 @@
 	padding: 16px 10px 16px 10px;
 }
 
+<<<<<<< HEAD
 .account-input-city {
 	border-radius: 4px;
 	border: solid #e2e2e2 1px;
@@ -68,12 +85,9 @@
 	padding: 16px 10px 16px 10px;
 }
 
+=======
+>>>>>>> main
 .account-input::placeholder {
-	color: #4d4d4d;
-	opacity: 40%;
-}
-
-.account-input-city::placeholder {
 	color: #4d4d4d;
 	opacity: 40%;
 }

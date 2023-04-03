@@ -1,7 +1,13 @@
 import React from 'react';
+<<<<<<< HEAD
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { userData } from '../../Store/userData';
+=======
+import { useState, useEffect } from 'react';
+//import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+>>>>>>> main
 
 import Success from '../../Components/Success';
 
@@ -11,15 +17,66 @@ import './index.css';
 export default function AccountInfo() {
 	const [isLoading, setIsLoading] = useState(false);
 
-	const navigate = useNavigate();
+	var [user, setUser] = useState([]);
+	var [firstName, setFirstName] = useState('');
+	var [lastName, setLastName] = useState('');
+	var [phone, setPhone] = useState('');
+	var [email, setEmail] = useState('');
+	var [address, setAddress] = useState('');
+	var [city, setCity] = useState('');
 
-	const navigateHome = () => {
+	async function updateUser() {
 		setIsLoading(true);
-		setTimeout(() => {
-			navigate('/home');
-			setIsLoading(false);
-		}, 2000);
-	};
+		const token = sessionStorage.getItem('accessToken');
+		const id = sessionStorage.getItem('id');
+		const url = 'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User';
+		const data = {
+			id: id,
+			firstName: firstName,
+			lastName: lastName,
+			email: email,
+			phone: phone,
+			address: address,
+			city: city,
+		};
+		const options = {
+			headers: { Authorization: `Bearer ${token}` },
+		};
+		axios
+			.put(url, data, options)
+			.then((res) => {
+				console.log('SUCCESS: Account info updated:', res.data);
+			})
+			.catch((error) => console.log('ERROR: Unable to update account', error));
+		window.location.reload('/account');
+		setIsLoading(false);
+	}
+
+	useEffect(() => {
+		//Check if user exists
+		function getUser() {
+			const token = sessionStorage.getItem('accessToken');
+			const id = sessionStorage.getItem('id');
+			const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`;
+
+			axios
+				.get(url, { headers: { Authorization: `Bearer ${token}` } })
+				.then((res) => {
+					setUser(res.data);
+					setFirstName(res.data.firstName);
+					setLastName(res.data.lastName);
+					setEmail(res.data.email);
+					setPhone(res.data.phone);
+					setAddress(res.data.address);
+					setCity(res.data.city);
+					return console.log('SUCCESS: User found!', res.data);
+				})
+				.catch((error) => {
+					console.log('ERROR: User does not exist in db', error);
+				});
+		}
+		getUser();
+	}, []);
 
 	const storedEmail = sessionStorage.getItem('userEmail');
 
@@ -44,8 +101,15 @@ export default function AccountInfo() {
 								<label>First name</label>
 								<br />
 								<input
+<<<<<<< HEAD
 									placeholder={filteredUser.firstName}
 									className="account-input"
+=======
+									placeholder={user.firstName}
+									className="account-input"
+									name={firstName}
+									onChange={(e) => setFirstName(e.target.value)}
+>>>>>>> main
 								/>
 							</div>
 							<div>
@@ -53,8 +117,15 @@ export default function AccountInfo() {
 								<br />
 								<input
 									className="account-input"
+<<<<<<< HEAD
 									placeholder={filteredUser.lastName}
 								></input>
+=======
+									placeholder={user.lastName}
+									name={lastName}
+									onChange={(e) => setLastName(e.target.value)}
+								/>
+>>>>>>> main
 							</div>
 							<div>
 								<label>Email</label>
@@ -62,7 +133,13 @@ export default function AccountInfo() {
 								<input
 									className="account-input"
 									type="email"
+<<<<<<< HEAD
 									placeholder={filteredUser.email}
+=======
+									placeholder={user.email}
+									name={email}
+									onChange={(e) => setEmail(e.target.value)}
+>>>>>>> main
 								/>
 							</div>
 							<div>
@@ -71,12 +148,18 @@ export default function AccountInfo() {
 								<input
 									className="account-input"
 									type="phone"
+<<<<<<< HEAD
 									placeholder={filteredUser.phone}
+=======
+									placeholder={user.phone}
+									name={phone}
+									onChange={(e) => setPhone(e.target.value)}
+>>>>>>> main
 								/>
 							</div>
 						</div>
 
-						<div className="right-side-form">
+						<div className="right-side-forms">
 							<h2 style={{ color: '#000000', margin: '0px' }}>
 								Address information
 							</h2>
@@ -85,6 +168,7 @@ export default function AccountInfo() {
 								<br />
 								<input
 									className="account-input"
+<<<<<<< HEAD
 									placeholder={filteredUser.address}
 								/>
 							</div>
@@ -106,17 +190,29 @@ export default function AccountInfo() {
 									/>
 								</div>
 							</div>
+=======
+									placeholder={user.address}
+									name={address}
+									onChange={(e) => setAddress(e.target.value)}
+								/>
+							</div>
+>>>>>>> main
 							<div>
-								<label>Country</label>
+								<label>City</label>
 								<br />
 								<input
 									className="account-input"
+<<<<<<< HEAD
 									placeholder={filteredUser.country}
+=======
+									placeholder={user.city}
+									name={city}
+									onChange={(e) => setCity(e.target.value)}
+>>>>>>> main
 								/>
 							</div>
-
 							<button
-								onClick={navigateHome}
+								onClick={updateUser}
 								disabled={isLoading}
 								className="save-button"
 								style={{ alignSelf: 'center' }}

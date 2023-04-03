@@ -1,10 +1,14 @@
 import { useState, useEffect } from 'react';
 import { auth } from '../../../Services/auth0.service';
+<<<<<<< HEAD
 import {
 	AUTH0_LOGIN_REDIRECT_URI,
 	AUTH0_LOGIN_RESPONSE_TYPE,
 	AUTH0_REALM,
 } from '../../../config';
+=======
+import { AUTH0_REALM } from '../../../config';
+>>>>>>> main
 
 import eye from '../../../assets/eye.png';
 import eyeslash from '../../../assets/eye-slash.png';
@@ -74,8 +78,11 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 		});
 	};
 
-	const onSubmit = (event) => {
+	async function onSubmit(event) {
+		sessionStorage.setItem('loggedIn', true);
+		sessionStorage.setItem('password', user.password);
 		event.preventDefault();
+<<<<<<< HEAD
 		sessionStorage.setItem('userEmail', user.email);
 		console.log('User email stored:', user.email);
 
@@ -94,10 +101,23 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 						console.log('Oops! login failed.', error);
 						return;
 					}
+=======
+		auth.login(
+			{
+				realm: AUTH0_REALM,
+				email: user.email,
+				password: user.password,
+			},
+			function (error) {
+				if (error) {
+					alert('Oops! Login failed, please try again.');
+					console.log('Oops! login failed.', error);
+					return;
+>>>>>>> main
 				}
-			);
-		}, 3000);
-	};
+			}
+		);
+	}
 
 	//To change icon, change the input type
 	const togglePassword = (event) => {
@@ -136,6 +156,7 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 							value={user.email}
 							onChange={onChangeHandler}
 							className="input-style2"
+							autoComplete="false"
 						/>
 						<p style={{ color: 'red' }}>{emailError}</p>
 					</label>
@@ -153,6 +174,7 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 								value={user.password}
 								onChange={onChangeHandler}
 								className="input-style2"
+								autoComplete="false"
 							/>
 							<button className="eye-slash" onClick={togglePassword}>
 								{passwordType === 'password' ? (
