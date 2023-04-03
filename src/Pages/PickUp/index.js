@@ -38,8 +38,9 @@ export default function PickUp() {
 		<>
 			<div className="pickup-container">
 				<div className="breadcrumbs">
-					Deals for you <img src={breadArrow} alt="path-arrow" /> Product
-					listing <img src={breadArrow} alt="path-arrow" /> Checkout
+					<a href="/home">Deals for you</a>
+					<img src={breadArrow} alt="path-arrow" /> Product listing{' '}
+					<img src={breadArrow} alt="path-arrow" /> Checkout
 					<img src={breadArrow} alt="path-arrow" /> Pickup Information
 				</div>
 				<div className="pickup-landing">
