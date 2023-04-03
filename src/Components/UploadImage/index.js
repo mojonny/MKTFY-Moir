@@ -10,7 +10,6 @@ export default function UploadImage({ src, className }) {
 
 	//A way to upload the images
 	const [images, setImages] = useState([]);
-	console.log(images);
 
 	//handler function: accessing files through the event object then storing in our state
 	function onImageChange(e) {

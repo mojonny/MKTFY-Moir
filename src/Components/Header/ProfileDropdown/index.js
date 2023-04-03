@@ -62,6 +62,7 @@ export default function ProfileDropdown() {
 
 	const onSubmit = () => {
 		setIsDropOpen3(false);
+		sessionStorage.clear();
 		auth.logout({
 			returnTo: AUTH0_LOGOUT_URI,
 			clientID: AUTH0_CLIENT_ID,

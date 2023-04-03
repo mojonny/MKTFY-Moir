@@ -4,26 +4,26 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 //import { Counter } from '../../Store/Counter';
-import UploadImage from '../../Components/UploadImage';
+//import UploadImage from '../../Components/UploadImage';
 import Success from '../../Components/Success';
 // import AddListing from './AddListing';
 // import ListingList from './ListingList';
 
-import loadImg from '../../assets/LoadImg.svg';
-import loadBigCam from '../../assets/Frame 123.png';
+//import loadImg from '../../assets/LoadImg.svg';
+//import loadBigCam from '../../assets/Frame 123.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function CreateListing() {
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [productName, setProductName] = useState(false);
-	const [description, setDescription] = useState(false);
-	const [price, setPrice] = useState(false);
-	const [category, setCategory] = useState(false);
-	const [condition, setCondition] = useState(false);
-	const [address, setAddress] = useState(false);
-	const [city, setCity] = useState(false);
+	const [productName, setProductName] = useState('');
+	const [description, setDescription] = useState('');
+	const [price, setPrice] = useState(0);
+	const [category, setCategory] = useState('');
+	const [condition, setCondition] = useState('');
+	const [address, setAddress] = useState('');
+	const [city, setCity] = useState('');
 	//const [images, setImages] = useState(false);
 
 	const navigate = useNavigate();
@@ -36,10 +36,33 @@ export default function CreateListing() {
 		}, 2000);
 	};
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		const token = sessionStorage.getItem('accessToken');
+	// function uploadImage() {
+	// 	let token = sessionStorage.getItem('accessToken');
+	// 	let formData = new FormData(); // instantiate it
 
+	// 	// suppose you have your file ready
+	// 	formData.set('file', images);
+
+	// 	axios
+	// 		.post(
+	// 			'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Upload',
+	// 			formData,
+	// 			{
+	// 				headers: {
+	// 					Authorization: `Bearer ${token}`,
+	// 					'content-type': 'multipart/form-data', // do not forget this
+	// 				},
+	// 			}
+	// 		)
+	// 		.then((res) => {
+	// 			console.log('SUCCESS: Listing created!', res);
+	// 			navigateHome();
+	// 		})
+	// 		.catch((error) => console.log('ERROR: Unable to create listing:', error));
+	// }
+
+	function createListing() {
+		let token = sessionStorage.getItem('accessToken');
 		axios
 			.post(
 				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product',
@@ -51,7 +74,7 @@ export default function CreateListing() {
 					condition: condition,
 					address: address,
 					city: city,
-					images: ['84f7bfc9-c182-475c-8790-2210f58e4cef'],
+					images: ['cb6e6e84-d805-47eb-967f-e6fd8ce28b07'],
 				},
 				{ headers: { Authorization: `Bearer ${token}` } }
 			)
@@ -60,6 +83,11 @@ export default function CreateListing() {
 				navigateHome();
 			})
 			.catch((error) => console.log('ERROR: Unable to create listing:', error));
+	}
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		createListing();
 	};
 
 	return (
@@ -76,7 +104,7 @@ export default function CreateListing() {
 
 				<div onSubmit={handleSubmit}>
 					<div className="create-listing-landing">
-						<div className="listing-image-box">
+						{/* <div className="listing-image-box">
 							<div>
 								<UploadImage className="main-listing-img" src={loadImg} />
 							</div>
@@ -87,7 +115,7 @@ export default function CreateListing() {
 								<UploadImage className="load-pic" src={loadBigCam} />
 								<UploadImage className="load-pic" src={loadBigCam} />
 							</div>
-						</div>
+						</div> */}
 
 						<div className="listing-info-container">
 							<div>
@@ -125,10 +153,10 @@ export default function CreateListing() {
 											Choose your Category
 										</option>
 										<option>All</option>
-										<option>Cars & Vehicles</option>
-										<option>Furniture</option>
-										<option>Electronics</option>
-										<option>Real estate</option>
+										<option value="VEHICLES">Cars & Vehicles</option>
+										<option value="FURNITURE">Furniture</option>
+										<option value="ELECTRONICS">Electronics</option>
+										<option value="REAL_ESTATE">Real estate</option>
 									</select>
 								</div>
 							</div>
@@ -144,11 +172,8 @@ export default function CreateListing() {
 										<option value="" selected hidden>
 											Select condition
 										</option>
-										<option>New - unused</option>
-										<option>Used - excellent</option>
-										<option>Used - good</option>
-										<option>Used - fair</option>
-										<option>Used - my trash=your treasure?</option>
+										<option value="NEW">NEW</option>
+										<option value="USED">USED</option>
 									</select>
 								</div>
 								<div>

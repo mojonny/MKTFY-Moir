@@ -50,8 +50,8 @@ export default function App() {
 				<Route path="/termsandservices" element={<TOC />} />
 
 				<Route element={<MainLayout />}>
-					<Route path="/" element={<Home />} />
 					<Route path="/*" element={<Home />} />
+					<Route path="/home" element={<Home />} />
 					<Route path="/deals" element={<Deals />} />
 					<Route path="/cars&vehicles" element={<Cars />} />
 					<Route path="/furniture" element={<Furniture />} />

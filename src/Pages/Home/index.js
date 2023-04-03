@@ -44,11 +44,7 @@ export default function Home() {
 					authResult.accessToken,
 
 					function (err, user) {
-						//To remove 'auth0|' from the start of the id string
-						let str = user.sub;
-						let n = 6;
-						let ID = str.substring(n);
-
+						let ID = user.sub;
 						sessionStorage.setItem('id', ID);
 						sessionStorage.setItem('accessToken', authResult.accessToken);
 					}

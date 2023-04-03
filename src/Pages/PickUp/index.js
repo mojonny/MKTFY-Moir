@@ -1,30 +1,38 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { userData } from '../../Store/userData';
 
 import Success from '../../Components/Success';
-
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function PickUp() {
 	const [isLoading, setIsLoading] = useState(false);
 
+	const firstName = sessionStorage.getItem('sellerFirstName');
+	const lastName = sessionStorage.getItem('sellerLastName');
+	const phone = sessionStorage.getItem('sellerPhone');
+	const address = sessionStorage.getItem('itemAddress');
+	const city = sessionStorage.getItem('sellerCity');
+
 	const navigate = useNavigate();
 
 	const navigateHome = () => {
+		sessionStorage.removeItem('sellerFirstName');
+		sessionStorage.removeItem('sellerLastName');
+		sessionStorage.removeItem('sellerPhone');
+		sessionStorage.removeItem('itemAddress');
+		sessionStorage.removeItem('sellerCity');
+		sessionStorage.removeItem('productName');
+		sessionStorage.removeItem('productPrice');
+		sessionStorage.removeItem('productImage');
+		sessionStorage.removeItem('sellerId');
 		setIsLoading(true);
 		setTimeout(() => {
 			navigate('/home');
 			setIsLoading(false);
 		}, 2000);
 	};
-	const userId = sessionStorage.getItem('userId');
-	console.log(userId);
-	const filterByUser = userData.filter((user) => user.userId === userId);
-	const filteredUser = filterByUser[0];
-	console.log(filteredUser);
 
 	return (
 		<>
@@ -40,7 +48,7 @@ export default function PickUp() {
 						<div className="profile-icon">P</div>
 						<div className="checkout-item-detail">
 							<h2>
-								{filteredUser.firstName} {filteredUser.lastName}
+								{firstName} {lastName}
 							</h2>
 							<div className="price-info1">
 								<h3
@@ -49,15 +57,14 @@ export default function PickUp() {
 										margin: '0px',
 									}}
 								>
-									{filteredUser.phone}
+									{phone}
 								</h3>
 							</div>
 						</div>
 					</div>
 					<div className="side-info-container">
 						<p>
-							Please pick up your purchase at {filteredUser.address},{' '}
-							{filteredUser.city}, {filteredUser.province}
+							Please pick up your purchase at {address}, {city}
 						</p>
 						<br />
 						<button

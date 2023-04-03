@@ -4,7 +4,7 @@ export const AUTH0_CLIENT_ID = 'XC5xNkx2fMFYrKFecp9tWIHf1bsdloFz';
 export const AUTH0_LOGIN_REDIRECT_URI = 'http://localhost:3000/';
 export const AUTH0_REALM = 'Username-Password-Authentication';
 export const AUTH0_USER_SCOPE = 'openid profile email';
-export const AUTH0_LOGOUT_URI = 'http://localhost:3000/';
+export const AUTH0_LOGOUT_URI = 'http://localhost:3000/auth';
 export const AUTH0_AUDIENCE = 'http://mktfy.com';
 
 //my config

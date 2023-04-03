@@ -12,9 +12,13 @@ export default function Checkout() {
 		navigate('/pickup');
 	};
 
+	Storage.prototype.getObj = function (key) {
+		return JSON.parse(this.getItem(key));
+	};
+
 	const productName = sessionStorage.getItem('productName');
 	const productPrice = sessionStorage.getItem('productPrice');
-	const productImage = sessionStorage.getItem('productImage');
+	const productImage = sessionStorage.getObj('productImage');
 
 	return (
 		<>
