@@ -92,7 +92,6 @@ export default function PasswordModal({ setSignupPage }) {
 						setIsLoading(false);
 						return;
 					} else {
-						sessionStorage.setItem('id', result.Id);
 						console.log('User registered in auth0!', result);
 						setSignupPage(0);
 						setIsLoading(false);

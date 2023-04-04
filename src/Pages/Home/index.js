@@ -1,74 +1,103 @@
 import React, { useEffect, useState } from 'react';
 import { auth } from '../../Services/auth0.service';
-//import { useNavigate } from 'react-router-dom';
-//import { getProducts, filterProducts } from '../../Services/services';
+import { useNavigate } from 'react-router-dom';
 //import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 import Success from '../../Components/Success';
 import Footer from '../../Components/Footer';
-import Slider from '../../Components/Sliders/Home-Slider';
+//import Slider from '../../Components/Sliders/Home-Slider';
 import MiniSlider from '../../Components/Sliders/Mini-Slider';
 
 import appBanner from '../../assets/AppBanner1.png';
 import './index.css';
 
 export default function Home() {
+	// const [user, setUser] = useState([]);
+	// const [firstName, setFirstName] = useState('');
+	// const [lastName, setLastName] = useState('');
+	// const [phone, setPhone] = useState('');
+	// const [email, setEmail] = useState('');
+	// const [address, setAddress] = useState('');
+	// const [city, setCity] = useState('');
+
 	//Show lottie when loading and moving to success
 	const [isLoading, setIsLoading] = useState(false);
 
-	// const [filteredProducts, setFilteredProducts] = useState(null);
-
 	// const filterResult = useSelector((state) => state.product.value);
 
-	//const navigate = useNavigate();
-	var registered = sessionStorage.getItem('Registered');
-	var token = sessionStorage.getItem('accessToken');
-	//var loggedIn = sessionStorage.getItem('loggedIn');
+	const navigate = useNavigate();
 
-	//Send user to auth page if not logged in
-	//IFFE to redirect user before processHash
-	// (() => {
-	// 	if (loggedIn === true) {
-	// 		return;
-	// 	} else {
-	// 		navigate('/auth');
-	// 	}
-	// })();
-
-	//Get user accessToken and id
 	useEffect(() => {
-		auth.parseHash((err, authResult) => {
-			if (authResult && authResult.accessToken) {
-				auth.client.userInfo(
-					authResult.accessToken,
+		setIsLoading(true);
+		getToken();
+		//Get user accessToken and id
 
-					function (err, user) {
-						let ID = user.sub;
-						sessionStorage.setItem('id', ID);
-						sessionStorage.setItem('accessToken', authResult.accessToken);
-					}
-				);
+		async function getToken() {
+			auth.parseHash((err, authResult) => {
+				if (window.location.hash === '') {
+					navigate('/auth');
+				} else if (authResult && authResult.accessToken) {
+					auth.client.userInfo(
+						authResult.accessToken,
+
+						function (err, user) {
+							let ID = user.sub;
+							sessionStorage.setItem('id', ID);
+							sessionStorage.setItem('accessToken', authResult.accessToken);
+							return getUser();
+						}
+					);
+				}
+			});
+		}
+
+		//Check if user exists
+		function getUser() {
+			const token = sessionStorage.getItem('accessToken');
+			const id = sessionStorage.getItem('id');
+			const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`;
+			if (token !== null) {
+				axios
+					.get(url, { headers: { Authorization: `Bearer ${token}` } })
+					.then((res) => {
+						sessionStorage.setItem('firstName', res.data.firstName);
+						sessionStorage.setItem('lastName', res.data.lastName);
+						sessionStorage.setItem('userEmail', res.data.email);
+						sessionStorage.setItem('phone', res.data.phone);
+						sessionStorage.setItem('address', res.data.address);
+						sessionStorage.setItem('city', res.data.city);
+						sessionStorage.setItem('Registered', true);
+
+						return console.log('SUCCESS: User found!', res.data);
+					})
+					.catch((error) => {
+						console.log('ERROR: User does not exist in db', error);
+						return getRegistered();
+					});
 			}
-		});
-	}, []);
+		}
 
-	//Register user
-	useEffect(() => {
-		async function checkIfRegistered() {
-			let id = sessionStorage.getItem('id');
-			let firstName = sessionStorage.getItem('firstName');
-			let lastName = sessionStorage.getItem('lastName');
-			let email = sessionStorage.getItem('userEmail');
-			let phone = sessionStorage.getItem('phone');
-			let address = sessionStorage.getItem('address');
-			let city = sessionStorage.getItem('city');
+		//If user doesn't exist, then register them to backend
+		function getRegistered() {
+			const token = sessionStorage.getItem('accessToken');
+			const id = sessionStorage.getItem('id');
+			const firstName = sessionStorage.getItem('firstName');
+			const lastName = sessionStorage.getItem('lastName');
+			const email = sessionStorage.getItem('userEmail');
+			const phone = sessionStorage.getItem('phone');
+			const address = sessionStorage.getItem('address');
+			const city = sessionStorage.getItem('city');
+
+			const registered = sessionStorage.getItem('Registered');
 
 			//Only run check if user's email is stored (only happens on signup)
 			//If it is, then register the user
 			if (registered === true) {
-				return;
-			} else if (firstName !== null) {
+				return console.log(
+					'User is already registered, skipping registration...'
+				);
+			} else if (registered === null) {
 				axios
 					.post(
 						'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/register',
@@ -84,35 +113,30 @@ export default function Home() {
 						{ headers: { Authorization: `Bearer ${token}` } }
 					)
 					.then((res) => {
-						sessionStorage.setItem('Registered', true);
-						console.log('SUCCESS: Registered to db!', res);
+						return console.log('SUCCESS: Registered to db!', res);
 					})
 					.catch((error) =>
 						console.log('ERROR: User may already be registered', error)
 					);
 			}
 		}
-		checkIfRegistered();
-	}, [registered, token]);
 
-	useEffect(() => {
-		setIsLoading(true);
 		setTimeout(() => {
 			setIsLoading(false);
 		}, 3000);
-	}, []);
+	}, [navigate]);
 
 	return (
 		<div className="home-dashboard">
 			{isLoading ? <Success /> : null}
 			<br />
 			<br />
-			<Slider
+			{/* <Slider
 				className="slider"
 				key="001"
 				title="Deals"
 				sliderCategory="Deals"
-			/>
+			/> */}
 
 			<br />
 			<div className="mini-slider-container">
@@ -132,12 +156,12 @@ export default function Home() {
 			</div>
 			<br />
 
-			<Slider
+			{/* <Slider
 				className="slider"
 				key="004"
 				title="More deals for you"
 				sliderCategory="Deals"
-			/>
+			/> */}
 
 			<br />
 			<div className="mini-slider-container" key="bottom">

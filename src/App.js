@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
 // Landing Page for login/sign-up
@@ -49,8 +49,8 @@ export default function App() {
 				<Route path="/privacy" element={<Privacy />} />
 				<Route path="/termsandservices" element={<TOC />} />
 
-				<Route path="/" element={<MainLayout />}>
-					<Route index element={<Navigate to="/auth" />} />
+				<Route element={<MainLayout />}>
+					<Route path="/" element={<Home />} />
 					<Route path="/home" element={<Home />} />
 					<Route path="/deals" element={<Deals />} />
 					<Route path="/cars&vehicles" element={<Cars />} />

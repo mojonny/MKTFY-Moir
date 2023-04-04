@@ -11,13 +11,13 @@ import './index.css';
 export default function AccountInfo() {
 	const [isLoading, setIsLoading] = useState(false);
 
-	var [user, setUser] = useState([]);
-	var [firstName, setFirstName] = useState('');
-	var [lastName, setLastName] = useState('');
-	var [phone, setPhone] = useState('');
-	var [email, setEmail] = useState('');
-	var [address, setAddress] = useState('');
-	var [city, setCity] = useState('');
+	const [user, setUser] = useState([]);
+	const [firstName, setFirstName] = useState('');
+	const [lastName, setLastName] = useState('');
+	const [phone, setPhone] = useState('');
+	const [email, setEmail] = useState('');
+	const [address, setAddress] = useState('');
+	const [city, setCity] = useState('');
 
 	async function updateUser() {
 		setIsLoading(true);

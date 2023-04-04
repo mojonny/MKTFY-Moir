@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../../../Services/auth0.service';
 import { AUTH0_CLIENT_ID, AUTH0_LOGOUT_URI } from '../../../config';
-import axios from 'axios';
+//import axios from 'axios';
 
 import logout from '../../../assets/LogOut.png';
 import dropArrow from '../../../assets/DownArrow.png';
@@ -11,31 +11,32 @@ import './index.css';
 export default function ProfileDropdown() {
 	const [isDropOpen3, setIsDropOpen3] = useState(false);
 	const dropMenu3 = useRef(null);
-	const [user, setUser] = useState([]);
-	const firstName = user.firstName;
-	const lastName = user.lastName;
+	// const [user, setUser] = useState({
+	// 	firstName: '',
+	// 	lastName: '',
+	// });
+	// const firstName = user.firstName;
+	// const lastName = user.lastName;
 
-	useEffect(() => {
-		setTimeout(() => {
-			//Check if user exists
-			function getUser() {
-				const token = sessionStorage.getItem('accessToken');
-				const id = sessionStorage.getItem('id');
-				const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`;
+	// useEffect(() => {
+	// 	//Check if user exists
+	// 	async function getUser() {
+	// 		const token = sessionStorage.getItem('accessToken');
+	// 		const id = sessionStorage.getItem('id');
+	// 		const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`;
 
-				axios
-					.get(url, { headers: { Authorization: `Bearer ${token}` } })
-					.then((res) => {
-						setUser(res.data);
-						return console.log('SUCCESS: User found!', res.data);
-					})
-					.catch((error) => {
-						console.log('ERROR: User does not exist in db', error);
-					});
-			}
-			getUser();
-		}, 3000);
-	}, []);
+	// 		axios
+	// 			.get(url, { headers: { Authorization: `Bearer ${token}` } })
+	// 			.then((res) => {
+	// 				setUser(res.data);
+	// 				return console.log('SUCCESS: User found!', res.data);
+	// 			})
+	// 			.catch((error) => {
+	// 				console.log('ERROR: User does not exist in db', error);
+	// 			});
+	// 	}
+	// 	getUser();
+	// }, []);
 
 	//Closes dropdown when clicked outside
 	const closeOpenMenus3 = (e) => {
@@ -93,9 +94,9 @@ export default function ProfileDropdown() {
 						style={{ width: '100%', cursor: 'pointer' }}
 					>
 						<img src={dropArrow} alt="dropArrow" />
-						<h4>
+						{/* <h4>
 							{firstName} {lastName}
-						</h4>
+						</h4> */}
 					</button>
 				</div>
 				{/* This is what pops up on button click */}
@@ -103,10 +104,10 @@ export default function ProfileDropdown() {
 					<div ref={dropMenu3} onClick={(e) => e.stopPropagation()}>
 						<div className="drop-container">
 							<div className="title-container">
-								<div className="profile-icon">{firstName[0]}</div>
+								{/* <div className="profile-icon">{firstName[0]}</div>
 								<h1>
 									{firstName} {lastName}
-								</h1>
+								</h1> */}
 							</div>
 
 							<h2 style={{ color: 'black', margin: '0px' }}>Settings</h2>
