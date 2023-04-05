@@ -6,38 +6,41 @@ import axios from 'axios';
 
 import Success from '../../Components/Success';
 import Footer from '../../Components/Footer';
-//import Slider from '../../Components/Sliders/Home-Slider';
+import Slider from '../../Components/Sliders/Home-Slider';
 import MiniSlider from '../../Components/Sliders/Mini-Slider';
 
 import appBanner from '../../assets/AppBanner1.png';
 import './index.css';
 
 export default function Home() {
-	// const [user, setUser] = useState([]);
-	// const [firstName, setFirstName] = useState('');
-	// const [lastName, setLastName] = useState('');
-	// const [phone, setPhone] = useState('');
-	// const [email, setEmail] = useState('');
-	// const [address, setAddress] = useState('');
-	// const [city, setCity] = useState('');
-
 	//Show lottie when loading and moving to success
 	const [isLoading, setIsLoading] = useState(false);
-
-	// const filterResult = useSelector((state) => state.product.value);
 
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		const loggedIn = sessionStorage.getItem('loggedIn');
+		console.log('logged in?:', loggedIn);
+
+		if (loggedIn === null) {
+			return navigate('/auth');
+		}
+	}, [navigate]);
+
+	useEffect(() => {
 		setIsLoading(true);
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 3000);
+	}, []);
+
+	useEffect(() => {
 		getToken();
 		//Get user accessToken and id
 
 		async function getToken() {
 			auth.parseHash((err, authResult) => {
-				if (window.location.hash === '') {
-					navigate('/auth');
-				} else if (authResult && authResult.accessToken) {
+				if (authResult) {
 					auth.client.userInfo(
 						authResult.accessToken,
 
@@ -88,7 +91,6 @@ export default function Home() {
 			const phone = sessionStorage.getItem('phone');
 			const address = sessionStorage.getItem('address');
 			const city = sessionStorage.getItem('city');
-
 			const registered = sessionStorage.getItem('Registered');
 
 			//Only run check if user's email is stored (only happens on signup)
@@ -120,10 +122,6 @@ export default function Home() {
 					);
 			}
 		}
-
-		setTimeout(() => {
-			setIsLoading(false);
-		}, 3000);
 	}, [navigate]);
 
 	return (
@@ -131,12 +129,12 @@ export default function Home() {
 			{isLoading ? <Success /> : null}
 			<br />
 			<br />
-			{/* <Slider
+			<Slider
 				className="slider"
 				key="001"
 				title="Deals"
 				sliderCategory="Deals"
-			/> */}
+			/>
 
 			<br />
 			<div className="mini-slider-container">
@@ -156,12 +154,12 @@ export default function Home() {
 			</div>
 			<br />
 
-			{/* <Slider
+			<Slider
 				className="slider"
 				key="004"
 				title="More deals for you"
 				sliderCategory="Deals"
-			/> */}
+			/>
 
 			<br />
 			<div className="mini-slider-container" key="bottom">
