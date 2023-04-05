@@ -16,7 +16,6 @@ import './index.css';
 
 export default function CreateListing() {
 	const [isLoading, setIsLoading] = useState(false);
-
 	const [productName, setProductName] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState(0);
@@ -24,7 +23,9 @@ export default function CreateListing() {
 	const [condition, setCondition] = useState('');
 	const [address, setAddress] = useState('');
 	const [city, setCity] = useState('');
-	//const [images, setImages] = useState(false);
+
+	//A way to upload the images
+	const [images, setImages] = useState(null);
 
 	const navigate = useNavigate();
 
@@ -36,66 +37,81 @@ export default function CreateListing() {
 		}, 2000);
 	};
 
-	// function uploadImage() {
-	// 	let token = sessionStorage.getItem('accessToken');
-	// 	let formData = new FormData(); // instantiate it
+	async function uploadImage() {
+		let token = sessionStorage.getItem('accessToken');
+		let formData = new FormData();
+		formData.append('file', images[0]);
 
-	// 	// suppose you have your file ready
-	// 	formData.set('file', images);
+		let config = {
+			method: 'post',
+			url: 'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Upload',
+			headers: {
+				'Content-Type': 'multipart/form-data',
+				Authorization: `Bearer ${token}`,
+			},
+			data: formData,
+		};
 
-	// 	axios
-	// 		.post(
-	// 			'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Upload',
-	// 			formData,
-	// 			{
-	// 				headers: {
-	// 					Authorization: `Bearer ${token}`,
-	// 					'content-type': 'multipart/form-data', // do not forget this
-	// 				},
-	// 			}
-	// 		)
-	// 		.then((res) => {
-	// 			console.log('SUCCESS: Listing created!', res);
-	// 			navigateHome();
-	// 		})
-	// 		.catch((error) => console.log('ERROR: Unable to create listing:', error));
-	// }
+		try {
+			const response = await axios.request(config);
+			sessionStorage.setItem('images', JSON.stringify(response.data));
+			console.log('SUCCESS: Image(s) added!', JSON.stringify(response.data));
+			return createListing();
+		} catch (error) {
+			console.log('ERROR: Unable to upload images:', error);
+		}
+	}
 
 	function createListing() {
 		let token = sessionStorage.getItem('accessToken');
-		axios
-			.post(
-				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product',
-				{
-					productName: productName,
-					description: description,
-					price: price,
-					category: category,
-					condition: condition,
-					address: address,
-					city: city,
-					images: ['cb6e6e84-d805-47eb-967f-e6fd8ce28b07'],
-				},
-				{ headers: { Authorization: `Bearer ${token}` } }
-			)
-			.then((res) => {
-				console.log('SUCCESS: Listing created!', res);
-				navigateHome();
-			})
-			.catch((error) => console.log('ERROR: Unable to create listing:', error));
+
+		let imageID = sessionStorage.getItem('images');
+		let imageUploadId = JSON.parse(imageID)[0].id;
+		console.log(imageUploadId);
+
+		if (images !== null) {
+			axios
+				.post(
+					'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product',
+					{
+						productName: productName,
+						description: description,
+						price: price,
+						category: category,
+						condition: condition,
+						address: address,
+						city: city,
+						images: imageUploadId,
+					},
+					{ headers: { Authorization: `Bearer ${token}` } }
+				)
+				.then((res) => {
+					console.log('SUCCESS: Listing created!', res.data);
+				})
+				.catch((error) =>
+					console.log('ERROR: Unable to create listing:', error)
+				);
+		}
 	}
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		createListing();
+		uploadImage();
 	};
+
+	//handler function: accessing files through the event object then storing in our state
+	function onImageChange(e) {
+		setImages([...e.target.files]);
+	}
 
 	return (
 		<>
 			<div className="create-listing-container">
-				{/* <form onSubmit={handleSubmit}>
-					<Counter />
-				</form> */}
+				<>
+					<label>
+						<input type="file" accept="image/*" onChange={onImageChange} />
+					</label>
+				</>
 
 				<div className="breadcrumbs">
 					Deals for you <img src={breadArrow} alt="path-arrow" /> Product
@@ -147,12 +163,9 @@ export default function CreateListing() {
 										required
 										className="create-listing-categories"
 										name={category}
+										defaultValue="Choose your Category"
 										onChange={(e) => setCategory(e.target.value)}
 									>
-										<option value="" selected hidden>
-											Choose your Category
-										</option>
-										<option>All</option>
 										<option value="VEHICLES">Cars & Vehicles</option>
 										<option value="FURNITURE">Furniture</option>
 										<option value="ELECTRONICS">Electronics</option>
@@ -167,11 +180,9 @@ export default function CreateListing() {
 									<select
 										className="condition-input"
 										name={condition}
+										defaultValue="Select condition"
 										onChange={(e) => setCondition(e.target.value)}
 									>
-										<option value="" selected hidden>
-											Select condition
-										</option>
 										<option value="NEW">NEW</option>
 										<option value="USED">USED</option>
 									</select>
@@ -206,10 +217,8 @@ export default function CreateListing() {
 										className="create-listing-categories"
 										name={city}
 										onChange={(e) => setCity(e.target.value)}
+										defaultValue="Select your city"
 									>
-										<option value="" selected hidden>
-											Select your city
-										</option>
 										<option>Calgary</option>
 										<option>Brooks</option>
 										<option>Camrose</option>
