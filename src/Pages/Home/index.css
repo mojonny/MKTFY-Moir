@@ -5,18 +5,18 @@
 
 .download-app-add {
 	margin: 0 auto;
-	width: 99vw;
+	width: 100%;
 	margin-bottom: 100px;
 }
 
 .slider {
-	height: 500px;
 	width: 87%;
 	padding: 20px 16px 20px 16px;
 	border-radius: 5px 5px 5px 5px;
 	margin: 0;
 	background: #ffffff;
 	margin-left: 150px;
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .mini-slider-container {
@@ -28,12 +28,15 @@
 	gap: 20px;
 }
 .mini-slider {
-	height: 475px;
+	height: 100%;
 	width: 49.5%;
 	padding: 20px 16px 20px 16px;
 	border-radius: 5px;
 	margin: 0;
 	background: #ffffff;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .results {

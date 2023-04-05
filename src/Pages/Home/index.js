@@ -117,9 +117,11 @@ export default function Home() {
 					.then((res) => {
 						return console.log('SUCCESS: Registered to db!', res);
 					})
-					.catch((error) =>
-						console.log('ERROR: User may already be registered', error)
-					);
+					.catch((error) => {
+						navigate('/auth');
+						alert('Please register a new account');
+						console.log('ERROR: User may already be registered', error);
+					});
 			}
 		}
 	}, [navigate]);
@@ -142,14 +144,14 @@ export default function Home() {
 					className="mini-slider"
 					key="002"
 					title="Cars & Vehicles"
-					sliderCategory="Cars & Vehicles"
+					sliderCategory="VEHICLES"
 				/>
 
 				<MiniSlider
 					className="mini-slider"
 					key="003"
 					title="Furniture"
-					sliderCategory="Furniture"
+					sliderCategory="FURNITURE"
 				/>
 			</div>
 			<br />
@@ -167,14 +169,14 @@ export default function Home() {
 					className="mini-slider"
 					key="005"
 					title="Electronics"
-					sliderCategory="Electronics"
+					sliderCategory="ELECTRONICS"
 				/>
 
 				<MiniSlider
 					className="mini-slider"
 					key="006"
 					title="Real Estate"
-					sliderCategory="Real Estate"
+					sliderCategory="REAL_ESTATE"
 				/>
 			</div>
 			<br />

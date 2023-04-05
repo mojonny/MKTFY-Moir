@@ -3,10 +3,10 @@
 	width: 99vw;
 	padding-top: 20px;
 	background-color: #6318af;
-	/* display: flex;
+	display: flex;
 	flex-direction: column;
-	align-items: center; */
-	box-sizing: border-box;
+	align-items: center;
+	justify-content: center;
 }
 
 .search-bar-container {
@@ -15,7 +15,6 @@
 	align-items: center;
 	gap: 20px;
 	height: 129px;
-	margin-left: 144px;
 }
 
 .search-bar-categories {

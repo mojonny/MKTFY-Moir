@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom';
 
 import './index.css';
 
-export default function Slider({ title, sliderCategory, className }) {
+export default function Slider({ title, className }) {
 	const [listings, setListings] = useState([]);
 
 	useEffect(() => {
 		setTimeout(() => {
 			const token = sessionStorage.getItem('accessToken');
 			const url =
-				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product';
+				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/deals?maxResults=100';
 			const options = {
 				headers: { Authorization: `Bearer ${token}` },
 			};
@@ -19,17 +19,13 @@ export default function Slider({ title, sliderCategory, className }) {
 				.get(url, options)
 				.then((res) => {
 					setListings(res.data);
-					console.log('SUCCESS: Retrieved all listings:', res.data);
+					console.log('SUCCESS: Retrieved DEALS:', res.data);
 				})
 				.catch((error) =>
 					console.log('ERROR: Unable to retrieve listings:', error)
 				);
 		}, 3000);
 	}, []);
-
-	// const filteredListings = listings.filter(
-	// 	({ category }) => category === sliderCategory
-	// );
 
 	const listingComponents = listings.map((product) => (
 		<div key={product.id}>

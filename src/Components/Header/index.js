@@ -6,7 +6,6 @@ import SearchBar from './SearchBar';
 import ProfileDropdown from './ProfileDropdown';
 import NotificationPopup from './NotificationDropdown';
 
-import hamburger from '../../assets/LinesMenu.png';
 import altLogo from '../../assets/altLogo.png';
 import plus from '../../assets/Plus.png';
 
@@ -53,16 +52,6 @@ export default function Header() {
 
 			<div>
 				<ul className="search-bar-categories">
-					<li>
-						<button
-							className="nav-category-button"
-							onClick={() => navigate('/')}
-						>
-							<img alt="drop-down" src={hamburger} />
-							{'\xa0'.repeat(5)}
-							All
-						</button>
-					</li>
 					<li>
 						<button
 							className="nav-category-button"
