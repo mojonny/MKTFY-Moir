@@ -108,6 +108,8 @@ export default function Product() {
 				<div className="product-landing">
 					{/* <VerticalSlider filtered={filtered} setMainImage={setMainImage} /> */}
 					<img src={images[0]} alt="main-cat-pic" className="main-img" />
+					<img src={images[1]} alt="main-cat-pic" className="main-img" />
+					<img src={images[2]} alt="main-cat-pic" className="main-img" />
 
 					<div className="side-info-container">
 						<h1

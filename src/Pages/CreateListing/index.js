@@ -3,13 +3,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-//import { Counter } from '../../Store/Counter';
-//import UploadImage from '../../Components/UploadImage';
 import Success from '../../Components/Success';
-// import AddListing from './AddListing';
-// import ListingList from './ListingList';
+//import UploadImage from '../../Components/UploadImage';
 
-//import loadImg from '../../assets/LoadImg.svg';
+import loadImg from '../../assets/LoadImg.svg';
 //import loadBigCam from '../../assets/Frame 123.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
@@ -25,7 +22,11 @@ export default function CreateListing() {
 	const [city, setCity] = useState('');
 
 	//A way to upload the images
-	const [images, setImages] = useState(null);
+	const [images, setImages] = useState([]);
+	const [imageIds, setImageIds] = useState([]);
+	console.log('imageIds:', imageIds);
+	//show the default image when there isn't a file to be loaded, or when one is removed
+	const [showDefaultImg, setShowDefaultImg] = useState(true);
 
 	const navigate = useNavigate();
 
@@ -39,8 +40,11 @@ export default function CreateListing() {
 
 	async function uploadImage() {
 		const token = sessionStorage.getItem('accessToken');
+
 		let formData = new FormData();
-		formData.append('file', images[0]);
+		for (let i = 0; i < images.length; i++) {
+			formData.append('file', images[i]);
+		}
 
 		let config = {
 			method: 'post',
@@ -54,9 +58,9 @@ export default function CreateListing() {
 
 		try {
 			const response = await axios.request(config);
-
-			sessionStorage.setItem('images', JSON.stringify(response.data));
-			console.log('SUCCESS: Image(s) added!', JSON.stringify(response.data));
+			setImageIds(response.data);
+			console.log('SUCCESS: Image(s) added!', response.data);
+			return createListing();
 		} catch (error) {
 			console.log('ERROR: Unable to upload images:', error);
 		}
@@ -64,9 +68,22 @@ export default function CreateListing() {
 
 	function createListing() {
 		const token = sessionStorage.getItem('accessToken');
-		let imageID = sessionStorage.getItem('images');
-		let imageUploadId = JSON.parse(imageID)[0].id;
-		let imageArray = [imageUploadId];
+
+		//var parsedJSON = JSON.parse(imageIds);
+		// for (let i = 0; i < parsedJSON.length; i++) {
+		// 	console.log(parsedJSON[i].Id);
+		// }
+
+		// for (let i = 0; i < parsedJSON.length; i++) {
+		// 	//let imageID = JSON.parse(imageIds);
+		// 	let imageUploadId = imageIds[i];
+		// 	setImageIds([imageUploadId.id]);
+		// 	console.log('new img ids:', imageIds);
+		// }
+
+		let Arr = imageIds;
+		const map1 = Arr.map((obj) => obj.id);
+		console.log('Image Id Array:', map1);
 
 		axios
 			.post(
@@ -79,7 +96,7 @@ export default function CreateListing() {
 					condition: condition,
 					address: address,
 					city: city,
-					images: imageArray,
+					images: map1,
 				},
 				{ headers: { Authorization: `Bearer ${token}` } }
 			)
@@ -91,24 +108,58 @@ export default function CreateListing() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+		setShowDefaultImg(false);
 		uploadImage();
 	};
 
 	//handler function: accessing files through the event object then storing in our state
+	// function onImageChange(e) {
+	// 	setImages([...e.target.files]);
+	// 	setShowDefaultImg(false);
+	// }
+
 	function onImageChange(e) {
-		setImages([...e.target.files]);
+		//To display preview images
+		let ImagesArray = Object.entries(e.target.files).map((e) =>
+			URL.createObjectURL(e[1])
+		);
+
+		// let newImageUrls = [];
+
+		// let ImagesArray = images.forEach((image) =>
+		// 	newImageUrls.push(URL.createObjectURL(image))
+		// );
+
+		//setPreviewImages([...ImagesArray]);
+		setImages([...images, ...e.target.files]);
+		console.log('image arr', ImagesArray);
+		e.preventDefault();
+		console.log('images file', images);
 	}
+	//A way to render images
+	// const [imageURLs, setImageURLs] = useState([]);
+	// console.log('images urls:', imageURLs);
+
+	//use effect looks for changes in our images array
+	// useEffect(() => {
+	// 	if (images.length < 1 || images.length > 6) return;
+	// 	const newImageUrls = [];
+	// 	images.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
+	// 	setImageURLs(newImageUrls);
+	// 	console.log('images:', images);
+	// 	console.log('images length:', images.length);
+	// }, [images]);
+
+	// function deleteFile(id) {
+	// 	const s = [];
+	// 	images.filter((images) => images.id !== id);
+	// 	setImageURLs(s);
+	// 	console.log(s);
+	// }
 
 	return (
 		<>
 			<div className="create-listing-container">
-				<>
-					<label>
-						<input type="file" accept="image/*" onChange={onImageChange} />
-					</label>
-					<button onClick={() => createListing()}>CREATE LISTINGS</button>
-				</>
-
 				<div className="breadcrumbs">
 					Deals for you <img src={breadArrow} alt="path-arrow" /> Product
 					listing
@@ -116,18 +167,71 @@ export default function CreateListing() {
 
 				<div onSubmit={handleSubmit}>
 					<div className="create-listing-landing">
-						{/* <div className="listing-image-box">
-							<div>
-								<UploadImage className="main-listing-img" src={loadImg} />
-							</div>
-
-							<div className="mini-image-box">
-								<UploadImage className="load-pic" src={loadBigCam} />
-								<UploadImage className="load-pic" src={loadBigCam} />
-								<UploadImage className="load-pic" src={loadBigCam} />
-								<UploadImage className="load-pic" src={loadBigCam} />
-							</div>
-						</div> */}
+						<div className="listing-image-box">
+							<>
+								<label>
+									{/*Load image button */}
+									{showDefaultImg && (
+										<img
+											src={loadImg}
+											className="main-listing-img"
+											alt="main-listing-pic"
+										/>
+									)}
+									{images.map((image, index) => (
+										<img
+											src={URL.createObjectURL(image)}
+											className="main-listing-img"
+											alt="preview"
+											key={index}
+										/>
+									))}
+									<input
+										type="file"
+										multiple
+										accept="image/*"
+										onChange={onImageChange}
+										// style={{
+										// 	visibility: 'hidden',
+										// 	width: '0',
+										// 	height: '0',
+										// }}
+									/>
+								</label>
+							</>
+							{/* <>
+								<div className="mini-image-box">
+									<label>
+										{showDefaultImg && (
+											<img
+												src={loadBigCam}
+												className="load-pic"
+												alt="load-pic"
+											/>
+										)}
+										 {imageURLs.map((imageSrc, index) => (
+											<img
+												src={imageSrc}
+												className="load-pic"
+												alt="preview"
+												key={index}
+											/>
+										))} 
+										<input
+											type="file"
+											multiple
+											accept="image/*"
+											onChange={onImageChange}
+											// style={{
+											// 	visibility: 'hidden',
+											// 	width: '0',
+											// 	height: '0',
+											// }}
+										/>
+									</label>
+								</div>
+							</> */}
+						</div>
 
 						<div className="listing-info-container">
 							<div>

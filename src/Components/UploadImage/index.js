@@ -22,7 +22,9 @@ export default function UploadImage({ src, className }) {
 	const [imageURLs, setImageURLs] = useState([]);
 
 	//Create a file with all the image urls
-	// createObjectURL. This method takes in an image object and then returns a string of a temporary local source for that image. Please note, on page reload or on re-render these strings will have to be re-built
+	// createObjectURL. This method takes in an image object and then returns a
+	//string of a temporary local source for that image.
+	//Please note, on page reload or on re-render these strings will have to be re-built
 
 	//use effect looks for changes in our images array
 	useEffect(() => {
@@ -42,12 +44,7 @@ export default function UploadImage({ src, className }) {
 		<>
 			<label>
 				{showDefaultImg && (
-					<img
-						src={src}
-						className={className}
-						alt="main-listing-pic"
-						showDefaultImg={showDefaultImg}
-					/>
+					<img src={src} className={className} alt="main-listing-pic" />
 				)}
 				<input
 					type="file"
@@ -75,7 +72,6 @@ export default function UploadImage({ src, className }) {
 						left: '20%',
 						marginLeft: '-60px',
 					}}
-					showButton={showButton}
 					onClick={() =>
 						setShowDefaultImg(true) ||
 						deleteFile(images.id) ||
