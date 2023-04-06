@@ -10,6 +10,8 @@ export default function MiniSlider({ title, sliderCategory, className }) {
 	useEffect(() => {
 		setTimeout(() => {
 			const token = sessionStorage.getItem('accessToken');
+			//const loggedIn = sessionStorage.getItem('loggedIn');
+
 			const url =
 				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/category?maxResults=100';
 			const data = {
@@ -19,6 +21,7 @@ export default function MiniSlider({ title, sliderCategory, className }) {
 			const options = {
 				headers: { Authorization: `Bearer ${token}` },
 			};
+			// if (loggedIn === true) {
 			axios
 				.post(url, data, options)
 				.then((res) => {
@@ -26,8 +29,9 @@ export default function MiniSlider({ title, sliderCategory, className }) {
 					console.log('SUCCESS: Listings by category:', res.data);
 				})
 				.catch((error) =>
-					console.log('ERROR: Unable to retrieve listings:', error)
+					console.log('ERROR: Unable to retrieve categories:', error)
 				);
+			//	}
 		}, 3000);
 	}, [sliderCategory]);
 

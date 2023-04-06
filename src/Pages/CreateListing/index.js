@@ -38,7 +38,7 @@ export default function CreateListing() {
 	};
 
 	async function uploadImage() {
-		let token = sessionStorage.getItem('accessToken');
+		const token = sessionStorage.getItem('accessToken');
 		let formData = new FormData();
 		formData.append('file', images[0]);
 
@@ -54,44 +54,39 @@ export default function CreateListing() {
 
 		try {
 			const response = await axios.request(config);
+
 			sessionStorage.setItem('images', JSON.stringify(response.data));
 			console.log('SUCCESS: Image(s) added!', JSON.stringify(response.data));
-			return createListing();
 		} catch (error) {
 			console.log('ERROR: Unable to upload images:', error);
 		}
 	}
 
 	function createListing() {
-		let token = sessionStorage.getItem('accessToken');
-
+		const token = sessionStorage.getItem('accessToken');
 		let imageID = sessionStorage.getItem('images');
 		let imageUploadId = JSON.parse(imageID)[0].id;
-		console.log(imageUploadId);
+		let imageArray = [imageUploadId];
 
-		if (images !== null) {
-			axios
-				.post(
-					'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product',
-					{
-						productName: productName,
-						description: description,
-						price: price,
-						category: category,
-						condition: condition,
-						address: address,
-						city: city,
-						images: imageUploadId,
-					},
-					{ headers: { Authorization: `Bearer ${token}` } }
-				)
-				.then((res) => {
-					console.log('SUCCESS: Listing created!', res.data);
-				})
-				.catch((error) =>
-					console.log('ERROR: Unable to create listing:', error)
-				);
-		}
+		axios
+			.post(
+				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product',
+				{
+					productName: productName,
+					description: description,
+					price: price,
+					category: category,
+					condition: condition,
+					address: address,
+					city: city,
+					images: imageArray,
+				},
+				{ headers: { Authorization: `Bearer ${token}` } }
+			)
+			.then((res) => {
+				console.log('SUCCESS: Listing created!', res.data);
+			})
+			.catch((error) => console.log('ERROR: Unable to create listing:', error));
 	}
 
 	const handleSubmit = (event) => {
@@ -111,6 +106,7 @@ export default function CreateListing() {
 					<label>
 						<input type="file" accept="image/*" onChange={onImageChange} />
 					</label>
+					<button onClick={() => createListing()}>CREATE LISTINGS</button>
 				</>
 
 				<div className="breadcrumbs">
@@ -163,9 +159,9 @@ export default function CreateListing() {
 										required
 										className="create-listing-categories"
 										name={category}
-										defaultValue="Choose your Category"
 										onChange={(e) => setCategory(e.target.value)}
 									>
+										<option>Choose your Category</option>
 										<option value="VEHICLES">Cars & Vehicles</option>
 										<option value="FURNITURE">Furniture</option>
 										<option value="ELECTRONICS">Electronics</option>
@@ -183,6 +179,7 @@ export default function CreateListing() {
 										defaultValue="Select condition"
 										onChange={(e) => setCondition(e.target.value)}
 									>
+										<option>Select condition</option>
 										<option value="NEW">NEW</option>
 										<option value="USED">USED</option>
 									</select>
@@ -219,18 +216,19 @@ export default function CreateListing() {
 										onChange={(e) => setCity(e.target.value)}
 										defaultValue="Select your city"
 									>
-										<option>Calgary</option>
-										<option>Brooks</option>
-										<option>Camrose</option>
-										<option>Cold Lake</option>
-										<option>Edmonton</option>
-										<option>Fort McMurray</option>
-										<option>Lacombe</option>
-										<option>Leduc</option>
-										<option>Lethbridge</option>
-										<option>Medicine Hat</option>
-										<option>Red Deer</option>
-										<option>St. Albert</option>
+										<option>Select your city</option>
+										<option value="Calgary">Calgary</option>
+										<option value="Brooks">Brooks</option>
+										<option value="Camrose">Camrose</option>
+										<option value="Cold Lake">Cold Lake</option>
+										<option value="Edmonton">Edmonton</option>
+										<option value="Fort McMurray">Fort McMurray</option>
+										<option value="Lacombe">Lacombe</option>
+										<option value="Leduc">Leduc</option>
+										<option value="Lethbridge">Lethbridge</option>
+										<option value="Medicine Hat">Medicine Hat</option>
+										<option value="Red Deer">Red Deer</option>
+										<option value="St. Albert">St. Albert</option>
 									</select>
 								</div>
 							</div>

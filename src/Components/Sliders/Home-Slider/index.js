@@ -10,11 +10,13 @@ export default function Slider({ title, className }) {
 	useEffect(() => {
 		setTimeout(() => {
 			const token = sessionStorage.getItem('accessToken');
+			//const loggedIn = sessionStorage.getItem('loggedIn');
 			const url =
 				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/deals?maxResults=100';
 			const options = {
 				headers: { Authorization: `Bearer ${token}` },
 			};
+			//if (loggedIn === true ) {
 			axios
 				.get(url, options)
 				.then((res) => {
@@ -22,8 +24,9 @@ export default function Slider({ title, className }) {
 					console.log('SUCCESS: Retrieved DEALS:', res.data);
 				})
 				.catch((error) =>
-					console.log('ERROR: Unable to retrieve listings:', error)
+					console.log('ERROR: Unable to retrieve deals:', error)
 				);
+			//}
 		}, 3000);
 	}, []);
 
