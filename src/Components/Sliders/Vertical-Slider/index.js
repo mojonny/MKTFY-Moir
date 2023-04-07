@@ -1,10 +1,5 @@
 import React from 'react';
 
-// import cat1 from '../../../assets/catBreakfast.png';
-// import cat2 from '../../../assets/catDonut.png';
-// import cat3 from '../../../assets/catHallow.png';
-
-// import catSide from '../../../assets/catToyedition.png';
 import upDownArrow from '../../../assets/UpDownArrow.png';
 import './index.css';
 
@@ -36,8 +31,8 @@ export default function VerticalSlider({ filtered, setMainImage }) {
 				>
 					<img
 						src={filtered.imageUrls[0]}
-						className="vert-cat-pic"
-						alt="vert-cat-pic"
+						className="vert-pic"
+						alt="vert-pic"
 					/>
 				</button>
 				<button
@@ -46,8 +41,8 @@ export default function VerticalSlider({ filtered, setMainImage }) {
 				>
 					<img
 						src={filtered.imageUrls[1]}
-						className="vert-cat-pic"
-						alt="vert-cat-pic"
+						className="vert-pic"
+						alt="vert-pic"
 					/>
 				</button>
 				<button
@@ -56,8 +51,8 @@ export default function VerticalSlider({ filtered, setMainImage }) {
 				>
 					<img
 						src={filtered.imageUrls[2]}
-						className="vert-cat-pic"
-						alt="vert-cat-pic"
+						className="vert-pic"
+						alt="vert-pic"
 					/>
 				</button>
 				<button
@@ -66,8 +61,8 @@ export default function VerticalSlider({ filtered, setMainImage }) {
 				>
 					<img
 						src={filtered.imageUrls[3]}
-						className="vert-cat-pic"
-						alt="vert-cat-pic"
+						className="vert-pic"
+						alt="vert-pic"
 					/>
 				</button>
 			</div>

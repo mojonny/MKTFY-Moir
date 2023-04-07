@@ -2,10 +2,10 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-// import { productData } from '../../Store/productData';
-// import { userData } from '../../Store/userData';
 
 //import VerticalSlider from '../../Components/Sliders/Vertical-Slider';
+
+import upDownArrow from '../../assets/UpDownArrow.png';
 import listingIcon from '../../assets/listingTag.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
@@ -26,24 +26,27 @@ export default function Product() {
 
 	const [showCondition, setShowCondition] = useState(false);
 
+	const [mainImage, setMainImage] = useState(images[0]);
+
 	const { id } = useParams();
-
-	// const filteredById = productData.filter(
-	// 	(product) => product.id === productId
-	// );
-
-	// const filtered = filteredById[0];
-	// console.log('filter by id:', filteredById);
-	// const [mainImage, setMainImage] = useState(filtered.imageUrl);
-
-	// const filterByUser = userData.filter(
-	// 	(user) => user.userId === filtered.userId
-	// );
-	// const filteredUser = filterByUser[0];
-	// console.log(filteredUser);
 
 	Storage.prototype.setObj = function (key, obj) {
 		return this.setItem(key, JSON.stringify(obj));
+	};
+
+	//Scrolls through vertical image carousel
+	const ScrollDown = () => {
+		document.getElementById('container').scrollBy({
+			top: -165,
+			behavior: 'smooth',
+		});
+	};
+
+	const ScrollUp = () => {
+		document.getElementById('container').scrollBy({
+			top: 165,
+			behavior: 'smooth',
+		});
 	};
 
 	const navigate = useNavigate();
@@ -106,10 +109,54 @@ export default function Product() {
 					listing
 				</div>
 				<div className="product-landing">
-					{/* <VerticalSlider filtered={filtered} setMainImage={setMainImage} /> */}
-					<img src={images[0]} alt="main-cat-pic" className="main-img" />
-					<img src={images[1]} alt="main-cat-pic" className="main-img" />
-					<img src={images[2]} alt="main-cat-pic" className="main-img" />
+					{/* VERTICAL SLIDER */}
+					<>
+						<div className="vert-slider-landing">
+							{/* Scroll buttons */}
+							<button onClick={ScrollDown} className="vert-up-arrow">
+								<img src={upDownArrow} alt="up-arrow" />
+							</button>
+
+							<div id="container" className="vert-image-slider1">
+								<button
+									className="vert-button"
+									onClick={() => setMainImage(images[0])}
+								>
+									<img src={images[0]} className="vert-pic" alt="vert-pic" />
+								</button>
+								<button
+									className="vert-button"
+									onClick={() => setMainImage(images[1])}
+								>
+									<img src={images[1]} className="vert-pic" alt="vert-pic" />
+								</button>
+								<button
+									className="vert-button"
+									onClick={() => setMainImage(images[2])}
+								>
+									<img src={images[2]} className="vert-pic" alt="vert-pic" />
+								</button>
+								<button
+									className="vert-button"
+									onClick={() => setMainImage(images[3])}
+								>
+									<img src={images[3]} className="vert-pic" alt="vert-pic" />
+								</button>
+								<button
+									className="vert-button"
+									onClick={() => setMainImage(images[4])}
+								>
+									<img src={images[4]} className="vert-pic" alt="vert-pic" />
+								</button>
+							</div>
+							<button onClick={ScrollUp} className="vert-down-arrow">
+								<img src={upDownArrow} alt="down-arrow" />
+							</button>
+						</div>
+					</>
+
+					{/* MAIN IMAGE */}
+					<img src={mainImage} alt="main-pic" className="main-img" />
 
 					<div className="side-info-container">
 						<h1
