@@ -157,3 +157,17 @@
 	border: none;
 	cursor: pointer;
 }
+
+.replace-img-button {
+	background: none;
+	border: none;
+	margin-left: -70px;
+	transform: translateY(-290px);
+}
+
+.mini-replace-img-button {
+	background: none;
+	border: none;
+	margin-left: -65px;
+	transform: translateY(-31px);
+}

@@ -5,6 +5,7 @@ import axios from 'axios';
 
 import Success from '../../Components/Success';
 
+import removeImg from '../../assets/Closing X.svg';
 import loadImg from '../../assets/LoadImg.svg';
 import loadBigCam from '../../assets/Frame 123.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
@@ -22,8 +23,24 @@ export default function CreateListing() {
 
 	//A way to upload the images
 	const [images, setImages] = useState([]);
+	console.log('images:', images);
 	const [imageIds, setImageIds] = useState([]);
 	console.log('imageIds:', imageIds);
+
+	const [maxImgs, setMaxImgs] = useState(false);
+
+	const [showButton, setShowButton] = useState(true);
+	const [showButton1, setShowButton1] = useState(true);
+	const [showButton2, setShowButton2] = useState(true);
+	const [showButton3, setShowButton3] = useState(true);
+	const [showButton4, setShowButton4] = useState(true);
+
+	const placeholderImage = loadImg;
+	const placeholderImage2 = loadBigCam;
+
+	const onImageError = (e) => {
+		e.target.src = placeholderImage;
+	};
 
 	const navigate = useNavigate();
 
@@ -97,22 +114,31 @@ export default function CreateListing() {
 	};
 
 	function onImageChange(e) {
-		//To display preview images
-		let ImagesArray = Object.entries(e.target.files).map((e) =>
-			URL.createObjectURL(e[1])
-		);
-
-		setImages([...images, ...e.target.files]);
-		console.log('images array', ImagesArray);
 		e.preventDefault();
+		setImages([...images, ...e.target.files]);
+
+		if (!images[0]) {
+			setShowButton(false);
+		} else if (!images[1]) {
+			setShowButton1(false);
+		} else if (!images[2]) {
+			setShowButton2(false);
+		} else if (!images[3]) {
+			setShowButton3(false);
+		} else if (!images[4]) {
+			setShowButton4(false);
+		}
+
+		if (images.length >= 5) {
+			setMaxImgs(true);
+		}
 	}
 
-	const placeholderImage = loadImg;
-	const placeholderImage2 = loadBigCam;
-
-	const onImageError = (e) => {
-		e.target.src = placeholderImage;
-	};
+	function deleteFile(e) {
+		const s = images.filter((index) => index !== e);
+		setImages(s);
+		console.log(s);
+	}
 
 	return (
 		<>
@@ -133,65 +159,142 @@ export default function CreateListing() {
 										multiple
 										accept="image/*"
 										onChange={onImageChange}
+										disabled={maxImgs}
 										style={{
 											visibility: 'hidden',
 											width: '0',
 											height: '0',
 										}}
 									/>
+									<>
+										<img
+											className="main-listing-img"
+											src={
+												images[0]
+													? URL.createObjectURL(images[0])
+													: placeholderImage
+											}
+											alt="preview"
+											onError={onImageError}
+										/>
 
-									<img
-										className="main-listing-img"
-										src={
-											images[0]
-												? URL.createObjectURL(images[0])
-												: placeholderImage
-										}
-										alt="preview"
-										onError={onImageError}
-									/>
+										<button
+											type="button"
+											index="0"
+											onClick={() =>
+												deleteFile(images[0]) || setShowButton(true)
+											}
+											className="replace-img-button"
+											hidden={showButton}
+										>
+											<img
+												className="replace-img"
+												alt="close-button"
+												src={removeImg}
+											/>
+										</button>
+									</>
 
+									{/* Mini-preview box */}
 									<div className="mini-image-box">
-										<img
-											className="load-pic"
-											src={
-												images[1]
-													? URL.createObjectURL(images[1])
-													: placeholderImage2
-											}
-											alt="preview"
-											onError={onImageError}
-										/>
-										<img
-											className="load-pic"
-											src={
-												images[2]
-													? URL.createObjectURL(images[2])
-													: placeholderImage2
-											}
-											alt="preview"
-											onError={onImageError}
-										/>
-										<img
-											className="load-pic"
-											src={
-												images[3]
-													? URL.createObjectURL(images[3])
-													: placeholderImage2
-											}
-											alt="preview"
-											onError={onImageError}
-										/>
-										<img
-											className="load-pic"
-											src={
-												images[4]
-													? URL.createObjectURL(images[4])
-													: placeholderImage2
-											}
-											alt="preview"
-											onError={onImageError}
-										/>
+										<>
+											<img
+												className="load-pic"
+												src={
+													images[1]
+														? URL.createObjectURL(images[1])
+														: placeholderImage2
+												}
+												alt="preview"
+												onError={onImageError}
+											/>
+
+											<button
+												type="button"
+												index="1"
+												onClick={() =>
+													deleteFile(images[1]) || setShowButton1(true)
+												}
+												className="mini-replace-img-button"
+												hidden={showButton1}
+											>
+												<img alt="close-button" src={removeImg} />
+											</button>
+										</>
+										<>
+											<img
+												className="load-pic"
+												src={
+													images[2]
+														? URL.createObjectURL(images[2])
+														: placeholderImage2
+												}
+												alt="preview"
+												onError={onImageError}
+											/>
+
+											<button
+												type="button"
+												index="2"
+												onClick={() =>
+													deleteFile(images[2]) || setShowButton2(true)
+												}
+												className="mini-replace-img-button"
+												hidden={showButton2}
+											>
+												<img alt="close-button" src={removeImg} />
+											</button>
+										</>
+
+										<>
+											<img
+												className="load-pic"
+												src={
+													images[3]
+														? URL.createObjectURL(images[3])
+														: placeholderImage2
+												}
+												alt="preview"
+												onError={onImageError}
+											/>
+
+											<button
+												type="button"
+												index="3"
+												onClick={() =>
+													deleteFile(images[3]) || setShowButton3(true)
+												}
+												className="mini-replace-img-button"
+												hidden={showButton3}
+											>
+												<img alt="close-button" src={removeImg} />
+											</button>
+										</>
+
+										<>
+											<img
+												className="load-pic"
+												src={
+													images[4]
+														? URL.createObjectURL(images[4])
+														: placeholderImage2
+												}
+												alt="preview"
+												onError={onImageError}
+											/>
+
+											<button
+												type="button"
+												index="4"
+												onClick={() =>
+													deleteFile(images[4]) || setShowButton4(true)
+												}
+												className="mini-replace-img-button"
+												hidden={showButton4}
+											>
+												<img alt="close-button" src={removeImg} />
+											</button>
+										</>
 									</div>
 								</label>
 							</>
