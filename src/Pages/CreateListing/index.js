@@ -4,10 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Success from '../../Components/Success';
-//import UploadImage from '../../Components/UploadImage';
 
 import loadImg from '../../assets/LoadImg.svg';
-//import loadBigCam from '../../assets/Frame 123.png';
+import loadBigCam from '../../assets/Frame 123.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
@@ -25,8 +24,6 @@ export default function CreateListing() {
 	const [images, setImages] = useState([]);
 	const [imageIds, setImageIds] = useState([]);
 	console.log('imageIds:', imageIds);
-	//show the default image when there isn't a file to be loaded, or when one is removed
-	const [showDefaultImg, setShowDefaultImg] = useState(true);
 
 	const navigate = useNavigate();
 
@@ -69,18 +66,6 @@ export default function CreateListing() {
 	function createListing() {
 		const token = sessionStorage.getItem('accessToken');
 
-		//var parsedJSON = JSON.parse(imageIds);
-		// for (let i = 0; i < parsedJSON.length; i++) {
-		// 	console.log(parsedJSON[i].Id);
-		// }
-
-		// for (let i = 0; i < parsedJSON.length; i++) {
-		// 	//let imageID = JSON.parse(imageIds);
-		// 	let imageUploadId = imageIds[i];
-		// 	setImageIds([imageUploadId.id]);
-		// 	console.log('new img ids:', imageIds);
-		// }
-
 		let Arr = imageIds;
 		const map1 = Arr.map((obj) => obj.id);
 		console.log('Image Id Array:', map1);
@@ -108,15 +93,8 @@ export default function CreateListing() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		setShowDefaultImg(false);
 		uploadImage();
 	};
-
-	//handler function: accessing files through the event object then storing in our state
-	// function onImageChange(e) {
-	// 	setImages([...e.target.files]);
-	// 	setShowDefaultImg(false);
-	// }
 
 	function onImageChange(e) {
 		//To display preview images
@@ -124,38 +102,17 @@ export default function CreateListing() {
 			URL.createObjectURL(e[1])
 		);
 
-		// let newImageUrls = [];
-
-		// let ImagesArray = images.forEach((image) =>
-		// 	newImageUrls.push(URL.createObjectURL(image))
-		// );
-
-		//setPreviewImages([...ImagesArray]);
 		setImages([...images, ...e.target.files]);
-		console.log('image arr', ImagesArray);
+		console.log('images array', ImagesArray);
 		e.preventDefault();
-		console.log('images file', images);
 	}
-	//A way to render images
-	// const [imageURLs, setImageURLs] = useState([]);
-	// console.log('images urls:', imageURLs);
 
-	//use effect looks for changes in our images array
-	// useEffect(() => {
-	// 	if (images.length < 1 || images.length > 6) return;
-	// 	const newImageUrls = [];
-	// 	images.forEach((image) => newImageUrls.push(URL.createObjectURL(image)));
-	// 	setImageURLs(newImageUrls);
-	// 	console.log('images:', images);
-	// 	console.log('images length:', images.length);
-	// }, [images]);
+	const placeholderImage = loadImg;
+	const placeholderImage2 = loadBigCam;
 
-	// function deleteFile(id) {
-	// 	const s = [];
-	// 	images.filter((images) => images.id !== id);
-	// 	setImageURLs(s);
-	// 	console.log(s);
-	// }
+	const onImageError = (e) => {
+		e.target.src = placeholderImage;
+	};
 
 	return (
 		<>
@@ -171,66 +128,73 @@ export default function CreateListing() {
 							<>
 								<label>
 									{/*Load image button */}
-									{showDefaultImg && (
-										<img
-											src={loadImg}
-											className="main-listing-img"
-											alt="main-listing-pic"
-										/>
-									)}
-									{images.map((image, index) => (
-										<img
-											src={URL.createObjectURL(image)}
-											className="main-listing-img"
-											alt="preview"
-											key={index}
-										/>
-									))}
 									<input
 										type="file"
 										multiple
 										accept="image/*"
 										onChange={onImageChange}
-										// style={{
-										// 	visibility: 'hidden',
-										// 	width: '0',
-										// 	height: '0',
-										// }}
+										style={{
+											visibility: 'hidden',
+											width: '0',
+											height: '0',
+										}}
 									/>
+
+									<img
+										className="main-listing-img"
+										src={
+											images[0]
+												? URL.createObjectURL(images[0])
+												: placeholderImage
+										}
+										alt="preview"
+										onError={onImageError}
+									/>
+
+									<div className="mini-image-box">
+										<img
+											className="load-pic"
+											src={
+												images[1]
+													? URL.createObjectURL(images[1])
+													: placeholderImage2
+											}
+											alt="preview"
+											onError={onImageError}
+										/>
+										<img
+											className="load-pic"
+											src={
+												images[2]
+													? URL.createObjectURL(images[2])
+													: placeholderImage2
+											}
+											alt="preview"
+											onError={onImageError}
+										/>
+										<img
+											className="load-pic"
+											src={
+												images[3]
+													? URL.createObjectURL(images[3])
+													: placeholderImage2
+											}
+											alt="preview"
+											onError={onImageError}
+										/>
+										<img
+											className="load-pic"
+											src={
+												images[4]
+													? URL.createObjectURL(images[4])
+													: placeholderImage2
+											}
+											alt="preview"
+											onError={onImageError}
+										/>
+									</div>
 								</label>
 							</>
-							{/* <>
-								<div className="mini-image-box">
-									<label>
-										{showDefaultImg && (
-											<img
-												src={loadBigCam}
-												className="load-pic"
-												alt="load-pic"
-											/>
-										)}
-										 {imageURLs.map((imageSrc, index) => (
-											<img
-												src={imageSrc}
-												className="load-pic"
-												alt="preview"
-												key={index}
-											/>
-										))} 
-										<input
-											type="file"
-											multiple
-											accept="image/*"
-											onChange={onImageChange}
-											// style={{
-											// 	visibility: 'hidden',
-											// 	width: '0',
-											// 	height: '0',
-											// }}
-										/>
-									</label>
-								</div>
-							</> */}
 						</div>
 
 						<div className="listing-info-container">
