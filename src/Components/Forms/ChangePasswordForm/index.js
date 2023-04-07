@@ -1,24 +1,15 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Success from '../../../Components/Success';
 
 import Checkmark from '../../../assets/Checkmark.svg';
 import CheckmarkGrey from '../../../assets/CheckmarkGrey.svg';
-
 import eye from '../../../assets/eye.png';
 import eyeslash from '../../../assets/eye-slash.png';
 import './index.css';
-
-//This checks that there is at least 1 Upper,1 Lower, and 1 Number
-// ^	The password string will start this way
-// (?=.*[a-z])	The string must contain at least 1 lowercase alphabetical character
-// (?=.*[A-Z])	The string must contain at least 1 uppercase alphabetical character
-// (?=.*[0-9])	The string must contain at least 1 numeric character
-// (?=.[!@#$%^&])	The string must contain at least one special character, but we are escaping reserved RegEx characters to avoid conflict
-// (?=.{8,})	The string must be eight characters or longer
 
 function isSixChar(password) {
 	return RegExp('^(?=.{6,})').test(password);
@@ -59,10 +50,8 @@ export default function ChangePasswordForm() {
 	const [newPassword, setNewPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 
-	const currentPassword = sessionStorage.getItem('password');
-
 	//Navigate back to home page once password is changed
-	//const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	function handleSubmit(event) {
 		event.preventDefault();
@@ -85,9 +74,13 @@ export default function ChangePasswordForm() {
 					.post(url, data, options)
 					.then((res) => {
 						console.log('SUCCESS: Password updated!', res.data);
+						navigate('/home');
 					})
-					.catch((error) =>
-						console.log('ERROR: Unable to update password:', error)
+					.catch(
+						(error) => console.log('ERROR: Unable to update password:', error),
+						alert(
+							"Heads up! Something happened and you password hasn't ChangePasswordForm."
+						)
 					);
 			}
 
@@ -114,36 +107,15 @@ export default function ChangePasswordForm() {
 		<>
 			<div className="change-pw-landing">
 				<form className="contact-form-container1" onSubmit={handleSubmit}>
-					<h1 style={{ color: '#9349de', margin: '0', fontSize: '36px' }}>
+					<h1
+						style={{
+							color: '#9349de',
+							margin: '0 0 -50px 0',
+							fontSize: '36px',
+						}}
+					>
 						Change password
 					</h1>
-
-					<label className="password">
-						Current Password
-						<div className="password-eye-box">
-							<input
-								id="currentPassword"
-								required
-								value={currentPassword}
-								type={passwordType}
-								className="input-style2"
-								autoComplete="false"
-								readOnly={true}
-							/>
-
-							<button className="eye-slash" onClick={togglePassword}>
-								{passwordType === 'password' ? (
-									<i>
-										<img src={eyeslash} alt="close-eye" />
-									</i>
-								) : (
-									<i>
-										<img src={eye} alt="open-eye" />
-									</i>
-								)}
-							</button>
-						</div>
-					</label>
 
 					<h3>
 						The password must have at least 6 characters and must contain 1

@@ -72,7 +72,6 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 
 	async function onSubmit(event) {
 		sessionStorage.setItem('loggedIn', true);
-		sessionStorage.setItem('password', user.password);
 		event.preventDefault();
 		auth.login(
 			{
