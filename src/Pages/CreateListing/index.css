@@ -127,8 +127,10 @@
 }
 
 .main-listing-img {
-	height: 320px;
-	width: 480px;
+	max-height: 320px;
+	height: 100%;
+	max-width: 480px;
+	width: 100%;
 	object-fit: cover;
 	border-radius: 6px;
 	margin-bottom: 12px;

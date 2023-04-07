@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -26,8 +26,6 @@ export default function CreateListing() {
 	console.log('images:', images);
 	const [imageIds, setImageIds] = useState([]);
 	console.log('imageIds:', imageIds);
-
-	const [maxImgs, setMaxImgs] = useState(false);
 
 	const [showButton, setShowButton] = useState(true);
 	const [showButton1, setShowButton1] = useState(true);
@@ -81,31 +79,37 @@ export default function CreateListing() {
 	}
 
 	function createListing() {
-		const token = sessionStorage.getItem('accessToken');
+		setTimeout(() => {
+			const token = sessionStorage.getItem('accessToken');
 
-		let Arr = imageIds;
-		const map1 = Arr.map((obj) => obj.id);
-		console.log('Image Id Array:', map1);
+			let Arr = imageIds;
+			const map1 = Arr.map((obj) => obj.id);
+			console.log('Image Id Array:', map1);
 
-		axios
-			.post(
-				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product',
-				{
-					productName: productName,
-					description: description,
-					price: price,
-					category: category,
-					condition: condition,
-					address: address,
-					city: city,
-					images: map1,
-				},
-				{ headers: { Authorization: `Bearer ${token}` } }
-			)
-			.then((res) => {
-				console.log('SUCCESS: Listing created!', res.data);
-			})
-			.catch((error) => console.log('ERROR: Unable to create listing:', error));
+			if (map1.length) {
+				axios
+					.post(
+						'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product',
+						{
+							productName: productName,
+							description: description,
+							price: price,
+							category: category,
+							condition: condition,
+							address: address,
+							city: city,
+							images: map1,
+						},
+						{ headers: { Authorization: `Bearer ${token}` } }
+					)
+					.then((res) => {
+						console.log('SUCCESS: Listing created!', res.data);
+					})
+					.catch((error) =>
+						console.log('ERROR: Unable to create listing:', error)
+					);
+			}
+		}, 2000);
 	}
 
 	const handleSubmit = (event) => {
@@ -115,23 +119,13 @@ export default function CreateListing() {
 
 	function onImageChange(e) {
 		e.preventDefault();
-		setImages([...images, ...e.target.files]);
-
-		if (!images[0]) {
-			setShowButton(false);
-		} else if (!images[1]) {
-			setShowButton1(false);
-		} else if (!images[2]) {
-			setShowButton2(false);
-		} else if (!images[3]) {
-			setShowButton3(false);
-		} else if (!images[4]) {
-			setShowButton4(false);
+		if (images.length < 5) {
+			setImages([...images, ...e.target.files]);
+		} else if (images.length > 5) {
+			return window.alert('Sorry, there is a 5 image limit');
 		}
 
-		if (images.length >= 5) {
-			setMaxImgs(true);
-		}
+		console.log('images length', images.length);
 	}
 
 	function deleteFile(e) {
@@ -139,6 +133,46 @@ export default function CreateListing() {
 		setImages(s);
 		console.log(s);
 	}
+
+	useEffect(() => {
+		if (images.length === 0) {
+			setShowButton(true);
+			setShowButton1(true);
+			setShowButton2(true);
+			setShowButton3(true);
+			setShowButton4(true);
+		} else if (images.length === 1) {
+			setShowButton(false);
+			setShowButton1(true);
+			setShowButton2(true);
+			setShowButton3(true);
+			setShowButton4(true);
+		} else if (images.length === 2) {
+			setShowButton(false);
+			setShowButton1(false);
+			setShowButton2(true);
+			setShowButton3(true);
+			setShowButton4(true);
+		} else if (images.length === 3) {
+			setShowButton(false);
+			setShowButton1(false);
+			setShowButton2(false);
+			setShowButton3(true);
+			setShowButton4(true);
+		} else if (images.length === 4) {
+			setShowButton(false);
+			setShowButton1(false);
+			setShowButton2(false);
+			setShowButton3(false);
+			setShowButton4(true);
+		} else if (images.length === 5) {
+			setShowButton(false);
+			setShowButton1(false);
+			setShowButton2(false);
+			setShowButton3(false);
+			setShowButton4(false);
+		}
+	}, [images.length]);
 
 	return (
 		<>
@@ -159,7 +193,6 @@ export default function CreateListing() {
 										multiple
 										accept="image/*"
 										onChange={onImageChange}
-										disabled={maxImgs}
 										style={{
 											visibility: 'hidden',
 											width: '0',
@@ -181,9 +214,7 @@ export default function CreateListing() {
 										<button
 											type="button"
 											index="0"
-											onClick={() =>
-												deleteFile(images[0]) || setShowButton(true)
-											}
+											onClick={() => deleteFile(images[0])}
 											className="replace-img-button"
 											hidden={showButton}
 										>
@@ -212,9 +243,7 @@ export default function CreateListing() {
 											<button
 												type="button"
 												index="1"
-												onClick={() =>
-													deleteFile(images[1]) || setShowButton1(true)
-												}
+												onClick={() => deleteFile(images[1])}
 												className="mini-replace-img-button"
 												hidden={showButton1}
 											>
@@ -236,9 +265,7 @@ export default function CreateListing() {
 											<button
 												type="button"
 												index="2"
-												onClick={() =>
-													deleteFile(images[2]) || setShowButton2(true)
-												}
+												onClick={() => deleteFile(images[2])}
 												className="mini-replace-img-button"
 												hidden={showButton2}
 											>
@@ -261,9 +288,7 @@ export default function CreateListing() {
 											<button
 												type="button"
 												index="3"
-												onClick={() =>
-													deleteFile(images[3]) || setShowButton3(true)
-												}
+												onClick={() => deleteFile(images[3])}
 												className="mini-replace-img-button"
 												hidden={showButton3}
 											>
@@ -286,9 +311,7 @@ export default function CreateListing() {
 											<button
 												type="button"
 												index="4"
-												onClick={() =>
-													deleteFile(images[4]) || setShowButton4(true)
-												}
+												onClick={() => deleteFile(images[4])}
 												className="mini-replace-img-button"
 												hidden={showButton4}
 											>
