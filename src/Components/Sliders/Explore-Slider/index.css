@@ -1,26 +1,21 @@
-.card-container::-webkit-scrollbar {
-	display: none;
-}
-
 .card-container {
-	overflow: scroll;
-	display: flex;
-	flex-direction: row;
+	flex-wrap: wrap;
 	gap: 25px;
-	height: 425px;
+	height: 120%;
+	min-height: 475px;
 	border-radius: 5px;
 }
 
-.info-label {
-	filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.25));
+.cat-info-label {
+	filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.25));
 	background: #ffffff;
 	border-radius: 15px;
 	border: none;
 	margin: 5px;
-	height: 350px;
-	min-height: 350px;
-	min-width: 240px;
-	width: 240px;
+	height: 425px;
+	min-height: 425px;
+	min-width: 225px;
+	width: 225px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -37,10 +32,9 @@
 	color: #000000;
 }
 
-.home-product-img {
+.product-img {
 	object-fit: cover;
 	min-height: 235px;
-	min-width: 235px;
 	height: 100%;
 	width: 100%;
 	border-radius: 10px 10px 0px 0px;

@@ -63,7 +63,7 @@ export default function Header() {
 					<li>
 						<button
 							className="nav-category-button"
-							onClick={() => navigate('/cars&vehicles')}
+							onClick={() => navigate('/vehicles')}
 						>
 							Cars & Vehicles
 						</button>
@@ -87,7 +87,7 @@ export default function Header() {
 					<li>
 						<button
 							className="nav-category-button"
-							onClick={() => navigate('/realestate')}
+							onClick={() => navigate('/real_estate')}
 						>
 							Real Estate
 						</button>

@@ -5,36 +5,31 @@ import { Link } from 'react-router-dom';
 import defaultImg from '../../../assets/LP.png';
 import './index.css';
 
-export default function MiniSlider({ title, sliderCategory, className }) {
+export default function ExploreSlider({ title, className, sliderCategory }) {
 	const [listings, setListings] = useState([]);
 
 	useEffect(() => {
 		setTimeout(() => {
 			const token = sessionStorage.getItem('accessToken');
 			//const loggedIn = sessionStorage.getItem('loggedIn');
-
 			const url =
-				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/category?maxResults=100';
-			const data = {
-				category: `${sliderCategory}`,
-				city: 'Calgary',
-			};
+				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/deals?maxResults=100';
 			const options = {
 				headers: { Authorization: `Bearer ${token}` },
 			};
-			// if (loggedIn === true) {
+			//if (loggedIn === true ) {
 			axios
-				.post(url, data, options)
+				.get(url, options)
 				.then((res) => {
 					setListings(res.data);
-					console.log('SUCCESS: Listings by category:', res.data);
+					console.log('SUCCESS: Retrieved DEALS:', res.data);
 				})
 				.catch((error) =>
-					console.log('ERROR: Unable to retrieve categories:', error)
+					console.log('ERROR: Unable to retrieve deals:', error)
 				);
-			//	}
+			//}
 		}, 3000);
-	}, [sliderCategory]);
+	}, []);
 
 	const placeholderImage = defaultImg;
 
@@ -44,16 +39,11 @@ export default function MiniSlider({ title, sliderCategory, className }) {
 
 	const listingComponents = listings.map((product) => (
 		<div key={product.id}>
-			<div className="mini-info-label">
-				<Link
-					to={`/product/${product.id}`}
-					key={product.id}
-					id={product.id}
-					style={{ textDecorationLine: 'none' }}
-				>
+			<div className="cat-info-label">
+				<Link to={`/product/${product.id}`} key={product.id} id={product.id}>
 					<img
-						className="mini-product-img"
 						src={product.images[0] ? product.images[0] : placeholderImage}
+						className="product-img"
 						alt="catPicture"
 						onError={onImageError}
 					/>
@@ -68,20 +58,16 @@ export default function MiniSlider({ title, sliderCategory, className }) {
 	));
 	return (
 		<div className={className}>
-			<h3 className="mini-slider-title">{title}</h3>
+			<h3 className="slider-title">
+				<Link
+					to={`/${sliderCategory.toLowerCase()}`}
+					style={{ textDecoration: 'none' }}
+				>
+					Explore now "{title}"
+				</Link>
+			</h3>
 			<br />
-			<div className="mini-card-container">{listingComponents}</div>
-			<Link
-				to={`/${sliderCategory.toLowerCase()}`}
-				style={{
-					textDecoration: 'none',
-					marginLeft: 'auto',
-					color: '#9349de',
-					size: '20px',
-				}}
-			>
-				Explore now
-			</Link>
+			<div className="card-container">{listingComponents}</div>
 		</div>
 	);
 }

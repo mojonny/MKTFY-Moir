@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+import defaultImg from '../../../assets/LP.png';
 import './index.css';
 
-export default function Slider({ title, className }) {
+export default function Slider({ title, className, sliderCategory }) {
 	const [listings, setListings] = useState([]);
 
 	useEffect(() => {
@@ -30,19 +31,21 @@ export default function Slider({ title, className }) {
 		}, 3000);
 	}, []);
 
+	const placeholderImage = defaultImg;
+
+	const onImageError = (e) => {
+		e.target.src = placeholderImage;
+	};
+
 	const listingComponents = listings.map((product) => (
 		<div key={product.id}>
 			<div className="info-label">
 				<Link to={`/product/${product.id}`} key={product.id} id={product.id}>
 					<img
-						style={{
-							objectFit: 'cover',
-							height: '235px',
-							width: '245px',
-							borderRadius: '10px 10px 0px 0px',
-						}}
-						src={product.images[0]}
+						className="home-product-img"
+						src={product.images[0] ? product.images[0] : placeholderImage}
 						alt="catPicture"
+						onError={onImageError}
 					/>
 				</Link>
 				<div className="bottom-card-info">
@@ -56,7 +59,10 @@ export default function Slider({ title, className }) {
 	return (
 		<div className={className}>
 			<h3 className="slider-title">
-				<Link to={`/${title}`} style={{ textDecoration: 'none' }}>
+				<Link
+					to={`/${sliderCategory.toLowerCase()}`}
+					style={{ textDecoration: 'none' }}
+				>
 					{title}
 				</Link>
 			</h3>

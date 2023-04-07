@@ -53,10 +53,10 @@ export default function App() {
 					<Route path="/" element={<Home />} />
 					<Route path="/home" element={<Home />} />
 					<Route path="/deals" element={<Deals />} />
-					<Route path="/cars&vehicles" element={<Cars />} />
+					<Route path="/vehicles" element={<Cars />} />
 					<Route path="/furniture" element={<Furniture />} />
 					<Route path="/electronics" element={<Electronics />} />
-					<Route path="/realestate" element={<RealEstate />} />
+					<Route path="/real_estate" element={<RealEstate />} />
 
 					{/* Linked to home page/dashboard */}
 					<Route path="/product/:id" element={<Product />} />

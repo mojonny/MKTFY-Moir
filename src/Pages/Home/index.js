@@ -134,7 +134,7 @@ export default function Home() {
 			<Slider
 				className="slider"
 				key="001"
-				title="Deals"
+				title="Deals for you"
 				sliderCategory="Deals"
 			/>
 
