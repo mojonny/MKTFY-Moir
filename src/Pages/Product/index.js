@@ -101,6 +101,12 @@ export default function Product() {
 		}
 	}, [condition]);
 
+	const placeholderImage = images[0];
+
+	const onImageError = (e) => {
+		e.target.src = placeholderImage;
+	};
+
 	return (
 		<>
 			<div className="product-container">
@@ -122,31 +128,56 @@ export default function Product() {
 									className="vert-button"
 									onClick={() => setMainImage(images[0])}
 								>
-									<img src={images[0]} className="vert-pic" alt="vert-pic" />
+									<img
+										src={images[0] ? images[0] : placeholderImage}
+										className="vert-pic"
+										alt="vert-pic"
+										onError={onImageError}
+									/>
 								</button>
 								<button
 									className="vert-button"
 									onClick={() => setMainImage(images[1])}
 								>
-									<img src={images[1]} className="vert-pic" alt="vert-pic" />
+									<img
+										src={images[1] ? images[1] : placeholderImage}
+										className="vert-pic"
+										alt="vert-pic"
+										onError={onImageError}
+									/>
 								</button>
 								<button
 									className="vert-button"
 									onClick={() => setMainImage(images[2])}
 								>
-									<img src={images[2]} className="vert-pic" alt="vert-pic" />
+									<img
+										src={images[2] ? images[2] : placeholderImage}
+										className="vert-pic"
+										alt="vert-pic"
+										onError={onImageError}
+									/>
 								</button>
 								<button
 									className="vert-button"
 									onClick={() => setMainImage(images[3])}
 								>
-									<img src={images[3]} className="vert-pic" alt="vert-pic" />
+									<img
+										src={images[3] ? images[3] : placeholderImage}
+										className="vert-pic"
+										alt="vert-pic"
+										onError={onImageError}
+									/>
 								</button>
 								<button
 									className="vert-button"
 									onClick={() => setMainImage(images[4])}
 								>
-									<img src={images[4]} className="vert-pic" alt="vert-pic" />
+									<img
+										src={images[4] ? images[4] : placeholderImage}
+										className="vert-pic"
+										alt="vert-pic"
+										onError={onImageError}
+									/>
 								</button>
 							</div>
 							<button onClick={ScrollUp} className="vert-down-arrow">
@@ -156,7 +187,12 @@ export default function Product() {
 					</>
 
 					{/* MAIN IMAGE */}
-					<img src={mainImage} alt="main-pic" className="main-img" />
+					<img
+						src={mainImage ? mainImage : placeholderImage}
+						className="main-img"
+						alt="main-pic"
+						onError={onImageError}
+					/>
 
 					<div className="side-info-container">
 						<h1
