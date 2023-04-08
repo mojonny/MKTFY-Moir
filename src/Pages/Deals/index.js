@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ExploreSlider from '../../Components/Sliders/Explore-Slider';
+import DealsSlider from '../../Components/Sliders/Deals-Slider';
 import Footer from '../../Components/Footer';
 import './index.css';
 
@@ -9,8 +9,8 @@ export default function Deals() {
 		<div className="home-dashboard">
 			<br />
 			<br />
-			<ExploreSlider
-				className="slider"
+			<DealsSlider
+				className="deals-slider"
 				key="001"
 				title="Deals"
 				sliderCategory="Deals"

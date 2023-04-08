@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
+import defaultImg from '../../assets/LP.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
@@ -18,7 +19,20 @@ export default function Checkout() {
 
 	const productName = sessionStorage.getItem('productName');
 	const productPrice = sessionStorage.getItem('productPrice');
-	const productImage = sessionStorage.getObj('productImage');
+
+	let productImage = () => {
+		if (!sessionStorage.getObj('productImage')) {
+			return;
+		} else if (sessionStorage.getObj('productImage')) {
+			productImage = sessionStorage.getObj('productImage');
+		}
+	};
+
+	const placeholderImage = defaultImg;
+
+	const onImageError = (e) => {
+		e.target.src = placeholderImage;
+	};
 
 	return (
 		<>
@@ -31,9 +45,10 @@ export default function Checkout() {
 					<h1 style={{ color: '#6318af' }}> Confirm</h1>
 					<div className="checkout-item-box">
 						<img
-							src={productImage}
-							alt="checkout-pic"
+							src={productImage ? productImage : placeholderImage}
 							className="checkout-pic"
+							alt="checkout-pic"
+							onError={onImageError}
 						/>
 						<div className="checkout-item-detail">
 							<h3>{productName}</h3>

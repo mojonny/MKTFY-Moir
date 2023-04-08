@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-//import VerticalSlider from '../../Components/Sliders/Vertical-Slider';
-
+import defaultImg from '../../assets/LP.png';
 import upDownArrow from '../../assets/UpDownArrow.png';
 import listingIcon from '../../assets/listingTag.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
@@ -51,16 +50,19 @@ export default function Product() {
 
 	const navigate = useNavigate();
 	const navigateToCheckout = () => {
-		navigate('/checkout');
+		if (images.length) {
+			sessionStorage.setObj('productImage', images[0]);
+		}
+
 		sessionStorage.setItem('productName', productName);
 		sessionStorage.setItem('productPrice', price);
-		sessionStorage.setObj('productImage', images[0]);
 		sessionStorage.setItem('sellerId', sellerId);
 		sessionStorage.setItem('sellerFirstName', sellerFirstName);
 		sessionStorage.setItem('sellerLastName', sellerLastName);
 		sessionStorage.setItem('sellerPhone', phone);
 		sessionStorage.setItem('itemAddress', address);
 		sessionStorage.setItem('sellerCity', city);
+		return navigate('/checkout');
 	};
 
 	useEffect(() => {
@@ -101,7 +103,7 @@ export default function Product() {
 		}
 	}, [condition]);
 
-	const placeholderImage = images[0];
+	const placeholderImage = defaultImg;
 
 	const onImageError = (e) => {
 		e.target.src = placeholderImage;

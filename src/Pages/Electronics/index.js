@@ -1,4 +1,5 @@
 import React from 'react';
+import ExploreSlider from '../../Components/Sliders/Explore-Slider';
 import Footer from '../../Components/Footer';
 import './index.css';
 
@@ -7,7 +8,11 @@ export default function Electronics() {
 		<div className="home-dashboard">
 			<br />
 			<br />
-			electronics
+			<ExploreSlider
+				className="explore-slider"
+				title="Electronics"
+				sliderCategory="ELECTRONICS"
+			/>
 			<br />
 			<Footer />
 		</div>

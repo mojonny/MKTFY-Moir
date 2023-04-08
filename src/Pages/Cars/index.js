@@ -9,7 +9,7 @@ export default function Cars() {
 			<br />
 			<br />
 			<ExploreSlider
-				className="mini-slider"
+				className="explore-slider"
 				title="Cars & Vehicles"
 				sliderCategory="VEHICLES"
 			/>
