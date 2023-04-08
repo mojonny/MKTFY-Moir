@@ -1,14 +1,13 @@
-import './index.css';
+import { useState, useRef } from 'react';
+
 import arrow from '../../../assets/DropArrowBlk.png';
 import search from '../../../assets/LookinGlass.png';
-import { useState, useRef } from 'react';
+import './index.css';
 
 export default function SearchBar() {
 	const [isDropOpen, setIsDropOpen] = useState(false);
 	const [isDropOpen1, setIsDropOpen1] = useState(false);
-
 	const [category, setCategory] = useState('All');
-
 	const [location, setLocation] = useState('Calgary');
 
 	const handleClick = (e) => {
@@ -101,6 +100,7 @@ export default function SearchBar() {
 					type="text"
 					placeholder=" Search on MKTFY"
 				/>
+
 				<img className="looking-glass" src={search} alt="looking glass" />
 			</div>
 			<div id="select">

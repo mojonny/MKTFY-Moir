@@ -15,6 +15,7 @@ import MainLayout from './Components/Layout';
 
 // Homepage/ Dashboard after login
 import Home from './Pages/Home';
+import Search from './Pages/Search';
 import Deals from './Pages/Deals';
 import Cars from './Pages/Cars';
 import Furniture from './Pages/Furniture';
@@ -57,6 +58,7 @@ export default function App() {
 					<Route path="/furniture" element={<Furniture />} />
 					<Route path="/electronics" element={<Electronics />} />
 					<Route path="/real_estate" element={<RealEstate />} />
+					<Route path="/search" element={<Search />} />
 
 					{/* Linked to home page/dashboard */}
 					<Route path="/product/:id" element={<Product />} />
