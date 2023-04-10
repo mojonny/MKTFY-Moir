@@ -5,12 +5,14 @@ import './index.css';
 
 export default function Search() {
 	return (
-		<div className="home-dashboard">
-			<br />
-			<br />
-			<SearchSlider className="search-slider" title="Search results for" />
-			<br />
-			<Footer />
+		<div className="search-container">
+			<div className="search-dashboard">
+				<br />
+				<br />
+				<SearchSlider className="search-slider" title="Search results for" />
+				<br />
+				<Footer />
+			</div>
 		</div>
 	);
 }

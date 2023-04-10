@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import productReducer from '../Features/ProductFilter/productSlice';
+import searchSlice from '../Features/Search/searchSlice';
 
 export default configureStore({
 	reducer: {
-		product: productReducer,
+		search: searchSlice,
 	},
 });

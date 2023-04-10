@@ -1,3 +1,46 @@
+import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const searchSlice = createSlice({
+	name: 'search',
+	initialState: {
+		data: [],
+	},
+	reducers: {
+		getSearch: (state, action) => {
+			state.data = [action.payload];
+		},
+	},
+});
+
+export const getSearchAsync =
+	({ searchValue, city, category }) =>
+	async (dispatch) => {
+		try {
+			const token = sessionStorage.getItem('accessToken');
+			const url =
+				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/search';
+			const param = {
+				search: searchValue,
+				city: city,
+				category: category,
+			};
+			const options = {
+				headers: { Authorization: `Bearer ${token}` },
+			};
+			const response = await axios.post(url, param, options);
+			dispatch(getSearch(response.data));
+			console.log('getAsync:', response.data);
+		} catch (err) {
+			console.log('err', err);
+			throw new Error(err);
+		}
+	};
+
+export const { getSearch } = searchSlice.actions;
+export const showSearch = (state) => state.search.data;
+export default searchSlice.reducer;
+
 // import { createSlice } from '@reduxjs/toolkit';
 // import { axios } from 'axios';
 // const API_URL =

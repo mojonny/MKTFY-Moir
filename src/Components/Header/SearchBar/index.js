@@ -1,32 +1,40 @@
+import { useDispatch } from 'react-redux';
+import { getSearchAsync } from '../../../Features/Search/searchSlice';
+
 import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import arrow from '../../../assets/DropArrowBlk.png';
 import searchButton from '../../../assets/LookinGlass.png';
 import './index.css';
 
-import { useDispatch } from 'react-redux';
-import { getSearchAsync } from '../../../Features/Search/searchSlice';
-
 export default function SearchBar() {
 	const [isDropOpen, setIsDropOpen] = useState(false);
 	const [isDropOpen1, setIsDropOpen1] = useState(false);
-	const [search, setSearch] = useState({
-		text: '',
-		category: 'All',
-		location: 'Calgary',
-	});
+	const [searchValue, setSearchValue] = useState('');
+	const [category, setCategory] = useState('All');
+	const [city, setCity] = useState('Calgary');
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 
+	const handleSubmit = () => {
+		dispatch(getSearchAsync({ searchValue, city, category }));
+		navigate('/search');
+		sessionStorage.setItem('searchValue', searchValue);
+		setSearchValue('');
+		setCategory('All');
+		setCity('Calgary');
+	};
+
 	const handleClick = (e) => {
-		setSearch((search.category = e.target.id));
+		console.log(searchValue);
+		setCategory(e.target.id);
 		setIsDropOpen(false);
 	};
 
 	const handleClick1 = (e) => {
 		//updates field
-		setSearch((search.location = e.target.id));
+		setCity(e.target.id);
 		//closes modal after click
 		setIsDropOpen1(false);
 	};
@@ -76,26 +84,42 @@ export default function SearchBar() {
 			<div id="select">
 				<button
 					onClick={handleToggle}
-					onChange={(e) => setSearch((search.category = e.target.value))}
 					style={{ border: 'none', background: 'none' }}
 				>
-					<h2>{search.category}</h2>
+					<h2>{category}</h2>
 				</button>
 				{isDropOpen && (
 					<ul ref={dropMenu} onClick={(e) => e.stopPropagation()}>
-						{/* <li className="options" id="All Categories" onClick={handleClick}>
-							All Categories
-						</li> */}
-						<li className="options" id="Cars & Vehicles" onClick={handleClick}>
+						<li
+							className="options"
+							id="VEHICLES"
+							onClick={handleClick}
+							value={category}
+						>
 							Cars & Vehicles
 						</li>
-						<li className="options" id="Furniture" onClick={handleClick}>
+						<li
+							className="options"
+							id="FURNITURE"
+							onClick={handleClick}
+							value={category}
+						>
 							Furniture
 						</li>
-						<li className="options" id="Electronics" onClick={handleClick}>
+						<li
+							className="options"
+							id="ELECTRONICS"
+							onClick={handleClick}
+							value={category}
+						>
 							Electronics
 						</li>
-						<li className="options" id="Real Estate" onClick={handleClick}>
+						<li
+							className="options"
+							id="REAL_ESTATE"
+							onClick={handleClick}
+							value={category}
+						>
 							Real Estate
 						</li>
 					</ul>
@@ -106,17 +130,19 @@ export default function SearchBar() {
 					className="text-search"
 					type="text"
 					placeholder=" Search on MKTFY"
-					onChange={(e) => setSearch(e.target.value)}
+					value={searchValue}
+					onChange={(e) => setSearchValue(e.target.value)}
 				/>
 				{/* SEARCH LOOKING-GLASS BUTTON */}
-				{/* <button onClick={() => navigate('/search')}>SEARCH TEST</button> */}
 				<button
-					onClick={() =>
-						dispatch(getSearchAsync({ search })) || navigate('/search')
-					}
+					// style={{
+					// 	border: 'none',
+					// 	background: 'none',
+					// }}
+					onClick={handleSubmit}
 				>
 					<img
-						className="looking-glass"
+						// className="looking-glass"
 						src={searchButton}
 						alt="looking glass"
 					/>
@@ -135,14 +161,15 @@ export default function SearchBar() {
 					}}
 				>
 					<img src={arrow} alt="arrow" />
-					<h2>{search.location}</h2>
+					<h2>{city}</h2>
 				</button>
 				{isDropOpen1 && (
 					<ul ref={dropMenu1} onClick={(e) => e.stopPropagation()}>
-						<li class="mini-search">
+						{/*THIS LETS THE USER SEARCH THEIR CITY  */}
+						<li className="mini-search">
 							<img
 								className="mini-looking-glass"
-								src={search}
+								src={searchButton}
 								alt="looking glass"
 							/>
 							<input
@@ -150,7 +177,7 @@ export default function SearchBar() {
 								type="text"
 								placeholder="Search city"
 								style={{ border: 'none', background: 'none' }}
-								onChange={(e) => setSearch(e.target.value)}
+								onChange={(e) => setCity(e.target.value)}
 							/>
 						</li>
 						<li className="options" id="Calgary" onClick={handleClick1}>
