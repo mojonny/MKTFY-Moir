@@ -1,92 +1,87 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import moment from 'moment/moment';
+// import { Link } from 'react-router-dom';
+
 import breadArrow from '../../assets/breadCrumbArrow.png';
+import defaultImg from '../../assets/LP.png';
 import './index.css';
 
-import React, { useState, useEffect } from 'react';
-
-import { getListings, filterListings } from '../../Services/services';
-
 export default function MyListings() {
-	const [filteredListings, setFilteredListings] = useState(null);
-
-	const [buttonClass, setButtonClass] = useState('inactive-button');
-	const [buttonClass1, setButtonClass1] = useState('inactive-button');
+	const [listings, setListings] = useState([]);
 
 	useEffect(() => {
-		//Gets all listings on initial render
-		setFilteredListings(getListings());
+		const token = sessionStorage.getItem('accessToken');
+		const url =
+			'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/products';
+		const options = {
+			headers: { Authorization: `Bearer ${token}` },
+		};
+		axios
+			.get(url, options)
+			.then((res) => {
+				setListings(res.data);
+				console.log('SUCCESS: Retrieved your listings:', res.data);
+			})
+			.catch((error) =>
+				console.log('ERROR: Unable to retrieve your listings:', error)
+			);
 	}, []);
 
-	function handleListings(e) {
-		//Sets filter onClick of active or sold buttons
-		let typeListing = e.target.value;
-		if (typeListing === 'active') {
-			//Only show active listings onClick
-			setFilteredListings(filterListings(typeListing));
+	const placeholderImage = defaultImg;
 
-			//change button style onClick
-			setButtonClass('active-button');
-			setButtonClass1('inactive-button');
-		} else if (typeListing === 'sold') {
-			setFilteredListings(filterListings(typeListing));
-			setButtonClass1('active-button');
-			setButtonClass('inactive-button');
-		} else {
-			setFilteredListings(getListings());
-		}
-	}
+	const onImageError = (e) => {
+		e.target.src = placeholderImage;
+	};
 
-	return (
-		<>
-			<div className="listing-container">
-				<div className="listing-labels">
-					<div>
-						Deals for you <img src={breadArrow} alt="path-arrow" /> My Listings
-					</div>
-					<br />
-					<h1> My listings</h1>
-					<br />
-					<div className="active-sold-labels">
-						<button
-							onClick={handleListings}
-							className={buttonClass}
-							value="active"
-						>
-							Active items
-						</button>
-						<button
-							onClick={handleListings}
-							className={buttonClass1}
-							value="sold"
-						>
-							Sold items
-						</button>
+	const listingComponents = listings.map((product) => (
+		<ul className="listing-item-box" key={product.id}>
+			<li className="listing-landing">
+				<div className="listing-item-box">
+					<img
+						className="listing-pic"
+						src={product.images[0] ? product.images[0] : placeholderImage}
+						alt="Product pic"
+						onError={onImageError}
+					/>
+					<div className="listing-item-detail">
+						<p>{moment(product.created).format('MMM Do YYYY')}</p>
+						<h4>{product.productName}</h4>
+						<h4>{product.price}</h4>
 					</div>
 				</div>
+			</li>
+		</ul>
+	));
+	return (
+		<div className="listing-container">
+			{' '}
+			<div className="listing-labels">
 				<div>
-					<div className="all-listings">
-						{filteredListings &&
-							filteredListings.map((type) => (
-								<ul className="listing-item-box" key={type.id}>
-									<li className="listing-landing">
-										<div className="listing-item-box">
-											<img
-												className="listing-pic"
-												src={type.src}
-												alt="listing img"
-											/>
-											<div className="listing-item-detail">
-												<p>{type.date}</p>
-
-												<h4>{type.title}</h4>
-												<h4>{type.price}</h4>
-											</div>
-										</div>
-									</li>
-								</ul>
-							))}
-					</div>
+					Deals for you <img src={breadArrow} alt="path-arrow" /> My Listings
+				</div>
+				<br />
+				<h1> My listings</h1>
+				<br />
+				<div className="active-sold-labels">
+					<button
+					// onClick={handleListings}
+					// className={buttonClass}
+					// value="active"
+					>
+						Active items
+					</button>
+					<button
+					// onClick={handleListings}
+					// className={buttonClass1}
+					// value="sold"
+					>
+						Sold items
+					</button>
 				</div>
 			</div>
-		</>
+			<br />
+			<div className="mylistings-container">{listingComponents}</div>
+		</div>
 	);
 }

@@ -97,8 +97,24 @@ export function filterListings(listType) {
 
 //We want productName,date,title,price
 function getMyListings() {
-	return axios.get(`http://localhost:5000/api/v1/user/listings/`);
+	const token = sessionStorage.getItem('accessToken');
+	const url =
+		'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/products';
+	const options = {
+		headers: { Authorization: `Bearer ${token}` },
+	};
+
+	return axios
+		.get(url, options)
+		.then((res) => {
+			getMyListings(res.data);
+			console.log('SUCCESS: Retrieved my listings:', res.data);
+		})
+		.catch((error) =>
+			console.log('ERROR: Unable to retrieve your listings:', error)
+		);
 }
+
 ///////////////////////////////////////////////////////////////////////////////////////
 
 // //service

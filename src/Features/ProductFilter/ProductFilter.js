@@ -1,14 +1,11 @@
 import { useDispatch } from 'react-redux';
 import {
-	filternone,
 	filterdeals,
 	filtercars,
 	filterfurniture,
 	filterelectronics,
 	filterrealestate,
-	filterhide,
 } from './productSlice';
-import hamburger from '../../assets/LinesMenu.png';
 import './index.css';
 
 export function ProductFilter() {
@@ -18,21 +15,6 @@ export function ProductFilter() {
 	return (
 		<div>
 			<ul className="search-bar-categories">
-				<li>
-					<button
-						className="nav-category-button"
-						onClick={() => dispatch(filterhide())}
-					>
-						<img alt="drop-down" src={hamburger} />
-					</button>
-					{'\xa0'.repeat(2)}
-					<button
-						className="nav-category-button"
-						onClick={() => dispatch(filternone())}
-					>
-						All
-					</button>
-				</li>
 				<li>
 					<button
 						className="nav-category-button"

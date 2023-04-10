@@ -53,9 +53,6 @@ export default function Header() {
 			<div>
 				<ul className="search-bar-categories">
 					<li>
-						<button onClick={() => navigate('/search')}>SEARCH TEST</button>
-					</li>
-					<li>
 						<button
 							className="nav-category-button"
 							onClick={() => navigate('/deals')}
