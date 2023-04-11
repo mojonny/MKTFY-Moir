@@ -1,8 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../../../Services/auth0.service';
 import { AUTH0_CLIENT_ID, AUTH0_LOGOUT_URI } from '../../../config';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { setLogout } from '../../../Features/Login/loginSlice';
 
 import logout from '../../../assets/LogOut.png';
@@ -16,8 +16,8 @@ export default function ProfileDropdown() {
 
 	const dropMenu3 = useRef(null);
 
-	const firstName = sessionStorage.getItem('firstName');
-	const lastName = sessionStorage.getItem('lastName');
+	let firstName = useSelector((state) => state.login.firstName);
+	let lastName = useSelector((state) => state.login.lastName);
 
 	//Closes dropdown when clicked outside
 	const closeOpenMenus3 = (e) => {
@@ -51,6 +51,8 @@ export default function ProfileDropdown() {
 			clientID: AUTH0_CLIENT_ID,
 		});
 	};
+
+	useEffect(() => {}, [firstName, lastName]);
 
 	return (
 		<div>

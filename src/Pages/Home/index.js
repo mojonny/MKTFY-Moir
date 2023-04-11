@@ -29,7 +29,6 @@ export default function Home() {
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const selector = useSelector((state) => state);
 
 	let loggedIn = useSelector((state) => state.login.login);
 
@@ -40,101 +39,107 @@ export default function Home() {
 	}, [navigate, loggedIn]);
 
 	useEffect(() => {
-		setIsLoading(true);
-		setTimeout(() => {
-			getToken();
-			//Get user accessToken and id
-			function getToken() {
-				auth.parseHash((err, authResult) => {
-					if (authResult) {
-						auth.client.userInfo(authResult.accessToken, function (err, user) {
-							let ID = user.sub;
-							sessionStorage.setItem('id', ID);
-							sessionStorage.setItem('accessToken', authResult.accessToken);
-							dispatch(setToken(authResult.accessToken));
-							dispatch(setId(ID));
-							return getUser();
-						});
+		if (loggedIn === null) {
+			setIsLoading(true);
+			setTimeout(() => {
+				getToken();
+				//Get user accessToken and id
+				function getToken() {
+					auth.parseHash((err, authResult) => {
+						if (authResult) {
+							auth.client.userInfo(
+								authResult.accessToken,
+								function (err, user) {
+									let ID = user.sub;
+									sessionStorage.setItem('id', ID);
+									sessionStorage.setItem('accessToken', authResult.accessToken);
+									dispatch(setToken(authResult.accessToken));
+									dispatch(setId(ID));
+									return getUser();
+								}
+							);
+						}
+					});
+				}
+
+				//Check if user exists
+				function getUser() {
+					const token = sessionStorage.getItem('accessToken');
+					const id = sessionStorage.getItem('id');
+					const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`;
+					if (token !== null) {
+						axios
+							.get(url, { headers: { Authorization: `Bearer ${token}` } })
+							.then((res) => {
+								dispatch(setFirstName(res.data.firstName));
+								dispatch(setLastName(res.data.lastName));
+								dispatch(setEmail(res.data.email));
+								dispatch(setPhone(res.data.phone));
+								dispatch(setAddress(res.data.address));
+								dispatch(setCity(res.data.city));
+								dispatch(setRegistered(res.data.registered));
+
+								sessionStorage.setItem('firstName', res.data.firstName);
+								sessionStorage.setItem('lastName', res.data.lastName);
+								sessionStorage.setItem('userEmail', res.data.email);
+								sessionStorage.setItem('phone', res.data.phone);
+								sessionStorage.setItem('address', res.data.address);
+								sessionStorage.setItem('city', res.data.city);
+								sessionStorage.setItem('registered', true);
+								console.log('SUCCESS: User found!', res.data);
+							})
+							.catch((error) => {
+								console.log('ERROR: User does not exist in db', error);
+								return getRegistered();
+							});
 					}
-				});
-			}
-
-			//Check if user exists
-			function getUser() {
-				const token = sessionStorage.getItem('accessToken');
-				const id = sessionStorage.getItem('id');
-				const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/${id}`;
-				if (token !== null) {
-					axios
-						.get(url, { headers: { Authorization: `Bearer ${token}` } })
-						.then((res) => {
-							dispatch(setFirstName(res.data.firstName));
-							dispatch(setLastName(res.data.lastName));
-							dispatch(setEmail(res.data.email));
-							dispatch(setPhone(res.data.phone));
-							dispatch(setAddress(res.data.address));
-							dispatch(setCity(res.data.city));
-							dispatch(setRegistered(res.data.registered));
-
-							sessionStorage.setItem('firstName', res.data.firstName);
-							sessionStorage.setItem('lastName', res.data.lastName);
-							sessionStorage.setItem('userEmail', res.data.email);
-							sessionStorage.setItem('phone', res.data.phone);
-							sessionStorage.setItem('address', res.data.address);
-							sessionStorage.setItem('city', res.data.city);
-							sessionStorage.setItem('registered', true);
-							console.log('SUCCESS: User found!', res.data);
-						})
-						.catch((error) => {
-							console.log('ERROR: User does not exist in db', error);
-							return getRegistered();
-						});
 				}
-			}
 
-			//If user doesn't exist, then register them to backend
-			function getRegistered() {
-				let token = selector((state) => state.login.token);
-				let id = selector((state) => state.login.id);
-				let firstName = selector((state) => state.login.firstName);
-				let lastName = selector((state) => state.login.lastName);
-				let email = selector((state) => state.login.email);
-				let phone = selector((state) => state.login.phone);
-				let address = selector((state) => state.login.address);
-				let city = selector((state) => state.login.city);
-				let registered = selector((state) => state.login.registered);
+				//If user doesn't exist, then register them to backend
+				function getRegistered() {
+					const token = sessionStorage.getItem('accessToken');
+					const id = sessionStorage.getItem('id');
+					const firstName = sessionStorage.getItem('firstName');
+					const lastName = sessionStorage.getItem('lastName');
+					const email = sessionStorage.getItem('userEmail');
+					const phone = sessionStorage.getItem('phone');
+					const address = sessionStorage.getItem('address');
+					const city = sessionStorage.getItem('city');
 
-				//Only run check if user's email is stored (only happens on signup)
-				//If it is, then register the user
-				if (registered === true) {
-					console.log('User is already registered, skipping registration...');
-				} else if (registered === null) {
-					axios
-						.post(
-							'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/register',
-							{
-								id: id,
-								firstName: firstName,
-								lastName: lastName,
-								email: email,
-								phone: phone,
-								address: address,
-								city: city,
-							},
-							{ headers: { Authorization: `Bearer ${token}` } }
-						)
-						.then((res) => {
-							console.log('SUCCESS: Registered to db!', res);
-						})
-						.catch((error) => {
-							alert('Please register a new account');
-							console.log('ERROR: User may already be registered', error);
-						});
+					const registered = sessionStorage.getItem('registered');
+
+					//Only run check if user's email is stored (only happens on signup)
+					//If it is, then register the user
+					if (registered === true) {
+						console.log('User is already registered, skipping registration...');
+					} else if (registered === null) {
+						axios
+							.post(
+								'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/register',
+								{
+									id: id,
+									firstName: firstName,
+									lastName: lastName,
+									email: email,
+									phone: phone,
+									address: address,
+									city: city,
+								},
+								{ headers: { Authorization: `Bearer ${token}` } }
+							)
+							.then((res) => {
+								console.log('SUCCESS: Registered to db!', res);
+							})
+							.catch((error) => {
+								alert('Please register a new account');
+								console.log('ERROR: User may already be registered', error);
+							});
+					}
 				}
-			}
-			setIsLoading(false);
-		}, 4000);
-	}, [dispatch, selector]);
+				setIsLoading(false);
+			}, 4000);
+		}
+	}, [dispatch, loggedIn]);
 
 	return (
 		<div className="home-dashboard">

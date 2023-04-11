@@ -87,7 +87,6 @@ export default function PasswordModal({ setSignupPage }) {
 					if (error) {
 						alert('Oops! Signup failed, please try again.');
 						console.log('Oops! Registration failed.', error);
-						console.log(user.email);
 						setSignupPage(0);
 						setIsLoading(false);
 						return;
@@ -98,7 +97,7 @@ export default function PasswordModal({ setSignupPage }) {
 					}
 				}
 			);
-		}, 4000);
+		}, 2000);
 	};
 
 	//To change icon, change the input type
