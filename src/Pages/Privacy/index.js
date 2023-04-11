@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Chat from '../../assets/Chat.svg';
+import Chat from '../../assets/chat.png';
 import Arrow from '../../assets/Arrow.png';
 import './index.css';
 
