@@ -79,37 +79,37 @@ export default function CreateListing() {
 	}
 
 	function createListing() {
-		setTimeout(() => {
-			const token = sessionStorage.getItem('accessToken');
+		// setTimeout(() => {
+		const token = sessionStorage.getItem('accessToken');
 
-			let Arr = imageIds;
-			const map1 = Arr.map((obj) => obj.id);
-			console.log('Image Id Array:', map1);
+		let Arr = imageIds;
+		const map1 = Arr.map((obj) => obj.id);
+		console.log('Image Id Array:', map1);
 
-			if (map1.length) {
-				axios
-					.post(
-						'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product',
-						{
-							productName: productName,
-							description: description,
-							price: price,
-							category: category,
-							condition: condition,
-							address: address,
-							city: city,
-							images: map1,
-						},
-						{ headers: { Authorization: `Bearer ${token}` } }
-					)
-					.then((res) => {
-						console.log('SUCCESS: Listing created!', res.data);
-					})
-					.catch((error) =>
-						console.log('ERROR: Unable to create listing:', error)
-					);
-			}
-		}, 2000);
+		if (map1.length) {
+			axios
+				.post(
+					'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product',
+					{
+						productName: productName,
+						description: description,
+						price: price,
+						category: category,
+						condition: condition,
+						address: address,
+						city: city,
+						images: map1,
+					},
+					{ headers: { Authorization: `Bearer ${token}` } }
+				)
+				.then((res) => {
+					console.log('SUCCESS: Listing created!', res.data);
+				})
+				.catch((error) =>
+					console.log('ERROR: Unable to create listing:', error)
+				);
+		}
+		// }, 2000);
 	}
 
 	const handleSubmit = (event) => {
