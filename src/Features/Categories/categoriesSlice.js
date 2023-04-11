@@ -29,7 +29,7 @@ export const getCategoriesAsync =
 			};
 			const response = await axios.post(url, param, options);
 			console.log('getAsyncCategories:', response.data);
-			return dispatch(getCategories(response.data));
+			dispatch(getCategories(response.data));
 		} catch (err) {
 			console.log('err', err);
 			throw new Error(err);

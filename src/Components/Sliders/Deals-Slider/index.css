@@ -3,6 +3,7 @@
 	flex-wrap: wrap;
 	gap: 25px;
 	height: 110%;
+	min-height: 400px;
 	border-radius: 5px;
 }
 

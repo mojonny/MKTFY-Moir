@@ -13,7 +13,7 @@ export const dealsSlice = createSlice({
 	},
 });
 
-export const getDealsAsync = () => async (dispatch) => {
+export const getDealsAsync = (data) => async (dispatch) => {
 	try {
 		const token = sessionStorage.getItem('accessToken');
 		const url =
@@ -23,7 +23,7 @@ export const getDealsAsync = () => async (dispatch) => {
 		};
 		const response = await axios.get(url, options);
 		console.log('getAsyncDeals:', response.data);
-		return dispatch(getDeals(response.data));
+		dispatch(getDeals(response.data));
 	} catch (err) {
 		console.log('err', err);
 		throw new Error(err);

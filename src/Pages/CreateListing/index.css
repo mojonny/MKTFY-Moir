@@ -43,17 +43,6 @@
 	overflow: visible;
 }
 
-.post-button {
-	width: 645px;
-	height: 65px;
-	color: #ffffff;
-	background-color: #d9d9d9;
-	border-radius: 100px;
-	border: none;
-	filter: drop-shadow(0px 4px 12px (0, 0, 0, 0.25));
-	cursor: pointer;
-}
-
 .cancel-listing-button {
 	width: 645px;
 	height: 65px;
@@ -172,4 +161,27 @@
 	border: none;
 	margin-left: -65px;
 	transform: translateY(-31px);
+}
+
+.post-button {
+	width: 645px;
+	height: 65px;
+	color: #ffffff;
+	background-color: #6318af;
+	border-radius: 100px;
+	border: none;
+	filter: drop-shadow(0px 4px 12px (0, 0, 0, 0.25));
+	cursor: pointer;
+	transition: background 0.9s ease-in-out;
+}
+
+.post-button:disabled {
+	width: 645px;
+	height: 65px;
+	color: #ffffff;
+	background-color: #d9d9d9;
+	border-radius: 100px;
+	border: none;
+	filter: drop-shadow(0px 4px 12px (0, 0, 0, 0.25));
+	cursor: pointer;
 }

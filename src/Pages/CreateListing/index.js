@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
 import Success from '../../Components/Success';
 
 import removeImg from '../../assets/Closing X.svg';
@@ -13,6 +11,7 @@ import './index.css';
 
 export default function CreateListing() {
 	const [isLoading, setIsLoading] = useState(false);
+	const [enabled, setEnabled] = useState(true);
 	const [productName, setProductName] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState(0);
@@ -21,18 +20,17 @@ export default function CreateListing() {
 	const [address, setAddress] = useState('');
 	const [city, setCity] = useState('');
 
-	//A way to upload the images
+	//Create the arrays for calling the api and previewing what was selected
 	const [images, setImages] = useState([]);
-	console.log('images:', images);
 	const [imageIds, setImageIds] = useState([]);
 	console.log('imageIds:', imageIds);
-
 	const [showButton, setShowButton] = useState(true);
 	const [showButton1, setShowButton1] = useState(true);
 	const [showButton2, setShowButton2] = useState(true);
 	const [showButton3, setShowButton3] = useState(true);
 	const [showButton4, setShowButton4] = useState(true);
 
+	//Set up default images when the user hasn't picked any yet
 	const placeholderImage = loadImg;
 	const placeholderImage2 = loadBigCam;
 
@@ -41,7 +39,6 @@ export default function CreateListing() {
 	};
 
 	const navigate = useNavigate();
-
 	const navigateHome = () => {
 		setIsLoading(true);
 		setTimeout(() => {
@@ -53,6 +50,7 @@ export default function CreateListing() {
 	async function uploadImage() {
 		const token = sessionStorage.getItem('accessToken');
 
+		//Format the data for multiple image files
 		let formData = new FormData();
 		for (let i = 0; i < images.length; i++) {
 			formData.append('file', images[i]);
@@ -71,20 +69,18 @@ export default function CreateListing() {
 		try {
 			const response = await axios.request(config);
 			setImageIds(response.data);
-			console.log('SUCCESS: Image(s) added!', response.data);
-			return createListing();
+			createListing(response.data);
 		} catch (error) {
 			console.log('ERROR: Unable to upload images:', error);
 		}
 	}
 
-	function createListing() {
-		// setTimeout(() => {
+	function createListing(imageIds) {
 		const token = sessionStorage.getItem('accessToken');
 
+		//Set up the image ids array from previous api call
 		let Arr = imageIds;
 		const map1 = Arr.map((obj) => obj.id);
-		console.log('Image Id Array:', map1);
 
 		if (map1.length) {
 			axios
@@ -104,12 +100,12 @@ export default function CreateListing() {
 				)
 				.then((res) => {
 					console.log('SUCCESS: Listing created!', res.data);
+					navigateHome();
 				})
 				.catch((error) =>
 					console.log('ERROR: Unable to create listing:', error)
 				);
 		}
-		// }, 2000);
 	}
 
 	const handleSubmit = (event) => {
@@ -124,8 +120,6 @@ export default function CreateListing() {
 		} else if (images.length > 5) {
 			return window.alert('Sorry, there is a 5 image limit');
 		}
-
-		console.log('images length', images.length);
 	}
 
 	function deleteFile(e) {
@@ -173,6 +167,31 @@ export default function CreateListing() {
 			setShowButton4(false);
 		}
 	}, [images.length]);
+
+	useEffect(() => {
+		if (
+			productName &&
+			description &&
+			category &&
+			condition &&
+			price &&
+			address &&
+			city &&
+			images.length > 0
+		) {
+			setEnabled(false);
+		}
+	}, [
+		address,
+		category,
+		city,
+		condition,
+		description,
+		enabled,
+		price,
+		productName,
+		images,
+	]);
 
 	return (
 		<>
@@ -429,7 +448,7 @@ export default function CreateListing() {
 
 							<button
 								onClick={handleSubmit}
-								disabled={isLoading}
+								disabled={enabled}
 								className="post-button"
 							>
 								Post your offer

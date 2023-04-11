@@ -45,7 +45,7 @@ export const getSearchAsync =
 			};
 			const response = await axios.post(url, param, options);
 			console.log('getAsync:', response.data);
-			return dispatch(getSearch(response.data));
+			dispatch(getSearch(response.data));
 		} catch (err) {
 			console.log('err', err);
 			throw new Error(err);
