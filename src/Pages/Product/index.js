@@ -86,6 +86,7 @@ export default function Product() {
 					setPhone(res.data.sellerProfile.phone);
 					setCity(res.data.sellerProfile.city);
 					setImages(res.data.images);
+					setMainImage(res.data.images[0]);
 					return console.log('SUCCESS: User found!', res.data);
 				})
 				.catch((error) => {

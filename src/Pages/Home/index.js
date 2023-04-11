@@ -31,6 +31,7 @@ export default function Home() {
 	const dispatch = useDispatch();
 
 	let loggedIn = useSelector((state) => state.login.login);
+	let token = useSelector((state) => state.login.token);
 
 	useEffect(() => {
 		if (loggedIn === null) {
@@ -39,7 +40,7 @@ export default function Home() {
 	}, [navigate, loggedIn]);
 
 	useEffect(() => {
-		if (loggedIn === null) {
+		if (token === null) {
 			setIsLoading(true);
 			setTimeout(() => {
 				getToken();
@@ -139,7 +140,7 @@ export default function Home() {
 				setIsLoading(false);
 			}, 4000);
 		}
-	}, [dispatch, loggedIn]);
+	}, [dispatch, token]);
 
 	return (
 		<div className="home-dashboard">

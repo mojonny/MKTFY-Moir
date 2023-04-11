@@ -9,33 +9,29 @@ import './index.css';
 export default function MiniSlider({ title, sliderCategory, className }) {
 	const [listings, setListings] = useState([]);
 
-	let loggedIn = useSelector((state) => state.login.login);
+	let token = useSelector((state) => state.login.token);
 
 	useEffect(() => {
-		setTimeout(() => {
-			const token = sessionStorage.getItem('accessToken');
-			const url =
-				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/category?maxResults=100';
-			const data = {
-				category: `${sliderCategory}`,
-				city: 'Calgary',
-			};
-			const options = {
-				headers: { Authorization: `Bearer ${token}` },
-			};
-			if (loggedIn === true) {
-				axios
-					.post(url, data, options)
-					.then((res) => {
-						setListings(res.data);
-						console.log('SUCCESS: Listings by category:', res.data);
-					})
-					.catch((error) =>
-						console.log('ERROR: Unable to retrieve categories:', error)
-					);
-			}
-		}, 3000);
-	}, [sliderCategory, loggedIn]);
+		const url =
+			'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/category?maxResults=100';
+		const data = {
+			category: `${sliderCategory}`,
+			city: 'Calgary',
+		};
+		const options = {
+			headers: { Authorization: `Bearer ${token}` },
+		};
+		if (token !== null) {
+			axios
+				.post(url, data, options)
+				.then((res) => {
+					setListings(res.data);
+				})
+				.catch((error) =>
+					console.log('ERROR: Unable to retrieve categories:', error)
+				);
+		}
+	}, [sliderCategory, token]);
 
 	const placeholderImage = defaultImg;
 

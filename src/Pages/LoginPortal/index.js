@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import Success from '../../Components/Success';
 import LoginModal from '../../Components/Modals/LoginModal';
 import ForgotPasswordModal from '../../Components/Modals/ForgotPasswordModal';
 import ResetVerificationModal from '../../Components/Modals/ResetVerificationModal';
 import ResetPasswordModal from '../../Components/Modals/ResetPasswordModal';
-
 import CreateModal from '../../Components/Modals/CreateAccountModal';
 import PasswordModal from '../../Components/Modals/PasswordModal';
 
@@ -14,9 +13,18 @@ import './index.css';
 export default function LoginPortal() {
 	const [loginPage, setLoginPage] = useState(0);
 	const [signupPage, setSignupPage] = useState(0);
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		setIsLoading(true);
+		setTimeout(() => {
+			setIsLoading(false);
+		}, 3000);
+	}, []);
 
 	return (
 		<div className="Login-Portal">
+			{isLoading ? <Success /> : null}
 			<div className="intro-container">
 				<img src={logo} className="logo" alt="logo" />
 

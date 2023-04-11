@@ -1,5 +1,4 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import defaultImg from '../../assets/LP.png';
@@ -7,6 +6,10 @@ import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function Checkout() {
+	const [productImage, setProductImage] = useState();
+
+	const productName = sessionStorage.getItem('productName');
+	const productPrice = sessionStorage.getItem('productPrice');
 	const navigate = useNavigate();
 
 	const navigatePickup = () => {
@@ -17,19 +20,16 @@ export default function Checkout() {
 		return JSON.parse(this.getItem(key));
 	};
 
-	const productName = sessionStorage.getItem('productName');
-	const productPrice = sessionStorage.getItem('productPrice');
-
-	let productImage = () => {
+	useEffect(() => {
 		if (!sessionStorage.getObj('productImage')) {
 			return;
 		} else if (sessionStorage.getObj('productImage')) {
-			productImage = sessionStorage.getObj('productImage');
+			setProductImage(sessionStorage.getObj('productImage'));
+			console.log('prod img:', productImage);
 		}
-	};
+	}, [productImage]);
 
 	const placeholderImage = defaultImg;
-
 	const onImageError = (e) => {
 		e.target.src = placeholderImage;
 	};

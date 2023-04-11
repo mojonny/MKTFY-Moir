@@ -1,18 +1,15 @@
-import { useSelector } from 'react-redux';
-import { showSearch } from '../../../Features/Search/searchSlice';
-
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { showSearch } from '../../../Features/Search/searchSlice';
 import defaultImg from '../../../assets/LP.png';
 import './index.css';
 
 export default function SearchSlider({ className }) {
 	const search = useSelector(showSearch);
-	console.log('show search', search);
 	const searchTitle = sessionStorage.getItem('searchValue');
 
 	const placeholderImage = defaultImg;
-
 	const onImageError = (e) => {
 		e.target.src = placeholderImage;
 	};

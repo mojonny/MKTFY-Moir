@@ -1,47 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { showCategories } from '../../../Features/Categories/categoriesSlice';
 
 import defaultImg from '../../../assets/LP.png';
 import './index.css';
 
-export default function ExploreSlider({ title, sliderCategory, className }) {
-	const [listings, setListings] = useState([]);
-
-	let loggedIn = useSelector((state) => state.login.login);
-
-	useEffect(() => {
-		const token = sessionStorage.getItem('accessToken');
-		const url =
-			'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/category?maxResults=100';
-		const data = {
-			category: `${sliderCategory}`,
-			city: 'Calgary',
-		};
-		const options = {
-			headers: { Authorization: `Bearer ${token}` },
-		};
-		if (loggedIn === true) {
-			axios
-				.post(url, data, options)
-				.then((res) => {
-					setListings(res.data);
-					console.log('SUCCESS: Listings by category:', res.data);
-				})
-				.catch((error) =>
-					console.log('ERROR: Unable to retrieve categories:', error)
-				);
-		}
-	}, [sliderCategory, loggedIn]);
+export default function ExploreSlider({ title, className }) {
+	const categories = useSelector(showCategories);
 
 	const placeholderImage = defaultImg;
-
 	const onImageError = (e) => {
 		e.target.src = placeholderImage;
 	};
 
-	const listingComponents = listings.map((product) => (
+	const listingComponents = categories.map((product) => (
 		<div key={product.id}>
 			<div className="explore-info-label">
 				<Link
