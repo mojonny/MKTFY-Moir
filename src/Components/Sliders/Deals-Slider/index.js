@@ -1,33 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import defaultImg from '../../../assets/LP.png';
 import './index.css';
 
 export default function DealsSlider({ title, className, sliderCategory }) {
 	const [listings, setListings] = useState([]);
+	// const [loggedIn, setLoggedIn] = useState(null);
+
+	let loggedIn = useSelector((state) => state.login.login);
 
 	useEffect(() => {
-		// setTimeout(() => {
 		const token = sessionStorage.getItem('accessToken');
-		//const loggedIn = sessionStorage.getItem('loggedIn');
 		const url =
 			'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/deals?maxResults=100';
 		const options = {
 			headers: { Authorization: `Bearer ${token}` },
 		};
-		//if (loggedIn === true ) {
-		axios
-			.get(url, options)
-			.then((res) => {
-				setListings(res.data);
-				console.log('SUCCESS: Retrieved DEALS:', res.data);
-			})
-			.catch((error) => console.log('ERROR: Unable to retrieve deals:', error));
-		//}
-		// }, 500);
-	}, []);
+		if (loggedIn === true) {
+			axios
+				.get(url, options)
+				.then((res) => {
+					setListings(res.data);
+					console.log('SUCCESS: Retrieved DEALS:', res.data);
+				})
+				.catch((error) =>
+					console.log('ERROR: Unable to retrieve deals:', error)
+				);
+		}
+	}, [loggedIn]);
 
 	const placeholderImage = defaultImg;
 

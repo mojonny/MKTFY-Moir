@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { auth } from '../../../Services/auth0.service';
 import { AUTH0_REALM } from '../../../config';
+import { useDispatch } from 'react-redux';
+import { setLogin } from '../../../Features/Login/loginSlice';
 
 import eye from '../../../assets/eye.png';
 import eyeslash from '../../../assets/eye-slash.png';
@@ -28,6 +30,8 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 
 	//To toggle visibility of password text
 	const [passwordType, setPasswordType] = useState('password');
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		if (user.email) {
@@ -72,6 +76,7 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 
 	async function onSubmit(event) {
 		sessionStorage.setItem('loggedIn', true);
+		dispatch(setLogin());
 		event.preventDefault();
 		auth.login(
 			{

@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
-//import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import {
+	setFirstName,
+	setLastName,
+	setEmail,
+	setPhone,
+	setAddress,
+	setCity,
+} from '../../../Features/Login/loginSlice';
 
 import greyX from '../../../assets/GreyX.png';
 import './index.css';
@@ -13,12 +21,13 @@ function isValidEmail(email) {
 }
 
 export default function CreateModal({ setSignupPage }) {
-	const [firstName, setFirstName] = useState('');
-	const [lastName, setLastName] = useState('');
-	const [email, setEmail] = useState('');
-	const [phone, setPhone] = useState('');
-	const [address, setAddress] = useState('');
-	const [city, setCity] = useState('');
+	const [firstName, setFormFirstName] = useState('');
+	const [lastName, setFormLastName] = useState('');
+	const [email, setFormEmail] = useState('');
+	const [phone, setFormPhone] = useState('');
+	const [address, setFormAddress] = useState('');
+	const [city, setFormCity] = useState('');
+	const dispatch = useDispatch();
 
 	const onSubmit = (event) => {
 		event.preventDefault();
@@ -31,12 +40,6 @@ export default function CreateModal({ setSignupPage }) {
 			city: city,
 		};
 
-		// 	axios
-		// 		.post('https://localhost:3000/api/account/register', userData)
-		// 		.then((response) => {
-		// 			console.log(response.status, response.data);
-		// 		});
-
 		setSignupPage(2);
 		sessionStorage.setItem('firstName', userData.firstName);
 		sessionStorage.setItem('lastName', userData.lastName);
@@ -44,6 +47,13 @@ export default function CreateModal({ setSignupPage }) {
 		sessionStorage.setItem('phone', userData.phone);
 		sessionStorage.setItem('address', userData.address);
 		sessionStorage.setItem('city', userData.city);
+
+		dispatch(setFirstName(userData.firstName));
+		dispatch(setLastName(userData.lastName));
+		dispatch(setEmail(userData.email));
+		dispatch(setPhone(userData.phone));
+		dispatch(setAddress(userData.address));
+		dispatch(setCity(userData.city));
 	};
 
 	return (
@@ -90,7 +100,7 @@ export default function CreateModal({ setSignupPage }) {
 								name="name"
 								placeholder=" Your first name"
 								value={firstName}
-								onChange={(e) => setFirstName(e.target.value)}
+								onChange={(e) => setFormFirstName(e.target.value)}
 							/>
 						</label>
 
@@ -103,7 +113,7 @@ export default function CreateModal({ setSignupPage }) {
 								placeholder=" Insert your address"
 								className="input-style"
 								value={address}
-								onChange={(e) => setAddress(e.target.value)}
+								onChange={(e) => setFormAddress(e.target.value)}
 							/>
 						</label>
 
@@ -116,7 +126,7 @@ export default function CreateModal({ setSignupPage }) {
 								name="name"
 								placeholder=" Your last name"
 								value={lastName}
-								onChange={(e) => setLastName(e.target.value)}
+								onChange={(e) => setFormLastName(e.target.value)}
 							/>
 						</label>
 
@@ -129,7 +139,7 @@ export default function CreateModal({ setSignupPage }) {
 								placeholder=" City name"
 								className="input-style"
 								value={city}
-								onChange={(e) => setCity(e.target.value)}
+								onChange={(e) => setFormCity(e.target.value)}
 							/>
 						</label>
 
@@ -140,7 +150,7 @@ export default function CreateModal({ setSignupPage }) {
 								type="email"
 								name="email"
 								placeholder=" Insert your email"
-								onChange={(e) => setEmail(e.target.value)}
+								onChange={(e) => setFormEmail(e.target.value)}
 								className="input-style"
 								value={email}
 							/>
@@ -155,7 +165,7 @@ export default function CreateModal({ setSignupPage }) {
 								placeholder=" +1 (000)000-0000"
 								className="input-style"
 								value={phone}
-								onChange={(e) => setPhone(e.target.value)}
+								onChange={(e) => setFormPhone(e.target.value)}
 							/>
 						</label>
 						<button

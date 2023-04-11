@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { auth } from '../../../Services/auth0.service';
 import { AUTH0_CLIENT_ID, AUTH0_LOGOUT_URI } from '../../../config';
-//import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setLogout } from '../../../Features/Login/loginSlice';
 
 import logout from '../../../assets/LogOut.png';
 import dropArrow from '../../../assets/DownArrow.png';
@@ -10,6 +11,9 @@ import './index.css';
 
 export default function ProfileDropdown() {
 	const [isDropOpen3, setIsDropOpen3] = useState(false);
+
+	const dispatch = useDispatch();
+
 	const dropMenu3 = useRef(null);
 
 	const firstName = sessionStorage.getItem('firstName');
@@ -39,6 +43,7 @@ export default function ProfileDropdown() {
 	};
 
 	const onSubmit = () => {
+		dispatch(setLogout());
 		setIsDropOpen3(false);
 		sessionStorage.clear();
 		auth.logout({

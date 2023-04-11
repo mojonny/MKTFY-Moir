@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import defaultImg from '../../../assets/LP.png';
 import './index.css';
@@ -8,11 +9,11 @@ import './index.css';
 export default function MiniSlider({ title, sliderCategory, className }) {
 	const [listings, setListings] = useState([]);
 
+	let loggedIn = useSelector((state) => state.login.login);
+
 	useEffect(() => {
 		setTimeout(() => {
 			const token = sessionStorage.getItem('accessToken');
-			//const loggedIn = sessionStorage.getItem('loggedIn');
-
 			const url =
 				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/category?maxResults=100';
 			const data = {
@@ -22,19 +23,19 @@ export default function MiniSlider({ title, sliderCategory, className }) {
 			const options = {
 				headers: { Authorization: `Bearer ${token}` },
 			};
-			// if (loggedIn === true) {
-			axios
-				.post(url, data, options)
-				.then((res) => {
-					setListings(res.data);
-					console.log('SUCCESS: Listings by category:', res.data);
-				})
-				.catch((error) =>
-					console.log('ERROR: Unable to retrieve categories:', error)
-				);
-			//	}
+			if (loggedIn === true) {
+				axios
+					.post(url, data, options)
+					.then((res) => {
+						setListings(res.data);
+						console.log('SUCCESS: Listings by category:', res.data);
+					})
+					.catch((error) =>
+						console.log('ERROR: Unable to retrieve categories:', error)
+					);
+			}
 		}, 3000);
-	}, [sliderCategory]);
+	}, [sliderCategory, loggedIn]);
 
 	const placeholderImage = defaultImg;
 
