@@ -1,8 +1,8 @@
 .footer {
 	box-sizing: border-box;
 	position: absolute;
-	width: 99vw;
-	height: 600px;
+	width: 100%;
+	min-height: 600px;
 	background-image: url('../../assets/FooterBG.png');
 	background-size: cover;
 	background-repeat: no-repeat;

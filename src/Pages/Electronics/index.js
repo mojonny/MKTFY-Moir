@@ -5,16 +5,14 @@ import './index.css';
 
 export default function Electronics() {
 	return (
-		<div className="home-dashboard">
-			<br />
+		<div className="explore-dashboard">
 			<br />
 			<ExploreSlider
 				className="explore-slider"
 				title="Electronics"
 				sliderCategory="ELECTRONICS"
 			/>
-			<br />
-			<Footer />
+			<Footer className="footer" />
 		</div>
 	);
 }

@@ -7,11 +7,10 @@ export default function Search() {
 	return (
 		<div className="search-container">
 			<br />
-			<br />
 			<div className="search-dashboard">
 				<SearchSlider className="search-slider" />
 			</div>
-			<Footer />
+			<Footer className="footer" />
 		</div>
 	);
 }

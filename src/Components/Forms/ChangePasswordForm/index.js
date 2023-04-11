@@ -59,8 +59,7 @@ export default function ChangePasswordForm() {
 		setTimeout(() => {
 			function updatePassword() {
 				const token = sessionStorage.getItem('accessToken');
-				console.log('new pw:', newPassword);
-				console.log('confirm pw:', confirmPassword);
+
 				const url =
 					'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Auth/changepassword';
 				const data = {
@@ -76,11 +75,8 @@ export default function ChangePasswordForm() {
 						console.log('SUCCESS: Password updated!', res.data);
 						navigate('/home');
 					})
-					.catch(
-						(error) => console.log('ERROR: Unable to update password:', error),
-						alert(
-							"Heads up! Something happened and you password hasn't ChangePasswordForm."
-						)
+					.catch((error) =>
+						console.log('ERROR: Unable to update password:', error)
 					);
 			}
 

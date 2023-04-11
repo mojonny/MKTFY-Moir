@@ -2,8 +2,26 @@
 	width: 87%;
 	padding: 20px 16px 20px 16px;
 	border-radius: 5px 5px 5px 5px;
-	margin: 0;
 	background: #ffffff;
 	margin-left: 150px;
+	margin-bottom: 5rem;
 	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);
+	min-height: 100%;
+}
+
+.deals-dashboard {
+	min-height: 87vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 100px;
+	justify-content: space-between;
+}
+
+.footer {
+	position: relative;
+	bottom: 0;
+	width: 100%;
+	height: 2.5rem;
+	margin: 0;
 }

@@ -5,7 +5,7 @@ import './index.css';
 
 export default function Cars() {
 	return (
-		<div className="home-dashboard">
+		<div className="explore-dashboard">
 			<br />
 			<br />
 			<ExploreSlider
@@ -14,7 +14,7 @@ export default function Cars() {
 				sliderCategory="VEHICLES"
 			/>
 			<br />
-			<Footer />
+			<Footer className="footer" />
 		</div>
 	);
 }

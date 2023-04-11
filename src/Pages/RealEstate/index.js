@@ -5,16 +5,14 @@ import './index.css';
 
 export default function RealEstate() {
 	return (
-		<div className="home-dashboard">
-			<br />
+		<div className="explore-dashboard">
 			<br />
 			<ExploreSlider
 				className="explore-slider"
 				title="Real Estate"
 				sliderCategory="REAL_ESTATE"
 			/>
-			<br />
-			<Footer />
+			<Footer className="footer" />
 		</div>
 	);
 }

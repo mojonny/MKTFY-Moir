@@ -6,8 +6,7 @@ import './index.css';
 
 export default function Deals() {
 	return (
-		<div className="home-dashboard">
-			<br />
+		<div className="deals-dashboard">
 			<br />
 			<DealsSlider
 				className="deals-slider"
@@ -15,8 +14,7 @@ export default function Deals() {
 				title="Deals"
 				sliderCategory="Deals"
 			/>
-			<br />
-			<Footer />
+			<Footer className="footer" />
 		</div>
 	);
 }

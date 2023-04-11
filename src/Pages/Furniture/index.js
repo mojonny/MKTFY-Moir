@@ -5,16 +5,15 @@ import './index.css';
 
 export default function Furniture() {
 	return (
-		<div className="home-dashboard">
-			<br />
+		<div className="explore-dashboard">
 			<br />
 			<ExploreSlider
 				className="explore-slider"
 				title="Furniture"
 				sliderCategory="FURNITURE"
 			/>
-			<br />
-			<Footer />
+
+			<Footer className="footer" />
 		</div>
 	);
 }
