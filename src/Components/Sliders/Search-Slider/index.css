@@ -2,8 +2,9 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 25px;
-	height: 110%;
+	height: 100%;
 	border-radius: 5px;
+	padding-bottom: 50px;
 }
 
 .search-info-label {

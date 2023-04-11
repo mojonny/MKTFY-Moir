@@ -19,21 +19,19 @@ export default function SearchBar() {
 
 	const handleSubmit = () => {
 		dispatch(getSearchAsync({ searchValue, city, category }));
-		navigate('/search');
 		sessionStorage.setItem('searchValue', searchValue);
 		setSearchValue('');
 		setCategory('All');
 		setCity('Calgary');
+		navigate('/search');
 	};
 
 	const handleClick = (e) => {
-		console.log(searchValue);
 		setCategory(e.target.id);
 		setIsDropOpen(false);
 	};
 
 	const handleClick1 = (e) => {
-		//updates field
 		setCity(e.target.id);
 		//closes modal after click
 		setIsDropOpen1(false);
@@ -90,36 +88,16 @@ export default function SearchBar() {
 				</button>
 				{isDropOpen && (
 					<ul ref={dropMenu} onClick={(e) => e.stopPropagation()}>
-						<li
-							className="options"
-							id="VEHICLES"
-							onClick={handleClick}
-							value={category}
-						>
+						<li className="options" onClick={handleClick} id="Cars & Vehicles">
 							Cars & Vehicles
 						</li>
-						<li
-							className="options"
-							id="FURNITURE"
-							onClick={handleClick}
-							value={category}
-						>
+						<li className="options" onClick={handleClick} id="Furniture">
 							Furniture
 						</li>
-						<li
-							className="options"
-							id="ELECTRONICS"
-							onClick={handleClick}
-							value={category}
-						>
+						<li className="options" onClick={handleClick} id="Electronics">
 							Electronics
 						</li>
-						<li
-							className="options"
-							id="REAL_ESTATE"
-							onClick={handleClick}
-							value={category}
-						>
+						<li className="options" onClick={handleClick} id="Real Estate">
 							Real Estate
 						</li>
 					</ul>
@@ -135,17 +113,13 @@ export default function SearchBar() {
 				/>
 				{/* SEARCH LOOKING-GLASS BUTTON */}
 				<button
-					// style={{
-					// 	border: 'none',
-					// 	background: 'none',
-					// }}
+					style={{
+						border: 'none',
+						background: 'none',
+					}}
 					onClick={handleSubmit}
 				>
-					<img
-						// className="looking-glass"
-						src={searchButton}
-						alt="looking glass"
-					/>
+					<img src={searchButton} alt="looking glass" />
 				</button>
 			</div>
 			<br />

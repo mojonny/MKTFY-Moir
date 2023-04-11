@@ -6,13 +6,12 @@ import './index.css';
 export default function Search() {
 	return (
 		<div className="search-container">
+			<br />
+			<br />
 			<div className="search-dashboard">
-				<br />
-				<br />
-				<SearchSlider className="search-slider" title="Search results for" />
-				<br />
-				<Footer />
+				<SearchSlider className="search-slider" />
 			</div>
+			<Footer />
 		</div>
 	);
 }

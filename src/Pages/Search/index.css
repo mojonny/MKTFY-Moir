@@ -1,8 +1,19 @@
+.search-container {
+	position: relative;
+	min-height: 100vh;
+	padding-bottom: 50rem;
+}
+
+/* .search-dashboard {
+	margin-bottom: 2.5rem;
+} */
+
 .search-slider {
 	width: 87%;
-	padding: 20px 16px 20px 16px;
+	height: 100%;
+	min-height: 500px;
+	padding: 20px 16px 16px 16px;
 	border-radius: 5px 5px 5px 5px;
-	margin: 0;
 	background: #ffffff;
 	margin-left: 150px;
 	box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15);

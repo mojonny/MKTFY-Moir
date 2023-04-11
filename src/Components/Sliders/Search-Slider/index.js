@@ -8,7 +8,7 @@ import './index.css';
 
 export default function SearchSlider({ className }) {
 	const search = useSelector(showSearch);
-
+	console.log('show search', search);
 	const searchTitle = sessionStorage.getItem('searchValue');
 
 	const placeholderImage = defaultImg;
@@ -17,7 +17,7 @@ export default function SearchSlider({ className }) {
 		e.target.src = placeholderImage;
 	};
 
-	const listingComponents = search[0].map((product) => (
+	const listingComponents = search.map((product) => (
 		<div key={product.id}>
 			<div className="search-info-label">
 				<Link
