@@ -63,6 +63,7 @@ export default function App() {
 					{/* Linked to home page/dashboard */}
 					<Route path="/product/:id" element={<Product />} />
 					<Route path="/createlisting" element={<CreateListing />} />
+					<Route path="/pending/:id" element={<PendingItems />} />
 
 					{/* Linked to product listing */}
 					<Route path="/checkout" element={<Checkout />} />
@@ -73,9 +74,6 @@ export default function App() {
 					<Route path="/changepassword" element={<ChangePassword />} />
 					<Route path="/mypurchases" element={<MyPurchases />} />
 					<Route path="/mylistings" element={<MyListings />} />
-
-					{/* Linked to my listings */}
-					<Route path="/pending" element={<PendingItems />} />
 
 					{/* Links found under help in dropdown */}
 					<Route path="/faq" element={<FAQ />} />

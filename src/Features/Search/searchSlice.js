@@ -13,25 +13,27 @@ export const searchSlice = createSlice({
 	},
 });
 
-export function changeCategory() {
-	let category;
-	let categoryText;
+export function changeCategory(category) {
+	let categoryText = '';
+
 	if (category === 'Electronics') {
-		return categoryText === 'ELECTRONICS';
+		categoryText = 'ELECTRONICS';
 	} else if (category === 'Cars & Vehicles') {
-		return categoryText === 'VEHICLES';
+		categoryText = 'VEHICLES';
 	} else if (category === 'Real Estate') {
-		return categoryText === 'REAL_ESTATE';
+		categoryText = 'REAL_ESTATE';
 	} else if (category === 'Furniture') {
-		return categoryText === 'FURNITURE';
+		categoryText = 'FURNITURE';
 	}
+
+	return categoryText;
 }
 
 export const getSearchAsync =
 	({ searchValue, city, category }) =>
 	async (dispatch) => {
 		try {
-			const categoryText = changeCategory(category);
+			let categoryText = changeCategory(category);
 			const token = sessionStorage.getItem('accessToken');
 			const url =
 				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/search';
@@ -44,7 +46,6 @@ export const getSearchAsync =
 				headers: { Authorization: `Bearer ${token}` },
 			};
 			const response = await axios.post(url, param, options);
-			console.log('getAsync:', response.data);
 			dispatch(getSearch(response.data));
 		} catch (err) {
 			console.log('err', err);

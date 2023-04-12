@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import moment from 'moment/moment';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import defaultImg from '../../assets/LP.png';
@@ -38,12 +38,14 @@ export default function MyListings() {
 		<ul className="listing-item-box" key={product.id}>
 			<li className="listing-landing">
 				<div className="listing-item-box">
-					<img
-						className="listing-pic"
-						src={product.images[0] ? product.images[0] : placeholderImage}
-						alt="Product pic"
-						onError={onImageError}
-					/>
+					<Link to={`/pending/${product.id}`} key={product.id} id={product.id}>
+						<img
+							className="listing-pic"
+							src={product.images[0] ? product.images[0] : placeholderImage}
+							alt="Product pic"
+							onError={onImageError}
+						/>
+					</Link>
 					<div className="listing-item-detail">
 						<p>{moment(product.created).format('MMM Do YYYY')}</p>
 						<h4>{product.productName}</h4>

@@ -1,6 +1,539 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+import Success from '../../Components/Success';
 
+import removeImg from '../../assets/Closing X.svg';
+import loadImg from '../../assets/LoadImg.svg';
+import loadBigCam from '../../assets/Frame 123.png';
+import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
+
 export default function PendingItems() {
-	return <div>PendingItems</div>;
+	const [isLoading, setIsLoading] = useState(false);
+	//const [enabled, setEnabled] = useState(true);
+
+	// Info needed from backend:
+	// listing id from params
+	// Status: ACTIVE/COMPLETE(SOLD)/PENDING/CANCELED
+	const [productName, setProductName] = useState('');
+	const [description, setDescription] = useState('');
+	const [price, setPrice] = useState(0);
+	const [category, setCategory] = useState('');
+	const [condition, setCondition] = useState('');
+	const [address, setAddress] = useState('');
+	const [city, setCity] = useState('');
+	const [status, setStatus] = useState('');
+
+	console.log('status', status);
+
+	//Create the arrays for calling the api and previewing what was selected
+	const [images, setImages] = useState([]);
+	// const [imageIds, setImageIds] = useState([]);
+	// console.log('imageIds:', imageIds);
+	const [showButton, setShowButton] = useState(true);
+	const [showButton1, setShowButton1] = useState(true);
+	const [showButton2, setShowButton2] = useState(true);
+	const [showButton3, setShowButton3] = useState(true);
+	const [showButton4, setShowButton4] = useState(true);
+
+	const { id } = useParams();
+
+	//Set up default images when the user hasn't picked any yet
+	const placeholderImage = loadImg;
+	const placeholderImage2 = loadBigCam;
+
+	const onImageError = (e) => {
+		e.target.src = placeholderImage;
+	};
+
+	const navigate = useNavigate();
+	const navigateHome = () => {
+		setIsLoading(true);
+		setTimeout(() => {
+			navigate('/home');
+			setIsLoading(false);
+		}, 2000);
+	};
+
+	// async function uploadImage() {
+	// 	const token = sessionStorage.getItem('accessToken');
+
+	// 	//Format the data for multiple image files
+	// 	let formData = new FormData();
+	// 	for (let i = 0; i < images.length; i++) {
+	// 		formData.append('file', images[i]);
+	// 	}
+
+	// 	let config = {
+	// 		method: 'post',
+	// 		url: 'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Upload',
+	// 		headers: {
+	// 			'Content-Type': 'multipart/form-data',
+	// 			Authorization: `Bearer ${token}`,
+	// 		},
+	// 		data: formData,
+	// 	};
+
+	// 	try {
+	// 		const response = await axios.request(config);
+	// 		setImageIds(response.data);
+	// 		createListing(response.data);
+	// 	} catch (error) {
+	// 		console.log('ERROR: Unable to upload images:', error);
+	// 	}
+	// }
+
+	// function createListing(imageIds) {
+	// 	const token = sessionStorage.getItem('accessToken');
+
+	// 	//Set up the image ids array from previous api call
+	// 	let Arr = imageIds;
+	// 	const map1 = Arr.map((obj) => obj.id);
+
+	// 	if (map1.length) {
+	// 		axios
+	// 			.post(
+	// 				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product',
+	// 				{
+	// 					productName: productName,
+	// 					description: description,
+	// 					price: price,
+	// 					category: category,
+	// 					condition: condition,
+	// 					address: address,
+	// 					city: city,
+	// 					images: map1,
+	// 				},
+	// 				{ headers: { Authorization: `Bearer ${token}` } }
+	// 			)
+	// 			.then((res) => {
+	// 				console.log('SUCCESS: Listing created!', res.data);
+	// 				navigateHome();
+	// 			})
+	// 			.catch((error) =>
+	// 				console.log('ERROR: Unable to create listing:', error)
+	// 			);
+	// 	}
+	// }
+
+	// const handleSubmit = (event) => {
+	// 	event.preventDefault();
+	// 	uploadImage();
+	// };
+
+	function onImageChange(e) {
+		e.preventDefault();
+		if (images.length < 5) {
+			console.log('new img', images);
+
+			setImages([...images, ...e.target.files]);
+		} else if (images.length > 5) {
+			return window.alert('Sorry, there is a 5 image limit');
+		}
+	}
+
+	function deleteFile(e) {
+		const s = images.filter((index) => index !== e);
+		setImages(s);
+		console.log('image deleted:', s);
+	}
+
+	useEffect(() => {
+		if (images.length === 0) {
+			setShowButton(true);
+			setShowButton1(true);
+			setShowButton2(true);
+			setShowButton3(true);
+			setShowButton4(true);
+		} else if (images.length === 1) {
+			setShowButton(false);
+			setShowButton1(true);
+			setShowButton2(true);
+			setShowButton3(true);
+			setShowButton4(true);
+		} else if (images.length === 2) {
+			setShowButton(false);
+			setShowButton1(false);
+			setShowButton2(true);
+			setShowButton3(true);
+			setShowButton4(true);
+		} else if (images.length === 3) {
+			setShowButton(false);
+			setShowButton1(false);
+			setShowButton2(false);
+			setShowButton3(true);
+			setShowButton4(true);
+		} else if (images.length === 4) {
+			setShowButton(false);
+			setShowButton1(false);
+			setShowButton2(false);
+			setShowButton3(false);
+			setShowButton4(true);
+		} else if (images.length === 5) {
+			setShowButton(false);
+			setShowButton1(false);
+			setShowButton2(false);
+			setShowButton3(false);
+			setShowButton4(false);
+		}
+	}, [images.length]);
+
+	// useEffect(() => {
+	// 	if (
+	// 		productName &&
+	// 		description &&
+	// 		category &&
+	// 		condition &&
+	// 		price &&
+	// 		address &&
+	// 		city &&
+	// 		images.length > 0
+	// 	) {
+	// 		setEnabled(false);
+	// 	}
+	// }, [
+	// 	address,
+	// 	category,
+	// 	city,
+	// 	condition,
+	// 	description,
+	// 	enabled,
+	// 	price,
+	// 	productName,
+	// 	images,
+	// ]);
+
+	useEffect(() => {
+		//Check if user exists
+		async function getProduct() {
+			const token = sessionStorage.getItem('accessToken');
+			const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/${id}`;
+
+			axios
+				.get(url, { headers: { Authorization: `Bearer ${token}` } })
+				.then((res) => {
+					setProductName(res.data.productName);
+					setPrice(res.data.price);
+					setCategory(res.data.category);
+					setCondition(res.data.condition);
+					setDescription(res.data.description);
+					setAddress(res.data.address);
+					setStatus(res.data.status);
+					setCity(res.data.city);
+					setImages(res.data.images);
+					return console.log('SUCCESS: Your listing was found!', res.data);
+				})
+				.catch((error) => {
+					console.log('ERROR: User does not exist in db', error);
+				});
+		}
+		getProduct();
+	}, [id]);
+
+	function handleSrc(i) {
+		let src;
+		if (typeof images[i] === 'object') {
+			src = URL.createObjectURL(images[i]);
+		} else if (typeof images[i] === 'string') {
+			src = images[i];
+		}
+		console.log('src:', src);
+		return src;
+	}
+	// function handleSrc1() {
+	// 	let src;
+	// 	if (typeof images[1] === 'object') {
+	// 		src = URL.createObjectURL(images[1]);
+	// 	} else if (typeof images[1] === 'string') {
+	// 		src = images[1];
+	// 	}
+	// 	console.log('src:', src);
+	// 	return src;
+	// }
+
+	return (
+		<>
+			<div className="create-listing-container">
+				<div className="breadcrumbs">
+					Deals for you <img src={breadArrow} alt="path-arrow" /> My listings{' '}
+					<img src={breadArrow} alt="path-arrow" /> Product
+				</div>
+				<h1> My listing</h1>
+				{/* <div onSubmit={handleSubmit}> */}
+				<div>
+					<div className="create-listing-landing">
+						<div className="listing-image-box">
+							<>
+								<label>
+									{/*Load image button */}
+									<input
+										type="file"
+										multiple
+										accept="image/*"
+										onChange={onImageChange}
+										style={{
+											visibility: 'hidden',
+											width: '0',
+											height: '0',
+										}}
+									/>
+									<>
+										<img
+											className="main-listing-img"
+											src={handleSrc(0) ? handleSrc(0) : placeholderImage}
+											alt="preview"
+											onError={onImageError}
+										/>
+
+										<button
+											type="button"
+											index="0"
+											onClick={() => deleteFile(images[0])}
+											className="replace-img-button"
+											hidden={showButton}
+										>
+											<img
+												className="replace-img"
+												alt="close-button"
+												src={removeImg}
+											/>
+										</button>
+									</>
+
+									{/* Mini-preview box */}
+									<div className="mini-image-box">
+										<>
+											<img
+												className="load-pic"
+												src={handleSrc(1) ? handleSrc(1) : placeholderImage2}
+												alt="preview"
+												onError={onImageError}
+											/>
+
+											<button
+												type="button"
+												index="1"
+												onClick={() => deleteFile(images[1])}
+												className="mini-replace-img-button"
+												hidden={showButton1}
+											>
+												<img alt="close-button" src={removeImg} />
+											</button>
+										</>
+										<>
+											<img
+												className="load-pic"
+												src={handleSrc(2) ? handleSrc(2) : placeholderImage2}
+												alt="preview"
+												onError={onImageError}
+											/>
+
+											<button
+												type="button"
+												index="2"
+												onClick={() => deleteFile(images[2])}
+												className="mini-replace-img-button"
+												hidden={showButton2}
+											>
+												<img alt="close-button" src={removeImg} />
+											</button>
+										</>
+
+										<>
+											<img
+												className="load-pic"
+												src={handleSrc(3) ? handleSrc(3) : placeholderImage2}
+												alt="preview"
+												onError={onImageError}
+											/>
+
+											<button
+												type="button"
+												index="3"
+												onClick={() => deleteFile(images[3])}
+												className="mini-replace-img-button"
+												hidden={showButton3}
+											>
+												<img alt="close-button" src={removeImg} />
+											</button>
+										</>
+
+										<>
+											<img
+												className="load-pic"
+												src={handleSrc(4) ? handleSrc(4) : placeholderImage2}
+												alt="preview"
+												onError={onImageError}
+											/>
+
+											<button
+												type="button"
+												index="4"
+												onClick={() => deleteFile(images[4])}
+												className="mini-replace-img-button"
+												hidden={showButton4}
+											>
+												<img alt="close-button" src={removeImg} />
+											</button>
+										</>
+									</div>
+								</label>
+							</>
+						</div>
+
+						<div className="listing-info-container">
+							<div>
+								<label>Product name</label>
+								<br />
+
+								<input
+									placeholder="Insert product name"
+									className="create-listing-categories"
+									value={productName}
+									onChange={(e) => setProductName(e.target.value)}
+								/>
+							</div>
+							<div>
+								<label>Description</label>
+								<br />
+								<textarea
+									className="description-text-area"
+									placeholder="Insert you description"
+									value={description}
+									onChange={(e) => setDescription(e.target.value)}
+								/>
+							</div>
+							<div>
+								<label>Category</label>
+								<br />
+								<div>
+									<select
+										required
+										className="create-listing-categories"
+										value={category}
+										onChange={(e) => setCategory(e.target.value)}
+									>
+										<option>Choose your Category</option>
+										<option value="VEHICLES">Cars & Vehicles</option>
+										<option value="FURNITURE">Furniture</option>
+										<option value="ELECTRONICS">Electronics</option>
+										<option value="REAL_ESTATE">Real estate</option>
+									</select>
+								</div>
+							</div>
+							<div className="condition-price-box">
+								<div>
+									<label>Condition</label>
+									<br />
+									<select
+										className="condition-input"
+										value={condition}
+										defaultValue="Select condition"
+										onChange={(e) => setCondition(e.target.value)}
+									>
+										<option>Select condition</option>
+										<option value="NEW">NEW</option>
+										<option value="USED">USED</option>
+									</select>
+								</div>
+								<div>
+									<label>Price</label>
+									<br />
+									<input
+										className="price-input"
+										placeholder="Type the price"
+										value={price}
+										onChange={(e) => setPrice(e.target.value)}
+									/>
+								</div>
+							</div>
+							<div>
+								<label>Address</label>
+								<br />
+								<input
+									className="create-listing-categories"
+									placeholder="Insert your address"
+									value={address}
+									onChange={(e) => setAddress(e.target.value)}
+								/>
+							</div>
+
+							<div>
+								<label>City</label>
+								<br />
+								<div>
+									<select
+										className="create-listing-categories"
+										value={city}
+										onChange={(e) => setCity(e.target.value)}
+										defaultValue="Select your city"
+									>
+										<option>Select your city</option>
+										<option value="Calgary">Calgary</option>
+										<option value="Brooks">Brooks</option>
+										<option value="Camrose">Camrose</option>
+										<option value="Cold Lake">Cold Lake</option>
+										<option value="Edmonton">Edmonton</option>
+										<option value="Fort McMurray">Fort McMurray</option>
+										<option value="Lacombe">Lacombe</option>
+										<option value="Leduc">Leduc</option>
+										<option value="Lethbridge">Lethbridge</option>
+										<option value="Medicine Hat">Medicine Hat</option>
+										<option value="Red Deer">Red Deer</option>
+										<option value="St. Albert">St. Albert</option>
+									</select>
+								</div>
+							</div>
+
+							<button
+								// onClick={handleSubmit}
+								//disabled={enabled}
+								//PUT - Update listing
+								className="post-button"
+							>
+								Save changes
+							</button>
+
+							<button
+								// onClick={handleSubmit}
+								// disabled={enabled}
+								//PUT - Confirm/ change status to complete
+								className="post-button"
+							>
+								Confirm sold
+							</button>
+
+							<button
+								onClick={navigateHome}
+								disabled={isLoading}
+								className="cancel-listing-button"
+								//make it unavailable but not complete
+							>
+								Cancel listing
+								{/* Make it unavailable / cancel deal?*/}
+							</button>
+
+							<button
+								onClick={navigateHome}
+								disabled={isLoading}
+								className="cancel-listing-button"
+							>
+								Cancel
+							</button>
+
+							{/* <button
+								onClick={navigateHome}
+								disabled={isLoading}
+								className="cancel-listing-button"
+							>
+								Delete listing
+							</button> */}
+						</div>
+					</div>
+				</div>
+			</div>
+			{isLoading ? <Success /> : null}
+		</>
+	);
 }

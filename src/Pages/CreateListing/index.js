@@ -117,6 +117,7 @@ export default function CreateListing() {
 		e.preventDefault();
 		if (images.length < 5) {
 			setImages([...images, ...e.target.files]);
+			console.log('images', images);
 		} else if (images.length > 5) {
 			return window.alert('Sorry, there is a 5 image limit');
 		}
