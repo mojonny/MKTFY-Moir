@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { getDealsAsync } from '../../Features/Deals/dealsSlice';
 
 import Success from '../../Components/Success';
 import breadArrow from '../../assets/breadCrumbArrow.png';
@@ -14,8 +17,9 @@ export default function PickUp() {
 	const phone = sessionStorage.getItem('sellerPhone');
 	const address = sessionStorage.getItem('itemAddress');
 	const city = sessionStorage.getItem('sellerCity');
-
+	const id = sessionStorage.getItem('listingId');
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const navigateHome = () => {
 		sessionStorage.removeItem('sellerFirstName');
@@ -27,6 +31,7 @@ export default function PickUp() {
 		sessionStorage.removeItem('productPrice');
 		sessionStorage.removeItem('productImage');
 		sessionStorage.removeItem('sellerId');
+		sessionStorage.removeItem('listingId');
 		setIsLoading(true);
 		setTimeout(() => {
 			navigate('/home');
@@ -34,14 +39,56 @@ export default function PickUp() {
 		}, 2000);
 	};
 
+	async function contactSeller() {
+		let token = sessionStorage.getItem('accessToken');
+		let config = {
+			method: 'put',
+			url: `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/checkout/${id}`,
+			headers: { Authorization: `Bearer ${token}` },
+		};
+
+		try {
+			const response = await axios.request(config);
+			console.log(
+				'SUCCESS: Seller contacted to confirm listing.',
+				response.data
+			);
+			navigateHome();
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 	return (
 		<>
 			<div className="pickup-container">
-				<div className="breadcrumbs">
-					<a href="/home">Deals for you</a>
-					<img src={breadArrow} alt="path-arrow" /> Product listing{' '}
-					<img src={breadArrow} alt="path-arrow" /> Checkout
-					<img src={breadArrow} alt="path-arrow" /> Pickup Information
+				<div>
+					<button
+						style={{ border: 'none', background: 'none' }}
+						onClick={() => navigate('/deals') || dispatch(getDealsAsync())}
+					>
+						Deals for you
+					</button>
+					<img src={breadArrow} alt="path-arrow" />
+					<button
+						onClick={() => navigate(-2)}
+						style={{ border: 'none', background: 'none' }}
+					>
+						Product listing
+					</button>
+					<img src={breadArrow} alt="path-arrow" />
+
+					<button
+						onClick={() => navigate(-1)}
+						style={{ border: 'none', background: 'none' }}
+					>
+						Checkout
+					</button>
+					<img src={breadArrow} alt="path-arrow" />
+
+					<button style={{ border: 'none', background: 'none' }}>
+						Pickup information
+					</button>
 				</div>
 				<div className="pickup-landing">
 					<h1 style={{ color: '#6318af' }}> Pick up</h1>
@@ -69,7 +116,7 @@ export default function PickUp() {
 						</p>
 						<br />
 						<button
-							onClick={navigateHome}
+							onClick={() => contactSeller()}
 							disabled={isLoading}
 							className="checkout-button1"
 							style={{ alignSelf: 'center' }}

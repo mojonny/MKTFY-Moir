@@ -71,7 +71,7 @@ export default function CreateListing() {
 			setImageIds(response.data);
 			createListing(response.data);
 		} catch (error) {
-			console.log('ERROR: Unable to upload images:', error);
+			alert('ERROR: Unable to upload images, they may be too large:', error);
 		}
 	}
 
@@ -103,7 +103,7 @@ export default function CreateListing() {
 					navigateHome();
 				})
 				.catch((error) =>
-					console.log(
+					alert(
 						'ERROR: Unable to create listing, make sure you have at least one image:',
 						error
 					)

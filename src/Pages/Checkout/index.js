@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { useDispatch } from 'react-redux';
+import { getDealsAsync } from '../../Features/Deals/dealsSlice';
+
 import defaultImg from '../../assets/LP.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
@@ -11,6 +14,7 @@ export default function Checkout() {
 	const productName = sessionStorage.getItem('productName');
 	const productPrice = sessionStorage.getItem('productPrice');
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const navigatePickup = () => {
 		navigate('/pickup');
@@ -25,7 +29,6 @@ export default function Checkout() {
 			return;
 		} else if (sessionStorage.getObj('productImage')) {
 			setProductImage(sessionStorage.getObj('productImage'));
-			console.log('prod img:', productImage);
 		}
 	}, [productImage]);
 
@@ -37,9 +40,24 @@ export default function Checkout() {
 	return (
 		<>
 			<div className="product-container">
-				<div className="breadcrumbs">
-					Deals for you <img src={breadArrow} alt="path-arrow" /> Product
-					listing <img src={breadArrow} alt="path-arrow" /> Checkout
+				<div>
+					<button
+						style={{ border: 'none', background: 'none' }}
+						onClick={() => navigate('/deals') || dispatch(getDealsAsync())}
+					>
+						Deals for you
+					</button>
+					<img src={breadArrow} alt="path-arrow" />
+					<button
+						onClick={() => navigate(-1)}
+						style={{ border: 'none', background: 'none' }}
+					>
+						Product listing
+					</button>
+					<img src={breadArrow} alt="path-arrow" />
+					<button style={{ border: 'none', background: 'none' }}>
+						Checkout
+					</button>
 				</div>
 				<div className="product-landing1">
 					<h1 style={{ color: '#6318af' }}> Confirm</h1>

@@ -3,6 +3,9 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import { useDispatch } from 'react-redux';
+import { getDealsAsync } from '../../Features/Deals/dealsSlice';
+
 import defaultImg from '../../assets/LP.png';
 import upDownArrow from '../../assets/UpDownArrow.png';
 import listingIcon from '../../assets/listingTag.png';
@@ -27,7 +30,9 @@ export default function Product() {
 
 	const [mainImage, setMainImage] = useState(images[0]);
 
+	const dispatch = useDispatch();
 	const { id } = useParams();
+	sessionStorage.setItem('listingId', id);
 
 	Storage.prototype.setObj = function (key, obj) {
 		return this.setItem(key, JSON.stringify(obj));
@@ -87,7 +92,7 @@ export default function Product() {
 					setCity(res.data.sellerProfile.city);
 					setImages(res.data.images);
 					setMainImage(res.data.images[0]);
-					return console.log('SUCCESS: User found!', res.data);
+					return console.log('SUCCESS: Listing found!', res.data);
 				})
 				.catch((error) => {
 					console.log('ERROR: User does not exist in db', error);
@@ -113,9 +118,17 @@ export default function Product() {
 	return (
 		<>
 			<div className="product-container">
-				<div className="breadcrumbs">
-					Deals for you <img src={breadArrow} alt="path-arrow" /> Product
-					listing
+				<div>
+					<button
+						style={{ border: 'none', background: 'none' }}
+						onClick={() => navigate('/deals') || dispatch(getDealsAsync())}
+					>
+						Deals for you
+					</button>
+					<img src={breadArrow} alt="path-arrow" />
+					<button style={{ border: 'none', background: 'none' }}>
+						Product listing
+					</button>
 				</div>
 				<div className="product-landing">
 					{/* VERTICAL SLIDER */}
