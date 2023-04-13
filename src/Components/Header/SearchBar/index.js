@@ -18,12 +18,16 @@ export default function SearchBar() {
 	const dispatch = useDispatch();
 
 	const handleSubmit = () => {
-		dispatch(getSearchAsync({ searchValue, city, category }));
-		sessionStorage.setItem('searchValue', searchValue);
-		setSearchValue('');
-		setCategory('All');
-		setCity('Calgary');
-		navigate('/search');
+		if (searchValue === '' && category === 'All' && city === 'Calgary') {
+			navigate('/all');
+		} else {
+			dispatch(getSearchAsync({ searchValue, city, category }));
+			sessionStorage.setItem('searchValue', searchValue);
+			setSearchValue('');
+			setCategory('All');
+			setCity('Calgary');
+			navigate('/search');
+		}
 	};
 
 	const handleClick = (e) => {
@@ -140,7 +144,7 @@ export default function SearchBar() {
 				{isDropOpen1 && (
 					<ul ref={dropMenu1} onClick={(e) => e.stopPropagation()}>
 						{/*THIS LETS THE USER SEARCH THEIR CITY  */}
-						<li className="mini-search">
+						{/* <li className="mini-search">
 							<img
 								className="mini-looking-glass"
 								src={searchButton}
@@ -153,7 +157,7 @@ export default function SearchBar() {
 								style={{ border: 'none', background: 'none' }}
 								onChange={(e) => setCity(e.target.value)}
 							/>
-						</li>
+						</li> */}
 						<li className="options" id="Calgary" onClick={handleClick1}>
 							Calgary
 						</li>

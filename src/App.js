@@ -21,6 +21,7 @@ import Cars from './Pages/Cars';
 import Furniture from './Pages/Furniture';
 import Electronics from './Pages/Electronics';
 import RealEstate from './Pages/RealEstate';
+import AllListings from './Pages/AllListings';
 import Product from './Pages/Product';
 import CreateListing from './Pages/CreateListing';
 import Checkout from './Pages/Checkout';
@@ -58,6 +59,7 @@ export default function App() {
 					<Route path="/furniture" element={<Furniture />} />
 					<Route path="/electronics" element={<Electronics />} />
 					<Route path="/real_estate" element={<RealEstate />} />
+					<Route path="/all" element={<AllListings />} />
 					<Route path="/search" element={<Search />} />
 
 					{/* Linked to home page/dashboard */}
