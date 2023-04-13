@@ -4,6 +4,7 @@
 	gap: 25px;
 	height: 110%;
 	border-radius: 5px;
+	min-height: 400px;
 }
 
 .explore-info-label {

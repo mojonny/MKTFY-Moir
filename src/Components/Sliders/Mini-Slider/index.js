@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { getCategoriesAsync } from '../../../Features/Categories/categoriesSlice';
 import defaultImg from '../../../assets/LP.png';
 import './index.css';
 
 export default function MiniSlider({ title, sliderCategory, className }) {
 	const [listings, setListings] = useState([]);
+
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	let token = useSelector((state) => state.login.token);
 
@@ -63,22 +66,32 @@ export default function MiniSlider({ title, sliderCategory, className }) {
 			</div>
 		</div>
 	));
+
 	return (
 		<div className={className}>
 			<h3 className="mini-slider-title">{title}</h3>
 			<br />
 			<div className="mini-card-container">{listingComponents}</div>
-			<Link
-				to={`/${sliderCategory.toLowerCase()}`}
+			<button
+				onClick={() =>
+					navigate(`/${sliderCategory.toLowerCase()}`) ||
+					dispatch(
+						getCategoriesAsync({
+							city: 'Calgary',
+							category: sliderCategory,
+						})
+					)
+				}
 				style={{
-					textDecoration: 'none',
+					border: 'none',
+					background: 'none',
 					marginLeft: 'auto',
 					color: '#9349de',
 					size: '20px',
 				}}
 			>
 				Explore now
-			</Link>
+			</button>
 		</div>
 	);
 }

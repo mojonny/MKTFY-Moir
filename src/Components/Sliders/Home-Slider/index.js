@@ -57,7 +57,10 @@ export default function Slider({ title, className, sliderCategory }) {
 	return (
 		<div className={className}>
 			<h3 className="slider-title">
-				<Link to={`/deals`} style={{ textDecoration: 'none' }}>
+				<Link
+					to={`/deals`}
+					style={{ textDecoration: 'none', color: '#000000' }}
+				>
 					{title}
 				</Link>
 			</h3>

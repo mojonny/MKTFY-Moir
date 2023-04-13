@@ -11,7 +11,7 @@ import './index.css';
 
 export default function PendingItems() {
 	const [isLoading, setIsLoading] = useState(false);
-	//const [enabled, setEnabled] = useState(true);
+	// const [enabled, setEnabled] = useState(true);
 
 	// Info needed from backend:
 	// listing id from params
@@ -64,27 +64,27 @@ export default function PendingItems() {
 		}, 2000);
 	};
 
-	// function filterByString(obj) {
-	// 	if (typeof obj === 'string') {
-	// 		return true;
-	// 	} else {
-	// 		return false;
-	// 	}
-	// }
+	function filterByString(obj) {
+		if (typeof obj === 'string') {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	async function uploadImage() {
 		const token = sessionStorage.getItem('accessToken');
 
 		let newAddedImgs = images.filter((index) => index !== 'string');
 
-		// let oldImgArr = images.filter(filterByString);
+		let oldImgArr = images.filter(filterByString);
 
-		// const arr1 = oldImgArr.map((index) =>
-		// 	index.replace(
-		// 		'https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/',
-		// 		''
-		// 	)
-		// );
+		const arr1 = oldImgArr.map((index) =>
+			index.replace(
+				'https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/',
+				''
+			)
+		);
 
 		//Format the data for multiple image files
 		let formData = new FormData();
@@ -107,13 +107,13 @@ export default function PendingItems() {
 			const newImageIds = response.data;
 
 			let arr2 = newImageIds.map((obj) => obj.id);
-			// const arr3 = arr1.concat(arr2);
+			let arr3 = arr1.concat(arr2);
 			//PUT Request not removing old images, so I will just add new ones for now...
-			setImageIds(arr2);
+			setImageIds(arr3);
 
 			console.log('Success! New images added:', response.data);
 
-			updateListing(arr2);
+			updateListing(arr3);
 		} catch (error) {
 			console.log('ERROR: Unable to upload images:', error);
 		}
