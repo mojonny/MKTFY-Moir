@@ -176,7 +176,7 @@ export default function Home() {
 				className="slider"
 				key="004"
 				title="More deals for you"
-				sliderCategory="Deals"
+				sliderCategory="MoreDeals"
 			/>
 
 			<br />

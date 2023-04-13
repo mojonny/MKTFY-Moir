@@ -57,15 +57,20 @@ export default function Slider({ title, className, sliderCategory }) {
 	return (
 		<div className={className}>
 			<h3 className="slider-title">
-				<Link
-					to={`/${sliderCategory.toLowerCase()}`}
-					style={{ textDecoration: 'none' }}
-				>
+				<Link to={`/deals`} style={{ textDecoration: 'none' }}>
 					{title}
 				</Link>
 			</h3>
 			<br />
-			<div className="card-container">{listingComponents}</div>
+			{sliderCategory === 'Deals' && (
+				<div className="card-container">{listingComponents}</div>
+			)}
+			{sliderCategory === 'MoreDeals' && (
+				<div className="card-container">
+					{listingComponents.slice(8)}
+					last8
+				</div>
+			)}
 		</div>
 	);
 }
