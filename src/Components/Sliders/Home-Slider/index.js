@@ -67,8 +67,8 @@ export default function Slider({ title, className, sliderCategory }) {
 			)}
 			{sliderCategory === 'MoreDeals' && (
 				<div className="card-container">
+					{/* This will show the next 8 deals in the lower slider */}
 					{listingComponents.slice(8)}
-					last8
 				</div>
 			)}
 		</div>
