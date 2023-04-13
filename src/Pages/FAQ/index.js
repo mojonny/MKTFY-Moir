@@ -1,37 +1,38 @@
-import React, { useState, useEffect } from 'react';
+//import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-import { filterQuestions } from '../../Services/services';
+//import { filterQuestions } from '../../Services/services';
 
-import rightArrow from '../../assets/DropdownArrow.svg';
-import breadArrow from '../../assets/breadCrumbArrow.png';
+// import rightArrow from '../../assets/DropdownArrow.svg';
+// import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function FAQ() {
-	const [filteredQuestions, setFilteredQuestions] = useState(null);
+	//const [filteredQuestions, setFilteredQuestions] = useState(null);
 
-	useEffect(() => {
-		let typeQuestion = 'question0';
-		setFilteredQuestions(filterQuestions(typeQuestion));
-	}, []);
+	// useEffect(() => {
+	// 	let typeQuestion = 'question0';
+	// 	setFilteredQuestions(filterQuestions(typeQuestion));
+	// }, []);
 
-	function handleQuestion(e) {
-		let typeQuestion = e.target.value;
-		if (typeQuestion === 'question0') {
-			setFilteredQuestions(filterQuestions(typeQuestion));
-		} else if (typeQuestion === 'question1') {
-			setFilteredQuestions(filterQuestions(typeQuestion));
-		} else if (typeQuestion === 'question2') {
-			setFilteredQuestions(filterQuestions(typeQuestion));
-		} else if (typeQuestion === 'question3') {
-			setFilteredQuestions(filterQuestions(typeQuestion));
-		} else if (typeQuestion === 'question4') {
-			setFilteredQuestions(filterQuestions(typeQuestion));
-		}
-	}
+	// function handleQuestion(e) {
+	// 	let typeQuestion = e.target.value;
+	// 	if (typeQuestion === 'question0') {
+	// 		setFilteredQuestions(filterQuestions(typeQuestion));
+	// 	} else if (typeQuestion === 'question1') {
+	// 		setFilteredQuestions(filterQuestions(typeQuestion));
+	// 	} else if (typeQuestion === 'question2') {
+	// 		setFilteredQuestions(filterQuestions(typeQuestion));
+	// 	} else if (typeQuestion === 'question3') {
+	// 		setFilteredQuestions(filterQuestions(typeQuestion));
+	// 	} else if (typeQuestion === 'question4') {
+	// 		setFilteredQuestions(filterQuestions(typeQuestion));
+	// 	}
+	// }
 
 	return (
 		<>
-			<div className="question-container">
+			{/* <div className="question-container">
 				<div>
 					<div>
 						Deals for you <img src={breadArrow} alt="path-arrow" /> FAQ
@@ -87,15 +88,15 @@ export default function FAQ() {
 								<div key={type.id}>
 									<div>
 										<h1 style={{ fontSize: '40px', color: '#6318af' }}>
-											{type.title}
+											{type.question}
 										</h1>
-										<div className="answers">{type.content}</div>
+										<div className="answers">{type.answer}</div>
 									</div>
 								</div>
 							))}
 					</div>
 				</div>
-			</div>
+			</div> */}
 		</>
 	);
 }
