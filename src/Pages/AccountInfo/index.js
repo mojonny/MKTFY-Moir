@@ -1,16 +1,14 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import Success from '../../Components/Success';
-
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function AccountInfo() {
 	const [isLoading, setIsLoading] = useState(false);
-
 	const [user, setUser] = useState([]);
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -19,8 +17,17 @@ export default function AccountInfo() {
 	const [address, setAddress] = useState('');
 	const [city, setCity] = useState('');
 
-	async function updateUser() {
+	const navigate = useNavigate();
+
+	function navigateHome() {
 		setIsLoading(true);
+		setTimeout(() => {
+			setIsLoading(false);
+			navigate('/home');
+		}, 3000);
+	}
+
+	async function updateUser() {
 		const token = sessionStorage.getItem('accessToken');
 		const id = sessionStorage.getItem('id');
 		const url = 'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User';
@@ -41,9 +48,10 @@ export default function AccountInfo() {
 			.then((res) => {
 				console.log('SUCCESS: Account info updated:', res.data);
 			})
-			.catch((error) => console.log('ERROR: Unable to update account', error));
-		window.location.reload('/account');
-		setIsLoading(false);
+			.catch((error) =>
+				alert('ERROR: Unable to update account, please try again', error)
+			);
+		navigateHome();
 	}
 
 	useEffect(() => {
@@ -154,18 +162,18 @@ export default function AccountInfo() {
 								/>
 							</div>
 							<button
-								onClick={updateUser}
+								onClick={() => updateUser()}
 								disabled={isLoading}
 								className="save-button"
 								style={{ alignSelf: 'center' }}
 							>
-								{isLoading ? <Success /> : null}
 								Save
 							</button>
 						</div>
 					</form>
 				</div>
 			</div>
+			{isLoading ? <Success /> : null}
 		</>
 	);
 }
