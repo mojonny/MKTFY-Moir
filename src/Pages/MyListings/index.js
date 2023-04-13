@@ -10,6 +10,25 @@ import './index.css';
 export default function MyListings() {
 	const [listings, setListings] = useState([]);
 
+	const [buttonClass, setButtonClass] = useState('inactive-button');
+	const [buttonClass1, setButtonClass1] = useState('inactive-button');
+	//NOT QUITE THERE AND WONDER IF PENDING ITEMS SHOULD GO HERE TOO...
+	function handleListings(e) {
+		//Sets filter onClick of active or sold buttons
+		let typeListing = e.target.value;
+		if (typeListing === 'active') {
+			//Only show active listings onClick
+			setListings(listings.filter((product) => product.status === 'ACTIVE'));
+			//change button style onClick
+			setButtonClass('active-button');
+			setButtonClass1('inactive-button');
+		} else if (typeListing === 'sold') {
+			setListings(listings.filter((product) => product.status === 'COMPLETE'));
+			setButtonClass1('active-button');
+			setButtonClass('inactive-button');
+		}
+	}
+
 	useEffect(() => {
 		const token = sessionStorage.getItem('accessToken');
 		const url =
@@ -34,7 +53,7 @@ export default function MyListings() {
 		e.target.src = placeholderImage;
 	};
 
-	const listingComponents = listings.map((product) => (
+	let listingComponents = listings.map((product) => (
 		<ul className="listing-item-box" key={product.id}>
 			<li className="listing-landing">
 				<div className="listing-item-box">
@@ -55,6 +74,7 @@ export default function MyListings() {
 			</li>
 		</ul>
 	));
+
 	return (
 		<div className="listing-container">
 			{' '}
@@ -67,16 +87,16 @@ export default function MyListings() {
 				<br />
 				<div className="active-sold-labels">
 					<button
-					// onClick={handleListings}
-					// className={buttonClass}
-					// value="active"
+						onClick={handleListings}
+						className={buttonClass}
+						value="active"
 					>
 						Active items
 					</button>
 					<button
-					// onClick={handleListings}
-					// className={buttonClass1}
-					// value="sold"
+						onClick={handleListings}
+						className={buttonClass1}
+						value="sold"
 					>
 						Sold items
 					</button>
