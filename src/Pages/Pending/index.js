@@ -15,7 +15,7 @@ export default function PendingItems() {
 
 	// Info needed from backend:
 	// listing id from params
-	// Status: ACTIVE/COMPLETE(SOLD)/PENDING/CANCELED
+	// Status: ACTIVE/COMPLETE(SOLD)/PENDING/CANCELLED
 	const [productName, setProductName] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState(0);
@@ -29,13 +29,21 @@ export default function PendingItems() {
 
 	//Create the arrays for calling the api and previewing what was selected
 	const [images, setImages] = useState([]);
-	// const [imageIds, setImageIds] = useState([]);
-	// console.log('imageIds:', imageIds);
+	const [imageIds, setImageIds] = useState([]);
+	console.log('imageIds:', imageIds);
+
 	const [showButton, setShowButton] = useState(true);
 	const [showButton1, setShowButton1] = useState(true);
 	const [showButton2, setShowButton2] = useState(true);
 	const [showButton3, setShowButton3] = useState(true);
 	const [showButton4, setShowButton4] = useState(true);
+	const [showConfirmSoldButton, setShowConfirmSoldButton] = useState(false);
+	const [showCancelListingButton, setShowCancelListingButton] = useState(false);
+	const [showCancelSaleButton, setShowCancelSaleButton] = useState(false);
+	const [showSaveButton, setShowSaveButton] = useState(false);
+
+	//Show an alert if user cancels their listing
+	const [showAlert, setShowAlert] = useState(false);
 
 	const { id } = useParams();
 
@@ -56,77 +64,95 @@ export default function PendingItems() {
 		}, 2000);
 	};
 
-	// async function uploadImage() {
-	// 	const token = sessionStorage.getItem('accessToken');
-
-	// 	//Format the data for multiple image files
-	// 	let formData = new FormData();
-	// 	for (let i = 0; i < images.length; i++) {
-	// 		formData.append('file', images[i]);
-	// 	}
-
-	// 	let config = {
-	// 		method: 'post',
-	// 		url: 'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Upload',
-	// 		headers: {
-	// 			'Content-Type': 'multipart/form-data',
-	// 			Authorization: `Bearer ${token}`,
-	// 		},
-	// 		data: formData,
-	// 	};
-
-	// 	try {
-	// 		const response = await axios.request(config);
-	// 		setImageIds(response.data);
-	// 		createListing(response.data);
-	// 	} catch (error) {
-	// 		console.log('ERROR: Unable to upload images:', error);
+	// function filterByString(obj) {
+	// 	if (typeof obj === 'string') {
+	// 		return true;
+	// 	} else {
+	// 		return false;
 	// 	}
 	// }
 
-	// function createListing(imageIds) {
-	// 	const token = sessionStorage.getItem('accessToken');
+	async function uploadImage() {
+		const token = sessionStorage.getItem('accessToken');
 
-	// 	//Set up the image ids array from previous api call
-	// 	let Arr = imageIds;
-	// 	const map1 = Arr.map((obj) => obj.id);
+		let newAddedImgs = images.filter((index) => index !== 'string');
 
-	// 	if (map1.length) {
-	// 		axios
-	// 			.post(
-	// 				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product',
-	// 				{
-	// 					productName: productName,
-	// 					description: description,
-	// 					price: price,
-	// 					category: category,
-	// 					condition: condition,
-	// 					address: address,
-	// 					city: city,
-	// 					images: map1,
-	// 				},
-	// 				{ headers: { Authorization: `Bearer ${token}` } }
-	// 			)
-	// 			.then((res) => {
-	// 				console.log('SUCCESS: Listing created!', res.data);
-	// 				navigateHome();
-	// 			})
-	// 			.catch((error) =>
-	// 				console.log('ERROR: Unable to create listing:', error)
-	// 			);
-	// 	}
-	// }
+		// let oldImgArr = images.filter(filterByString);
 
-	// const handleSubmit = (event) => {
-	// 	event.preventDefault();
-	// 	uploadImage();
-	// };
+		// const arr1 = oldImgArr.map((index) =>
+		// 	index.replace(
+		// 		'https://mktfy-proof-staging.s3.ca-central-1.amazonaws.com/',
+		// 		''
+		// 	)
+		// );
+
+		//Format the data for multiple image files
+		let formData = new FormData();
+		for (let i = 0; i < newAddedImgs.length; i++) {
+			formData.append('file', newAddedImgs[i]);
+		}
+
+		let config = {
+			method: 'post',
+			url: 'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Upload',
+			headers: {
+				'Content-Type': 'multipart/form-data',
+				Authorization: `Bearer ${token}`,
+			},
+			data: formData,
+		};
+
+		try {
+			const response = await axios.request(config);
+			const newImageIds = response.data;
+
+			let arr2 = newImageIds.map((obj) => obj.id);
+			// const arr3 = arr1.concat(arr2);
+			//PUT Request not removing old images, so I will just add new ones for now...
+			setImageIds(arr2);
+
+			console.log('Success! New images added:', response.data);
+
+			updateListing(arr2);
+		} catch (error) {
+			console.log('ERROR: Unable to upload images:', error);
+		}
+	}
+
+	function updateListing(imageIds) {
+		const token = sessionStorage.getItem('accessToken');
+
+		axios
+			.put(
+				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product',
+				{
+					id: id,
+					productName: productName,
+					description: description,
+					price: price,
+					category: category,
+					condition: condition,
+					address: address,
+					city: city,
+					images: imageIds,
+				},
+				{ headers: { Authorization: `Bearer ${token}` } }
+			)
+			.then((res) => {
+				console.log('SUCCESS: Listing updated!', res.data);
+				navigateHome();
+			})
+			.catch((error) => console.log('ERROR: Unable to update listing:', error));
+	}
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		uploadImage(images);
+	};
 
 	function onImageChange(e) {
 		e.preventDefault();
 		if (images.length < 5) {
-			console.log('new img', images);
-
 			setImages([...images, ...e.target.files]);
 		} else if (images.length > 5) {
 			return window.alert('Sorry, there is a 5 image limit');
@@ -170,7 +196,7 @@ export default function PendingItems() {
 			setShowButton2(false);
 			setShowButton3(false);
 			setShowButton4(true);
-		} else if (images.length === 5) {
+		} else if (images.length >= 5) {
 			setShowButton(false);
 			setShowButton1(false);
 			setShowButton2(false);
@@ -179,33 +205,31 @@ export default function PendingItems() {
 		}
 	}, [images.length]);
 
-	// useEffect(() => {
-	// 	if (
-	// 		productName &&
-	// 		description &&
-	// 		category &&
-	// 		condition &&
-	// 		price &&
-	// 		address &&
-	// 		city &&
-	// 		images.length > 0
-	// 	) {
-	// 		setEnabled(false);
-	// 	}
-	// }, [
-	// 	address,
-	// 	category,
-	// 	city,
-	// 	condition,
-	// 	description,
-	// 	enabled,
-	// 	price,
-	// 	productName,
-	// 	images,
-	// ]);
+	useEffect(() => {
+		if (status === 'COMPLETE') {
+			setShowConfirmSoldButton(false);
+			setShowCancelListingButton(false);
+			setShowCancelSaleButton(false);
+			setShowSaveButton(false);
+		} else if (status === 'PENDING') {
+			setShowConfirmSoldButton(true);
+			setShowCancelListingButton(false);
+			setShowCancelSaleButton(true);
+			setShowSaveButton(false);
+		} else if (status === 'ACTIVE') {
+			setShowConfirmSoldButton(false);
+			setShowCancelListingButton(true);
+			setShowCancelSaleButton(false);
+			setShowSaveButton(true);
+		} else if (status === 'CANCELLED') {
+			setShowConfirmSoldButton(false);
+			setShowCancelListingButton(false);
+			setShowCancelSaleButton(false);
+			setShowSaveButton(true);
+		}
+	}, [status]);
 
 	useEffect(() => {
-		//Check if user exists
 		async function getProduct() {
 			const token = sessionStorage.getItem('accessToken');
 			const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/${id}`;
@@ -225,11 +249,62 @@ export default function PendingItems() {
 					return console.log('SUCCESS: Your listing was found!', res.data);
 				})
 				.catch((error) => {
-					console.log('ERROR: User does not exist in db', error);
+					console.log('ERROR: Cannot find listing', error);
 				});
 		}
 		getProduct();
 	}, [id]);
+
+	function Confirm() {
+		const token = sessionStorage.getItem('accessToken');
+		const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/complete/${id}`;
+
+		axios
+			.put(url, { headers: { Authorization: `Bearer ${token}` } })
+			.then((res) => {
+				console.log('SUCCESS: Your listing was SOLD!', res.data);
+				navigateHome();
+			})
+			.catch((error) => {
+				console.log('ERROR: Your listing was not changed', error);
+			});
+	}
+
+	function Cancel() {
+		const token = sessionStorage.getItem('accessToken');
+		const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/cancel/${id}`;
+
+		axios
+			.put(url, { headers: { Authorization: `Bearer ${token}` } })
+			.then((res) => {
+				console.log(
+					'SUCCESS: Your listing was cancelled. It is no longer active.',
+					res.data
+				);
+				navigateHome();
+			})
+			.catch((error) => {
+				console.log('ERROR: Your listing was not changed', error);
+			});
+	}
+
+	function CancelSale() {
+		const token = sessionStorage.getItem('accessToken');
+		const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/cancelsale/${id}`;
+
+		axios
+			.put(url, { headers: { Authorization: `Bearer ${token}` } })
+			.then((res) => {
+				console.log(
+					'SUCCESS: Your listing was cancelled. It is no longer active.',
+					res.data
+				);
+				navigateHome();
+			})
+			.catch((error) => {
+				console.log('ERROR: Your listing was not changed', error);
+			});
+	}
 
 	function handleSrc(i) {
 		let src;
@@ -238,19 +313,8 @@ export default function PendingItems() {
 		} else if (typeof images[i] === 'string') {
 			src = images[i];
 		}
-		console.log('src:', src);
 		return src;
 	}
-	// function handleSrc1() {
-	// 	let src;
-	// 	if (typeof images[1] === 'object') {
-	// 		src = URL.createObjectURL(images[1]);
-	// 	} else if (typeof images[1] === 'string') {
-	// 		src = images[1];
-	// 	}
-	// 	console.log('src:', src);
-	// 	return src;
-	// }
 
 	return (
 		<>
@@ -260,8 +324,7 @@ export default function PendingItems() {
 					<img src={breadArrow} alt="path-arrow" /> Product
 				</div>
 				<h1> My listing</h1>
-				{/* <div onSubmit={handleSubmit}> */}
-				<div>
+				<div onSubmit={handleSubmit}>
 					<div className="create-listing-landing">
 						<div className="listing-image-box">
 							<>
@@ -409,12 +472,11 @@ export default function PendingItems() {
 								<br />
 								<div>
 									<select
-										required
 										className="create-listing-categories"
 										value={category}
 										onChange={(e) => setCategory(e.target.value)}
 									>
-										<option>Choose your Category</option>
+										<option value="">Choose your Category</option>
 										<option value="VEHICLES">Cars & Vehicles</option>
 										<option value="FURNITURE">Furniture</option>
 										<option value="ELECTRONICS">Electronics</option>
@@ -429,10 +491,9 @@ export default function PendingItems() {
 									<select
 										className="condition-input"
 										value={condition}
-										defaultValue="Select condition"
 										onChange={(e) => setCondition(e.target.value)}
 									>
-										<option>Select condition</option>
+										<option value="">Select condition</option>
 										<option value="NEW">NEW</option>
 										<option value="USED">USED</option>
 									</select>
@@ -467,9 +528,8 @@ export default function PendingItems() {
 										className="create-listing-categories"
 										value={city}
 										onChange={(e) => setCity(e.target.value)}
-										defaultValue="Select your city"
 									>
-										<option>Select your city</option>
+										<option value="">Select your city</option>
 										<option value="Calgary">Calgary</option>
 										<option value="Brooks">Brooks</option>
 										<option value="Camrose">Camrose</option>
@@ -485,50 +545,65 @@ export default function PendingItems() {
 									</select>
 								</div>
 							</div>
+							{showSaveButton && (
+								<button onClick={handleSubmit} className="save-changes-button">
+									Save changes
+								</button>
+							)}
 
-							<button
-								// onClick={handleSubmit}
-								//disabled={enabled}
-								//PUT - Update listing
-								className="post-button"
-							>
-								Save changes
-							</button>
+							{showConfirmSoldButton && (
+								<button onClick={() => Confirm()} className="post-button">
+									Confirm sold
+								</button>
+							)}
 
-							<button
-								// onClick={handleSubmit}
-								// disabled={enabled}
-								//PUT - Confirm/ change status to complete
-								className="post-button"
-							>
-								Confirm sold
-							</button>
+							{showCancelListingButton && (
+								<button
+									onClick={() => setShowAlert(true)}
+									disabled={isLoading}
+									className="cancel-listing-button"
+									//make it unavailable but not complete
+								>
+									Cancel listing
+								</button>
+							)}
 
-							<button
-								onClick={navigateHome}
-								disabled={isLoading}
-								className="cancel-listing-button"
-								//make it unavailable but not complete
-							>
-								Cancel listing
-								{/* Make it unavailable / cancel deal?*/}
-							</button>
+							{showCancelSaleButton && (
+								<button
+									onClick={() => CancelSale()}
+									disabled={isLoading}
+									className="cancel-listing-button"
+									//make it available
+								>
+									Cancel Sale
+								</button>
+							)}
 
-							<button
-								onClick={navigateHome}
-								disabled={isLoading}
-								className="cancel-listing-button"
-							>
-								Cancel
-							</button>
-
-							{/* <button
-								onClick={navigateHome}
-								disabled={isLoading}
-								className="cancel-listing-button"
-							>
-								Delete listing
-							</button> */}
+							{showAlert && (
+								<div className="darkAlert" onClick={() => setShowAlert(false)}>
+									<div
+										className="cancel-alert"
+										onClick={(e) => e.stopPropagation()}
+									>
+										<h3>Heads up!</h3>
+										<p>You are about to cancel your listing. Are you sure?</p>
+										<div className="alert-buttons-container">
+											<button
+												className="cancel-alert-button"
+												onClick={() => setShowAlert(false)}
+											>
+												Cancel
+											</button>
+											<button
+												className="confirm-alert-button"
+												onClick={() => Cancel()}
+											>
+												Yes
+											</button>
+										</div>
+									</div>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>

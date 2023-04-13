@@ -103,7 +103,10 @@ export default function CreateListing() {
 					navigateHome();
 				})
 				.catch((error) =>
-					console.log('ERROR: Unable to create listing:', error)
+					console.log(
+						'ERROR: Unable to create listing, make sure you have at least one image:',
+						error
+					)
 				);
 		}
 	}
