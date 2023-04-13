@@ -133,14 +133,26 @@ export default function CreateModal({ setSignupPage }) {
 						<label className="city">
 							City
 							<br />
-							<input
-								type="text"
-								name="city"
-								placeholder=" City name"
+							<select
 								className="input-style"
+								name="city"
 								value={city}
 								onChange={(e) => setFormCity(e.target.value)}
-							/>
+								placeholder=" City name"
+							>
+								<option value="Calgary">Calgary</option>
+								<option value="Brooks">Brooks</option>
+								<option value="Camrose">Camrose</option>
+								<option value="Cold Lake">Cold Lake</option>
+								<option value="Edmonton">Edmonton</option>
+								<option value="Fort McMurray">Fort McMurray</option>
+								<option value="Lacombe">Lacombe</option>
+								<option value="Leduc">Leduc</option>
+								<option value="Lethbridge">Lethbridge</option>
+								<option value="Medicine Hat">Medicine Hat</option>
+								<option value="Red Deer">Red Deer</option>
+								<option value="St. Albert">St. Albert</option>
+							</select>
 						</label>
 
 						<label className="email">
