@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { decode } from 'html-entities';
+import parse from 'html-react-parser';
 
 import rightArrow from '../../assets/DropdownArrow.svg';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function FAQ() {
-	// const [filteredQuestions, setFilteredQuestions] = useState(null);
 	const [faq, setFaq] = useState([]);
 	const [faqIndex, setFaqIndex] = useState(0);
-	//const [showAnswer, setShowAnswer] = useState([]);
 
 	useEffect(() => {
 		async function getFAQ() {
@@ -52,7 +52,7 @@ export default function FAQ() {
 		<div key={type.id}>
 			<div>
 				<h1 style={{ fontSize: '40px', color: '#6318af' }}>{type.question}</h1>
-				<div className="answers">{type.answer}</div>
+				<div className="answers">{parse(decode(type.answer))}</div>
 			</div>
 		</div>
 	));
