@@ -122,7 +122,7 @@ export default function ProfileDropdown() {
 									onClick={handleClick}
 									to="/mylistings"
 								>
-									My listings
+									My listings <div className="listing-count">2</div>
 								</Link>
 							</div>
 							<br />

@@ -1,11 +1,15 @@
-import React, { useState, useRef } from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import newBell from '../../../assets/newBell.png';
 import bell from '../../../assets/Bell.png';
 import mktfy from '../../../assets/altLogo.png';
+import moment from 'moment/moment';
 import './index.css';
 
 export default function NotificationPopup() {
 	const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+	const [newNotifications, setNewNotifications] = useState([]);
+	const [seenNotifications, setSeenNotifications] = useState([]);
 
 	const notificationMenu = useRef(null);
 
@@ -27,6 +31,65 @@ export default function NotificationPopup() {
 	const handleNotification = () => {
 		setIsNotificationOpen(true);
 	};
+
+	useEffect(() => {
+		async function getNotifications() {
+			try {
+				const token = sessionStorage.getItem('accessToken');
+				const url =
+					'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/notifications';
+				const options = {
+					headers: { Authorization: `Bearer ${token}` },
+				};
+				const response = await axios.get(url, options);
+				setNewNotifications(response.data.new);
+				setSeenNotifications(response.data.seen);
+
+				console.log('SUCCESS: Got all notifications:', response.data);
+			} catch (err) {
+				console.log('err', err);
+				throw new Error(err);
+			}
+		}
+
+		getNotifications();
+	}, []);
+
+	const newNotificationComponents = newNotifications.map((type) => {
+		return (
+			<div key={type.id}>
+				<div className="notification-box">
+					<div className="note-box">
+						<img src={mktfy} className="mini-logo" alt="mktfy" />
+						<div className="note">
+							{type.message}
+							<br />
+							<p>{moment(type.created).format('MMM Do YYYY')}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	});
+
+	const seenNotificationComponents = seenNotifications.map((type) => {
+		return (
+			<div key={type.id}>
+				<div className="notification-box">
+					<div className="seen-note-box">
+						<img src={mktfy} className="mini-logo" alt="mktfy" />
+
+						<div className="note">
+							<p>{type.message}</p>
+							<br />
+							<p>{moment(type.created).format('MMM Do YYYY')}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		);
+	});
+
 	return (
 		<div>
 			{/* This is what shows initially on header */}
@@ -43,7 +106,15 @@ export default function NotificationPopup() {
 						border: 'none',
 					}}
 				>
-					<img alt="notifications" src={bell} />
+					{newNotifications.length === 0 ? (
+						<i>
+							<img alt="notifications" src={bell} />
+						</i>
+					) : (
+						<i>
+							<img alt="notifications" src={newBell} />
+						</i>
+					)}
 				</button>
 			</div>
 			{/* This is what pops up on button click */}
@@ -54,42 +125,15 @@ export default function NotificationPopup() {
 					className="notification-container"
 				>
 					<div className="new-notifications">
-						<h3 style={{ paddingLeft: '20px' }}>New for you</h3>
-						<div className="notification-box">
-							<div className="note-box">
-								<img src={mktfy} className="mini-logo" alt="mktfy" />
-								<div className="note">
-									Hey Pearl, welcome to MKTFY
-									<br />
-									<p>September 07,2020</p>
-								</div>
-							</div>
-						</div>
+						<br />
+						<h4 style={{ paddingLeft: '20px' }}>New for you</h4>
+						{newNotificationComponents}
 					</div>
 					<br />
 					<div className="old-notifications">
-						<h3 style={{ paddingLeft: '20px' }}>Previously seen</h3>
-						<div className="notification-box">
-							<div className="note-box">
-								<img src={mktfy} className="mini-logo" alt="mktfy" />
-
-								<div className="note">
-									Let's create your first listing!
-									<br />
-									<p>September 05,2020</p>
-								</div>
-							</div>
-							<br />
-							<div className="note-box">
-								<img src={mktfy} className="mini-logo" alt="mktfy" />
-
-								<div className="note">
-									Our Terms of Service has been updated!
-									<br />
-									<p>September 03,2020</p>
-								</div>
-							</div>
-						</div>
+						<h4 style={{ paddingLeft: '20px' }}>Previously seen</h4>
+						<br />
+						{seenNotificationComponents}
 					</div>
 				</div>
 			)}
