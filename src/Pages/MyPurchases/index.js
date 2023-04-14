@@ -27,8 +27,6 @@ export default function MyPurchases() {
 				const response = await axios.get(url, options);
 				setListings(response.data);
 				setNumberOfPurchases(response.data.length);
-				console.log(numberOfPurchases);
-				console.log('Get all Listings:', response.data);
 			} catch (err) {
 				console.log('err', err);
 				throw new Error(err);

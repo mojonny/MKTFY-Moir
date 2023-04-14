@@ -134,12 +134,16 @@ export default function CreateModal({ setSignupPage }) {
 							City
 							<br />
 							<select
+								required
 								className="input-style"
 								name="city"
 								value={city}
 								onChange={(e) => setFormCity(e.target.value)}
-								placeholder=" City name"
 							>
+								<option disabled value="">
+									{' '}
+									City name
+								</option>
 								<option value="Calgary">Calgary</option>
 								<option value="Brooks">Brooks</option>
 								<option value="Camrose">Camrose</option>
@@ -172,12 +176,14 @@ export default function CreateModal({ setSignupPage }) {
 							Phone
 							<br />
 							<input
-								type="phone"
-								name="phone"
-								placeholder=" +1 (000)000-0000"
+								id="phone-input"
+								type="tel"
 								className="input-style"
 								value={phone}
 								onChange={(e) => setFormPhone(e.target.value)}
+								name="phone"
+								aria-label="Please enter your phone number"
+								placeholder="+1 (000)-000-0000"
 							/>
 						</label>
 						<button

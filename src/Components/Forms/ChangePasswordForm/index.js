@@ -133,7 +133,7 @@ export default function ChangePasswordForm() {
 								autoComplete="false"
 							/>
 
-							<button className="eye-slash" onClick={togglePassword}>
+							<div className="eye-slash" onClick={togglePassword}>
 								{passwordType === 'password' ? (
 									<i>
 										<img src={eyeslash} alt="close-eye" />
@@ -143,7 +143,7 @@ export default function ChangePasswordForm() {
 										<img src={eye} alt="open-eye" />
 									</i>
 								)}
-							</button>
+							</div>
 						</div>
 					</label>
 

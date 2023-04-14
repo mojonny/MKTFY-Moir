@@ -151,7 +151,7 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 								className="input-style2"
 								autoComplete="false"
 							/>
-							<button className="eye-slash" onClick={togglePassword}>
+							<div className="eye-slash" onClick={togglePassword}>
 								{passwordType === 'password' ? (
 									<i>
 										<img src={eyeslash} alt="close-eye" />
@@ -161,7 +161,7 @@ export default function LoginModal({ setLoginPage, setMessage }) {
 										<img src={eye} alt="open-eye" />
 									</i>
 								)}
-							</button>
+							</div>
 						</div>
 						<p style={{ color: 'red' }}>{pwError}</p>
 					</label>

@@ -64,3 +64,7 @@ li {
 	line-height: 22px;
 	margin: 0px;
 }
+
+select:invalid {
+	color: #b3b3b3;
+}
