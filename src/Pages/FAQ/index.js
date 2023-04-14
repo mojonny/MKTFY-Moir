@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { decode } from 'html-entities';
 import parse from 'html-react-parser';
-
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { getDealsAsync } from '../../Features/Deals/dealsSlice';
 import rightArrow from '../../assets/DropdownArrow.svg';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
@@ -10,6 +12,8 @@ import './index.css';
 export default function FAQ() {
 	const [faq, setFaq] = useState([]);
 	const [faqIndex, setFaqIndex] = useState(0);
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		async function getFAQ() {
@@ -60,10 +64,16 @@ export default function FAQ() {
 	return (
 		<>
 			<div className="question-container">
-				<div>
-					<div>
-						Deals for you <img src={breadArrow} alt="path-arrow" /> FAQ
-					</div>
+				<div className="breadcrumbs">
+					<button
+						style={{ border: 'none', background: 'none' }}
+						onClick={() => navigate('/deals') || dispatch(getDealsAsync())}
+					>
+						Deals for you
+					</button>
+
+					<img src={breadArrow} alt="path-arrow" />
+					<button style={{ border: 'none', background: 'none' }}> FAQ </button>
 				</div>
 				<div className="question-landing">
 					<div className="question-tabs">{faqQuestionsComponents}</div>

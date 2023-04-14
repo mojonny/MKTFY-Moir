@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
+import { getDealsAsync } from '../../Features/Deals/dealsSlice';
 import Success from '../../Components/Success';
 
 import breadArrow from '../../assets/breadCrumbArrow.png';
@@ -20,7 +21,7 @@ export default function ContactUS() {
 	const [email, setEmail] = useState('');
 	const [message, setMessage] = useState('');
 	const [name, setName] = useState('');
-
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const navigateHome = () => {
@@ -35,8 +36,17 @@ export default function ContactUS() {
 		<>
 			<div className="product-container">
 				<div className="breadcrumbs">
-					Deals for you <img src={breadArrow} alt="path-arrow" /> FAQ{' '}
+					<button
+						style={{ border: 'none', background: 'none' }}
+						onClick={() => navigate('/deals') || dispatch(getDealsAsync())}
+					>
+						Deals for you
+					</button>
+
+					<img src={breadArrow} alt="path-arrow" />
+					<button style={{ border: 'none', background: 'none' }}> FAQ </button>
 				</div>
+
 				<div className="product-landing2">
 					<form className="contact-form-container1">
 						<h1 style={{ color: '#6318af' }}> Contact us</h1>
