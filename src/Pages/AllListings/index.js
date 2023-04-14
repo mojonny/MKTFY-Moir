@@ -53,7 +53,7 @@ export default function AllListings() {
 				<div className="all-bottom-card-info">
 					<p>{product.productName}</p>
 					<br />
-					<h3 style={{ color: '#6318af' }}>${product.price}</h3>
+					<h3 style={{ color: '#6318af' }}>${product.price.toFixed(2)}</h3>
 				</div>
 			</div>
 		</div>

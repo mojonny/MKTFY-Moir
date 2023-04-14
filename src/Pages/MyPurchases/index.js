@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import moment from 'moment/moment';
+import { useDispatch } from 'react-redux';
+import { getDealsAsync } from '../../Features/Deals/dealsSlice';
 import defaultImg from '../../assets/LP.png';
 import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function MyPurchases() {
 	const [listings, setListings] = useState([]);
+	const [numberOfPurchases, setNumberOfPurchases] = useState(0);
+
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		async function getPurchases() {
+		async function getMyPurchases() {
 			try {
 				const token = sessionStorage.getItem('accessToken');
 				const url =
@@ -20,14 +26,16 @@ export default function MyPurchases() {
 				};
 				const response = await axios.get(url, options);
 				setListings(response.data);
+				setNumberOfPurchases(response.data.length);
+				console.log(numberOfPurchases);
 				console.log('Get all Listings:', response.data);
 			} catch (err) {
 				console.log('err', err);
 				throw new Error(err);
 			}
 		}
-		getPurchases();
-	}, []);
+		getMyPurchases();
+	}, [numberOfPurchases]);
 
 	const placeholderImage = defaultImg;
 	const onImageError = (e) => {
@@ -35,28 +43,8 @@ export default function MyPurchases() {
 	};
 
 	const listingComponents = listings.map((product) => (
-		// 	<div className="purchases-landing">
-		// 	<div className="purchase-item-box">
-		// 		<div className="purchase-item-detail">
-		// 			<p> September 07,2020</p>
-		// 			<h4> Pearl The Cat: Toy edition </h4>
-		// 			<div className="price-info1">
-		// 				<h4
-		// 					style={{
-		// 						color: '#560f9f',
-
-		// 						margin: '0px',
-		// 					}}
-		// 				>
-		// 					$340.00
-		// 				</h4>
-		// 			</div>
-		// 		</div>
-		// 	</div>
-		// </div>
-
-		<div key={product.id}>
-			<div className="view-all-info-label">
+		<div className="purchases-landing" key={product.id}>
+			<div className="purchase-item-box">
 				<Link
 					to={`/product/${product.id}`}
 					key={product.id}
@@ -64,16 +52,26 @@ export default function MyPurchases() {
 					style={{ textDecorationLine: 'none' }}
 				>
 					<img
-						className="all-product-img"
+						className="purchase-pic"
 						src={product.images[0] ? product.images[0] : placeholderImage}
 						alt="catPicture"
 						onError={onImageError}
 					/>
 				</Link>
-				<div className="all-bottom-card-info">
-					<p>{product.productName}</p>
-					<br />
-					<h3 style={{ color: '#6318af' }}>${product.price}</h3>
+				<div className="purchase-item-detail">
+					<p>{moment(product.created).format('MMM Do YYYY')}</p>
+					<h4>{product.productName}</h4>
+					<div className="price-info1">
+						<h4
+							style={{
+								color: '#560f9f',
+
+								margin: '0px',
+							}}
+						>
+							${product.price.toFixed(2)}
+						</h4>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -84,17 +82,25 @@ export default function MyPurchases() {
 			<div className="purchase-container">
 				<div className="purchase-labels">
 					<div>
-						Deals for you <img src={breadArrow} alt="path-arrow" /> My Purchases
+						<button
+							style={{ border: 'none', background: 'none' }}
+							onClick={() => navigate('/deals') || dispatch(getDealsAsync())}
+						>
+							Deals for you
+						</button>
+						<img src={breadArrow} alt="path-arrow" />
+
+						<button style={{ border: 'none', background: 'none' }}>
+							My Purchases
+						</button>
 					</div>
+					<br />
 					<h1> My purchases</h1>
-					<p>number of items goes here</p>
+					<br />
+					<p>{numberOfPurchases} items</p>
 				</div>
 
-				<div className="purchases-landing">
-					<div className="purchase-item-box">
-						<div className="purchase-item-detail">{listingComponents}</div>
-					</div>
-				</div>
+				{listingComponents}
 			</div>
 		</>
 	);

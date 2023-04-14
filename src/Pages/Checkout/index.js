@@ -78,7 +78,7 @@ export default function Checkout() {
 										margin: '0px',
 									}}
 								>
-									${productPrice}
+									${productPrice.toFixed(2)}
 								</h4>
 							</div>
 						</div>
@@ -86,7 +86,7 @@ export default function Checkout() {
 					<div className="side-info-container">
 						<h3> Total</h3>
 						<div className="price-info">
-							<h1 style={{ color: '#6e20be' }}> ${productPrice}</h1>
+							<h1 style={{ color: '#6e20be' }}> ${productPrice.toFixed(2)}</h1>
 						</div>
 						<br />
 						<button

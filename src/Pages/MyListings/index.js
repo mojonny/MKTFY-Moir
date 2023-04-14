@@ -109,7 +109,7 @@ export default function MyListings() {
 						)}
 						<p>{moment(product.created).format('MMM Do YYYY')}</p>
 						<h4>{product.productName}</h4>
-						<h4 style={{ color: '#560F9F' }}>${product.price}.00</h4>
+						<h4 style={{ color: '#560F9F' }}>${product.price.toFixed(2)}</h4>
 					</div>
 				</div>
 			</li>

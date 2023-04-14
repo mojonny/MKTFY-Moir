@@ -21,7 +21,8 @@
 .purchase-pic {
 	height: 200px;
 	width: 390px;
-	object-fit: fill;
+	object-fit: cover;
+	border-radius: 10px 0 0 10px;
 }
 
 .price-info {
