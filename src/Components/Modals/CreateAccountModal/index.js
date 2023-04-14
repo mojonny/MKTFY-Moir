@@ -188,7 +188,14 @@ export default function CreateModal({ setSignupPage }) {
 						</label>
 						<button
 							type="submit"
-							disabled={!isValidEmail(email)}
+							disabled={
+								!isValidEmail(email) ||
+								!firstName ||
+								!lastName ||
+								!address ||
+								!city ||
+								!phone
+							}
 							className="next-page-button"
 							onClick={onSubmit}
 						>

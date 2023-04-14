@@ -76,6 +76,7 @@ body {
 	cursor: pointer;
 	width: 350px;
 	height: 50px;
+	transition: 0.7s;
 }
 
 .next-page-button:disabled {
