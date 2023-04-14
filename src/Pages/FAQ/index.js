@@ -1,102 +1,76 @@
-//import React, { useState, useEffect } from 'react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-//import { filterQuestions } from '../../Services/services';
-
-// import rightArrow from '../../assets/DropdownArrow.svg';
-// import breadArrow from '../../assets/breadCrumbArrow.png';
+import rightArrow from '../../assets/DropdownArrow.svg';
+import breadArrow from '../../assets/breadCrumbArrow.png';
 import './index.css';
 
 export default function FAQ() {
-	//const [filteredQuestions, setFilteredQuestions] = useState(null);
+	// const [filteredQuestions, setFilteredQuestions] = useState(null);
+	const [faq, setFaq] = useState([]);
+	const [faqIndex, setFaqIndex] = useState(0);
+	//const [showAnswer, setShowAnswer] = useState([]);
 
-	// useEffect(() => {
-	// 	let typeQuestion = 'question0';
-	// 	setFilteredQuestions(filterQuestions(typeQuestion));
-	// }, []);
+	useEffect(() => {
+		async function getFAQ() {
+			try {
+				const token = sessionStorage.getItem('accessToken');
+				const url =
+					'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/FAQ';
+				const options = {
+					headers: { Authorization: `Bearer ${token}` },
+				};
+				const response = await axios.get(url, options);
+				setFaq(response.data);
 
-	// function handleQuestion(e) {
-	// 	let typeQuestion = e.target.value;
-	// 	if (typeQuestion === 'question0') {
-	// 		setFilteredQuestions(filterQuestions(typeQuestion));
-	// 	} else if (typeQuestion === 'question1') {
-	// 		setFilteredQuestions(filterQuestions(typeQuestion));
-	// 	} else if (typeQuestion === 'question2') {
-	// 		setFilteredQuestions(filterQuestions(typeQuestion));
-	// 	} else if (typeQuestion === 'question3') {
-	// 		setFilteredQuestions(filterQuestions(typeQuestion));
-	// 	} else if (typeQuestion === 'question4') {
-	// 		setFilteredQuestions(filterQuestions(typeQuestion));
-	// 	}
-	// }
+				console.log('SUCCESS: Got all FAQs:', response.data);
+			} catch (err) {
+				console.log('err', err);
+				throw new Error(err);
+			}
+		}
+
+		getFAQ();
+	}, []);
+
+	const faqQuestionsComponents = faq.map((type, index) => (
+		<div key={type.id}>
+			<button
+				className="question-button"
+				onClick={() => {
+					setFaqIndex(index);
+				}}
+				value={type.id}
+			>
+				{type.question}
+				<img src={rightArrow} alt="right-arrow" />
+			</button>
+		</div>
+	));
+
+	var faqComponents = faq.map((type) => (
+		<div key={type.id}>
+			<div>
+				<h1 style={{ fontSize: '40px', color: '#6318af' }}>{type.question}</h1>
+				<div className="answers">{type.answer}</div>
+			</div>
+		</div>
+	));
 
 	return (
 		<>
-			{/* <div className="question-container">
+			<div className="question-container">
 				<div>
 					<div>
 						Deals for you <img src={breadArrow} alt="path-arrow" /> FAQ
 					</div>
 				</div>
 				<div className="question-landing">
-					<div className="question-tabs">
-						<button
-							className="question-button"
-							onClick={handleQuestion}
-							value="question0"
-						>
-							How MKTFY works?
-							<img src={rightArrow} alt="right-arrow" />
-						</button>
-						<button
-							className="question-button"
-							onClick={handleQuestion}
-							value="question1"
-						>
-							How can I sell things on MKTFY?
-							<img src={rightArrow} alt="right-arrow" />
-						</button>
-						<button
-							className="question-button"
-							onClick={handleQuestion}
-							value="question2"
-						>
-							Where do the products come from?
-							<img src={rightArrow} alt="right-arrow" />
-						</button>
-						<button
-							className="question-button"
-							onClick={handleQuestion}
-							value="question3"
-						>
-							Can I have a refund?
-							<img src={rightArrow} alt="right-arrow" />
-						</button>
-						<button
-							className="question-button"
-							onClick={handleQuestion}
-							value="question4"
-						>
-							Where is MKTFY based?
-							<img src={rightArrow} alt="right-arrow" />
-						</button>
-					</div>
+					<div className="question-tabs">{faqQuestionsComponents}</div>
 
-					<div className="all-questions">
-						{filteredQuestions &&
-							filteredQuestions.map((type) => (
-								<div key={type.id}>
-									<div>
-										<h1 style={{ fontSize: '40px', color: '#6318af' }}>
-											{type.question}
-										</h1>
-										<div className="answers">{type.answer}</div>
-									</div>
-								</div>
-							))}
-					</div>
+					<div className="all-questions">{faqComponents[faqIndex]}</div>
 				</div>
-			</div> */}
+			</div>
 		</>
 	);
 }
