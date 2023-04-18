@@ -106,6 +106,7 @@ export default function NotificationPopup() {
 						border: 'none',
 					}}
 				>
+					{/* toggle between images based on if there are new notifications */}
 					{newNotifications.length === 0 ? (
 						<i>
 							<img alt="notifications" src={bell} />
