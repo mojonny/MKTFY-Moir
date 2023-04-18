@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 import { auth } from '../../../Services/auth0.service';
 import { AUTH0_CLIENT_ID, AUTH0_LOGOUT_URI } from '../../../config';
-import { useSelector, useDispatch } from 'react-redux';
 import { setLogout } from '../../../Features/Login/loginSlice';
 
 import logout from '../../../assets/LogOut.png';
@@ -11,6 +13,7 @@ import './index.css';
 
 export default function ProfileDropdown() {
 	const [isDropOpen3, setIsDropOpen3] = useState(false);
+	const [listingCount, setListingCount] = useState(false);
 
 	const dispatch = useDispatch();
 
@@ -53,6 +56,30 @@ export default function ProfileDropdown() {
 	};
 
 	useEffect(() => {}, [firstName, lastName]);
+
+	let token = useSelector((state) => state.login.token);
+
+	useEffect(() => {
+		async function getListingCount() {
+			const url =
+				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/notifications/count';
+			const options = {
+				headers: { Authorization: `Bearer ${token}` },
+			};
+
+			if (token !== null) {
+				try {
+					const response = await axios.get(url, options);
+					setListingCount(response.data.pendingListings);
+					console.log(response.data);
+				} catch (err) {
+					console.log('err', err);
+					throw new Error(err);
+				}
+			}
+		}
+		getListingCount();
+	}, [token]);
 
 	return (
 		<div>
@@ -121,8 +148,26 @@ export default function ProfileDropdown() {
 									className="drop-nav-links"
 									onClick={handleClick}
 									to="/mylistings"
+									style={{
+										display: 'flex',
+										flexDirection: 'row',
+										gap: '10px',
+										alignItems: 'center',
+									}}
 								>
-									My listings <div className="listing-count">2</div>
+									My listings{' '}
+									<div
+										className="listing-count"
+										style={{
+											padding: '5px 10px 5px 10px',
+
+											borderRadius: '5px',
+											backgroundColor: '#560F9F',
+											color: '#ffffff',
+										}}
+									>
+										{listingCount}
+									</div>
 								</Link>
 							</div>
 							<br />
