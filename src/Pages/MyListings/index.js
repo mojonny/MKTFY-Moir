@@ -21,7 +21,7 @@ export default function MyListings() {
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	//NOT QUITE THERE AND WONDER IF PENDING ITEMS SHOULD GO HERE TOO...
+
 	function handleListings(e) {
 		//Sets filter onClick of active or sold buttons
 		let typeListing = e.target.value;

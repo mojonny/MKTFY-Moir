@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+
 import newBell from '../../../assets/newBell.png';
 import bell from '../../../assets/Bell.png';
 import mktfy from '../../../assets/altLogo.png';
@@ -12,6 +14,8 @@ export default function NotificationPopup() {
 	const [seenNotifications, setSeenNotifications] = useState([]);
 
 	const notificationMenu = useRef(null);
+
+	let token = useSelector((state) => state.login.token);
 
 	//Closes dropdown when clicked outside
 	const closeNotificationPopup = (e) => {
@@ -34,26 +38,28 @@ export default function NotificationPopup() {
 
 	useEffect(() => {
 		async function getNotifications() {
-			try {
-				const token = sessionStorage.getItem('accessToken');
-				const url =
-					'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/notifications';
-				const options = {
-					headers: { Authorization: `Bearer ${token}` },
-				};
-				const response = await axios.get(url, options);
-				setNewNotifications(response.data.new);
-				setSeenNotifications(response.data.seen);
+			const url =
+				'http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/User/notifications';
+			const options = {
+				headers: { Authorization: `Bearer ${token}` },
+			};
 
-				console.log('SUCCESS: Got all notifications:', response.data);
-			} catch (err) {
-				console.log('err', err);
-				throw new Error(err);
+			if (token !== null) {
+				try {
+					const response = await axios.get(url, options);
+					setNewNotifications(response.data.new);
+					console.log(response.data.seen);
+					setSeenNotifications(response.data.seen);
+
+					console.log('SUCCESS: Got all notifications:', response.data);
+				} catch (err) {
+					console.log('err', err);
+					throw new Error(err);
+				}
 			}
 		}
-
 		getNotifications();
-	}, []);
+	}, [token]);
 
 	const newNotificationComponents = newNotifications.map((type) => {
 		return (

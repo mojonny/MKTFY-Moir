@@ -255,55 +255,58 @@ export default function PendingItems() {
 		getProduct();
 	}, [id]);
 
-	function Confirm() {
+	async function Confirm() {
 		const token = sessionStorage.getItem('accessToken');
-		const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/complete/${id}`;
 
-		axios
-			.put(url, { headers: { Authorization: `Bearer ${token}` } })
-			.then((res) => {
-				console.log('SUCCESS: Your listing was SOLD!', res.data);
-				navigateHome();
-			})
-			.catch((error) => {
-				console.log('ERROR: Your listing was not changed', error);
-			});
+		let config = {
+			method: 'put',
+			url: `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/complete/${id}`,
+			headers: { Authorization: `Bearer ${token}` },
+		};
+
+		try {
+			const response = await axios.request(config);
+			console.log('SUCCESS: Your listing was SOLD!', response.data);
+			navigateHome();
+		} catch (error) {
+			console.log('ERROR: Your sale was not completed', error);
+		}
 	}
 
-	function Cancel() {
+	async function Cancel() {
 		const token = sessionStorage.getItem('accessToken');
-		const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/cancel/${id}`;
 
-		axios
-			.put(url, { headers: { Authorization: `Bearer ${token}` } })
-			.then((res) => {
-				console.log(
-					'SUCCESS: Your listing was cancelled. It is no longer active.',
-					res.data
-				);
-				navigateHome();
-			})
-			.catch((error) => {
-				console.log('ERROR: Your listing was not changed', error);
-			});
+		let config = {
+			method: 'put',
+			url: `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/cancel/${id}`,
+			headers: { Authorization: `Bearer ${token}` },
+		};
+
+		try {
+			const response = await axios.request(config);
+			console.log('SUCCESS: Your sale was cancelled!', response.data);
+			navigateHome();
+		} catch (error) {
+			alert('ERROR: Your sale was not canceled', error);
+		}
 	}
 
-	function CancelSale() {
+	async function CancelSale() {
 		const token = sessionStorage.getItem('accessToken');
-		const url = `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/cancelsale/${id}`;
 
-		axios
-			.put(url, { headers: { Authorization: `Bearer ${token}` } })
-			.then((res) => {
-				console.log(
-					'SUCCESS: Your listing was cancelled. It is no longer active.',
-					res.data
-				);
-				navigateHome();
-			})
-			.catch((error) => {
-				console.log('ERROR: Your listing was not changed', error);
-			});
+		let config = {
+			method: 'put',
+			url: `http://mktfy-proof.ca-central-1.elasticbeanstalk.com/api/Product/cancelsale/${id}`,
+			headers: { Authorization: `Bearer ${token}` },
+		};
+
+		try {
+			const response = await axios.request(config);
+			console.log('SUCCESS: Your listing was canceled!', response.data);
+			navigateHome();
+		} catch (error) {
+			alert('ERROR: Your sale was not canceled', error);
+		}
 	}
 
 	function handleSrc(i) {
